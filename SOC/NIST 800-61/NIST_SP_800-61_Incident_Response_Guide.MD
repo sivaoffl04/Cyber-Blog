@@ -25,6 +25,29 @@ The current release, **NIST SP 800-61 Revision 3**, directly integrates with the
 
 ---
 
+## The Incident Response State Machine
+
+From initial detection through post-incident hardening, an incident advances through distinct, verifiable operational states:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Ingestion: Anomaly Detected
+    Ingestion --> Qualification: Triage Analysis
+    Qualification --> Suppressed: Benign / False Positive
+    Qualification --> Scoping: Verified True Incident
+    
+    state Incident_Handling {
+        Scoping --> Containment: Blast Radius Mapped
+        Containment --> Eradication: Host Isolated
+        Eradication --> Recovery: Threat Eliminated
+    }
+    
+    Recovery --> PostIncident: Rebuilt & Validated
+    PostIncident --> [*]: Lessons Applied & Rules Tuned
+```
+
+---
+
 ## The Paradigm Shift: Revision 2 vs. Revision 3
 
 Earlier versions (Revision 2) structured incident response as a standalone four-step cycle:
@@ -117,6 +140,17 @@ A single alert does not equal a verified security incident. Analysts qualify eve
                         [ Security Incident Confirmed ] (Open Case & Assign Severity)
 ```
 
+<details>
+<summary><b>🔍 Expand UI Panel: High-Fidelity vs. Low-Fidelity Signal Comparison</b></summary>
+
+| Signal Level | Example Telemetry | Analyst Action | Typical Automation |
+| :--- | :--- | :--- | :--- |
+| **High Fidelity** | EDR flags Mimikatz injection into `lsass.exe` | Immediate containment; open P1 incident | Auto-isolate host via SOAR playbook |
+| **Medium Fidelity** | New administrative scheduled task created | Cross-reference with change management ticket | Query user identity in Active Directory |
+| **Low Fidelity** | Single failed RDP login attempt from public IP | Store in indexer for correlation thresholding | Auto-suppress unless count > 10 in 1 min |
+
+</details>
+
 ---
 
 # 2. Analyze & Investigate: The 4W Framework
@@ -169,9 +203,9 @@ flowchart LR
     P0["Patient Zero: Workstation WIN-PC01"]
     
     subgraph BlastRadius["Enterprise Blast Radius"]
-        P0 -->|Pass-the-Hash| S1["Workstation WIN-PC02"]
-        P0 -->|Privilege Escalation| S2["Domain Controller DC01"]
-        P0 -->|Stolen Admin Tokens| S3["Cloud Console Entra ID"]
+        P0 --> S1["Workstation WIN-PC02 (Pass-the-Hash)"]
+        P0 --> S2["Domain Controller DC01 (Priv Esc)"]
+        P0 --> S3["Cloud Console Entra ID (Stolen Admin Token)"]
         S2 --> S4["Database Server SQL-PROD"]
     end
 
@@ -258,7 +292,7 @@ Recovery is not simply booting a computer back up. It is a verified, staged re-i
 
 ```mermaid
 flowchart TD
-    Step1["1. Clean Rebuild from Golden Image / Trusted Offline Backup"]
+    Step1["1. Clean Rebuild from Golden Image or Trusted Offline Backup"]
     --> Step2["2. Security Patching & Endpoint Agent Validation (EDR Active)"]
     --> Step3["3. Reconnect to Production Network under Elevated Monitoring"]
     --> Step4["4. Real-Time Telemetry Observation (24 to 72 Hour Vigilance)"]
@@ -341,26 +375,34 @@ sequenceDiagram
     participant SOAR as Cortex XSOAR
     participant Lead as Incident Response Lead
 
-    Note over Attacker,Host: Phase 1: Attack & Detection
-    Attacker->>Host: Delivers weaponized resume.docm via Phishing
-    Host->>Host: Macro spawns encoded PowerShell cradle
-    EDR->>SIEM: Streams Process Alert: WINWORD spawning PowerShell
-    SIEM->>SOAR: Correlates EDR alert with suspicious external outbound DNS
+    rect rgba(239, 68, 68, 0.15)
+        Note over Attacker,Host: Phase 1 - Infiltration & Telemetry
+        Attacker->>Host: Delivers weaponized resume.docm via Phishing
+        Host->>Host: Macro spawns encoded PowerShell cradle
+        EDR->>SIEM: Streams Process Alert: WINWORD spawning PowerShell
+        SIEM->>SOAR: Correlates EDR alert with suspicious external outbound DNS
+    end
 
-    Note over SOAR,Lead: Phase 2: Containment & Scoping
-    SOAR->>EDR: API Command: Isolate Employee Workstation from LAN
-    SOAR->>Lead: Alert Triggered: Possible C2 activity isolated
-    Lead->>SIEM: Queries environment: Any other machines seen with this C2 IP?
-    SIEM-->>Lead: Zero hits. Incident isolated to Patient Zero.
+    rect rgba(245, 158, 11, 0.15)
+        Note over SOAR,Lead: Phase 2 - Containment & Scoping
+        SOAR->>EDR: API Command: Isolate Employee Workstation from LAN
+        SOAR->>Lead: Alert Triggered: Possible C2 activity isolated
+        Lead->>SIEM: Queries environment: Check any other hosts targeting C2 IP
+        SIEM-->>Lead: Zero hits found - Incident isolated to Patient Zero
+    end
 
-    Note over Lead,Host: Phase 3: Eradication & Recovery
-    Lead->>Host: Extracts payload for YARA analysis; kills persistence RunKey
-    Lead->>Host: Rebuilds workstation from golden image
-    Lead->>EDR: Verifies sensor health; reconnects to production network
+    rect rgba(59, 130, 246, 0.15)
+        Note over Lead,Host: Phase 3 - Eradication & Recovery
+        Lead->>Host: Extracts payload for YARA analysis and kills persistence RunKey
+        Lead->>Host: Rebuilds workstation from verified golden image
+        Lead->>EDR: Verifies sensor health and reconnects to production network
+    end
 
-    Note over Lead,SIEM: Phase 4: Continuous Improvement
-    Lead->>SIEM: Deploys new SPL detection rule for macro execution
-    Lead->>Lead: Closes case ticket with full post-mortem documentation
+    rect rgba(16, 185, 129, 0.15)
+        Note over Lead,SIEM: Phase 4 - Continuous Improvement
+        Lead->>SIEM: Deploys new SPL detection rule for macro execution
+        Lead->>Lead: Closes case ticket with full post-mortem documentation
+    end
 ```
 
 ---
