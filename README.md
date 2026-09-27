@@ -22,10 +22,11 @@ Content is organized into dedicated topic folders as new writeups are added:
 
 ```text
 Cyber-Blog/
-├── Android_pentest/     # Android penetration testing, APK analysis & mobile security
-├── SOC/                 # SOC workflows, EDR, SIEM, SOAR & detection engineering
-├── Purple_Team/         # Adversary emulation & detection validation
-└── ...                  # More topics added on a regular basis!
+├── Android_pentest/         # Android penetration testing, APK analysis & mobile security
+├── SOC/                     # SOC workflows, EDR, SIEM, SOAR & detection engineering
+├── Purple_Team/             # Adversary emulation & detection validation
+├── Red_Team_vs_Blue_Team/   # Offensive vs Defensive mindset, workflows & tradecraft
+└── ...                      # More topics added on a regular basis!
 ```
 
 ---
