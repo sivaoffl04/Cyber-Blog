@@ -1,17 +1,19 @@
-# Purple Teaming — Bridging Adversary Emulation with Detection Engineering
+# Purple Teaming: Bridging Adversary Emulation with Detection Engineering
 
-> **Category:** Purple Team & Threat Operations | **Series:** Purple Team Foundations | **Level:** Intermediate to Advanced
+> **Category:** Purple Team & Threat Operations | **Series:** Security Team Operations | **Level:** Intermediate to Advanced
 
 ---
 
 ## Executive Overview: Breaking the Silo
 
-For decades, enterprise cybersecurity operated on a fragmented adversarial model:
+For decades, enterprise cybersecurity operated on a fragmented, adversarial model:
 
-* **The Red Team** operated in shadows, mimicking sophisticated threat actors, breaching perimeters, and dropping a 150-page PDF report weeks after exploitation.
-* **The Blue Team** defended blind, drowning in alerts, triaging false positives, and struggling to reconstruct how the attacker evaded their controls.
+* **The Red Team** operated in the shadows, mimicking sophisticated threat actors, breaching perimeters, and dropping a 150-page PDF report weeks after exploitation.
+* **The Blue Team** defended blind, drowning in false-positive alerts and struggling to reconstruct how the attacker evaded their controls.
 
 This disconnection created an **operational blind spot**: attacks succeeded not because organizations lacked security tools, but because their detection controls were never systematically validated against realistic tradecraft.
+
+![Purple Team Collaborative War Room](./images/purple_team_lab.jpg)
 
 ```text
 +-----------------------------------------------------------------------------------------------+
@@ -115,7 +117,7 @@ flowchart TD
 
 ---
 
-# 3. MITRE ATT&CK: The Universal Rosetta Stone
+# 3. MITRE ATT&CK: The Universal Operational Taxonomy
 
 Purple Teams rely on the **MITRE ATT&CK framework** as a shared operational taxonomy to evaluate security posture across the entire intrusion lifecycle.
 
@@ -154,7 +156,7 @@ Level 4: AUTOMATED BLOCK   --> SOAR playbook or EDR engine blocks action instant
 
 ---
 
-# 4. Practical Hands-On Exercise: T1059.001 (Obfuscated PowerShell Execution)
+# 4. Hands-On Exercise: T1059.001 (Obfuscated PowerShell Execution)
 
 Let us walk through a live, atomic Purple Team exercise demonstrating how offensive tradecraft is translated into detection engineering.
 
@@ -240,31 +242,128 @@ The Red operator re-executes the exact payload with variation (different flags, 
 
 # 5. The Purple Team Tooling Arsenal
 
-Effective Purple Teaming requires specialized platforms designed for repeatable, controlled adversary emulation:
+Effective Purple Teaming requires specialized platforms designed for repeatable, controlled adversary emulation, telemetry hunting, and collaborative gap tracking:
 
-```text
-+-----------------------------------------------------------------------------------------------+
-|                               Purple Team Platform Ecosystem                                  |
-+--------------------------+------------------------------------+-------------------------------+
-|  Adversary Emulation     |  Detection Verification / Scoring  |  Telemetry & Analysis         |
-|  - Atomic Red Team (ART) |  - VECTR (SRA Metrics Tracking)    |  - Sysmon & Event Log Engine  |
-|  - MITRE Caldera         |  - Prelude Operator                |  - Sigma Rules (Universal)    |
-|  - Red Canary Invoke-Atomic| - DeTT&CT (Threat Coverage)      |  - Chainsaw / Hayabusa        |
-+--------------------------+------------------------------------+-------------------------------+
-```
-
-### Tool Comparison Matrix
-
-| Tool | Primary Purpose | How Purple Teams Use It |
-| :--- | :--- | :--- |
-| **Atomic Red Team** | Library of scripted TTPs | Runs standalone, single-command tests mapped to specific ATT&CK IDs |
-| **MITRE Caldera** | Automated adversary emulation | Simulates complex, multi-stage multi-host attack operations |
-| **VECTR** | Tracking & reporting platform | Measures and visualizes detection posture improvements over time |
-| **Sigma** | Generic detection format | Authors vendor-neutral detection logic convertible to Splunk, Elastic, or Sentinel |
+![Purple Team Collaborative Tooling Arsenal](./images/purple_team_toolchain.jpg)
 
 ---
 
-# 6. Building an Enterprise Detection Scorecard
+## 5.1 Category 1: Adversary Emulation & Simulation Platforms
+
+#### 1. Atomic Red Team (Red Canary)
+* **Purpose:** Open-source library of simple, atomic tests mapped directly to the MITRE ATT&CK matrix.
+* **Key Execution Tool:** `Invoke-AtomicTest` (PowerShell module).
+```powershell
+# Install Atomic Red Team execution framework
+IEX (IWR 'https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/master/install-atomicredteam.ps1' -UseBasicParsing);
+Install-AtomicRedTeam -getAtomics
+
+# Check prerequisites for Technique T1003.001 (LSASS Dump)
+Invoke-AtomicTest T1003.001 -CheckPrereqs
+
+# Execute the atomic simulation test
+Invoke-AtomicTest T1003.001 -TestNumbers 1
+
+# Clean up all residual test artifacts
+Invoke-AtomicTest T1003.001 -Cleanup
+```
+
+#### 2. MITRE Caldera
+* **Purpose:** Scalable, automated adversary emulation system that allows operators to run multi-agent, chained attack campaigns across Windows, Linux, and macOS.
+* **Key Strengths:** Visual campaign maps, automated decision engines, and deep integration with ATT&CK.
+
+#### 3. Stratus Red Team (DataDog)
+* **Purpose:** Lightweight, atomic adversary emulation specifically engineered for cloud environments (AWS, Azure, GCP, Kubernetes).
+```bash
+# List available cloud attack techniques
+stratus list
+
+# Detonate AWS persistence technique (CreateAccessKey)
+stratus detonate aws.persistence.iam-create-access-key
+```
+
+---
+
+## 5.2 Category 2: Rapid Telemetry Inspection & EVTX Hunting
+
+When executing tests in target labs, engineers require fast CLI utilities to verify whether artifacts were written to local disk logs:
+
+#### 1. Chainsaw
+* **Purpose:** Blazing fast Rust-based tool to search and parse Windows Event Logs (`.evtx`) against Sigma detection rules.
+```bash
+# Rapidly hunt for Sigma rule matches inside Windows Security and Sysmon logs
+chainsaw hunt /path/to/winevt/Logs/ -s /path/to/sigma/rules/ --mapping /path/to/mapping.yml
+```
+
+#### 2. Hayabusa
+* **Purpose:** Fast Windows event log timeline analyzer that outputs MITRE ATT&CK mapped summaries in seconds.
+
+---
+
+## 5.3 Category 3: Universal Detection Engineering (Sigma & Uncoder)
+
+#### 1. Sigma Rules
+* **Purpose:** Generic YAML detection format. Allows Purple Teams to write detection logic once and export to any enterprise SIEM.
+```yaml
+title: Suspicious PowerShell Download Cradle
+id: 3c18b76a-5431-4c28-98e3-a4e9b97b6920
+status: production
+description: Detects encoded PowerShell downloading external payloads via WebClient
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\powershell.exe'
+    selection_flags:
+        CommandLine|contains:
+            - '-enc'
+            - '-encodedcommand'
+    selection_cradle:
+        CommandLine|contains:
+            - 'DownloadString'
+            - 'WebClient'
+    condition: selection_img and selection_flags and selection_cradle
+falsepositives:
+    - Administrative update scripts (rare)
+level: high
+tags:
+    - attack.execution
+    - attack.t1059.001
+```
+
+#### 2. Uncoder.IO / pySigma
+* **Purpose:** Translates Sigma YAML rules directly into native queries for Splunk (SPL), Microsoft Sentinel (KQL), Elastic (EQL/KQL), and QRadar.
+
+---
+
+## 5.4 Category 4: Collaboration, Metrics & Posture Tracking
+
+#### 1. VECTR (Security Risk Advisors)
+* **Purpose:** Premier web-based Purple Team campaign and metrics tracking software.
+* **Key Use Case:** Visualizes detection posture gains, historical test results, and ATT&CK matrix coverage heatmaps over successive quarters.
+
+#### 2. MITRE ATT&CK Navigator
+* **Purpose:** Interactive matrix visualization tool to color-code enterprise detection coverage, identifying red blind spots and green validated detections.
+
+---
+
+# 6. Master Purple Team Tool Reference Matrix
+
+| Tool Name | Operational Category | Primary Technology | Primary Function |
+| :--- | :--- | :--- | :--- |
+| **Atomic Red Team** | Emulation / Execution | PowerShell / Bash | Pre-scripted single-command ATT&CK technique tests |
+| **MITRE Caldera** | Automated Emulation | Go / Python / Web | Multi-host, autonomous adversary campaign orchestration |
+| **Stratus Red Team** | Cloud Emulation | Go / AWS / Azure / GCP | Safe, atomic detonation of cloud-specific threat techniques |
+| **Chainsaw** | Telemetry Hunting | Rust / Windows EVTX | Rapid hunting across offline Windows event logs with Sigma rules |
+| **Hayabusa** | Event Analysis | Rust / Windows EVTX | Timeline generation and threat hunting against Windows logs |
+| **Sigma** | Detection Format | YAML / Generic | Standardized open-source detection signature language |
+| **VECTR** | Tracking & Scoring | Web / Docker | Campaign management, metrics scoring, and test case documentation |
+| **ATT&CK Navigator**| Visualization | Web / JSON | Color-coded enterprise detection coverage matrix heatmaps |
+
+---
+
+# 7. Building an Enterprise Detection Scorecard
 
 Purple Teaming tracks real quantitative progress. Below is a sample assessment scorecard used to benchmark defensive resilience:
 
@@ -284,36 +383,8 @@ Purple Teaming tracks real quantitative progress. Below is a sample assessment s
 
 ---
 
-# 7. Unifying Cyber-Blog: The Purple Team Perspective
-
-This repository reflects the comprehensive balance of a modern security engineer:
-
-```text
-                     [ PURPLE TEAM CORE ]
-                              │
-            ┌─────────────────┴─────────────────┐
-            ▼                                   ▼
-    [ OFFENSIVE TRACK ]                 [ DEFENSIVE TRACK ]
-    Android Penetration Testing         Security Operations Center (SOC)
-    - APK Decompilation & Reverse Eng   - CrowdStrike Falcon EDR
-    - Intent Spoofing & IPC Attacks     - Splunk SIEM Architecture
-    - Deep Link Manipulation            - Cortex XSOAR Playbooks
-    - Static & Dynamic Testing          - YARA Memory & Byte Hunting
-            │                                   │
-            └─────────────────┬─────────────────┘
-                              ▼
-            Adversary Emulation & Detection Engineering
-            "Every attack we execute builds the rule to stop it."
-```
-
-* **Offensive Research (`Android_pentest/`):** Explores client-side attack surfaces, decompilation, binary manipulation, and untrusted component communication.
-* **Defensive Engineering (`SOC/`):** Explores enterprise visibility, event correlation, automated response pipelines, and signature-based artifact hunting.
-* **Purple Team Integration:** Connects the two halves into an unbreakable operational loop.
-
----
-
 # Summary & Core Philosophy
 
-1. **Defense is an active discipline:** Having tools installed is not the same as having tested protections. If you haven't validated a detection against real tradecraft, assume it does not work.
+1. **Defense is an active discipline:** Having security software installed is not the same as having tested protections. If you haven't validated a detection against real tradecraft, assume it does not work.
 2. **Emulate, measure, and automate:** Don't just find vulnerabilities—engineer detection logic, deploy playbooks, and automate containment.
 3. **Collaboration outperforms isolation:** When Red and Blue work together with mutual respect and transparent knowledge sharing, security postures elevate exponentially.
