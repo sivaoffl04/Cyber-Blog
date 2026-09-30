@@ -29,6 +29,8 @@ Cyber-Blog/
 │   ├── Purple_Team/         # Collaborative emulation, gap analysis & rule validation
 │   └── Red_Team_vs_Blue_Team/ # Mindset & operational workflow comparison
 ├── SOC/                     # SOC workflows, EDR, SIEM, SOAR & incident response
+├── tools/                   # Essential cybersecurity tools masterclasses & labs
+│   └── Nmap/                # Complete A-Z Nmap masterclass, packet dissection & evasion
 └── ...                      # More topics added on a regular basis!
 ```
 
