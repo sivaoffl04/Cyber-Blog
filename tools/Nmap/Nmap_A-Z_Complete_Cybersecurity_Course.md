@@ -351,13 +351,13 @@ sequenceDiagram
     Target-->>Nmap: 2. TCP SYN/ACK
     Nmap->>Target: 3. TCP ACK (Connection Established)
     Nmap->>Target: 4. TCP RST/ACK (Immediate Teardown)
-    Note over Target: Application logs connection (e.g., Apache access.log)
+    Note over Target: Application logs connection (e.g. Apache access.log)
 
     Note over Nmap,Target: SYN Stealth Scan (-sS)
     Nmap->>Target: 1. TCP SYN
     Target-->>Nmap: 2. TCP SYN/ACK
     Nmap->>Target: 3. TCP RST (Reset - Connection Aborted)
-    Note over Target: Kernel resets socket; application NEVER sees connection!
+    Note over Target: Kernel resets socket - application NEVER sees connection
 ```
 
 ### Feature Comparison Matrix
