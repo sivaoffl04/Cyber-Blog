@@ -30,7 +30,8 @@ Cyber-Blog/
 │   └── Red_Team_vs_Blue_Team/ # Mindset & operational workflow comparison
 ├── SOC/                     # SOC workflows, EDR, SIEM, SOAR & incident response
 ├── tools/                   # Essential cybersecurity tools masterclasses & labs
-│   └── Nmap/                # Complete A-Z Nmap masterclass, packet dissection & evasion
+│   ├── Nmap/                # Complete A-Z Nmap masterclass, packet dissection & evasion
+│   └── John the ripper/     # Complete A-Z John the Ripper masterclass, hash cracking & *2john
 └── ...                      # More topics added on a regular basis!
 ```
 
