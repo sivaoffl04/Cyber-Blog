@@ -31,7 +31,8 @@ Cyber-Blog/
 ├── SOC/                     # SOC workflows, EDR, SIEM, SOAR & incident response
 ├── tools/                   # Essential cybersecurity tools masterclasses & labs
 │   ├── Nmap/                # Complete A-Z Nmap masterclass, packet dissection & evasion
-│   └── John the ripper/     # Complete A-Z John the Ripper masterclass, hash cracking & *2john
+│   ├── John the ripper/     # Complete A-Z John the Ripper masterclass, hash cracking & *2john
+│   └── Hashcat/             # Complete A-Z Hashcat masterclass, GPU cracking & cryptanalysis
 └── ...                      # More topics added on a regular basis!
 ```
 
