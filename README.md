@@ -34,6 +34,8 @@ Cyber-Blog/
 │   ├── John the ripper/     # Complete A-Z John the Ripper masterclass, hash cracking & *2john
 │   ├── Hashcat/             # Complete A-Z Hashcat masterclass, GPU cracking & cryptanalysis
 │   └── Aircrack-ng/         # Complete Aircrack-ng Wi-Fi security course, 802.11 analysis & WPA3
+├── INE lab/                 # Hands-on security labs & challenge walkthroughs (INE / AttackDefense)
+│   └── Kibana Windows Event Logs I/ # Sysmon threat hunting, Atomic Red Team detection & ELK analysis
 └── ...                      # More topics added on a regular basis!
 ```
 
