@@ -32,7 +32,8 @@ Cyber-Blog/
 ├── tools/                   # Essential cybersecurity tools masterclasses & labs
 │   ├── Nmap/                # Complete A-Z Nmap masterclass, packet dissection & evasion
 │   ├── John the ripper/     # Complete A-Z John the Ripper masterclass, hash cracking & *2john
-│   └── Hashcat/             # Complete A-Z Hashcat masterclass, GPU cracking & cryptanalysis
+│   ├── Hashcat/             # Complete A-Z Hashcat masterclass, GPU cracking & cryptanalysis
+│   └── Aircrack-ng/         # Complete Aircrack-ng Wi-Fi security course, 802.11 analysis & WPA3
 └── ...                      # More topics added on a regular basis!
 ```
 
