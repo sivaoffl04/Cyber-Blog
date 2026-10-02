@@ -50,9 +50,10 @@ Before running commands, it is crucial to understand the fundamental distinction
 
 ```mermaid
 flowchart LR
-    Dev["Developer Workstation\n(Local Git Engine)"] 
-    <-->|git push / git pull\n(Encrypted SSH Transport)| Cloud["GitHub Cloud Platform\n(Remote Repository Host)"]
-    
+    Dev["Developer Workstation<br/>(Local Git Engine)"]
+    Cloud["GitHub Cloud Platform<br/>(Remote Repository Host)"]
+
+    Dev <-->|"Encrypted SSH (Push & Pull)"| Cloud
     Cloud --> PR["Pull Requests & Code Reviews"]
     Cloud --> Actions["GitHub Actions CI/CD"]
     Cloud --> Security["Secret Scanning & Push Protection"]
@@ -74,12 +75,15 @@ Every Git command moves files between **four discrete states**. Understanding th
 
 ```mermaid
 flowchart LR
-    Z1["Zone 1: Working Directory\n(Files you are currently editing)"]
-    -->|git add| Z2["Zone 2: Staging Area (Index)\n(Files prepped for the next commit)"]
-    -->|git commit| Z3["Zone 3: Local Repository\n(.git history on your machine)"]
-    -->|git push| Z4["Zone 4: Remote GitHub\n(Shared repository on the cloud)"]
+    Z1["Zone 1: Working Directory<br/>(Files currently edited)"]
+    Z2["Zone 2: Staging Area<br/>(Files prepped for commit)"]
+    Z3["Zone 3: Local Repo .git<br/>(Signed commits on machine)"]
+    Z4["Zone 4: Remote GitHub<br/>(Shared cloud repository)"]
 
-    Z4 -->|git pull / fetch| Z1
+    Z1 -->|"git add"| Z2
+    Z2 -->|"git commit"| Z3
+    Z3 -->|"git push"| Z4
+    Z4 -->|"git pull / fetch"| Z1
 
     style Z1 fill:#1e293b,stroke:#06b6d4,color:#fff
     style Z2 fill:#1e293b,stroke:#f59e0b,color:#fff
@@ -349,19 +353,19 @@ For teams of all sizes, the **GitHub Flow** (Trunk-Based Development) is the ind
 
 ```mermaid
 gitGraph
-    commit id: "Initial commit"
-    commit id: "Setup CI/CD"
-    branch feature/oauth2
-    checkout feature/oauth2
-    commit id: "Add login logic"
-    commit id: "Add unit tests"
+    commit id: "Initial-Commit"
+    commit id: "Setup-CICD"
+    branch feature-oauth2
+    checkout feature-oauth2
+    commit id: "Login-Logic"
+    commit id: "Unit-Tests"
     checkout main
-    merge feature/oauth2 id: "PR #1 (Approved & Merged)"
-    branch fix/security-patch
-    checkout fix/security-patch
-    commit id: "Patch CVE-2026-X"
+    merge feature-oauth2 id: "PR-1-Merged"
+    branch fix-security-patch
+    checkout fix-security-patch
+    commit id: "Patch-Applied"
     checkout main
-    merge fix/security-patch id: "PR #2 (Squashed)"
+    merge fix-security-patch id: "PR-2-Merged"
 ```
 
 ### The 5 Steps of GitHub Flow:
