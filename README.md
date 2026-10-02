@@ -3,19 +3,20 @@
 ![CYBER-BLOG | Security Engineering, Offensive Operations & SOC Threat Hunting](./assets/images/cyber_blog_main_banner.jpg)
 
 # 🛡️ CYBER-BLOG 🛡️
-### Offensive Operations • Defensive Engineering • Threat Hunting • Mobile Security
+### Offensive Operations • Defensive Engineering • Threat Hunting • DevSecOps • Mobile Security
 
 [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20Android-0078D4?style=for-the-badge&logo=linux)](https://github.com/sivaoffl04/Cyber-Blog)
 [![MITRE](https://img.shields.io/badge/Framework-MITRE%20ATT%26CK-orange?style=for-the-badge&logo=target)](https://attack.mitre.org/)
 [![NIST](https://img.shields.io/badge/Standard-NIST%20SP%20800--61-blue?style=for-the-badge&logo=shield)](https://csrc.nist.gov/)
+[![CIS](https://img.shields.io/badge/Benchmark-CIS%20GitHub%20v1.0-005571?style=for-the-badge&logo=github)](https://www.cisecurity.org/)
 [![OWASP](https://img.shields.io/badge/Mobile-OWASP%20MASVS-red?style=for-the-badge&logo=owasp)](https://mas.owasp.org/)
 [![Status](https://img.shields.io/badge/Status-Actively%20Maintained-success?style=for-the-badge&logo=git)](https://github.com/sivaoffl04/Cyber-Blog)
 
 <p align="center">
-  <b>A comprehensive, production-grade cybersecurity knowledge base, hands-on lab walkthroughs, tool masterclasses, and detection engineering playbooks.</b>
+  <b>A comprehensive, production-grade cybersecurity knowledge base, hands-on lab walkthroughs, tool masterclasses, DevSecOps hardening guides, and detection engineering playbooks.</b>
 </p>
 
-[📚 Tool Masterclasses](#-tool-masterclasses) • [🎯 Hands-on Lab Solutions](#-hands-on-lab-walkthroughs-ine--attackdefense) • [👥 Security Teams](#-security-team-operations) • [🛡️ SOC & Incident Response](#-soc-detection-engineering--incident-response) • [📱 Mobile Pentesting](#-android-application-penetration-testing)
+[📚 Tool Masterclasses](#-tool-masterclasses) • [🔒 GitHub Security & DevSecOps](#-github-security--devsecops-masterclass) • [🎯 Hands-on Lab Solutions](#-hands-on-lab-walkthroughs-ine--attackdefense) • [👥 Security Teams](#-security-team-operations) • [🛡️ SOC & Incident Response](#-soc-detection-engineering--incident-response) • [📱 Mobile Pentesting](#-android-application-penetration-testing)
 
 </div>
 
@@ -25,9 +26,9 @@
 
 Welcome to **Cyber-Blog**! 👋
 
-This repository is my central cybersecurity research blog and operational knowledge base. Rather than high-level summaries or basic command cheat sheets, every guide in this repository is built as an **in-depth, production-ready masterclass**—grounded in low-level protocol mechanics, source code analysis, realistic attack tradecraft, detection engineering (Sigma rules), and enterprise defense playbooks.
+This repository is my central cybersecurity research blog and operational knowledge base. Rather than high-level summaries or basic command cheat sheets, every guide in this repository is built as an **in-depth, production-ready masterclass**—grounded in low-level protocol mechanics, source code analysis, realistic attack tradecraft, detection engineering (Sigma rules), CI/CD pipeline hardening, and enterprise defense playbooks.
 
-Whether you are preparing for certifications (**eJPT, eCPPT, OSCP, BAP, CRTP, eCDFP, CySA+**), conducting authorized penetration testing engagements, or defending an enterprise SOC, this repository provides deep, actionable knowledge.
+Whether you are preparing for certifications (**eJPT, eCPPT, OSCP, BAP, CRTP, eCDFP, CySA+**), conducting authorized penetration testing engagements, or defending an enterprise SOC and cloud infrastructure, this repository provides deep, actionable knowledge.
 
 ---
 
@@ -38,6 +39,7 @@ flowchart TD
     Hub["🛡️ CYBER-BLOG ROOT"]
     
     Hub --> Tools["🧰 Tools Masterclasses\n(tools/)"]
+    Hub --> GhSec["🔒 GitHub Security\n(GitHub_Security/)"]
     Hub --> SecTeams["👥 Security Teams\n(Security_Team/)"]
     Hub --> SOC["🛡️ SOC & Blue Team\n(SOC/)"]
     Hub --> Mobile["📱 Mobile Security\n(Android_pentest/)"]
@@ -47,6 +49,10 @@ flowchart TD
     Tools --> T2["John the Ripper Course"]
     Tools --> T3["Hashcat Complete Course"]
     Tools --> T4["Aircrack-ng Wi-Fi Course"]
+
+    GhSec --> G1["Real-World Incidents (Uber, Toyota, Codecov)"]
+    GhSec --> G2["Secret Prevention (Gitleaks, Push Protection)"]
+    GhSec --> G3["Pipeline Hardening (OIDC, SHA Pinning, CodeQL)"]
 
     SecTeams --> ST1["🔴 Red Team Operations"]
     SecTeams --> ST2["🔵 Blue Team Operations"]
@@ -65,8 +71,9 @@ flowchart TD
 
     style Hub fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#fff
     style Tools fill:#1e293b,stroke:#06b6d4,color:#fff
+    style GhSec fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#fff
     style SecTeams fill:#1e293b,stroke:#a855f7,color:#fff
-    style SOC fill:#1e293b,stroke:#10b981,color:#fff
+    style SOC fill:#1e293b,stroke:#0ea5e9,color:#fff
     style Mobile fill:#1e293b,stroke:#f59e0b,color:#fff
     style Labs fill:#1e293b,stroke:#ef4444,color:#fff
 ```
@@ -77,6 +84,7 @@ flowchart TD
 
 | Category | Module / Topic | Core Technologies | Level | Direct Link |
 | :--- | :--- | :--- | :---: | :---: |
+| 🔒 **DevSecOps** | **GitHub Security & Hardening Masterclass** | Secret Scanning, Gitleaks, Push Protection, OIDC, Actions, CodeQL, Dependabot | All Levels | [Explore](./GitHub_Security/README.md) |
 | 🧰 **Tools** | **Nmap Masterclass** | TCP/UDP Sockets, Raw Packets, NSE (Lua), Firewall Evasion | All Levels | [Explore](./tools/Nmap/README.md) |
 | 🧰 **Tools** | **John the Ripper Masterclass** | Hash Cracking, Rule Mutation, Incremental, `*2john` Converters | All Levels | [Explore](./tools/John%20the%20ripper/README.md) |
 | 🧰 **Tools** | **Hashcat Masterclass** | GPU Acceleration, Attack Modes (0,1,3,6,7), Cryptanalysis | All Levels | [Explore](./tools/Hashcat/README.md) |
@@ -92,6 +100,26 @@ flowchart TD
 | 🛡️ **SOC** | **NIST SP 800-61 Incident Response** | NIST CSF 2.0 Aligned, Containment, Eradication, RCA | Intermediate | [Explore](./SOC/NIST%20800-61/README.md) |
 | 📱 **Mobile** | **Android Pentest Part 1** | APK Decompilation, DEX/Smali, JADX-GUI, MobSF, Manifest Audits | Beginner → Int | [Explore](./Android_pentest/Introduction,%20APK%20Analysis,%20JADX%20&%20MobSF/README.md) |
 | 📱 **Mobile** | **Android Pentest Part 2** | Android Studio, ADB Commands, Magisk Rooting, Sandboxing | Beginner → Int | [Explore](./Android_pentest/Android%20Studio,%20ADB,%20Root%20&%20Non-Root%20Lab%20Setup/README.md) |
+
+---
+
+# 🔒 GitHub Security & DevSecOps Masterclass
+
+[👉 **Read the Complete GitHub Security & Hardening Masterclass**](./GitHub_Security/README.md)
+
+Modern organizations deploy code at unprecedented speeds, making source code repositories and CI/CD pipelines prime Tier-0 attack targets. This comprehensive guide dissects historic real-world breaches and provides an enterprise defense-in-depth hardening blueprint:
+
+* **Real-World Case Studies Dissected:**
+  - **Uber AWS Credential Leak (2016):** Attackers scraped hardcoded AWS IAM keys from private GitHub code commits, exfiltrating the PII of 57 million users and 600,000 drivers.
+  - **Toyota 5-Year Exposed Access Key (2022):** A contractor uploaded server access keys to a public GitHub repository, remaining undetected for nearly 5 years and exposing 296,000 customers.
+  - **Codecov Supply Chain Attack (2021):** Tampered bash uploaders in CI/CD pipelines silently harvested customer environment variables, GitHub tokens, and private keys.
+  - **CircleCI Session Hijacking (2023):** Info-stealing malware on a developer laptop bypassed 2FA via session cookie theft, decrypting customer GitHub OAuth tokens.
+* **The 5-Layer Defense Blueprint:**
+  1. **IAM:** Mandatory FIDO2/WebAuthn MFA, deprecating Classic PATs in favor of Fine-Grained PATs with 30-90 day expiration.
+  2. **Secret Prevention:** Local client-side **Gitleaks** pre-commit hooks, server-side **GitHub Push Protection**, and **OpenID Connect (OIDC)** passwordless cloud authentication.
+  3. **Branch Protection Rulesets:** Mandatory 2-reviewer pull requests, `CODEOWNERS` signoff, and cryptographically signed commits (GPG/SSH).
+  4. **CI/CD Hardening:** Workflow `permissions: read-all`, pinning actions to immutable commit SHAs, and eliminating script injection.
+  5. **Supply Chain Defense:** Dependabot automated CVE patching, CodeQL SAST scanning, and Software Bill of Materials (SBOM) generation.
 
 ---
 
@@ -167,10 +195,13 @@ Real-world SOC and threat hunting challenges documented with 100% verified flag 
 | **Defense Evasion** | **T1070.004** | File Deletion (`sdelete`) | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) |
 | **Defense Evasion** | **T1027** | Obfuscated Files or Information | [Kibana Event Logs III](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
 | **Credential Access** | **T1110** | Brute Force Password Guessing | [John the Ripper](./tools/John%20the%20ripper/README.md) & [Hashcat](./tools/Hashcat/README.md) |
+| **Credential Access** | **T1552.001** | Credentials in Files / Git Trees | [GitHub Security Masterclass](./GitHub_Security/README.md) |
 | **Credential Access** | **T1003** | OS Credential Dumping (`appcmd`) | [Kibana Event Logs III](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
 | **Discovery** | **T1087** | Account Discovery (`UserHunter`) | [Kibana Event Logs II](./INE%20lab/Kibana%20Windows%20Event%20Logs%20II/README.md) |
 | **Discovery** | **T1018** | Remote System Discovery (Ping / Net) | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) & [II](./INE%20lab/Kibana%20Windows%20Event%20Logs%20II/README.md) |
 | **Lateral Movement** | **T1021.002** | SMB/Windows Admin Shares | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) |
+| **Supply Chain** | **T1195.001** | Compromise Dependencies (Actions/Packages) | [GitHub Security Masterclass](./GitHub_Security/README.md) |
+| **Supply Chain** | **T1195.002** | Compromise Software Supply Chain (Pipeline) | [GitHub Security Masterclass](./GitHub_Security/README.md) |
 | **Command & Control** | **T1105** | Ingress Tool Transfer (`bitsadmin`) | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) |
 
 ---
@@ -185,7 +216,7 @@ Executing offensive actions against target systems without explicit, prior, writ
 
 <div align="center">
 
-**Crafted with ❤️ by Siva | Continuously Updated with New Research, Tools & Labs**
+**Crafted with ❤️ by Siva | Continuously Updated with New Research, Tools, DevSecOps & Labs**
 
 ⭐ **Star this repository if you find it valuable for your cybersecurity journey!** ⭐
 
