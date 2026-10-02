@@ -20,6 +20,12 @@
 [![Supply Chain](https://img.shields.io/badge/Security-SLSA%20Level%203-blue?style=for-the-badge&logo=google)](https://slsa.dev/)
 [![MITRE](https://img.shields.io/badge/MITRE-ATT%26CK%20for%20Cloud-orange?style=for-the-badge&logo=target)](https://attack.mitre.org/matrices/enterprise/cloud/)
 
+<p align="center">
+  <b>📚 GitHub Security Series:</b><br>
+  👉 <a href="./How_to_Use_GitHub_Securely_Complete_Guide.md"><b>Part 1: How to Use Git & GitHub Securely (Commands & CLI Mastery)</b></a><br>
+  👉 <a href="./GitHub_Security_and_Hardening_Masterclass.md"><b>Part 2: DevSecOps Hardening & Real-World Case Incidents</b></a>
+</p>
+
 </div>
 
 ---

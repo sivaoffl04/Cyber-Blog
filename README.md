@@ -84,7 +84,8 @@ flowchart TD
 
 | Category | Module / Topic | Core Technologies | Level | Direct Link |
 | :--- | :--- | :--- | :---: | :---: |
-| 🔒 **DevSecOps** | **GitHub Security & Hardening Masterclass** | Secret Scanning, Gitleaks, Push Protection, OIDC, Actions, CodeQL, Dependabot | All Levels | [Explore](./GitHub_Security/README.md) |
+| 🔒 **Git & GitHub** | **How to Use Git & GitHub Securely** | Essential Commands, Git 4-Zones, Ed25519 SSH, `gh` CLI, Signed Commits | All Levels | [Explore](./GitHub_Security/How_to_Use_GitHub_Securely_Complete_Guide.md) |
+| 🔒 **DevSecOps** | **GitHub Security & Hardening Masterclass** | Breach Case Studies (Uber/Toyota), Secret Scanning, Gitleaks, OIDC, Actions | All Levels | [Explore](./GitHub_Security/GitHub_Security_and_Hardening_Masterclass.md) |
 | 🧰 **Tools** | **Nmap Masterclass** | TCP/UDP Sockets, Raw Packets, NSE (Lua), Firewall Evasion | All Levels | [Explore](./tools/Nmap/README.md) |
 | 🧰 **Tools** | **John the Ripper Masterclass** | Hash Cracking, Rule Mutation, Incremental, `*2john` Converters | All Levels | [Explore](./tools/John%20the%20ripper/README.md) |
 | 🧰 **Tools** | **Hashcat Masterclass** | GPU Acceleration, Attack Modes (0,1,3,6,7), Cryptanalysis | All Levels | [Explore](./tools/Hashcat/README.md) |
@@ -105,9 +106,9 @@ flowchart TD
 
 # 🔒 GitHub Security & DevSecOps Masterclass
 
-[👉 **Read the Complete GitHub Security & Hardening Masterclass**](./GitHub_Security/README.md)
+[👉 **Part 1: How to Use Git & GitHub Securely (CLI, Workflow & Commands)**](./GitHub_Security/How_to_Use_GitHub_Securely_Complete_Guide.md) • [👉 **Part 2: DevSecOps Hardening & Real-World Breaches**](./GitHub_Security/GitHub_Security_and_Hardening_Masterclass.md)
 
-Modern organizations deploy code at unprecedented speeds, making source code repositories and CI/CD pipelines prime Tier-0 attack targets. This comprehensive guide dissects historic real-world breaches and provides an enterprise defense-in-depth hardening blueprint:
+Modern organizations deploy code at unprecedented speeds, making source code repositories and CI/CD pipelines prime Tier-0 attack targets. This comprehensive curriculum covers both everyday secure usage and enterprise defense-in-depth hardening:
 
 * **Real-World Case Studies Dissected:**
   - **Uber AWS Credential Leak (2016):** Attackers scraped hardcoded AWS IAM keys from private GitHub code commits, exfiltrating the PII of 57 million users and 600,000 drivers.
