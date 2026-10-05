@@ -13,6 +13,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **Kibana : Windows Event Logs I** | **CID 1182** | Threat Hunting / LOLBAS | Sysmon EID 1 (Process Creation) | **T1053.005** (Schtasks)<br>**T1070.004** (SDelete)<br>**T1021.002** (SMB Shares)<br>**T1018** (Remote Discovery)<br>**T1197** (BITS Jobs) | 🟢 **100% Solved**<br>(5/5 Flags) | [View Solution](./Kibana%20Windows%20Event%20Logs%20I/README.md) |
 | **Kibana : Windows Event Logs II** | **CID 1185** | Active Directory Recon | Sysmon EID 3 (Network Connections) | **T1087.002** (Domain Account Discovery)<br>**T1018** (Remote System Discovery)<br>**T1069.002** (Permission Groups) | 🟢 **100% Solved**<br>(3/3 Flags) | [View Solution](./Kibana%20Windows%20Event%20Logs%20II/README.md) |
 | **Kibana : Windows Event Logs III** | **CID 1186** | Web Shell & Memory Decryption | Sysmon EID 1 (Process Creation) | **T1505.003** (Web Shell)<br>**T1027** (Obfuscation)<br>**T1059.001** (PowerShell)<br>**T1003** / **T1082** (LOLBAS `appcmd.exe`) | 🟢 **100% Solved**<br>(3/3 Flags) | [View Solution](./Kibana%20Windows%20Event%20Logs%20III/README.md) |
+| **Log Anomaly Detection Basics** | **CID 141** | Web Forensics / Anomaly Detection | Web Access Telemetry (`logs.txt`) | **T1190** (Exploit Public-Facing App)<br>**T1595** (Active Scanning)<br>**T1059** (Command & Scripting Interpreter) | 🟢 **100% Solved**<br>(5/5 Anomalies) | [View Solution](./Log%20Anomaly%20Detection%20Basics/README.md) |
 
 ---
 
@@ -32,6 +33,11 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Dataset:** Samir Bousseaden EVTX Attack Samples (IIS Web Shell & Post-Exploitation Execution).
 * **Scenario:** Compromise of an Internet Information Services (IIS) web server with in-memory obfuscated payload execution.
 * **Key Tasks:** Identifying the compromised application pool from `w3wp.exe` execution, deobfuscating Base64/UTF-16LE encoded PowerShell scripts to extract the XOR decryption key, and tracing child process spawning of Microsoft's `appcmd.exe` utility used for credential and virtual directory harvesting.
+
+### 4. [Log Anomaly Detection Basics](./Log%20Anomaly%20Detection%20Basics/README.md)
+* **Dataset:** `logs.txt` (1,000,005 Web Access Log Records).
+* **Scenario:** Web application telemetry analysis to isolate hidden malicious probes and syntax corruptions from baseline traffic.
+* **Key Tasks:** Developing high-throughput streaming Python pipelines and AWK one-liners, auditing HTTP verb cardinality to detect non-standard method `HEADER`, evaluating temporal calendar semantics to identify impossible day `33` and corrupted month `XYZ`, statistical range modeling to flag numeric outlier `8119`, and enforcing lexical prefix patterns to detect word mutation `crachy`.
 
 ---
 
