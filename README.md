@@ -72,6 +72,7 @@ flowchart TD
     Labs --> L5["Compromised Credentials (Host Forensics)"]
     Labs --> L6["Malicious User Behaviour Analysis (Insider Threat)"]
     Labs --> L7["Apache Error Log Analysis (CID 140)"]
+    Labs --> L8["Apache Access Log Analysis (CID 103)"]
 
     style Hub fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#fff
     style Tools fill:#1e293b,stroke:#06b6d4,color:#fff
@@ -101,6 +102,7 @@ flowchart TD
 | 🎯 **Labs** | **Compromised Credentials** | Windows Security EID 4625/4624, Sysmon EID 3, SMB Password Spray | Hands-on | [Explore](./INE%20lab/Compromised%20Credentials/README.md) |
 | 🎯 **Labs** | **Malicious User Behaviour** | Linux Credential Audit, ClamAV Malware Scan, Rogue Netcat Sockets | Hands-on | [Explore](./INE%20lab/Malicious%20User%20Behaviour%20Analysis/README.md) |
 | 🎯 **Labs** | **Apache Error Log Analysis** | Web Server Error Telemetry, LFI Traversal, Basic Auth Spraying, 404s | Hands-on | [Explore](./INE%20lab/Apache%20Error%20Log%20Analysis%20Basics/README.md) |
+| 🎯 **Labs** | **Apache Access Log Analysis** | Web Server Access Telemetry, Top Clients, User-Agents, CMS Brute Force | Hands-on | [Explore](./INE%20lab/Apache%20Log%20Analysis%20Basics/README.md) |
 | 👥 **Teams** | **🔴 Red Team Operations** | C2 Infrastructure, Evasion, Lateral Movement, AD Exploitation | Intermediate | [Explore](./Security_Team/Red_Team/README.md) |
 | 👥 **Teams** | **🔵 Blue Team Operations** | Threat Hunting, EDR Telemetry, SIEM Correlation, Hardening | Intermediate | [Explore](./Security_Team/Blue_Team/README.md) |
 | 👥 **Teams** | **🟣 Purple Team Methodology** | Adversary Emulation, Telemetry Validation, Sigma Rules | Intermediate | [Explore](./Security_Team/Purple_Team/README.md) |
@@ -171,6 +173,7 @@ Real-world SOC and threat hunting challenges documented with 100% verified flag 
 | **Compromised Credentials**<br>*(Incident Response)* | Windows host incident response. Triaging 3,651 failed logons (EID 4625), isolating attacker IP `13.214.192.125`, confirming Admin compromise (EID 4624), and attributing SMB service (Sysmon EID 3). | 🟢 **Breach Confirmed**<br>`Administrator`, `13.214.192.125`, `SMB / Port 445`, `3,651 fails` | [Read Walkthrough](./INE%20lab/Compromised%20Credentials/README.md) |
 | **Malicious User Behaviour**<br>*(Insider Threat)* | Linux employee security audit across 5 users. Cracking weak password (`12345`), detecting trojan malware (`Unix.Ircbot`), and attributing rogue open port (`4444`) to `usr1`. | 🟢 **3 of 3 Tasks**<br>`usr1`, `12345`, `Unix.Ircbot`, `Port 4444 (nc)` | [Read Walkthrough](./INE%20lab/Malicious%20User%20Behaviour%20Analysis/README.md) |
 | **Apache Error Log Analysis**<br>*(CID 140)* | Web server error log forensics (`error.log`). Path bruteforcing (229k requests), Basic Auth spraying (75 users), LFI traversal (15 attacks), and error taxonomy. | 🟢 **7 of 7 Questions**<br>`229,112`, `75 users`, `15 LFI`, `7 error types` | [Read Walkthrough](./INE%20lab/Apache%20Error%20Log%20Analysis%20Basics/README.md) |
+| **Apache Access Log Analysis**<br>*(CID 103)* | Web server access forensics (`apache_access.log`). Traffic quantification (10k logs), top client IPs, User-Agent profiling, and Joomla admin credential stuffing. | 🟢 **7 of 7 Questions**<br>`10000`, `91.141.1.150`, `Top 5 UAs`, `Joomla spray` | [Read Walkthrough](./INE%20lab/Apache%20Log%20Analysis%20Basics/README.md) |
 
 ---
 

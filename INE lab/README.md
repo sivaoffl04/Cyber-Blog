@@ -17,6 +17,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **Compromised Credentials** | **Incident Response** | Windows Host Forensics / Brute Force | Security.evtx (EID 4625/4624) & Sysmon EID 3 | **T1110.001** (Password Guessing)<br>**T1110.003** (Password Spraying)<br>**T1078.003** (Local Accounts)<br>**T1021.002** (SMB) | 🟢 **100% Solved**<br>(Breach Confirmed) | [View Solution](./Compromised%20Credentials/README.md) |
 | **Malicious User Behaviour Analysis** | **Insider Threat** | Linux Host Forensics / Insider Threat | `/etc/shadow`, ClamAV, `ss`, `/proc` | **T1078.003** (Local Accounts)<br>**T1204.002** (Malicious File)<br>**T1571** (Non-Standard Port) | 🟢 **100% Solved**<br>(3/3 Tasks) | [View Solution](./Malicious%20User%20Behaviour%20Analysis/README.md) |
 | **Apache Error Log Analysis Basics** | **CID 140** | Web Forensics / Error Log Analysis | Apache `error.log` | **T1595.002** (Vulnerability Scanning)<br>**T1110.001** (Password Guessing)<br>**T1083** (File & Directory Discovery) | 🟢 **100% Solved**<br>(7/7 Questions) | [View Solution](./Apache%20Error%20Log%20Analysis%20Basics/README.md) |
+| **Apache Log Analysis Basics** | **CID 103** | Web Forensics / Access Log Analysis | Apache `apache_access.log` (10k events) | **T1110.001** (Password Guessing)<br>**T1190** (Exploit Public-Facing App)<br>**T1595.002** (Vulnerability Scanning) | 🟢 **100% Solved**<br>(7/7 Questions) | [View Solution](./Apache%20Log%20Analysis%20Basics/README.md) |
 
 ---
 
@@ -56,6 +57,11 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Dataset:** `error.log` (Apache 2.x HTTPD Error Telemetry).
 * **Scenario:** Forensic analysis of web server errors to uncover automated scanning and directory traversal attempts.
 * **Key Tasks:** Filtering 229,112 non-existent page requests from aggressive path bruteforcing, isolating 75 unique usernames from HTTP Basic Auth password spraying, detecting 15 Directory Traversal / LFI requests targeting critical operating system files (`passwd`, `shadow`, `boot.ini`, `sam`), extracting probed URL wordlists, and categorizing the 7-part super-set of web server error types.
+
+### 8. [Apache Log Analysis Basics](./Apache%20Log%20Analysis%20Basics/README.md)
+* **Dataset:** `apache_access.log` (10,000 Apache Access Telemetry Entries).
+* **Scenario:** Investigation of web traffic volume, endpoint access patterns, client browser distributions, and identification of aggressive automated brute-force attacks.
+* **Key Tasks:** Quantifying total access requests (`10,000`), ranking top 5 client IPs to isolate primary attacker `91.141.1.150` (2,842 requests), extracting top 5 User-Agent strings, profiling top URLs requested alongside HTTP methods, evaluating visited URLs, filtering non-200 OK HTTP response codes, and conducting detailed threat attribution into Joomla administrator credential stuffing.
 
 ---
 
