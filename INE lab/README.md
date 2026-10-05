@@ -16,6 +16,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **Log Anomaly Detection Basics** | **CID 141** | Web Forensics / Anomaly Detection | Web Access Telemetry (`logs.txt`) | **T1190** (Exploit Public-Facing App)<br>**T1595** (Active Scanning)<br>**T1059** (Command & Scripting Interpreter) | 🟢 **100% Solved**<br>(5/5 Anomalies) | [View Solution](./Log%20Anomaly%20Detection%20Basics/README.md) |
 | **Compromised Credentials** | **Incident Response** | Windows Host Forensics / Brute Force | Security.evtx (EID 4625/4624) & Sysmon EID 3 | **T1110.001** (Password Guessing)<br>**T1110.003** (Password Spraying)<br>**T1078.003** (Local Accounts)<br>**T1021.002** (SMB) | 🟢 **100% Solved**<br>(Breach Confirmed) | [View Solution](./Compromised%20Credentials/README.md) |
 | **Malicious User Behaviour Analysis** | **Insider Threat** | Linux Host Forensics / Insider Threat | `/etc/shadow`, ClamAV, `ss`, `/proc` | **T1078.003** (Local Accounts)<br>**T1204.002** (Malicious File)<br>**T1571** (Non-Standard Port) | 🟢 **100% Solved**<br>(3/3 Tasks) | [View Solution](./Malicious%20User%20Behaviour%20Analysis/README.md) |
+| **Apache Error Log Analysis Basics** | **CID 140** | Web Forensics / Error Log Analysis | Apache `error.log` | **T1595.002** (Vulnerability Scanning)<br>**T1110.001** (Password Guessing)<br>**T1083** (File & Directory Discovery) | 🟢 **100% Solved**<br>(7/7 Questions) | [View Solution](./Apache%20Error%20Log%20Analysis%20Basics/README.md) |
 
 ---
 
@@ -50,6 +51,11 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Dataset:** Ubuntu Linux Host Environment (`/etc/passwd`, `/etc/shadow`, ClamAV, `ss`).
 * **Scenario:** Internal hygiene audit of 5 employees to identify careless and negligent behavior following a branch breach.
 * **Key Tasks:** Cracking weak user shadow hashes with John the Ripper (`usr1: 12345`), scanning user home directories with ClamAV to uncover trojan malware (`Unix.Ircbot` in `usr1`'s project tree), inspecting listening network sockets with `ss` to detect unauthenticated Netcat listeners on port 4444, and tracing process ownership to `usr1` via `/proc/<PID>/environ`.
+
+### 7. [Apache Error Log Analysis Basics](./Apache%20Error%20Log%20Analysis%20Basics/README.md)
+* **Dataset:** `error.log` (Apache 2.x HTTPD Error Telemetry).
+* **Scenario:** Forensic analysis of web server errors to uncover automated scanning and directory traversal attempts.
+* **Key Tasks:** Filtering 229,112 non-existent page requests from aggressive path bruteforcing, isolating 75 unique usernames from HTTP Basic Auth password spraying, detecting 15 Directory Traversal / LFI requests targeting critical operating system files (`passwd`, `shadow`, `boot.ini`, `sam`), extracting probed URL wordlists, and categorizing the 7-part super-set of web server error types.
 
 ---
 
