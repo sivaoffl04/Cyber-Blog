@@ -70,6 +70,7 @@ flowchart TD
     Labs --> L3["Kibana Event Logs III (IIS Webshell & AppCmd)"]
     Labs --> L4["Log Anomaly Detection Basics (Web Telemetry)"]
     Labs --> L5["Compromised Credentials (Host Forensics)"]
+    Labs --> L6["Malicious User Behaviour Analysis (Insider Threat)"]
 
     style Hub fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#fff
     style Tools fill:#1e293b,stroke:#06b6d4,color:#fff
@@ -97,6 +98,7 @@ flowchart TD
 | 🎯 **Labs** | **Kibana: Event Logs III (CID 1186)** | Sysmon EID 1, IIS Webshell, In-Memory XOR Decryption, `appcmd` | Hands-on | [Explore](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
 | 🎯 **Labs** | **Log Anomaly Detection (CID 141)** | Web Server Access Logs, Cardinality Profiling, RFC Violations, Outliers | Hands-on | [Explore](./INE%20lab/Log%20Anomaly%20Detection%20Basics/README.md) |
 | 🎯 **Labs** | **Compromised Credentials** | Windows Security EID 4625/4624, Sysmon EID 3, SMB Password Spray | Hands-on | [Explore](./INE%20lab/Compromised%20Credentials/README.md) |
+| 🎯 **Labs** | **Malicious User Behaviour** | Linux Credential Audit, ClamAV Malware Scan, Rogue Netcat Sockets | Hands-on | [Explore](./INE%20lab/Malicious%20User%20Behaviour%20Analysis/README.md) |
 | 👥 **Teams** | **🔴 Red Team Operations** | C2 Infrastructure, Evasion, Lateral Movement, AD Exploitation | Intermediate | [Explore](./Security_Team/Red_Team/README.md) |
 | 👥 **Teams** | **🔵 Blue Team Operations** | Threat Hunting, EDR Telemetry, SIEM Correlation, Hardening | Intermediate | [Explore](./Security_Team/Blue_Team/README.md) |
 | 👥 **Teams** | **🟣 Purple Team Methodology** | Adversary Emulation, Telemetry Validation, Sigma Rules | Intermediate | [Explore](./Security_Team/Purple_Team/README.md) |
@@ -165,6 +167,7 @@ Real-world SOC and threat hunting challenges documented with 100% verified flag 
 | **Kibana: Windows Event Logs III**<br>*(CID 1186)* | IIS web server compromise via webshell, in-memory UTF-16LE Base64 PowerShell execution, XOR decryption, and `appcmd.exe` credential dumping. | 🟢 **3 of 3 Flags**<br>`DefaultAppPool`, `8d969eef6ecad...`, `C:\Windows\System32\inetsrv\appcmd.exe` | [Read Walkthrough](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
 | **Log Anomaly Detection Basics**<br>*(CID 141)* | Web access log forensics over 1M+ records (`logs.txt`). Multi-variate cardinality, temporal semantics, lexical prefix, and statistical bounds. | 🟢 **5 of 5 Anomalies**<br>`HEADER`, `33JAN2013`, `20XYZ2019`, `8119`, `crachy` | [Read Walkthrough](./INE%20lab/Log%20Anomaly%20Detection%20Basics/README.md) |
 | **Compromised Credentials**<br>*(Incident Response)* | Windows host incident response. Triaging 3,651 failed logons (EID 4625), isolating attacker IP `13.214.192.125`, confirming Admin compromise (EID 4624), and attributing SMB service (Sysmon EID 3). | 🟢 **Breach Confirmed**<br>`Administrator`, `13.214.192.125`, `SMB / Port 445`, `3,651 fails` | [Read Walkthrough](./INE%20lab/Compromised%20Credentials/README.md) |
+| **Malicious User Behaviour**<br>*(Insider Threat)* | Linux employee security audit across 5 users. Cracking weak password (`12345`), detecting trojan malware (`Unix.Ircbot`), and attributing rogue open port (`4444`) to `usr1`. | 🟢 **3 of 3 Tasks**<br>`usr1`, `12345`, `Unix.Ircbot`, `Port 4444 (nc)` | [Read Walkthrough](./INE%20lab/Malicious%20User%20Behaviour%20Analysis/README.md) |
 
 ---
 
