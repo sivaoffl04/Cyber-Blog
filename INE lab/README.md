@@ -14,6 +14,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **Kibana : Windows Event Logs II** | **CID 1185** | Active Directory Recon | Sysmon EID 3 (Network Connections) | **T1087.002** (Domain Account Discovery)<br>**T1018** (Remote System Discovery)<br>**T1069.002** (Permission Groups) | 🟢 **100% Solved**<br>(3/3 Flags) | [View Solution](./Kibana%20Windows%20Event%20Logs%20II/README.md) |
 | **Kibana : Windows Event Logs III** | **CID 1186** | Web Shell & Memory Decryption | Sysmon EID 1 (Process Creation) | **T1505.003** (Web Shell)<br>**T1027** (Obfuscation)<br>**T1059.001** (PowerShell)<br>**T1003** / **T1082** (LOLBAS `appcmd.exe`) | 🟢 **100% Solved**<br>(3/3 Flags) | [View Solution](./Kibana%20Windows%20Event%20Logs%20III/README.md) |
 | **Log Anomaly Detection Basics** | **CID 141** | Web Forensics / Anomaly Detection | Web Access Telemetry (`logs.txt`) | **T1190** (Exploit Public-Facing App)<br>**T1595** (Active Scanning)<br>**T1059** (Command & Scripting Interpreter) | 🟢 **100% Solved**<br>(5/5 Anomalies) | [View Solution](./Log%20Anomaly%20Detection%20Basics/README.md) |
+| **Compromised Credentials** | **Incident Response** | Windows Host Forensics / Brute Force | Security.evtx (EID 4625/4624) & Sysmon EID 3 | **T1110.001** (Password Guessing)<br>**T1110.003** (Password Spraying)<br>**T1078.003** (Local Accounts)<br>**T1021.002** (SMB) | 🟢 **100% Solved**<br>(Breach Confirmed) | [View Solution](./Compromised%20Credentials/README.md) |
 
 ---
 
@@ -38,6 +39,11 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Dataset:** `logs.txt` (1,000,005 Web Access Log Records).
 * **Scenario:** Web application telemetry analysis to isolate hidden malicious probes and syntax corruptions from baseline traffic.
 * **Key Tasks:** Developing high-throughput streaming Python pipelines and AWK one-liners, auditing HTTP verb cardinality to detect non-standard method `HEADER`, evaluating temporal calendar semantics to identify impossible day `33` and corrupted month `XYZ`, statistical range modeling to flag numeric outlier `8119`, and enforcing lexical prefix patterns to detect word mutation `crachy`.
+
+### 5. [Compromised Credentials](./Compromised%20Credentials/README.md)
+* **Dataset:** Windows Security Event Log (`Security.evtx`) and Sysmon Operational Telemetry.
+* **Scenario:** Triage of a Windows host following suspicious login notifications from an employee.
+* **Key Tasks:** Enumerating local SAM accounts (`net user`), measuring 3,651 failed authentication attempts (Event ID 4625), isolating attacker IP `13.214.192.125`, confirming Administrator account takeover via Event ID 4624 (Logon Type 3 - Network), and correlating targeted SMB service (TCP Port 445) via Sysmon Event ID 3.
 
 ---
 
