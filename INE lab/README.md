@@ -20,6 +20,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **Apache Log Analysis Basics** | **CID 103** | Web Forensics / Access Log Analysis | Apache `apache_access.log` (10k events) | **T1110.001** (Password Guessing)<br>**T1190** (Exploit Public-Facing App)<br>**T1595.002** (Vulnerability Scanning) | 🟢 **100% Solved**<br>(7/7 Questions) | [View Solution](./Apache%20Log%20Analysis%20Basics/README.md) |
 | **False Positive Validation: Trusted Admin Brute-Force** | **SOC Lab** | SOC Triage / Case Management | Wazuh v4.x & TheHive (`10.0.0.11` / `10.0.0.100`) | **T1110** (Brute Force)<br>**T1078** (Valid Accounts)<br>**T1021.004** (SSH) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./False%20Positive%20Validation%20Trusted%20Admin%20Brute-Force%20Detection/README.md) |
 | **Account Creation & Privilege Escalation Attempt** | **SOC Lab** | SOC Triage / Privilege Escalation | Wazuh v4.x & TheHive (`ip-10-0-0-100` / `10.0.0.11`) | **T1136** (Create Account)<br>**T1078** (Valid Accounts)<br>**T1021.004** (SSH)<br>**T1548.003** (Sudoers) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./Account%20Creation%20&%20Privilege%20Escalation%20Attempt%20Detection/README.md) |
+| **PCAP Analysis With Zeek** | **Defender Lab** | Network Forensics / Malware PCAP | Zeek Logs (`conn`, `dns`, `http`, `ssl`, `dhcp`, `kerberos`) | **T1071.001** (Web Protocols)<br>**T1566.001** (Spearphishing Attachment)<br>**T1059.005** (Macros)<br>**T1078** (Valid Accounts) | 🟢 **100% Solved**<br>(15/15 Questions) | [View Solution](./PCAP%20Analysis%20With%20Zeek/README.md) |
 
 ---
 
@@ -74,6 +75,11 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Platform & Stack:** Wazuh SIEM v4.x & TheHive Incident Management Platform.
 * **Scenario:** Tier 1 SOC triage of a multi-stage intrusion sequence involving unauthorized local user creation, remote SSH login, and privilege escalation targeting `/etc/sudoers` on Linux endpoint `ip-10-0-0-100`.
 * **Key Tasks:** Reviewing Wazuh MITRE ATT&CK dashboard on date 24th December 2025, correlating unauthorized account creation `eviluser` (T1136 @ 07:41) with subsequent SSH access from `10.0.0.11` (T1021/T1078 @ 07:59) and first-time sudo execution on `/etc/sudoers` (T1548.003 @ 08:00), classifying as a True Positive (`Severity: HIGH`), registering 4 sighted observables (`eviluser`, `10.0.0.11`, `ip-10-0-0-100`, `/etc/sudoers`), defining a mandatory validation task, attaching MITRE TTPs, and reassigning the case to SOC Level 2 (`soc2@syntrix.com`).
+
+### 11. [PCAP Analysis With Zeek](./PCAP%20Analysis%20With%20Zeek/README.md)
+* **Platform & Stack:** Zeek (Bro Network Security Monitor), `zeek-cut`, `jq`, `awk` on Ubuntu Target Sensor.
+* **Scenario:** Network packet dissection and threat attribution across two complex malware PCAP captures (`Malware1` & `Malware2`).
+* **Key Tasks:** Splitting raw PCAPs into Zeek transaction logs (`conn.log`, `http.log`, `dns.log`, `ssl.log`, `dhcp.log`, `kerberos.log`, `files.log`), exporting JSON logs via `LogAscii::use_json=T`, parsing HTTP OCSP transactions with `jq`, extracting destination IP cardinality, uncovering Cobalt Strike TLS C2 (`ceyuvigi.com` / `23.108.57.213:443`) and Bumblebee RAT sessions (`139.177.146.137:443`), fingerprinting Windows client MAC (`00:1e:67:4a:d7:5c`) and hostname (`Nalyvaiko-PC`) via DHCP, extracting Kerberos domain account (`innochka.nalyvaiko`), tracing malicious Word document phishing download (`2018_11Details_zur_Transaktion.doc`), isolating binary payload executable (`6169583.exe` - 429,056 bytes), and identifying the Emotet Trojan campaign.
 
 ---
 
