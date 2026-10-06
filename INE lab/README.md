@@ -18,6 +18,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **Malicious User Behaviour Analysis** | **Insider Threat** | Linux Host Forensics / Insider Threat | `/etc/shadow`, ClamAV, `ss`, `/proc` | **T1078.003** (Local Accounts)<br>**T1204.002** (Malicious File)<br>**T1571** (Non-Standard Port) | 🟢 **100% Solved**<br>(3/3 Tasks) | [View Solution](./Malicious%20User%20Behaviour%20Analysis/README.md) |
 | **Apache Error Log Analysis Basics** | **CID 140** | Web Forensics / Error Log Analysis | Apache `error.log` | **T1595.002** (Vulnerability Scanning)<br>**T1110.001** (Password Guessing)<br>**T1083** (File & Directory Discovery) | 🟢 **100% Solved**<br>(7/7 Questions) | [View Solution](./Apache%20Error%20Log%20Analysis%20Basics/README.md) |
 | **Apache Log Analysis Basics** | **CID 103** | Web Forensics / Access Log Analysis | Apache `apache_access.log` (10k events) | **T1110.001** (Password Guessing)<br>**T1190** (Exploit Public-Facing App)<br>**T1595.002** (Vulnerability Scanning) | 🟢 **100% Solved**<br>(7/7 Questions) | [View Solution](./Apache%20Log%20Analysis%20Basics/README.md) |
+| **False Positive Validation: Trusted Admin Brute-Force** | **SOC Lab** | SOC Triage / Case Management | Wazuh v4.x & TheHive (`10.0.0.11` / `10.0.0.100`) | **T1110** (Brute Force)<br>**T1078** (Valid Accounts)<br>**T1021.004** (SSH) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./False%20Positive%20Validation%20Trusted%20Admin%20Brute-Force%20Detection/README.md) |
 
 ---
 
@@ -62,6 +63,11 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Dataset:** `apache_access.log` (10,000 Apache Access Telemetry Entries).
 * **Scenario:** Investigation of web traffic volume, endpoint access patterns, client browser distributions, and identification of aggressive automated brute-force attacks.
 * **Key Tasks:** Quantifying total access requests (`10,000`), ranking top 5 client IPs to isolate primary attacker `91.141.1.150` (2,842 requests), extracting top 5 User-Agent strings, profiling top URLs requested alongside HTTP methods, evaluating visited URLs, filtering non-200 OK HTTP response codes, and conducting detailed threat attribution into Joomla administrator credential stuffing.
+
+### 9. [False Positive Validation: Trusted Admin Brute-Force Detection](./False%20Positive%20Validation%20Trusted%20Admin%20Brute-Force%20Detection/README.md)
+* **Platform & Stack:** Wazuh SIEM v4.x & TheHive Incident Management Platform.
+* **Scenario:** Tier 1 SOC triage of an SSH brute-force alert (MITRE T1110) targeting user `root` on internal Ubuntu server `10.0.0.100`.
+* **Key Tasks:** Triaging Wazuh MITRE ATT&CK dashboard on date 7th December 2025, correlating source IP `10.0.0.11` to the trusted Syntrix administrator workstation, classifying the incident as a confirmed False Positive (`Severity: LOW`), creating and tagging the case in TheHive with `TLP:CLEAR` / `PAP:CLEAR`, binding sighted IP observables (`10.0.0.11`), and creating a mandatory cross-verification task escalated to SOC Level 2 (`soc2@syntrix.com`).
 
 ---
 
