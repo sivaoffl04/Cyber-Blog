@@ -76,6 +76,7 @@ flowchart TD
     Labs --> L9["False Positive Validation (Wazuh & TheHive)"]
     Labs --> L10["Account Creation & PrivEsc (Wazuh & TheHive)"]
     Labs --> L11["PCAP Analysis With Zeek (Malware Forensics)"]
+    Labs --> L12["Attack Emulation on ELK (HELK & Atomic Red Team)"]
 
     style Hub fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#fff
     style Tools fill:#1e293b,stroke:#06b6d4,color:#fff
@@ -109,6 +110,7 @@ flowchart TD
 | 🎯 **Labs** | **False Positive Validation** | Wazuh v4.x, TheHive, Alert Triage, TLP/PAP, Case Escalation | Hands-on | [Explore](./INE%20lab/False%20Positive%20Validation%20Trusted%20Admin%20Brute-Force%20Detection/README.md) |
 | 🎯 **Labs** | **Account Creation & PrivEsc** | Wazuh v4.x, TheHive, Sudoers, Multi-Stage Triage, L2 Escalation | Hands-on | [Explore](./INE%20lab/Account%20Creation%20&%20Privilege%20Escalation%20Attempt%20Detection/README.md) |
 | 🎯 **Labs** | **PCAP Analysis With Zeek** | Zeek/Bro Engine, jq, Bumblebee C2, Cobalt Strike, Emotet Phishing | Hands-on | [Explore](./INE%20lab/PCAP%20Analysis%20With%20Zeek/README.md) |
+| 🎯 **Labs** | **Attack Emulation & Detection on ELK** | HELK Platform, Invoke-AtomicTest, Winlogbeat→Kafka→ES, Kibana Discover | Hands-on | [Explore](./INE%20lab/Effectively%20Using%20the%20ELK%20Stack/README.md) |
 | 👥 **Teams** | **🔴 Red Team Operations** | C2 Infrastructure, Evasion, Lateral Movement, AD Exploitation | Intermediate | [Explore](./Security_Team/Red_Team/README.md) |
 | 👥 **Teams** | **🔵 Blue Team Operations** | Threat Hunting, EDR Telemetry, SIEM Correlation, Hardening | Intermediate | [Explore](./Security_Team/Blue_Team/README.md) |
 | 👥 **Teams** | **🟣 Purple Team Methodology** | Adversary Emulation, Telemetry Validation, Sigma Rules | Intermediate | [Explore](./Security_Team/Purple_Team/README.md) |
@@ -183,6 +185,7 @@ Real-world SOC and threat hunting challenges documented with 100% verified flag 
 | **False Positive Validation**<br>*(SOC Incident)* | Wazuh SIEM v4.x & TheHive incident handling. Triaging SSH brute-force alert (T1110) on 7th Dec 2025, validating admin host `10.0.0.11`, assigning `Severity: LOW`, attaching observables, and escalating to SOC L2. | 🟢 **Validated & Escalated**<br>`10.0.0.11`, `Low`, `TLP:CLEAR`, `soc2@syntrix.com` | [Read Walkthrough](./INE%20lab/False%20Positive%20Validation%20Trusted%20Admin%20Brute-Force%20Detection/README.md) |
 | **Account Creation & PrivEsc**<br>*(SOC Incident)* | Wazuh SIEM v4.x & TheHive incident handling. Triaging rogue user `eviluser` (T1136 @ 07:41), SSH login from `10.0.0.11` (T1021/T1078 @ 07:59), and sudoers modification attempt (T1548.003 @ 08:00). Classifying as True Positive (`Severity: HIGH`), registering 4 observables, and escalating to SOC L2. | 🟢 **Verified & Escalated**<br>`eviluser`, `10.0.0.11`, `/etc/sudoers`, `High / TLP:AMBER` | [Read Walkthrough](./INE%20lab/Account%20Creation%20&%20Privilege%20Escalation%20Attempt%20Detection/README.md) |
 | **PCAP Analysis With Zeek**<br>*(Network Forensics)* | Bro/Zeek network monitoring and malware dissection. Extracting JSON logs via `jq`, isolating Cobalt Strike C2 (`ceyuvigi.com` / `23.108.57.213`), Bumblebee RAT (`139.177.146.137`), and tracing Emotet Word doc dropper and executable payload (`6169583.exe`). | 🟢 **15 of 15 Solved**<br>`Cobalt Strike`, `Bumblebee`, `Emotet`, `429,056 bytes` | [Read Walkthrough](./INE%20lab/PCAP%20Analysis%20With%20Zeek/README.md) |
+| **Attack Emulation & Detection on ELK**<br>*(HELK Threat Hunting)* | Full red-to-blue emulation on HELK platform. Configuring Winlogbeat → Kafka → Elasticsearch pipeline, executing 3 Atomic Red Team simulations (`T1218.010` Regsvr32, `T1518.001` Sysmon Discovery, `T1053.005` Scheduled Task), and detecting all attacks in Kibana Discover. | 🟢 **3 of 3 Detected**<br>`Regsvr32`, `fltmc 385201`, `spawn task`, `HELK/hunting` | [Read Walkthrough](./INE%20lab/Effectively%20Using%20the%20ELK%20Stack/README.md) |
 
 ---
 
@@ -214,20 +217,32 @@ Real-world SOC and threat hunting challenges documented with 100% verified flag 
 | ATT&CK Tactic | Technique ID | Technique Name | Covered in Module |
 | :--- | :---: | :--- | :--- |
 | **Reconnaissance** | **T1595** | Active Scanning | [Nmap Masterclass](./tools/Nmap/README.md) |
+| **Initial Access** | **T1566.001** | Spearphishing Attachment (Emotet Word Doc) | [PCAP Analysis With Zeek](./INE%20lab/PCAP%20Analysis%20With%20Zeek/README.md) |
 | **Execution** | **T1059.001** | PowerShell Scripting | [Kibana Event Logs III](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
-| **Persistence** | **T1053.005** | Scheduled Task / Job | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) |
+| **Execution** | **T1059.005** | Visual Basic / Macro Execution | [PCAP Analysis With Zeek](./INE%20lab/PCAP%20Analysis%20With%20Zeek/README.md) |
+| **Persistence** | **T1053.005** | Scheduled Task / Job | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) & [ELK Attack Emulation](./INE%20lab/Effectively%20Using%20the%20ELK%20Stack/README.md) |
 | **Persistence** | **T1505.003** | Web Shell Execution | [Kibana Event Logs III](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
+| **Persistence** | **T1136** | Create Account (`eviluser`) | [Account Creation & PrivEsc](./INE%20lab/Account%20Creation%20&%20Privilege%20Escalation%20Attempt%20Detection/README.md) |
+| **Privilege Escalation** | **T1548.003** | Abuse Elevation via Sudo (`/etc/sudoers`) | [Account Creation & PrivEsc](./INE%20lab/Account%20Creation%20&%20Privilege%20Escalation%20Attempt%20Detection/README.md) |
 | **Defense Evasion** | **T1070.004** | File Deletion (`sdelete`) | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) |
 | **Defense Evasion** | **T1027** | Obfuscated Files or Information | [Kibana Event Logs III](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
-| **Credential Access** | **T1110** | Brute Force Password Guessing | [John the Ripper](./tools/John%20the%20ripper/README.md) & [Hashcat](./tools/Hashcat/README.md) |
+| **Defense Evasion** | **T1218.010** | Signed Binary Proxy Execution: Regsvr32 | [ELK Attack Emulation](./INE%20lab/Effectively%20Using%20the%20ELK%20Stack/README.md) |
+| **Credential Access** | **T1110** | Brute Force Password Guessing | [John the Ripper](./tools/John%20the%20ripper/README.md) & [Hashcat](./tools/Hashcat/README.md) & [Compromised Credentials](./INE%20lab/Compromised%20Credentials/README.md) |
+| **Credential Access** | **T1110.003** | Password Spraying (SMB `Administrator`) | [Compromised Credentials](./INE%20lab/Compromised%20Credentials/README.md) |
 | **Credential Access** | **T1552.001** | Credentials in Files / Git Trees | [GitHub Security Masterclass](./GitHub_Security/README.md) |
 | **Credential Access** | **T1003** | OS Credential Dumping (`appcmd`) | [Kibana Event Logs III](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
 | **Discovery** | **T1087** | Account Discovery (`UserHunter`) | [Kibana Event Logs II](./INE%20lab/Kibana%20Windows%20Event%20Logs%20II/README.md) |
 | **Discovery** | **T1018** | Remote System Discovery (Ping / Net) | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) & [II](./INE%20lab/Kibana%20Windows%20Event%20Logs%20II/README.md) |
+| **Discovery** | **T1518.001** | Security Software Discovery (Sysmon `fltmc`) | [ELK Attack Emulation](./INE%20lab/Effectively%20Using%20the%20ELK%20Stack/README.md) |
 | **Lateral Movement** | **T1021.002** | SMB/Windows Admin Shares | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) |
+| **Lateral Movement** | **T1021.004** | SSH Remote Service Login | [False Positive Validation](./INE%20lab/False%20Positive%20Validation%20Trusted%20Admin%20Brute-Force%20Detection/README.md) & [Account Creation & PrivEsc](./INE%20lab/Account%20Creation%20&%20Privilege%20Escalation%20Attempt%20Detection/README.md) |
+| **Collection** | **T1083** | File & Directory Discovery (LFI/Traversal) | [Apache Error Log Analysis](./INE%20lab/Apache%20Error%20Log%20Analysis%20Basics/README.md) |
+| **Command & Control** | **T1071.001** | Web Protocols C2 (Cobalt Strike / Bumblebee) | [PCAP Analysis With Zeek](./INE%20lab/PCAP%20Analysis%20With%20Zeek/README.md) |
+| **Command & Control** | **T1105** | Ingress Tool Transfer (`bitsadmin`) | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) |
 | **Supply Chain** | **T1195.001** | Compromise Dependencies (Actions/Packages) | [GitHub Security Masterclass](./GitHub_Security/README.md) |
 | **Supply Chain** | **T1195.002** | Compromise Software Supply Chain (Pipeline) | [GitHub Security Masterclass](./GitHub_Security/README.md) |
-| **Command & Control** | **T1105** | Ingress Tool Transfer (`bitsadmin`) | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) |
+| **Impact** | **T1204.002** | User Execution: Malicious File (Malware Install) | [Malicious User Behaviour](./INE%20lab/Malicious%20User%20Behaviour%20Analysis/README.md) |
+| **Impact** | **T1571** | Non-Standard Port (Netcat Port 4444) | [Malicious User Behaviour](./INE%20lab/Malicious%20User%20Behaviour%20Analysis/README.md) |
 
 ---
 
