@@ -74,6 +74,7 @@ flowchart TD
     Labs --> L7["Apache Error Log Analysis (CID 140)"]
     Labs --> L8["Apache Access Log Analysis (CID 103)"]
     Labs --> L9["False Positive Validation (Wazuh & TheHive)"]
+    Labs --> L10["Account Creation & PrivEsc (Wazuh & TheHive)"]
 
     style Hub fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#fff
     style Tools fill:#1e293b,stroke:#06b6d4,color:#fff
@@ -105,6 +106,7 @@ flowchart TD
 | 🎯 **Labs** | **Apache Error Log Analysis** | Web Server Error Telemetry, LFI Traversal, Basic Auth Spraying, 404s | Hands-on | [Explore](./INE%20lab/Apache%20Error%20Log%20Analysis%20Basics/README.md) |
 | 🎯 **Labs** | **Apache Access Log Analysis** | Web Server Access Telemetry, Top Clients, User-Agents, CMS Brute Force | Hands-on | [Explore](./INE%20lab/Apache%20Log%20Analysis%20Basics/README.md) |
 | 🎯 **Labs** | **False Positive Validation** | Wazuh v4.x, TheHive, Alert Triage, TLP/PAP, Case Escalation | Hands-on | [Explore](./INE%20lab/False%20Positive%20Validation%20Trusted%20Admin%20Brute-Force%20Detection/README.md) |
+| 🎯 **Labs** | **Account Creation & PrivEsc** | Wazuh v4.x, TheHive, Sudoers, Multi-Stage Triage, L2 Escalation | Hands-on | [Explore](./INE%20lab/Account%20Creation%20&%20Privilege%20Escalation%20Attempt%20Detection/README.md) |
 | 👥 **Teams** | **🔴 Red Team Operations** | C2 Infrastructure, Evasion, Lateral Movement, AD Exploitation | Intermediate | [Explore](./Security_Team/Red_Team/README.md) |
 | 👥 **Teams** | **🔵 Blue Team Operations** | Threat Hunting, EDR Telemetry, SIEM Correlation, Hardening | Intermediate | [Explore](./Security_Team/Blue_Team/README.md) |
 | 👥 **Teams** | **🟣 Purple Team Methodology** | Adversary Emulation, Telemetry Validation, Sigma Rules | Intermediate | [Explore](./Security_Team/Purple_Team/README.md) |
@@ -177,6 +179,7 @@ Real-world SOC and threat hunting challenges documented with 100% verified flag 
 | **Apache Error Log Analysis**<br>*(CID 140)* | Web server error log forensics (`error.log`). Path bruteforcing (229k requests), Basic Auth spraying (75 users), LFI traversal (15 attacks), and error taxonomy. | 🟢 **7 of 7 Questions**<br>`229,112`, `75 users`, `15 LFI`, `7 error types` | [Read Walkthrough](./INE%20lab/Apache%20Error%20Log%20Analysis%20Basics/README.md) |
 | **Apache Access Log Analysis**<br>*(CID 103)* | Web server access forensics (`apache_access.log`). Traffic quantification (10k logs), top client IPs, User-Agent profiling, and Joomla admin credential stuffing. | 🟢 **7 of 7 Questions**<br>`10000`, `91.141.1.150`, `Top 5 UAs`, `Joomla spray` | [Read Walkthrough](./INE%20lab/Apache%20Log%20Analysis%20Basics/README.md) |
 | **False Positive Validation**<br>*(SOC Incident)* | Wazuh SIEM v4.x & TheHive incident handling. Triaging SSH brute-force alert (T1110) on 7th Dec 2025, validating admin host `10.0.0.11`, assigning `Severity: LOW`, attaching observables, and escalating to SOC L2. | 🟢 **Validated & Escalated**<br>`10.0.0.11`, `Low`, `TLP:CLEAR`, `soc2@syntrix.com` | [Read Walkthrough](./INE%20lab/False%20Positive%20Validation%20Trusted%20Admin%20Brute-Force%20Detection/README.md) |
+| **Account Creation & PrivEsc**<br>*(SOC Incident)* | Wazuh SIEM v4.x & TheHive incident handling. Triaging rogue user `eviluser` (T1136 @ 07:41), SSH login from `10.0.0.11` (T1021/T1078 @ 07:59), and sudoers modification attempt (T1548.003 @ 08:00). Classifying as True Positive (`Severity: HIGH`), registering 4 observables, and escalating to SOC L2. | 🟢 **Verified & Escalated**<br>`eviluser`, `10.0.0.11`, `/etc/sudoers`, `High / TLP:AMBER` | [Read Walkthrough](./INE%20lab/Account%20Creation%20&%20Privilege%20Escalation%20Attempt%20Detection/README.md) |
 
 ---
 
