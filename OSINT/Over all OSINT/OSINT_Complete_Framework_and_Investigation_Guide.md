@@ -340,6 +340,14 @@ Adversaries, targets, and investigators frequently reuse aliases and usernames a
 #### 1. Sherlock
 The industry standard Python CLI utility scanning over 400 social platforms via HTTP status codes and signature detection:
 
+<div align="center">
+
+![Sherlock Live Recon Demo](./images/sherlock_username_recon_demo.gif)
+
+*Figure 4.1: High-concurrency username discovery across 400+ platforms utilizing Sherlock.*
+
+</div>
+
 ```bash
 # Installation
 sudo apt update && sudo apt install -y sherlock
@@ -350,6 +358,29 @@ sherlock username123 --print-found
 # Scan multiple candidate usernames and output to folder
 sherlock user1 user2 user3 --folderoutput ./sherlock_results/
 ```
+
+##### 🔍 Detailed Operational Walkthrough & Output Analysis:
+1. **Target Initialization (`analyst@osint-box:~$ sherlock shadow_operative ...`)**:
+   - The investigator passes the target alias (`shadow_operative`) to the Sherlock CLI engine.
+   - The `--timeout 15` parameter ensures that slow, hanging, or tarpitted web servers do not stall the scan.
+   - The `--print-found` flag filters terminal noise by outputting only confirmed active accounts rather than printing hundreds of 404/Not Found lines.
+   - The `--csv shadow_op_results.csv` flag exports structured telemetry for forensic documentation and automated ingestion into graph analysis tools (such as Maltego or Gephi).
+
+2. **Under-the-Hood Detection Mechanics**:
+   - Sherlock maintains a curated JSON database of regex endpoint patterns (e.g., `https://github.com/{}` or `https://twitter.com/{}`).
+   - It issues asynchronous HTTP GET requests and evaluates responses using three distinct detection strategies:
+     * **HTTP Status Code:** A `200 OK` indicates an active user, while a `404 Not Found` indicates an unclaimed handle.
+     * **Response Body Signatures:** Certain platforms return `200 OK` even for non-existent profiles but include specific DOM text (e.g., *"This account does not exist"* or *"User not found"*). Sherlock compares the returned HTML against predefined error strings.
+     * **Response Redirection:** Platforms that redirect unregistered handles to a generic login or home page (e.g., `302 Found` to `/login`) are flagged as absent.
+
+3. **Interpreting Discovered Assets in the GIF**:
+   - **Developer & Technical Repositories:** Confirmed accounts on `GitHub`, `GitLab`, and `Docker Hub` suggest a technical professional, software developer, or DevOps engineer.
+   - **Offensive Security & CTF Presence:** Verified accounts on `HackerOne`, `HackTheBox`, and `TryHackMe` indicate the target has offensive security skills and actively participates in bug bounty or penetration testing programs.
+   - **Communications & Social Presence:** Discovered profiles on `Telegram`, `Mastodon`, and `Reddit` provide targets for message analysis and community interactions.
+
+4. **Forensic Pivoting Next Steps**:
+   - **Pivot to Email:** Inspect the target's public GitHub repositories. Append `.patch` to any commit URL (e.g., `https://github.com/shadow_operative/repo/commit/<hash>.patch`) to reveal the committer's real name and unmasked email address from the Git Author header.
+   - **Pivot to Cryptography & Identities:** Query Keybase (`keybase.io/shadow_operative`) to extract public PGP keys, verified social proofs, and linked Bitcoin/Zcash wallet addresses.
 
 #### 2. Maigret
 Advanced fork of Sherlock that extracts user profile metadata (real names, bio, avatars, locations) and parses web pages for secondary links:
@@ -422,6 +453,14 @@ user@example.com"]
 #### 1. Holehe
 Checks if an email is registered on over 120 services (Twitter, Instagram, GitHub, Discord, Adobe, Office365) by leveraging password reset and signup endpoints without alerting the target:
 
+<div align="center">
+
+![Holehe Email Investigation Demo](./images/holehe_email_investigation_demo.gif)
+
+*Figure 5.1: Non-intrusive service registration verification across 120+ platforms utilizing Holehe.*
+
+</div>
+
 ```bash
 # Installation
 pipx install holehe
@@ -429,6 +468,28 @@ pipx install holehe
 # Execute non-intrusive service enumeration
 holehe user@example.com
 ```
+
+##### 🔍 Detailed Operational Walkthrough & Output Analysis:
+1. **Target Initialization (`analyst@osint-box:~$ holehe target.dev@cybersec-corp.org --only-used`)**:
+   - The investigator supplies a corporate or personal email address (`target.dev@cybersec-corp.org`).
+   - The `--only-used` parameter suppresses hundreds of negative results, displaying only platforms where the target email is actively registered.
+
+2. **Under-the-Hood Detection Mechanics**:
+   - Traditional credential checking requires entering a password, which triggers intrusion alerts, two-factor authentication (2FA) prompts, or account lockouts.
+   - **Zero-Intrusion Password Reset Probing:** Holehe queries the legitimate *forgot password* or *account creation* APIs of 120+ web services.
+   - When an email is queried against a platform (e.g., Twitter or Spotify), the server response differentiates between:
+     * *"An email has been sent to reset your password"* $\implies$ Account **EXISTS** (`[+]`).
+     * *"No account found with this email address"* $\implies$ Account **DOES NOT EXIST** (`[-]`).
+   - No notification or security email is triggered to the target's inbox on modern JSON endpoint checks, preserving absolute investigator OPSEC.
+
+3. **Interpreting Discovered Assets in the GIF**:
+   - **Enterprise Identity Disclosure:** Confirmed Microsoft / Office 365 registration reveals the underlying Azure AD Tenant ID and confirms corporate employment at `cybersec-corp.org`.
+   - **Google Gaia ID Extraction:** The Google account binding returns the internal Gaia ID (`10492849182740182`). This unique numeric identifier links directly to public Google Maps reviews, posted photos, and Google Calendar scheduling links.
+   - **Telephone Number Mask Clues:** The PayPal and Twitter endpoints return masked phone hints (e.g., `+1 (***) ***-1284`). This reduces the search space for phone number intelligence from 10 digits down to a handful of known area codes.
+
+4. **Forensic Pivoting Next Steps**:
+   - **Pivot to Phone OSINT:** Cross-reference the last 4 digits (`1284`) against corporate employee directories, LinkedIn contact cards, and PhoneInfoga scans.
+   - **Pivot to Breach Records:** Submit the email address to DeHashed and HaveIBeenPwned to discover historical plaintext passwords, salted hashes, and compromised account databases.
 
 #### 2. Epieos (`epieos.com`)
 Pioneering web service that inspects Google account metadata tied to an email address. Uncovers linked Google Reviews, Google Maps location edits, profile avatars, and calendar availability.
@@ -590,6 +651,14 @@ dig axfr @ns1.example.com example.com
 
 Organizations rarely expose vulnerabilities on their primary corporate web homepage (`example.com`). Instead, compromises occur through forgotten development testbeds, staging servers, obsolete VPN portals, and internal documentation sites (`dev-api.example.com`, `vpn-legacy.example.com`, `jira.corp.example.com`).
 
+<div align="center">
+
+![Subdomain Recon Pipeline Demo](./images/subdomain_recon_pipeline_demo.gif)
+
+*Figure 10.1: Chaining passive subdomain discovery into high-speed active HTTP probing.*
+
+</div>
+
 ### 10.1 Passive Subdomain Toolchain:
 
 #### 1. OWASP Amass
@@ -621,6 +690,23 @@ High-speed Rust binary querying multiple public APIs and web archives:
 ```bash
 findomain -t example.com -u findomain_subs.txt
 ```
+
+##### 🔍 Detailed Operational Walkthrough & Output Analysis:
+1. **Pipeline Invocation (`subfinder -d megacorp-defense.com -all -silent | httpx ...`)**:
+   - **Subfinder** passively queries over 40 distinct data sources (including Certificate Transparency logs via `crt.sh`, AlienVault OTX, Chaos ProjectDiscovery, and historical web archives).
+   - The `-silent` flag strips ANSI banners and status output, streaming clean domain hostnames directly down the Unix pipe (`|`).
+   - **HTTPX** consumes the stream in real-time, executing high-concurrency HTTP/HTTPS connection probes with automated TLS handshakes.
+   - Parameters `-title`, `-status-code`, `-tech-detect`, and `-follow-redirects` enrich every responding host with HTTP response codes, page titles, and fingerprinted technologies.
+
+2. **Interpreting Discovered Endpoints in the GIF**:
+   - **`[200 OK] vpn.megacorp-defense.com [Pulse Connect Secure]`**: Identifies an external SSL-VPN access portal. VPN appliances are prime targets for threat actors seeking Initial Access (MITRE ATT&CK T1190).
+   - **`[403 FOR] jenkins.internal.megacorp-defense.com`**: Discovers an internal continuous integration portal that leaked onto the public DNS zone. Even though it returns HTTP 403 Forbidden, the server banner reveals `Jenkins 2.387`, allowing the analyst to verify if known authorization bypass vulnerabilities exist.
+   - **`[200 OK] staging.megacorp-defense.com [PHP 8.1, Laravel]`**: Development and staging environments frequently run in debug mode (`APP_DEBUG=true`) and often lack the web application firewall (WAF) protections applied to the main production domain.
+   - **`[200 OK] grafana.telemetry.megacorp-defense.com [Grafana v9.4.1]`**: Unauthenticated metrics and monitoring dashboards provide operational topology, internal IP schemes, and server performance data.
+
+3. **Attack Surface Management Next Steps**:
+   - **Direct Origin IP Identification:** Compare the IP addresses of staging subdomains against the cloud CDN (e.g., Cloudflare) protecting the root domain to bypass CDN filtering.
+   - **Automated Vulnerability Scanning:** Pipe the live targets into Nuclei (`cat live_hosts.txt | nuclei -t cves/ -severity critical,high`) to immediately test for critical unpatched vulnerabilities.
 
 #### 5. Unified Passive Aggregation Pipeline:
 
@@ -698,6 +784,14 @@ flowchart LR
 
 ### 12.2 Shodan CLI Workflow:
 
+<div align="center">
+
+![Shodan Device Recon Demo](./images/shodan_device_recon_demo.gif)
+
+*Figure 12.1: Discovering perimeter assets, exposed services, and unpatched CVEs via the Shodan CLI.*
+
+</div>
+
 ```bash
 # Initialize Shodan API Key
 shodan init YOUR_SHODAN_API_KEY
@@ -711,6 +805,24 @@ shodan search "port:9200 json:"cluster_name"" --fields ip_str,port,org
 # Count total global exposures of an unpatched CVE
 shodan count "vuln:CVE-2021-44228"
 ```
+
+##### 🔍 Detailed Operational Walkthrough & Output Analysis:
+1. **Target Query (`shodan search --fields ip_str,port,org,hostnames 'org:"Megacorp Defense" ...'`)**:
+   - Queries Shodan's global repository of 4.2+ billion scanned IPv4 addresses for systems registered to the target organization.
+   - Specifying `--fields ip_str,port,org,hostnames` yields clean, tabular intelligence without unstructured banner clutter.
+
+2. **Host Telemetry Dissection (`shodan host 198.51.100.14`)**:
+   - Interrogates all stored telemetry for the discovered IP address `198.51.100.14` (`vpn.megacorp-defense.com`).
+   - Retrieves geographic geolocation (Ashburn, VA), ASN (AS64496), open listening ports (80, 443, 8443), and the complete X.509 SSL Certificate chain.
+
+3. **Vulnerability Correlation & Exploit Assessment**:
+   - Shodan automatically correlates detected service banners against the National Vulnerability Database (NVD) and the CISA Known Exploited Vulnerabilities (KEV) catalog.
+   - **`CVE-2019-11510` (CVSS 10.0):** An unpatched Pulse Secure SSL-VPN path traversal flaw allowing unauthenticated remote attackers to read arbitrary files, including `/etc/passwd` and plaintext VPN session caches containing active corporate credentials.
+   - **`CVE-2023-46805` (CVSS 8.2):** An authentication bypass vulnerability affecting Ivanti Connect Secure gateways.
+
+4. **Defensive Remediation Actions**:
+   - Immediately alert the client's Security Operations Center (SOC) to isolate IP `198.51.100.14` at the perimeter firewall.
+   - Revoke all active session tokens and emergency-patch the VPN appliance firmware to the latest vendor release.
 
 ---
 
@@ -1081,6 +1193,14 @@ Exchangeable Image File Format (EXIF) metadata stores technical camera settings,
 
 ### 32.1 Command-Line Extraction with ExifTool:
 
+<div align="center">
+
+![ExifTool Metadata Analysis Demo](./images/exiftool_metadata_analysis_demo.gif)
+
+*Figure 32.1: Extracting hardware signatures, geodetic coordinates, and reverse geocoding via ExifTool.*
+
+</div>
+
 ```bash
 # Installation
 sudo apt update && sudo apt install -y libimage-exiftool-perl
@@ -1095,6 +1215,29 @@ exiftool -GPS* -DateTimeOriginal -Make -Model target_image.jpg
 exiftool -c "%.6f" -p "$GPSLatitude, $GPSLongitude" target_image.jpg
 ```
 
+##### 🔍 Detailed Operational Walkthrough & Output Analysis:
+1. **Metadata Parsing (`exiftool -GPS* -Make -Model -Software -DateTimeOriginal ...`)**:
+   - ExifTool parses binary EXIF, XMP, and MakerNotes blocks from `field_evidence.jpg`.
+   - Recovers hardware device signatures: `Apple iPhone 15 Pro Max`, iOS build `17.5.1`, and lens specifications (`6.86mm f/1.78`).
+   - Extracts exact capture timestamp: `2026:09:14 14:32:08 UTC`.
+
+2. **Geodetic Extraction & Coordinate Formatting**:
+   - GPS Latitude: `37 deg 46' 48.12" N` (Decimal: `37.780033`).
+   - GPS Longitude: `122 deg 24' 12.36" W` (Decimal: `-122.403433`).
+   - Altitude: `18.2 m Above Sea Level`.
+
+3. **Reverse Geocoding & Landmark Verification**:
+   - Piping coordinates to OpenStreetMap's Nominatim reverse geocoder (`https://nominatim.openstreetmap.org/reverse?lat=...&lon=...`) resolves the physical address:
+     * `742 Market Street, Financial District, San Francisco, California, 94102, USA`.
+     * Landmark Identified: Corporate headquarters building housing the target organization.
+
+4. **Solar & Chronolocation Validation (SunCalc)**:
+   - Calculating solar positioning for `37.780033 N, -122.403433 W` on Sept 14, 2026 at `14:32:08 UTC` (07:32:08 PDT local time):
+     * **Solar Azimuth:** `98.4°` (East-Southeast).
+     * **Solar Elevation:** `18.7°` above the horizon.
+     * **Shadow Ratio:** `1 : 2.95`.
+   - The direction and length of cast shadows in the photograph match the astronomical calculation, mathematically confirming that the photograph was taken on that exact date, time, and location without digital tampering.
+
 > **Operational Reality:** Social media platforms (X/Twitter, Facebook, Instagram, Reddit) automatically strip EXIF metadata upon image upload to protect user privacy. However, raw media sent via messaging apps (as uncompressed documents), cloud drives (Google Drive, Dropbox), or downloaded from personal blogs and forums frequently retains full EXIF data.
 
 ---
@@ -1102,6 +1245,14 @@ exiftool -c "%.6f" -p "$GPSLatitude, $GPSLongitude" target_image.jpg
 ## 33. Image Geolocation
 
 Image Geolocation (GEOINT) determines the precise real-world geographic coordinates where a visual photograph or video frame was captured.
+
+<div align="center">
+
+![Geospatial Intelligence Methodology](./images/geospatial_intelligence_methodology.jpg)
+
+*Figure 33.1: The 4-Quadrant Scientific GEOINT & Environmental Verification Framework.*
+
+</div>
 
 ```mermaid
 flowchart TD
@@ -1437,6 +1588,14 @@ theHarvester is a classic, battle-tested Python command-line utility designed fo
 
 ### 52.1 Command Syntax & Execution:
 
+<div align="center">
+
+![theHarvester Recon Demo](./images/theharvester_recon_demo.gif)
+
+*Figure 52.1: Multi-source OSINT harvesting of corporate emails, subdomains, and IP spaces.*
+
+</div>
+
 ```bash
 # Run comprehensive scan querying all passive search engines
 theHarvester -d target.com -b all -l 500 -f target_recon_report.html
@@ -1447,6 +1606,20 @@ theHarvester -d target.com -b all -l 500 -f target_recon_report.html
 # -l : Limit number of search results per engine
 # -f : Save findings as HTML and XML report
 ```
+
+##### 🔍 Detailed Operational Walkthrough & Output Analysis:
+1. **Engine Orchestration (`theHarvester -d cybersec-corp.org -b bing,duckduckgo,shodan,certspotter -l 500`)**:
+   - Initiates passive reconnaissance across both traditional search engines (Bing, DuckDuckGo) and specialized infrastructure repositories (Shodan, Certspotter).
+   - Configures a limit of 500 results per engine to ensure thorough coverage without triggering automated bot CAPTCHAs.
+
+2. **Extracted Organizational Assets in the GIF**:
+   - **Corporate Email Schema:** Uncovers active employee addresses (`ciso@cybersec-corp.org`, `sarah.connor@cybersec-corp.org`, `devops-lead@cybersec-corp.org`), revealing standard organizational naming patterns (`{firstname}.{lastname}@domain.com` vs `{role}@domain.com`).
+   - **Perimeter Hostnames & IPs:** Identifies 7 public subdomains (`vpn`, `dev`, `cloud`, `portal`, `mail`) mapped to IP block `198.51.100.0/24` belonging to Autonomous System `AS64496`.
+   - **Shodan Exposure Alert:** Confirms that `dev.cybersec-corp.org` (`198.51.100.99`) has ports 22 (SSH) and 8080 (GitLab) directly exposed to the Internet.
+
+3. **Downstream Intelligence Pivoting**:
+   - Discovered emails are immediately routed to **Holehe** to map registered employee SaaS accounts.
+   - Discovered IPs and hostnames are fed into **Nmap** and **Nuclei** for active port scanning and vulnerability triage.
 
 ---
 
@@ -2166,6 +2339,14 @@ flowchart TD
 ---
 
 ## 105. The OSINT Pivot Mindset
+
+<div align="center">
+
+![OSINT Cross-Pillar Pivot Matrix](./images/osint_pivot_matrix_infographic.jpg)
+
+*Figure 105.1: The Unified OSINT Cross-Pillar Pivot Matrix & Operational Blueprint.*
+
+</div>
 
 The core differentiator between a casual searcher and a professional intelligence analyst is the **Pivot Mindset**—the ability to jump from one entity type into another across disparate data domains:
 

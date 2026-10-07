@@ -27,9 +27,46 @@
 
 ---
 
-## ⚡ Terminal Workflow Simulation
+## ⚡ Operational Reconnaissance Pipeline Simulation
 
 ![OSINT Live Investigation Terminal Demo](./images/osint_recon_live_demo.gif)
+
+---
+
+## 🎬 Interactive Tool Demonstrations & Animated CLI Walkthroughs
+
+The operational playbook includes detailed, frame-by-frame animated command-line executions and analytical walkthroughs for every primary OSINT discipline:
+
+| Demonstration | Target Discipline | Core Toolchain & Commands | Key Operational Capabilities |
+| :--- | :--- | :--- | :--- |
+| **[Username Recon Demo](./images/sherlock_username_recon_demo.gif)** | Section 04: Username Intelligence | `sherlock shadow_operative --timeout 15 --print-found --csv` | Scans 400+ platforms, detects active developer/gaming handles, exports CSV telemetry. |
+| **[Email Intel Demo](./images/holehe_email_investigation_demo.gif)** | Section 05: Email Intelligence | `holehe target.dev@domain.com --only-used` | Zero-alert password-reset probing, recovers Google Gaia ID, unmasks phone numbers. |
+| **[Subdomain Pipeline Demo](./images/subdomain_recon_pipeline_demo.gif)** | Section 10: Subdomain Reconnaissance | `subfinder -d target.com -silent \| httpx -title -tech-detect` | Combines 40+ passive feeds with active HTTP probes to unmask dev portals and Grafana metrics. |
+| **[Shodan CLI Demo](./images/shodan_device_recon_demo.gif)** | Section 12: Device & Infrastructure | `shodan search 'org:"Target"' \| shodan host <ip>` | Indexes IPv4 banners, identifies unpatched perimeter CVEs (Pulse Secure, Ivanti CVSS 10.0). |
+| **[ExifTool Forensics Demo](./images/exiftool_metadata_analysis_demo.gif)** | Section 32: Media & Metadata | `exiftool -GPS* -Make -Model target.jpg \| suncalc` | Extracts camera hardware, coordinates, reverse-geocodes address, validates solar shadows. |
+| **[theHarvester Demo](./images/theharvester_recon_demo.gif)** | Section 52: Multi-Source Scraping | `theHarvester -d target.com -b all -l 500` | Aggregates employee emails, subdomains, and IP netblocks across search engines and threat feeds. |
+
+---
+
+## 🗺️ Cross-Pillar Pivot Blueprint & Methodological Framework
+
+<div align="center">
+
+![OSINT Cross-Pillar Pivot Matrix](./images/osint_pivot_matrix_infographic.jpg)
+
+*Systematic lateral pivot matrix: Converting isolated indicators into comprehensive intelligence dossiers.*
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Geospatial Intelligence Methodology](./images/geospatial_intelligence_methodology.jpg)
+
+*Scientific 4-quadrant GEOINT framework: Solar chronolocation, infrastructure markers, and multispectral satellites.*
+
+</div>
 
 ---
 
