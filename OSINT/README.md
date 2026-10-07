@@ -8,7 +8,7 @@ Welcome to the **OSINT & Threat Reconnaissance Knowledge Base**. This section co
 
 | Module / Guide | Category | Primary Focus & Capabilities | Status | Direct Link |
 | :--- | :---: | :--- | :---: | :---: |
-| **🔎 OSINT Complete Framework & A–Z Masterclass** | **Complete Curriculum** | 20-Module Comprehensive Course: Search Engines, Dorking, Usernames, Emails, Telecom, Domains, DNS, Subdomains, Shodan, Censys, SOCMINT, GitLeaks, Breach DBs, Tor, Crypto UTXO, Corporate Registries, GEOINT, EXIF, Video Forensics, CTI (MISP/STIX), Maltego, and Reporting | 🟢 **Complete**<br>(Modules 01–20) | [Explore Course](./Over%20all%20OSINT/README.md) |
+| **🔎 Open Source Intelligence (OSINT) & Threat Reconnaissance** | **Enterprise Framework** | Comprehensive 20-Domain Field Manual: Search Engines, Advanced Dorking, Identity, Telecom, Domains, DNS, Subdomains, Shodan, Censys, SOCMINT, GitLeaks, Breach DBs, Tor, Crypto UTXO, Corporate Registries, GEOINT, EXIF, Video Forensics, CTI (MISP/STIX), Maltego, and Reporting | 🟢 **Complete** | [Explore Framework](./Over%20all%20OSINT/README.md) |
 
 ---
 
@@ -46,4 +46,4 @@ flowchart LR
 
 ---
 
-👉 **[Start the Complete OSINT A–Z Masterclass](./Over%20all%20OSINT/README.md)**
+👉 **[Explore the Complete OSINT Operational Framework & Playbook](./Over%20all%20OSINT/README.md)**

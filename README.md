@@ -51,7 +51,7 @@ flowchart TD
     Tools --> T3["Hashcat Complete Course"]
     Tools --> T4["Aircrack-ng Wi-Fi Course"]
 
-    Osint --> O1["Complete A to Z Course (Modules 01-20)"]
+    Osint --> O1["OSINT Operational Framework & Playbook"]
     Osint --> O2["Infrastructure, Shodan & Censys"]
     Osint --> O3["GEOINT, EXIF & Video Forensics"]
     Osint --> O4["CTI, MISP, Dark Web & Blockchain"]
@@ -102,7 +102,7 @@ flowchart TD
 | :--- | :--- | :--- | :---: | :---: |
 | 🔒 **Git & GitHub** | **How to Use Git & GitHub Securely** | Essential Commands, Git 4-Zones, Ed25519 SSH, `gh` CLI, Signed Commits | All Levels | [Explore](./GitHub_Security/How_to_Use_GitHub_Securely_Complete_Guide.md) |
 | 🔒 **DevSecOps** | **GitHub Security & Hardening Masterclass** | Breach Case Studies (Uber/Toyota), Secret Scanning, Gitleaks, OIDC, Actions | All Levels | [Explore](./GitHub_Security/GitHub_Security_and_Hardening_Masterclass.md) |
-| 🔎 **OSINT** | **OSINT Complete A–Z Masterclass** | 20 Modules: Shodan, Censys, Subfinder, Holehe, GEOINT, Dark Web, Crypto | All Levels | [Explore](./OSINT/Over%20all%20OSINT/README.md) |
+| 🔎 **OSINT** | **Open Source Intelligence & Threat Reconnaissance** | Complete 20-Domain Framework: Shodan, Censys, Subfinder, Holehe, GEOINT, Dark Web, Crypto | Professional | [Explore](./OSINT/Over%20all%20OSINT/README.md) |
 | 🧰 **Tools** | **Nmap Masterclass** | TCP/UDP Sockets, Raw Packets, NSE (Lua), Firewall Evasion | All Levels | [Explore](./tools/Nmap/README.md) |
 | 🧰 **Tools** | **John the Ripper Masterclass** | Hash Cracking, Rule Mutation, Incremental, `*2john` Converters | All Levels | [Explore](./tools/John%20the%20ripper/README.md) |
 | 🧰 **Tools** | **Hashcat Masterclass** | GPU Acceleration, Attack Modes (0,1,3,6,7), Cryptanalysis | All Levels | [Explore](./tools/Hashcat/README.md) |
@@ -150,11 +150,11 @@ Modern organizations deploy code at unprecedented speeds, making source code rep
 
 ---
 
-# 🔎 OSINT & Threat Reconnaissance Masterclass
+# 🔎 Open Source Intelligence (OSINT) & Threat Reconnaissance
 
-[👉 **Explore Complete 20-Module OSINT Masterclass**](./OSINT/Over%20all%20OSINT/README.md) • [📖 **Direct Course Guide**](./OSINT/Over%20all%20OSINT/OSINT_Complete_A_to_Z_Masterclass.md)
+[👉 **Explore OSINT Operational Framework**](./OSINT/Over%20all%20OSINT/README.md) • [📖 **Complete Investigation Guide**](./OSINT/Over%20all%20OSINT/OSINT_Complete_Framework_and_Investigation_Guide.md)
 
-Open Source Intelligence is far more than simple search engine queries. This 20-module production-grade curriculum covers end-to-end reconnaissance tradecraft, pivot mechanics, toolchain automation, and blue team mitigation strategies:
+Open Source Intelligence is far more than simple search engine queries. This enterprise-grade operational playbook covers end-to-end reconnaissance tradecraft, pivot mechanics, toolchain automation, and blue team mitigation strategies:
 
 * **Core Operational Capabilities:**
   - **Identity & SOCMINT:** Multi-platform username hunting with **Sherlock** and **Maigret**, email profile identification via **Holehe** and **Epieos**, and telecom routing with **PhoneInfoga**.

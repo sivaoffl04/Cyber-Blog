@@ -1,20 +1,20 @@
 <div align="center">
 
-![OSINT Masterclass Hero Banner](./images/osint_masterclass_banner.jpg)
+![Open Source Intelligence and Threat Reconnaissance Banner](./images/osint_masterclass_banner.jpg)
 
-# 🔎 OSINT MASTERCLASS : THE COMPLETE A TO Z COURSE
-### Advanced Cyber Reconnaissance • Threat Hunting • SOCMINT • GEOINT • Blockchain Forensics • CTI Architecture
+# 🔎 Open Source Intelligence (OSINT) & Cyber Threat Reconnaissance
+### Enterprise Investigation Framework • Attack Surface Mapping • SOCMINT • GEOINT • Blockchain Forensics • CTI Architecture
 
 [![Framework](https://img.shields.io/badge/Framework-OSINT%20Framework-00e5ff?style=for-the-badge&logo=target)](https://osintframework.com/)
 [![Standard](https://img.shields.io/badge/Standard-NIST%20SP%20800--61%20%7C%20DoD-blue?style=for-the-badge&logo=shield)](https://csrc.nist.gov/)
 [![Intelligence](https://img.shields.io/badge/Intelligence-MISP%20%7C%20STIX%202.1-orange?style=for-the-badge&logo=apache)](https://www.misp-project.org/)
-[![Status](https://img.shields.io/badge/Curriculum-20%20Modules%20Complete-success?style=for-the-badge&logo=git)](.)
+[![Playbook](https://img.shields.io/badge/Playbook-20%20Operational%20Domains-success?style=for-the-badge&logo=git)](.)
 
 <p align="center">
   <b>A comprehensive, production-grade Open Source Intelligence (OSINT) operations manual designed for Cybersecurity Analysts, Threat Hunters, Purple Teams, Penetration Testers, and Incident Responders.</b>
 </p>
 
-[🏛️ Architecture & Lifecycle](#-osint-investigation-lifecycle--pivot-architecture) • [⚡ Animated Workflow Demo](#-live-investigation-workflow-demonstration) • [📚 Module Directory](#-curriculum-directory-module-01--module-20) • [⚖️ Legal & OPSEC](#module-01-foundations-intelligence-cycle--opsec-tradecraft)
+[🏛️ Architecture & Lifecycle](#-osint-investigation-lifecycle--pivot-architecture) • [⚡ Animated Workflow Demo](#-live-investigation-workflow-demonstration) • [📚 Operational Domains Directory](#-operational-domains-directory-domain-01--20) • [⚖️ Legal & OPSEC](#module-01-foundations-intelligence-cycle--opsec-tradecraft)
 
 </div>
 
@@ -51,7 +51,7 @@ The terminal demonstration below simulates an end-to-end authorized threat recon
 
 ---
 
-## 📚 Curriculum Directory: Module 01 → Module 20
+## 📚 Operational Domains Directory: Domain 01 → 20
 
 | Module | Domain | Key Tools & Technologies | Focus & Capabilities |
 | :---: | :--- | :--- | :--- |
@@ -827,8 +827,8 @@ When completing an engagement, document your findings using an executive-ready i
 
 <div align="center">
 
-**🎯 OSINT Masterclass Complete — 20 Modules Operationalized**
+**🎯 Open Source Intelligence (OSINT) Framework Complete — 20 Operational Domains**
 
-*Ethical • Actionable • Production-Ready Cyber Threat Intelligence*
+*Ethical • Actionable • Enterprise-Grade Cyber Threat Intelligence*
 
 </div>
