@@ -22,28 +22,17 @@
 
 ---
 
-## 🗺️ Investigation Lifecycle & Pivot Architecture
+## 🗺️ Investigation Lifecycle & Operational Pipeline
 
 <div align="center">
 
-![OSINT Lifecycle and Pivot Architecture Interactive Flow](./Over all OSINT/images/osint_investigation_lifecycle_pipeline.gif)
+![Enterprise OSINT Investigation Lifecycle Pipeline](./Over%20all%20OSINT/images/osint_investigation_lifecycle_pipeline.gif)
 
-*Figure 1.1: Interactive Animated Lifecycle & Entity Pivot Flow — Dynamically cycling through all 5 phases & pivot transformations.*
-
-</div>
-
-<br>
-
-<details open>
-<summary><b>🔍 Click to view High-Resolution Static Architecture Blueprint & Breakdown</b></summary>
-
-<div align="center">
-
-![OSINT Lifecycle and Pivot Architecture High-Res Blueprint](./Over all OSINT/images/osint_investigation_lifecycle_pipeline.jpg)
+*Figure 1.1: Enterprise OSINT Investigation Lifecycle — 5-Phase End-to-End Operational Pipeline.*
 
 </div>
 
-#### ⚡ Interactive Operational Phase Breakdown:
+#### ⚡ Operational Phase Breakdown:
 
 <details>
 <summary><b>Phase 01: Planning, Direction & OPSEC (Click to expand)</b></summary>
@@ -87,8 +76,6 @@
 * **Objective:** Deliver actionable intelligence dossiers with cryptographic proof and mitigation playbooks.
 * **Actionable Outputs:** Assign Admiralty Code reliability ratings, generate Blue Team containment playbooks (Sigma rules, firewall drop lists), and guide immediate CVE remediation.
 * **Core Toolchain:** `Sigma Rules`, `YARA`, `CISA KEV`, `Executive Threat Dossier`.
-
-</details>
 
 </details>
 
