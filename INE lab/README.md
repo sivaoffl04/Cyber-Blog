@@ -22,6 +22,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **Account Creation & Privilege Escalation Attempt** | **SOC Lab** | SOC Triage / Privilege Escalation | Wazuh v4.x & TheHive (`ip-10-0-0-100` / `10.0.0.11`) | **T1136** (Create Account)<br>**T1078** (Valid Accounts)<br>**T1021.004** (SSH)<br>**T1548.003** (Sudoers) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./Account%20Creation%20&%20Privilege%20Escalation%20Attempt%20Detection/README.md) |
 | **PCAP Analysis With Zeek** | **Defender Lab** | Network Forensics / Malware PCAP | Zeek Logs (`conn`, `dns`, `http`, `ssl`, `dhcp`, `kerberos`) | **T1071.001** (Web Protocols)<br>**T1566.001** (Spearphishing Attachment)<br>**T1059.005** (Macros)<br>**T1078** (Valid Accounts) | 🟢 **100% Solved**<br>(15/15 Questions) | [View Solution](./PCAP%20Analysis%20With%20Zeek/README.md) |
 | **Attack Emulation & Detection on ELK** | **Defender Lab** | Threat Hunting / Attack Emulation | HELK Stack (Elasticsearch · Kibana · Kafka) + Winlogbeat + Sysmon | **T1218.010** (Regsvr32 Proxy Exec)<br>**T1518.001** (Security Software Discovery)<br>**T1053.005** (Scheduled Task) | 🟢 **100% Solved**<br>(3/3 Attacks) | [View Solution](./Effectively%20Using%20the%20ELK%20Stack/README.md) |
+| **Detecting Abnormal Network Connections With Wazuh** | **Defender Lab** | SIEM Detection / Port Anomaly | Sysmon EID 3 (Network Connections) | **T1021.002** (SMB Shares)<br>**T1059.001** (PowerShell)<br>**T1571** (Non-Standard Port) | 🟢 **100% Solved**<br>(Real-time Alerts) | [View Solution](./Detecting%20Abnormal%20Network%20Connections%20With%20Wazuh/README.md) |
 
 
 ---
@@ -89,6 +90,14 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Platform & Stack:** HELK (Hunting ELK) — Elasticsearch · Logstash · Kibana · Kafka · Winlogbeat.
 * **Scenario:** Full red-to-blue adversary emulation pipeline using the Atomic Red Team framework on a HELK-backed threat hunting platform.
 * **Key Tasks:** Configuring Winlogbeat to ship Windows events to HELK Kafka broker (`hosts: ["10.0.21.29:9092"]`), installing Winlogbeat as a Windows service; importing `Invoke-AtomicRedTeam` PowerShell module; executing three Atomic Red Team tests — `T1218.010-1` (Regsvr32 LOLBAS proxy execution launching `calc.exe` via remote `.sct` scriptlet), `T1518.001-5` (Sysmon filter altitude enumeration via `fltmc.exe | findstr.exe 385201`), and `T1053.005-2` (scheduled task persistence creating `spawn` task → `cmd.exe` at 20:10); detecting all 3 attacks in Kibana Discover with queries `Invoke-Process`, `sysmon`, and `scheduled`; validating full payload capture in Sysmon `payload` field; and correlating the complete attack kill chain.
+
+
+---
+
+### 13. [Detecting Abnormal Network Connections With Wazuh](./Detecting%20Abnormal%20Network%20Connections%20With%20Wazuh/README.md)
+* **Platform & Stack:** Wazuh SIEM v4.x (Ubuntu SOC `10.0.18.204`), Microsoft Sysmon v14.x (Windows Server 2019 `10.0.23.132`), Kali Linux (`10.10.21.2`).
+* **Scenario:** Host-based anomaly detection against unauthorized outbound C2 channels and lateral movement using CDB list port whitelisting.
+* **Key Tasks:** Deploying Wazuh Agent v4.3.10 silently on Windows Server 2019; installing Microsoft Sysmon with modular XML schema; binding `Microsoft-Windows-Sysmon/Operational` eventchannel to agent `ossec.conf`; authoring CDB constant database list `/var/ossec/etc/lists/common-ports` with standard baseline ports; authoring custom Wazuh Rule `115001` (Level 10) evaluating `win.eventdata.destinationPort` with `lookup="not_match_key"`; simulating Pass-the-Hash via Metasploit SMB PsExec (`exploit/windows/smb/psexec`) triggering an alert on default port 4444; and launching an in-memory PowerShell reverse shell download cradle triggering an alert on non-standard port 1234.
 
 ---
 
