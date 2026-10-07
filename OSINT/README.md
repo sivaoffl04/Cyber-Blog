@@ -26,11 +26,71 @@
 
 <div align="center">
 
-![OSINT Lifecycle and Pivot Architecture](./Over%20all%20OSINT/images/osint_investigation_lifecycle_pipeline.jpg)
+![OSINT Lifecycle and Pivot Architecture Interactive Flow](./Over all OSINT/images/osint_investigation_lifecycle_pipeline.gif)
 
-*High-Resolution Operational Execution Flow: 5-Stage Investigation Lifecycle & Cross-Domain Entity Pivot Nexus.*
+*Figure 1.1: Interactive Animated Lifecycle & Entity Pivot Flow — Dynamically cycling through all 5 phases & pivot transformations.*
 
 </div>
+
+<br>
+
+<details open>
+<summary><b>🔍 Click to view High-Resolution Static Architecture Blueprint & Breakdown</b></summary>
+
+<div align="center">
+
+![OSINT Lifecycle and Pivot Architecture High-Res Blueprint](./Over all OSINT/images/osint_investigation_lifecycle_pipeline.jpg)
+
+</div>
+
+#### ⚡ Interactive Operational Phase Breakdown:
+
+<details>
+<summary><b>Phase 01: Planning, Direction & OPSEC (Click to expand)</b></summary>
+
+* **Objective:** Define Priority Intelligence Requirements (PIRs) and establish legal Rules of Engagement (RoE).
+* **OPSEC Protocol:** Provision aged, decoupled sock puppets, isolate hardware inside Whonix/Tails VMs, route traffic over Tor circuits and non-attributable VPN tunnels, and randomize browser canvas fingerprints.
+* **Core Toolchain:** `Whonix`, `Tails OS`, `Tor`, `ProtonVPN`, `User-Agent Switcher`.
+
+</details>
+
+<details>
+<summary><b>Phase 02: Multi-Vector Signal Harvesting (Click to expand)</b></summary>
+
+* **Objective:** Conduct exhaustive passive collection without sending active probe packets to the target.
+* **Collection Vectors:** Identity footprints (`Sherlock`, `Maigret`), Certificate Transparency (`crt.sh`), passive subdomain enumeration (`Subfinder`, `Amass`), device scanners (`Shodan`, `Censys`), and secrets detection (`GitLeaks`, `TruffleHog`).
+* **Core Toolchain:** `Subfinder`, `Amass`, `Shodan`, `Holehe`, `Censys`, `GitLeaks`.
+
+</details>
+
+<details>
+<summary><b>Phase 03: Multi-Hop Lateral Pivoting (Click to expand)</b></summary>
+
+* **Objective:** Traverse from single isolated artifacts into multi-domain entity graphs.
+* **Pivot Chains:** Email $\to$ GitHub Commits $\to$ Internal Dev Domains $\to$ Origin IP Addresses $\to$ SSL Certificate SANs $\to$ Exposed Administration Portals.
+* **Core Toolchain:** `Holehe`, `Epieos`, `SecurityTrails`, `ExifTool`, `SunCalc`.
+
+</details>
+
+<details>
+<summary><b>Phase 04: Correlation, Processing & CTI Enrichment (Click to expand)</b></summary>
+
+* **Objective:** Synthesize raw observables into structured intelligence graphs and map adversary TTPs.
+* **Analytical Engines:** Automated transform discovery in Maltego, graph database modeling in Neo4j/Gephi, threat indicator correlation via MISP & AlienVault OTX, and MITRE ATT&CK Reconnaissance (TA0043) alignment.
+* **Core Toolchain:** `Maltego`, `Neo4j`, `MISP`, `AlienVault OTX`, `MITRE ATT&CK Navigator`.
+
+</details>
+
+<details>
+<summary><b>Phase 05: Dissemination, Reporting & Defensive Action (Click to expand)</b></summary>
+
+* **Objective:** Deliver actionable intelligence dossiers with cryptographic proof and mitigation playbooks.
+* **Actionable Outputs:** Assign Admiralty Code reliability ratings, generate Blue Team containment playbooks (Sigma rules, firewall drop lists), and guide immediate CVE remediation.
+* **Core Toolchain:** `Sigma Rules`, `YARA`, `CISA KEV`, `Executive Threat Dossier`.
+
+</details>
+
+</details>
 
 ---
 

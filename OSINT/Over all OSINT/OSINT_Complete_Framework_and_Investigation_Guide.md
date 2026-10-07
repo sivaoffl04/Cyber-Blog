@@ -24,7 +24,26 @@
 
 Modern intelligence operations do not rely on passive web searches. Professional OSINT is an **iterative, multi-stage engineering discipline** structured across the standardized Intelligence Cycle:
 
-![OSINT Lifecycle and Pivot Architecture](./images/osint_investigation_lifecycle_pipeline.jpg)
+<div align="center">
+
+![OSINT Lifecycle and Pivot Architecture Interactive Flow](./images/osint_investigation_lifecycle_pipeline.gif)
+
+*Figure 1.1: Interactive Animated Lifecycle & Entity Pivot Flow — Dynamically cycling through all 5 phases & pivot transformations.*
+
+</div>
+
+<br>
+
+<details open>
+<summary><b>🔍 Click to view High-Resolution Static Architecture Blueprint & Breakdown</b></summary>
+
+<div align="center">
+
+![OSINT Lifecycle and Pivot Architecture High-Res Blueprint](./images/osint_investigation_lifecycle_pipeline.jpg)
+
+</div>
+
+</details>
 
 ```mermaid
 flowchart LR
