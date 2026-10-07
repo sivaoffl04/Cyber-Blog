@@ -16,7 +16,7 @@
   <b>A comprehensive, production-grade cybersecurity knowledge base, hands-on lab walkthroughs, tool masterclasses, DevSecOps hardening guides, and detection engineering playbooks.</b>
 </p>
 
-[📚 Tool Masterclasses](#-tool-masterclasses) • [🔒 GitHub Security & DevSecOps](#-github-security--devsecops-masterclass) • [🎯 Hands-on Lab Solutions](#-hands-on-lab-walkthroughs-ine--attackdefense) • [👥 Security Teams](#-security-team-operations) • [🛡️ SOC & Incident Response](#-soc-detection-engineering--incident-response) • [📱 Mobile Pentesting](#-android-application-penetration-testing)
+[📚 Tool Masterclasses](#-tool-masterclasses) • [🔎 OSINT Masterclass](#-osint--threat-reconnaissance-masterclass) • [🔒 GitHub Security & DevSecOps](#-github-security--devsecops-masterclass) • [🎯 Hands-on Lab Solutions](#-hands-on-lab-walkthroughs-ine--attackdefense) • [👥 Security Teams](#-security-team-operations) • [🛡️ SOC & Incident Response](#-soc-detection-engineering--incident-response) • [📱 Mobile Pentesting](#-android-application-penetration-testing)
 
 </div>
 
@@ -39,6 +39,7 @@ flowchart TD
     Hub["🛡️ CYBER-BLOG ROOT"]
     
     Hub --> Tools["🧰 Tools Masterclasses\n(tools/)"]
+    Hub --> Osint["🔎 OSINT & Recon\n(OSINT/)"]
     Hub --> GhSec["🔒 GitHub Security\n(GitHub_Security/)"]
     Hub --> SecTeams["👥 Security Teams\n(Security_Team/)"]
     Hub --> SOC["🛡️ SOC & Blue Team\n(SOC/)"]
@@ -49,6 +50,11 @@ flowchart TD
     Tools --> T2["John the Ripper Course"]
     Tools --> T3["Hashcat Complete Course"]
     Tools --> T4["Aircrack-ng Wi-Fi Course"]
+
+    Osint --> O1["Complete A to Z Course (Modules 01-20)"]
+    Osint --> O2["Infrastructure, Shodan & Censys"]
+    Osint --> O3["GEOINT, EXIF & Video Forensics"]
+    Osint --> O4["CTI, MISP, Dark Web & Blockchain"]
 
     GhSec --> G1["Real-World Incidents (Uber, Toyota, Codecov)"]
     GhSec --> G2["Secret Prevention (Gitleaks, Push Protection)"]
@@ -80,6 +86,7 @@ flowchart TD
 
     style Hub fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#fff
     style Tools fill:#1e293b,stroke:#06b6d4,color:#fff
+    style Osint fill:#1e293b,stroke:#00e5ff,stroke-width:2px,color:#fff
     style GhSec fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#fff
     style SecTeams fill:#1e293b,stroke:#a855f7,color:#fff
     style SOC fill:#1e293b,stroke:#0ea5e9,color:#fff
@@ -95,6 +102,7 @@ flowchart TD
 | :--- | :--- | :--- | :---: | :---: |
 | 🔒 **Git & GitHub** | **How to Use Git & GitHub Securely** | Essential Commands, Git 4-Zones, Ed25519 SSH, `gh` CLI, Signed Commits | All Levels | [Explore](./GitHub_Security/How_to_Use_GitHub_Securely_Complete_Guide.md) |
 | 🔒 **DevSecOps** | **GitHub Security & Hardening Masterclass** | Breach Case Studies (Uber/Toyota), Secret Scanning, Gitleaks, OIDC, Actions | All Levels | [Explore](./GitHub_Security/GitHub_Security_and_Hardening_Masterclass.md) |
+| 🔎 **OSINT** | **OSINT Complete A–Z Masterclass** | 20 Modules: Shodan, Censys, Subfinder, Holehe, GEOINT, Dark Web, Crypto | All Levels | [Explore](./OSINT/Over%20all%20OSINT/README.md) |
 | 🧰 **Tools** | **Nmap Masterclass** | TCP/UDP Sockets, Raw Packets, NSE (Lua), Firewall Evasion | All Levels | [Explore](./tools/Nmap/README.md) |
 | 🧰 **Tools** | **John the Ripper Masterclass** | Hash Cracking, Rule Mutation, Incremental, `*2john` Converters | All Levels | [Explore](./tools/John%20the%20ripper/README.md) |
 | 🧰 **Tools** | **Hashcat Masterclass** | GPU Acceleration, Attack Modes (0,1,3,6,7), Cryptanalysis | All Levels | [Explore](./tools/Hashcat/README.md) |
@@ -139,6 +147,21 @@ Modern organizations deploy code at unprecedented speeds, making source code rep
   3. **Branch Protection Rulesets:** Mandatory 2-reviewer pull requests, `CODEOWNERS` signoff, and cryptographically signed commits (GPG/SSH).
   4. **CI/CD Hardening:** Workflow `permissions: read-all`, pinning actions to immutable commit SHAs, and eliminating script injection.
   5. **Supply Chain Defense:** Dependabot automated CVE patching, CodeQL SAST scanning, and Software Bill of Materials (SBOM) generation.
+
+---
+
+# 🔎 OSINT & Threat Reconnaissance Masterclass
+
+[👉 **Explore Complete 20-Module OSINT Masterclass**](./OSINT/Over%20all%20OSINT/README.md) • [📖 **Direct Course Guide**](./OSINT/Over%20all%20OSINT/OSINT_Complete_A_to_Z_Masterclass.md)
+
+Open Source Intelligence is far more than simple search engine queries. This 20-module production-grade curriculum covers end-to-end reconnaissance tradecraft, pivot mechanics, toolchain automation, and blue team mitigation strategies:
+
+* **Core Operational Capabilities:**
+  - **Identity & SOCMINT:** Multi-platform username hunting with **Sherlock** and **Maigret**, email profile identification via **Holehe** and **Epieos**, and telecom routing with **PhoneInfoga**.
+  - **Attack Surface & Infrastructure:** Passive subdomain discovery via **OWASP Amass**, **Subfinder**, and Certificate Transparency logs (`crt.sh`), paired with port and vulnerability auditing on **Shodan** and **Censys**.
+  - **GEOINT & Media Forensics:** Camera hardware and GPS extraction using **ExifTool**, image manipulation verification via **FotoForensics** (Error Level Analysis), solar angle and shadow chronolocation using **SunCalc**, and video keyframe extraction via **InVID**.
+  - **Dark Web, Breach & Cryptocurrency:** Monitoring ransomware leak showcases on **Ransomwatch**, querying breached credentials on **DeHashed** and **HIBP**, and tracing Bitcoin/Ethereum fund flows via **Mempool**, **Etherscan**, and **Arkham Intelligence**.
+  - **Visual Link Analysis & CTI:** Multi-hop entity mapping using **Maltego** and **Neo4j**, sharing threat intelligence via **MISP** and **STIX 2.1**, and producing executive intelligence dossiers aligned with NIST SP 800-61.
 
 ---
 
@@ -215,7 +238,11 @@ Real-world SOC and threat hunting challenges documented with 100% verified flag 
 # 🎯 MITRE ATT&CK Coverage Matrix
 
 | ATT&CK Tactic | Technique ID | Technique Name | Covered in Module |
-| :--- | :---: | :--- | :--- |
+| **Reconnaissance** | **T1596** | Search Open Technical Databases (Shodan/Censys/crt.sh) | [OSINT Masterclass](./OSINT/Over%20all%20OSINT/README.md) |
+| **Reconnaissance** | **T1589** | Gather Victim Identity Information (Sherlock/Holehe) | [OSINT Masterclass](./OSINT/Over%20all%20OSINT/README.md) |
+| **Reconnaissance** | **T1590** | Gather Victim Network Information (DNS/Amass) | [OSINT Masterclass](./OSINT/Over%20all%20OSINT/README.md) |
+| **Reconnaissance** | **T1591** | Gather Victim Org Information (SEC EDGAR/OpenCorp) | [OSINT Masterclass](./OSINT/Over%20all%20OSINT/README.md) |
+| **Reconnaissance** | **T1593** | Search Open Websites/Domains (Google Dorks/Wayback) | [OSINT Masterclass](./OSINT/Over%20all%20OSINT/README.md) |
 | **Reconnaissance** | **T1595** | Active Scanning | [Nmap Masterclass](./tools/Nmap/README.md) |
 | **Initial Access** | **T1566.001** | Spearphishing Attachment (Emotet Word Doc) | [PCAP Analysis With Zeek](./INE%20lab/PCAP%20Analysis%20With%20Zeek/README.md) |
 | **Execution** | **T1059.001** | PowerShell Scripting | [Kibana Event Logs III](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
