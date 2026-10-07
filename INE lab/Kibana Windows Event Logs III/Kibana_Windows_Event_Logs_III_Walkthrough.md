@@ -51,6 +51,7 @@ In this hands-on lab, we analyze Windows Sysmon Event ID 1 (Process Creation) lo
 Understanding the attacker lifecycle in this incident:
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Attacker as Remote Threat Actor (Webshell Operator)
@@ -83,6 +84,7 @@ sequenceDiagram
 ![Threat Hunting Architecture Map](./images/kibana_3_workflow_map.jpg)
 
 ```mermaid
+
 flowchart TD
     Dataset["1. Sysmon Process Creation Telemetry\n(Event ID 1 - PanacheSysmon / Webshell)"]
     --> DiscoverView["2. Kibana Discover View\nTime Range: May 27, 2019 @ 06:58:38 - 06:59:25"]

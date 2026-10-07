@@ -93,6 +93,7 @@ Security theory is meaningless without understanding how catastrophic real-world
 ### Case 1: The Uber AWS Credential Leak (57M Users Affected)
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Attacker as Threat Actor
@@ -122,6 +123,7 @@ sequenceDiagram
 ### Case 2: Toyota 5-Year Exposed Access Key on Public GitHub
 
 ```mermaid
+
 flowchart TD
     Contractor["Development Contractor (December 2017)"] 
     -->|Accidentally Commits Access Key| PublicRepo["Public GitHub Repository\n(Exposed to the entire Internet)"]
@@ -151,6 +153,7 @@ flowchart TD
 ### Case 3: Codecov Bash Uploader Supply Chain Compromise
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Attacker as Nation-State / Supply Chain Actor
@@ -224,6 +227,7 @@ Securing GitHub requires five interconnected concentric rings of defense:
 ![GitHub Defense in Depth Architecture](./images/github_threat_matrix_and_defense.jpg)
 
 ```mermaid
+
 flowchart TD
     subgraph Ring1 ["1. Identity & Access (IAM)"]
         MFA["Hardware FIDO2 / WebAuthn MFA"]
@@ -341,6 +345,7 @@ gitleaks detect --verbose --redact
 Instead, configure GitHub Actions to authenticate to AWS, Google Cloud, or Microsoft Azure using **OpenID Connect (OIDC)**:
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     participant GHA as GitHub Actions Runner
@@ -559,6 +564,7 @@ jobs:
 If you or a team member accidentally pushes a credential or secret to a GitHub repository, follow this immediate 5-step containment playbook:
 
 ```mermaid
+
 flowchart TD
     Leak["Accidental Secret Push to GitHub"]
     

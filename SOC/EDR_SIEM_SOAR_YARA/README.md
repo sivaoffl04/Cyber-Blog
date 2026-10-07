@@ -44,6 +44,7 @@ The core SOC paradigm centers around four foundational building blocks:
 **Endpoint Detection and Response (EDR)** provides behavioral instrumentation, threat detection, and active incident response on corporate workloads, servers, and workstations (Windows, Linux, macOS).
 
 ```mermaid
+
 flowchart TD
     subgraph Endpoint["Protected Host (Windows / Linux / macOS)"]
         Kernel["Falcon Kernel Driver / eBPF Sensor"]
@@ -112,6 +113,7 @@ WINWORD.EXE (PID: 4120 - User opened malicious invoice.docm)
 While an EDR provides unmatched endpoint depth, it rarely sees identity providers, VPN gateways, firewalls, and cloud access logs. A **Security Information and Event Management (SIEM)** platform centralizes and correlates these disparate logs across the entire infrastructure.
 
 ```mermaid
+
 flowchart TD
     subgraph DataSources["Distributed Enterprise Log Sources"]
         D1["CrowdStrike EDR Alerts"]
@@ -195,6 +197,7 @@ Tier 1 SOC analysts are frequently overwhelmed by repetitive alert triage: copyi
 A **Security Orchestration, Automation, and Response (SOAR)** platform eliminates manual overhead by executing automated **Playbooks** across heterogeneous security tools.
 
 ```mermaid
+
 flowchart TD
     Trigger["Splunk Notable Event / EDR Alert"] --> Ingest["Cortex XSOAR Ingestion Engine"]
     
@@ -259,6 +262,7 @@ Input: Alert from SIEM/EDR
 While EDR identifies what a file *does* (behavior) and SIEM tracks where it *went* (logs), **YARA** determines what a file *is* by analyzing its static binary contents, strings, and opcodes.
 
 ```mermaid
+
 flowchart LR
     File["Target File / Binary Sample"] --> YARA["YARA Engine"]
     Rule["Compiled YARA Rule"] --> YARA
@@ -390,6 +394,7 @@ rule Suspicious_Office_Macro_Dropper
 When integrated properly, these four tools form a cohesive, layered defense loop:
 
 ```mermaid
+
 flowchart TD
     Attacker["Threat Actor / Phishing Email"] --> Victim["Employee Endpoint"]
     
@@ -432,6 +437,7 @@ YARA                -->  Validates and fingerprints malicious binaries across di
 To see how these technologies collaborate during an active intrusion, follow this real-world attack scenario:
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Attacker as Attacker
@@ -479,6 +485,7 @@ sequenceDiagram
 The four technologies map directly into the standard **NIST SP 800-61 Rev. 2** Incident Handling Lifecycle:
 
 ```mermaid
+
 flowchart LR
     P1["1. Preparation: Log Baseline & YARA Rule Creation"] 
     --> P2["2. Detection & Analysis: CrowdStrike EDR + Splunk SIEM Correlation"]

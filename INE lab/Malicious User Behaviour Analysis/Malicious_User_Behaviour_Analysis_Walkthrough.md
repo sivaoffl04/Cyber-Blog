@@ -83,6 +83,7 @@ The forensic workflow employed to systematically inspect the Ubuntu workstation:
 ![Linux Insider Threat Audit Workflow](./images/insider_threat_audit_workflow.jpg)
 
 ```mermaid
+
 flowchart TD
     Init["Branch Security Audit Initiation\n(Ubuntu Linux GUI)"] --> Recon["Phase 1: User Discovery\n(cat /etc/passwd)"]
     

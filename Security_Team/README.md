@@ -20,6 +20,7 @@ This section covers the operations, methodologies, tools, and tactical mindsets 
 ## 🔄 The Continuous Purple Team Security Cycle
 
 ```mermaid
+
 flowchart TD
     Org["Enterprise Organization & Crown Jewels"] --> Red["🔴 Red Team: Simulate Adversary TTPs"]
     Red --> Gap["Identify Coverage & Detection Gaps"]

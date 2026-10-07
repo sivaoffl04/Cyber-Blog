@@ -35,6 +35,7 @@ Whether you are preparing for certifications (**eJPT, eCPPT, OSCP, BAP, CRTP, eC
 # 🗺️ Repository Architecture & Ecosystem
 
 ```mermaid
+
 flowchart TD
     Hub["🛡️ CYBER-BLOG ROOT"]
     

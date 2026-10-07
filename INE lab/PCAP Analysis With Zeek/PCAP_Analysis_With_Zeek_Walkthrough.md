@@ -72,6 +72,7 @@ Zeek functions as a passive network observation engine, transforming high-volume
 ![Zeek Architecture and Processing Pipeline](./images/zeek_architecture_and_pipeline.jpg)
 
 ```mermaid
+
 flowchart TD
     subgraph RawData ["Raw Network Telemetry"]
         P1["Malware1/infected.pcap<br/>(Bumblebee & Cobalt Strike)"]

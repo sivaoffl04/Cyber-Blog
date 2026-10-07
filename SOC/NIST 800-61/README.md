@@ -38,6 +38,7 @@ The current release, **NIST SP 800-61 Revision 3**, directly integrates with the
 From initial detection through post-incident hardening, an incident advances through distinct, verifiable operational states:
 
 ```mermaid
+
 stateDiagram-v2
     [*] --> Ingestion: Anomaly Detected
     Ingestion --> Qualification: Triage Analysis
@@ -64,6 +65,7 @@ Earlier versions (Revision 2) structured incident response as a standalone four-
 **Revision 3 aligns incident response directly with the NIST CSF 2.0 core functions:**
 
 ```mermaid
+
 flowchart TD
     subgraph Foundation["Governance & Strategic Foundation"]
         GV["GOVERN: Risk Strategy, Policies, Resource Allocation"]
@@ -103,6 +105,7 @@ flowchart TD
 Incident response begins the moment an anomaly is observed. Detection signals originate across multiple distributed enterprise vantage points:
 
 ```mermaid
+
 flowchart LR
     subgraph Sensors["Enterprise Signal Collection"]
         S1["EDR / XDR Alerts"]
@@ -166,6 +169,7 @@ A single alert does not equal a verified security incident. Analysts qualify eve
 When an alert is verified as an active incident, analysts transition from alert triaging to structured digital forensics. NIST SP 800-61 utilizes the **4W Framework** to reconstruct adversary behavior:
 
 ```mermaid
+
 flowchart TD
     Incident["Qualified Security Incident"]
 
@@ -207,6 +211,7 @@ Correlating timestamps into a normalized chronological timeline is essential for
 An attacker rarely stays on the initial machine (**Patient Zero**). Scoping establishes the total perimeter of the compromise:
 
 ```mermaid
+
 flowchart LR
     P0["Patient Zero: Workstation WIN-PC01"]
     
@@ -237,6 +242,7 @@ flowchart LR
 Containment halts ongoing damage without alerting the adversary prematurely or destroying volatile forensic evidence.
 
 ```mermaid
+
 flowchart TD
     Decision{"Containment Strategy Decision"}
 
@@ -278,6 +284,7 @@ Eradication ensures that the threat actor cannot simply reconnect using secondar
 ```
 
 ```mermaid
+
 flowchart LR
     E1["1. Terminate Malicious Processes"] 
     --> E2["2. Purge Injected Files & Droppers"]
@@ -299,6 +306,7 @@ flowchart LR
 Recovery is not simply booting a computer back up. It is a verified, staged re-integration of sanitized systems into the production network:
 
 ```mermaid
+
 flowchart TD
     Step1["1. Clean Rebuild from Golden Image or Trusted Offline Backup"]
     --> Step2["2. Security Patching & Endpoint Agent Validation (EDR Active)"]
@@ -327,6 +335,7 @@ flowchart TD
 The incident response lifecycle is incomplete without post-incident analysis. A security incident is the single most valuable source of telemetry for fortifying future defenses.
 
 ```mermaid
+
 flowchart LR
     Incident["Post-Incident Post-Mortem"]
     
@@ -374,6 +383,7 @@ Modern security platforms do not replace the NIST framework; they operationalize
 Follow how a complete NIST SP 800-61 response workflow unfolds during an enterprise intrusion:
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Attacker as Attacker
@@ -420,6 +430,7 @@ sequenceDiagram
 To understand modern cyber defense, recognize how these three industry frameworks complement one another:
 
 ```mermaid
+
 flowchart LR
     subgraph Offensive["Attacker Perspective: Cyber Kill Chain"]
         direction TB

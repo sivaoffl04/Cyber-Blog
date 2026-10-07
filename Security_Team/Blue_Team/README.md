@@ -34,6 +34,7 @@ Modern defensive operations extend far beyond traditional static firewalls and a
 A world-class Security Operations Center processes billions of raw telemetry events daily, systematically filtering noise into high-fidelity incidents:
 
 ```mermaid
+
 flowchart TD
     subgraph Layer1["1. Enterprise Telemetry Sensors"]
         E1["Endpoints: Sysmon, EDR (CrowdStrike / Defender)"]
@@ -86,6 +87,7 @@ Defenders rely on a layered tooling stack to capture signals across endpoints, n
 Without high-fidelity telemetry, defenders are completely blind. Endpoint sensors and log forwarders stream structured events to the security analytics data lake.
 
 ```mermaid
+
 flowchart LR
     Host["Endpoint / Server"] --> Sysmon["Microsoft Sysmon"]
     Host --> Auditd["Linux auditd"]
@@ -184,6 +186,7 @@ alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"ET MALWARE Cobalt Strike Bea
 When an incident is confirmed, DFIR tools reconstruct exactly what occurred, when it happened, and which files were touched.
 
 ```mermaid
+
 flowchart LR
     Compromised["Triage Machine"]
     --> Mem["RAM Acquisition"]

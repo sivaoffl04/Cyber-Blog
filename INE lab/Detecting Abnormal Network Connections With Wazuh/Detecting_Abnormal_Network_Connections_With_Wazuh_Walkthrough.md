@@ -98,6 +98,7 @@ The detection pipeline combines kernel-level instrumentation on Windows with hig
 ![Wazuh Detection Pipeline Architecture](./images/wazuh_detection_pipeline_architecture.jpg)
 
 ```mermaid
+
 flowchart TD
     subgraph WindowsEndpoint ["Windows Server 2019 Target (10.0.23.132)"]
         A["Adversary Action / Payload<br/>(Metasploit / PowerShell)"] --> B["Kernel Network Socket Creation<br/>(Outbound TCP SYN)"]
@@ -666,6 +667,7 @@ tags:
 When Rule `115001` or `115002` triggers in the SOC queue:
 
 ```mermaid
+
 flowchart TD
     Alert["🚨 Alert Fired: Rule 115001<br/>Uncommon Port Connection"] --> Triage1["Phase 1: Extract Telemetry<br/>Image, Initiated, DestinationIp, DestinationPort, User"]
     Triage1 --> Decision1{"Is Image a Known LOLBAS or Script?<br/>(powershell, rundll32, cmd, certutil)"}

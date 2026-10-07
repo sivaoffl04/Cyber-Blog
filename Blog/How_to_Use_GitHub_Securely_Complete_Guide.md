@@ -49,6 +49,7 @@ Before running commands, it is crucial to understand the fundamental distinction
 | **Key Functions** | Tracking file diffs, commit history, merges, branches. | Pull requests, issue tracking, secret scanning, CI/CD pipelines. |
 
 ```mermaid
+
 flowchart LR
     Dev["Developer Workstation<br/>(Local Git Engine)"]
     Cloud["GitHub Cloud Platform<br/>(Remote Repository Host)"]
@@ -74,6 +75,7 @@ Every Git command moves files between **four discrete states**. Understanding th
 ![Git Architecture 4 Zones Diagram](./images/git_architecture_lifecycle.jpg)
 
 ```mermaid
+
 flowchart LR
     Z1["Zone 1: Working Directory<br/>(Files currently edited)"]
     Z2["Zone 2: Staging Area<br/>(Files prepped for commit)"]
@@ -352,6 +354,7 @@ gh secret set PRODUCTION_API_URL --body "https://api.internal.corp"
 For teams of all sizes, the **GitHub Flow** (Trunk-Based Development) is the industry standard for secure, reliable delivery:
 
 ```mermaid
+
 gitGraph
     commit id: "Initial-Commit"
     commit id: "Setup-CICD"

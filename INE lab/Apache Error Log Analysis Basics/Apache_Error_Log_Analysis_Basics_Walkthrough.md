@@ -84,6 +84,7 @@ The diagram below categorizes the four primary threat vectors discovered in `err
 ![Apache Attack Taxonomy Matrix](./images/apache_attack_taxonomy_matrix.jpg)
 
 ```mermaid
+
 flowchart TD
     Log["Apache Web Error Log Stream\n(error.log)"] --> Parser["Field Parsing & Filtering Engine\n(grep / cut / awk)"]
     

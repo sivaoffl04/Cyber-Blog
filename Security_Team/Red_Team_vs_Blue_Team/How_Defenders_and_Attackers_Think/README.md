@@ -30,6 +30,7 @@ This dynamic is driven by two specialized operational groups:
 When these teams operate in harmony, they transform organizational defense from reactive guesswork into an **adaptive, continuous security improvement cycle**:
 
 ```mermaid
+
 flowchart TD
     subgraph Org["Enterprise Organization"]
         ASSETS["Critical Business Assets & Data"]
@@ -81,6 +82,7 @@ Unlike traditional vulnerability scanners that evaluate servers in isolation, a 
 Red Team engagements typically follow a structured attack path aligned with the Cyber Kill Chain and the MITRE ATT&CK framework:
 
 ```mermaid
+
 flowchart LR
     A["1. Reconnaissance"] --> B["2. Initial Access"]
     B --> C["3. Privilege Escalation"]
@@ -145,6 +147,7 @@ The **Blue Team** is the operational force responsible for defending an organiza
 A Blue Team does not merely configure anti-malware tools. Modern defensive security is an active, intelligence-driven discipline focused on **continuous threat detection, telemetry correlation, proactive threat hunting, and rapid incident response**.
 
 ```mermaid
+
 flowchart TD
     subgraph Sources["Enterprise Telemetry Collection"]
         S1["Endpoints (EDR/XDR Agents)"]
@@ -209,6 +212,7 @@ Failed Kerberos Login ─────┘
 When malicious activity is confirmed, Blue Teams execute battle-tested playbooks following standard incident handling frameworks (such as **NIST SP 800-61**):
 
 ```mermaid
+
 stateDiagram-v2
     [*] --> Detect: Telemetry Anomaly
     Detect --> Scope: Triage & Blast Radius
@@ -257,6 +261,7 @@ The famous security principle formulated by John Lambert (Microsoft Threat Intel
 > **"Defenders think in lists. Attackers think in graphs. As long as this is true, attackers win."**
 
 ```mermaid
+
 flowchart TD
     subgraph DefenderList["Defenders Thinking in Lists"]
         L1["[✓] Antivirus installed"]
@@ -305,6 +310,7 @@ Historically, Red and Blue teams operated in silos. Red Teams would execute a se
 ### The Purple Team Operational Loop
 
 ```mermaid
+
 flowchart TD
     subgraph Step1["1. Atomic Simulation"]
         RT["🔴 Red Team executes single authorized technique (e.g., T1003 LSASS Dump)"]
@@ -396,6 +402,7 @@ The percentage of alerts investigated by analysts that turn out to be harmless o
 Both paths offer challenging, high-impact careers in cybersecurity. Your ideal trajectory depends on what problems you enjoy solving:
 
 ```mermaid
+
 flowchart TD
     START{"What excites you most?"}
 

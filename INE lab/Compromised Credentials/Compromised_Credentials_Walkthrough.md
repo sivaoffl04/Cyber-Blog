@@ -62,6 +62,7 @@ The diagram below details the entire attacker lifecycle from initial reconnaissa
 ### Sequential Incident Progression:
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Attacker as Threat Actor (13.214.192.125)
@@ -394,6 +395,7 @@ To conduct high-fidelity Windows forensics, an incident responder must understan
 Having confirmed the Administrator account breach, the incident responder must immediately transition from **Detection** to **Containment and Eradication** in accordance with NIST SP 800-61:
 
 ```mermaid
+
 flowchart TD
     Detect["1. Compromise Confirmed\n(Admin breached via SMB)"] --> Contain["2. Immediate Containment"]
     

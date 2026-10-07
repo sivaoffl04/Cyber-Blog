@@ -74,6 +74,7 @@
 ![HELK Attack Detection Architecture](./images/elk_helk_architecture_pipeline.jpg)
 
 ```mermaid
+
 flowchart LR
     A["🎯 Windows Target\nAtomic Red Team\nSysmon + WinEvt"] 
     B["📤 Winlogbeat\nLog Shipper\nPort config"]
@@ -458,6 +459,7 @@ After login, navigate to **Kibana → Discover** to begin hunting.
 ### Attack Kill Chain
 
 ```mermaid
+
 flowchart TD
     A["🎯 Initial Access\nWindows Target Compromised\n(Assumed via prior breach)"]
     B["🔍 Discovery\nT1518.001 — Security Software Discovery\nfltmc.exe pipe findstr 385201\nMap installed EDR/Sysmon"]

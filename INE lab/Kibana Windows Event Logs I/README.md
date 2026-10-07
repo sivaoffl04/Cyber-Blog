@@ -55,6 +55,7 @@ The investigation follows the structured methodology below:
 ![5-Stage Threat Hunting Workflow in Kibana](./images/kibana_investigation_process_map.jpg)
 
 ```mermaid
+
 flowchart TD
     Ingest["1. Elasticsearch Ingestion\n(PanacheSysmon_vs_AtomicRedTeam01.evtx)"]
     --> Discover["2. Kibana Discover View\n(Time Filter: Jul 19, 2019 @ 20:11 - 20:43)"]

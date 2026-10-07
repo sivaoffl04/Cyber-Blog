@@ -143,6 +143,7 @@ password  next candidate
 ```
 
 ```mermaid
+
 flowchart TD
     Candidate["1. Generate Password Candidate\n(e.g., 'Winter2026!')"]
     --> HashAlgo["2. Compute Cryptographic Hash\n(e.g., sha512crypt(candidate, salt))"]
@@ -258,6 +259,7 @@ When John hashes `password`, it produces an identical 32-character hexadecimal s
 A **salt** is a cryptographically random string generated uniquely for each user and appended to the password before hashing:
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor User as User Registering
@@ -1020,6 +1022,7 @@ John includes helper utilities (`*2john`) to extract hashes from encrypted conta
 ![The JtR 2john Extraction Ecosystem](./images/twojohn_tools.jpg)
 
 ```mermaid
+
 flowchart TD
     Archive["Encrypted ZIP Archive\n(protected.zip)"]
     --> Zip2John["zip2john Helper\n(zip2john protected.zip > zip.hash)"]
@@ -1230,6 +1233,7 @@ Remediation: Transition to NIST SP 800-63B standards (15+ character passphrases,
 # 28. Professional Password-Audit Workflow
 
 ```mermaid
+
 flowchart TD
     P1["1. Written Authorization & Scoping"]
     --> P2["2. Collect Approved Credential Dataset"]

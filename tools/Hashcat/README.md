@@ -154,6 +154,7 @@ Result:
 ```
 
 ```mermaid
+
 flowchart TD
     Target["1. Target Hash File\n(e.g., NTLM / SHA256 / WPA2)"]
     --> Engine["2. Hashcat Execution Engine\n(Loads GPU Kernels & Charsets)"]
@@ -1066,6 +1067,7 @@ $$E = 5 \times \log_2(7776) \approx 64.6 \text{ bits}$$
 Follow a tiered escalation methodology during authorized password audits:
 
 ```mermaid
+
 flowchart TD
     S1["Tier 1: Fast Dictionary Pass\n(rockyou.txt, no rules - 2 mins)"]
     --> S2["Tier 2: Targeted Rules Pass\n(wordlists + best64.rule - 15 mins)"]
@@ -1201,6 +1203,7 @@ Tests PIN lengths 4, then 5, 6, 7, and 8 digits sequentially.
 Think of Hashcat as two decoupled pipeline components:
 
 ```mermaid
+
 flowchart LR
     CandidateGen["Candidate Generator\n(Wordlist, Rules, Masks, Hybrid)"]
     --> Stream["Candidate Word Stream"]
@@ -1242,6 +1245,7 @@ $$\text{Company Keywords} \implies \text{Common Wordlists} \implies \text{Rules}
 # 51. Professional Password Audit Workflow
 
 ```mermaid
+
 flowchart TD
     W1["1. Legal Authorization & Scoping"]
     --> W2["2. Hash Extraction & Format Identification (-m)"]

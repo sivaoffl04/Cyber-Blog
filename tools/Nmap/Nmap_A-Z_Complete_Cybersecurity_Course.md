@@ -91,6 +91,7 @@ nmap 192.168.1.10
 ```
 
 ```mermaid
+
 flowchart TD
     subgraph HostDiscovery["1. Host Discovery"]
         HD["ARP / ICMP / TCP Pings"]
@@ -145,6 +146,7 @@ Nmap Scanner                                 Target Host
 In standard TCP communications, two endpoints establish a session via a 3-way handshake:
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Client as Client / Scanner
@@ -300,6 +302,7 @@ A classic beginner mistake:
 In modern enterprise networks, border firewalls and Windows Defender Firewall **silently discard ICMP Echo requests by default**:
 
 ```mermaid
+
 flowchart LR
     Scanner["Nmap Scanner"] -->|ICMP Echo Probe| FW["Firewall"]
     FW -.->|SILENTLY DROPPED| Dead["Target System (Host UP)"]
@@ -341,6 +344,7 @@ nmap -sT 192.168.1.10
 ### Packet-Level Mechanics Comparison
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Nmap as Nmap Scanner
@@ -656,6 +660,7 @@ nmap -oA client_assessment_report 192.168.1.10
 In professional engagements, follow a **structured, phased methodology** to maximize discovery while minimizing target network strain:
 
 ```mermaid
+
 flowchart TD
     Phase1["Phase 1: Fast Host Discovery (No Port Scan)\nnmap -sn -iL scope.txt -oA 01_live_hosts"]
     --> Phase2["Phase 2: Full TCP Port Discovery\nnmap -p- -sS -T4 -iL live_hosts.txt -oA 02_open_ports"]
@@ -740,6 +745,7 @@ msf6 > vulns
 A purple-team mindset evaluates **both what the scanner sees and what the Security Operations Center (SOC) logs**:
 
 ```mermaid
+
 flowchart LR
     Scan["Nmap Scanner: -sS Sweep"]
     --> Sensor["SIEM / EDR Sensor (Sysmon / Suricata)"]

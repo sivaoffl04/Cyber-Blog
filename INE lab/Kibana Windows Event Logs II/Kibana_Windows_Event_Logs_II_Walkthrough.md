@@ -53,6 +53,7 @@ As SOC threat hunters, our objective is to analyze the connection patterns origi
 Understanding the underlying attack mechanics is essential for high-fidelity threat hunting:
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Attacker as Compromised Host (alice.insecurebank.local - 10.59.4.20)
@@ -86,6 +87,7 @@ The investigation methodology proceeds through the following structured stages:
 ![Threat Hunting Workflow Architecture](./images/kibana_2_workflow_map.jpg)
 
 ```mermaid
+
 flowchart TD
     Dataset["1. Sysmon EID 3 Telemetry\n(discovery_sysmon_3_Invoke_UserHunter.evtx)"]
     --> DiscoverView["2. Kibana Discover View\nTime Window: May 14, 2019 @ 22:47:18 - 22:47:45"]

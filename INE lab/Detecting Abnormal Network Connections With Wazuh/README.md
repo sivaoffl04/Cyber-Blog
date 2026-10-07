@@ -72,6 +72,7 @@ In this lab environment, GUI access to **Ubuntu 20.04 (SOC Machine)** and **Wind
 ![Wazuh Detection Pipeline Architecture](./images/wazuh_detection_pipeline_architecture.jpg)
 
 ```mermaid
+
 flowchart TD
     subgraph WindowsEndpoint ["Windows Server 2019 Target (10.0.23.132)"]
         A["Adversary Action / Payload<br/>(Metasploit / PowerShell)"] --> B["Kernel Network Socket Creation<br/>(Outbound TCP SYN)"]

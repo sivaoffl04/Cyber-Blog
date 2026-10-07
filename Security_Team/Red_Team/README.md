@@ -33,6 +33,7 @@ Unlike traditional vulnerability assessment or point-in-time penetration testing
 Professional Red Teams structure their campaigns around proven offensive methodologies, such as the **Cyber Kill Chain** and the **MITRE ATT&CK Framework**:
 
 ```mermaid
+
 flowchart TD
     subgraph Phase1["1. Reconnaissance & Staging"]
         A1["OSINT Gathering (Amass, Shodan, GitHub)"] --> A2["External Attack Surface Enumeration"]
@@ -78,6 +79,7 @@ Modern Red Teams deploy a specialized arsenal of tools to navigate each phase of
 Reconnaissance identifies exposed assets, subdomains, shadow IT, and misconfigurations before launching active attacks.
 
 ```mermaid
+
 flowchart LR
     Target["Target Organization"] --> Passive["Passive Recon: Shodan, WHOIS, Censys"]
     Target --> Active["Active Recon: Nmap, Amass, ffuf"]
@@ -152,6 +154,7 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp \
 In enterprise networks, Active Directory (AD) is the primary target. Red Teams focus on identity graph paths rather than individual host compromises.
 
 ```mermaid
+
 flowchart LR
     Comp["Initial Compromise: Workstation"]
     --> BH["BloodHound: Query AD LDAP"]

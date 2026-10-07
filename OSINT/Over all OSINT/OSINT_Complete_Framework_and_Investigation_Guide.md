@@ -54,27 +54,13 @@ Modern intelligence operations do not rely on passive web searches. Professional
 </details>
 
 ```mermaid
+
 flowchart LR
-    P["🎯 1. Planning & OPSEC
-• Define PIRs
-• Sock Puppets
-• Isolation Sandbox"] 
-    --> C["📥 2. Multi-Vector Harvesting
-• People & Identity
-• Infrastructure & DNS
-• Scanners & CTI"]
-    --> PV["🔄 3. Multi-Hop Pivoting
-• Email ➔ Username
-• Handle ➔ Commit Hash
-• Commit ➔ AWS Key / IP"]
-    --> A["🧠 4. Correlation & Link Graph
-• Maltego Transforms
-• Neo4j Graph Models
-• MISP Threat Sharing"]
-    --> D["📑 5. Dissemination & Action
-• Actionable Dossier
-• Confidence Matrix
-• Perimeter Hardening"]
+    P["🎯 1. Planning & OPSEC<br>• Define PIRs<br>• Sock Puppets<br>• Isolation Sandbox"]
+    --> C["📥 2. Multi-Vector Harvesting<br>• People & Identity<br>• Infrastructure & DNS<br>• Scanners & CTI"]
+    --> PV["🔄 3. Multi-Hop Pivoting<br>• Email ➔ Username<br>• Handle ➔ Commit Hash<br>• Commit ➔ AWS Key / IP"]
+    --> A["🧠 4. Correlation & Link Graph<br>• Maltego Transforms<br>• Neo4j Graph Models<br>• MISP Threat Sharing"]
+    --> D["📑 5. Dissemination & Action<br>• Actionable Dossier<br>• Confidence Matrix<br>• Perimeter Hardening"]
 
     style P fill:#0f172a,stroke:#00e5ff,stroke-width:2px,color:#fff
     style C fill:#0f172a,stroke:#ffab00,stroke-width:2px,color:#fff
@@ -252,13 +238,11 @@ Open Source Intelligence (OSINT) practitioners do not reinvent the wheel for eve
 Search engines serve as the foundational indexing layer of the World Wide Web. However, relying on a single engine introduces severe cognitive bias, as search algorithms tailor results based on geography, advertising models, and filtering algorithms.
 
 ```mermaid
+
 flowchart TD
-    Q["Search Query"] --> GE["General Indexers
-(Google, Bing, Brave, Yandex, Baidu)"]
-    Q --> SE["Specialized Engines
-(Google Scholar, Patents, Archive, Common Crawl)"]
-    Q --> SA["Metasearch Aggregators
-(SearXNG, Carrot2, Dogpile, Million Short)"]
+    Q["Search Query"] --> GE["General Indexers<br>(Google, Bing, Brave, Yandex, Baidu)"]
+    Q --> SE["Specialized Engines<br>(Google Scholar, Patents, Archive, Common Crawl)"]
+    Q --> SA["Metasearch Aggregators<br>(SearXNG, Carrot2, Dogpile, Million Short)"]
 
     GE --> D["De-Duplicated Global Intelligence"]
     SE --> D
@@ -501,19 +485,14 @@ python blackbird.py -u username123
 Email addresses (`user@example.com`) are unique digital identifiers. Investigating an email address enables analysts to pivot across enterprise domains, breach records, social media profiles, and cloud services.
 
 ```mermaid
+
 flowchart TD
-    E["Target Email:
-user@example.com"]
-    E --> D["Domain Recon
-(MX Records, SPF, Office365)"]
-    E --> H["Service Registration
-(Holehe: GitHub, Twitter, Spotify)"]
-    E --> G["Google / Gravatar
-(Epieos: Maps Reviews, Profile Pic)"]
-    E --> B["Breach Records
-(HIBP, DeHashed, Hudson Rock)"]
-    E --> R["Reputation & Fraud
-(EmailRep.io, IPQS)"]
+    E["Target Email:<br>user@example.com"]
+    E --> D["Domain Recon<br>(MX Records, SPF, Office365)"]
+    E --> H["Service Registration<br>(Holehe: GitHub, Twitter, Spotify)"]
+    E --> G["Google / Gravatar<br>(Epieos: Maps Reviews, Profile Pic)"]
+    E --> B["Breach Records<br>(HIBP, DeHashed, Hudson Rock)"]
+    E --> R["Reputation & Fraud<br>(EmailRep.io, IPQS)"]
 
     style E fill:#0f172a,stroke:#00e5ff,color:#fff
     style D fill:#1e293b,stroke:#ffab00,color:#fff
@@ -679,6 +658,7 @@ Domain names (`example.com`) are the central anchors of internet infrastructure.
 The Domain Name System (DNS) translates human-readable hostnames into machine-routable IP addresses. Querying authoritative nameservers provides critical passive and semi-passive intelligence regarding enterprise architecture.
 
 ```mermaid
+
 flowchart LR
     Target["example.com"]
     Target -->|"A"| IPv4["198.51.100.25 (Hosting / CDN)"]
@@ -834,13 +814,11 @@ Given a raw IPv4 or IPv6 address (e.g., `8.8.8.8` or `198.51.100.14`), investiga
 Shodan is the world's first search engine for Internet-connected devices. Rather than crawling web pages, Shodan continuously sends probes across the entire IPv4 address space, interrogating ports 1 through 65535 and indexing raw banners returned by daemons, web servers, industrial control systems (ICS/SCADA), IoT cameras, and database services.
 
 ```mermaid
+
 flowchart LR
-    S["Shodan Crawler Engines"] --> P["TCP/UDP Port Probes
-(80, 443, 22, 3389, 502, 9200)"]
-    P --> B["Raw Banner Capture
-(HTTP Headers, SSL Certs, SSH Strings)"]
-    B --> I["Indexed Telemetry Database
-(Searchable via Filters & API)"]
+    S["Shodan Crawler Engines"] --> P["TCP/UDP Port Probes<br>(80, 443, 22, 3389, 502, 9200)"]
+    P --> B["Raw Banner Capture<br>(HTTP Headers, SSL Certs, SSH Strings)"]
+    B --> I["Indexed Telemetry Database<br>(Searchable via Filters & API)"]
 
     style S fill:#0f172a,stroke:#00e5ff,color:#fff
     style P fill:#1e293b,stroke:#ffab00,color:#fff
@@ -1001,15 +979,14 @@ Analyzing suspicious URLs without exposing your own infrastructure is critical d
 Cyber Threat Intelligence (CTI) platforms correlate technical Indicators of Compromise (IOCs)—such as IPs, domains, hashes, and mutexes—to identify threat actors, campaigns, and malware families.
 
 ```mermaid
+
 flowchart TD
-    IOC["Indicator of Compromise (IOC)
-(Hash, Domain, IP, Mutex)"]
+    IOC["Indicator of Compromise (IOC)<br>(Hash, Domain, IP, Mutex)"]
     IOC --> VT["VirusTotal / AlienVault OTX"]
     IOC --> MB["MalwareBazaar / ThreatFox"]
     IOC --> HA["Hybrid Analysis / Triage Sandbox"]
     
-    VT --> CORR["Threat Actor & Campaign Attribution
-(e.g., APT29, Cobalt Strike, Bumblebee)"]
+    VT --> CORR["Threat Actor & Campaign Attribution<br>(e.g., APT29, Cobalt Strike, Bumblebee)"]
     MB --> CORR
     HA --> CORR
 
@@ -1081,14 +1058,12 @@ Instagram investigations present unique challenges due to strict API restriction
 LinkedIn provides rich corporate and human organizational intelligence. Mapping an enterprise on LinkedIn reveals internal reporting hierarchies, administrative roles, technology stacks, and direct employee targets for authorized security assessments.
 
 ```mermaid
+
 flowchart TD
     LI["LinkedIn Corporate Page"] --> EMP["Employee Directory & Title Enumeration"]
-    EMP --> PAT["Email Structure Derivation
-(e.g., first.last@company.com)"]
-    EMP --> ROLES["Tech Stack Attribution
-('Kubernetes Admin', 'AWS Cloud Architect')"]
-    ROLES --> SEC["Targeted Phishing Defense
-& Attack Surface Discovery"]
+    EMP --> PAT["Email Structure Derivation<br>(e.g., first.last@company.com)"]
+    EMP --> ROLES["Tech Stack Attribution<br>('Kubernetes Admin', 'AWS Cloud Architect')"]
+    ROLES --> SEC["Targeted Phishing Defense<br>& Attack Surface Discovery"]
 
     style LI fill:#0f172a,stroke:#00e5ff,color:#fff
     style EMP fill:#1e293b,stroke:#ffab00,color:#fff
@@ -1222,12 +1197,11 @@ The Tor (The Onion Router) network hosts hidden services operating on the `.onio
 Public blockchains (Bitcoin, Ethereum, Polygon) operate as immutable, decentralized public ledgers. Every transaction, fee, timestamp, sender, and recipient address is permanently recorded and visible to investigators.
 
 ```mermaid
+
 flowchart LR
-    W1["Wallet Address A
-(1A1zP1eP...)"] -->|0.5 BTC| TX["Transaction Hash
-(f4184fc6...)"]
+    W1["Wallet Address A<br>(1A1zP1eP...)"] -->|0.5 BTC| TX["Transaction Hash<br>(f4184fc6...)"]
     TX -->|0.48 BTC| W2["Wallet Address B (Destination)"]
-    TX -->|0.02 BTC (Change)| W3["Wallet Address C (Change Output)"]
+    TX -->|"0.02 BTC (Change)"| W3["Wallet Address C (Change Output)"]
 
     style W1 fill:#0f172a,stroke:#00e5ff,color:#fff
     style TX fill:#1e293b,stroke:#ffab00,color:#fff
@@ -1382,18 +1356,14 @@ Image Geolocation (GEOINT) determines the precise real-world geographic coordina
 </div>
 
 ```mermaid
-flowchart TD
-    IMG["Target Photograph"] --> EX["1. Check EXIF GPS Data
-(ExifTool)"]
-    IMG --> BUILT["2. Built Infrastructure
-(Street lamps, curb markings, signage)"]
-    IMG --> NAT["3. Natural Topography
-(Mountain ridgelines via PeakVisor)"]
-    IMG --> TIME["4. Chronolocation
-(Solar shadow angles via SunCalc)"]
 
-    EX --> LOC["Verified GPS Pin
-(Google Earth / OpenStreetMap)"]
+flowchart TD
+    IMG["Target Photograph"] --> EX["1. Check EXIF GPS Data<br>(ExifTool)"]
+    IMG --> BUILT["2. Built Infrastructure<br>(Street lamps, curb markings, signage)"]
+    IMG --> NAT["3. Natural Topography<br>(Mountain ridgelines via PeakVisor)"]
+    IMG --> TIME["4. Chronolocation<br>(Solar shadow angles via SunCalc)"]
+
+    EX --> LOC["Verified GPS Pin<br>(Google Earth / OpenStreetMap)"]
     BUILT --> LOC
     NAT --> LOC
     TIME --> LOC
@@ -1514,18 +1484,14 @@ Meteorological records verify the timeline and credibility of photographs, video
 The Internet is transient—web pages are modified, deleted, or hidden behind paywalls daily. Digital archives preserve historical captures of websites, providing an immutable record of past employees, obsolete contact numbers, deleted blog disclosures, and retired infrastructure.
 
 ```mermaid
-flowchart TD
-    URL["Target Web Page
-(Deleted or Modified)"]
-    URL --> WB["Wayback Machine
-(web.archive.org)"]
-    URL --> AT["Archive.today
-(archive.is)"]
-    URL --> CC["Common Crawl
-(WARC Data)"]
 
-    WB --> EX["Extracted Historical Intelligence
-(Former staff, deleted API endpoints, legacy IP records)"]
+flowchart TD
+    URL["Target Web Page<br>(Deleted or Modified)"]
+    URL --> WB["Wayback Machine<br>(web.archive.org)"]
+    URL --> AT["Archive.today<br>(archive.is)"]
+    URL --> CC["Common Crawl<br>(WARC Data)"]
+
+    WB --> EX["Extracted Historical Intelligence<br>(Former staff, deleted API endpoints, legacy IP records)"]
     AT --> EX
     CC --> EX
 
@@ -1592,21 +1558,15 @@ Metadata represents "data about data." In digital investigations, metadata frequ
 People-centric intelligence should follow a structured, multi-hop investigation path rather than random searching:
 
 ```mermaid
+
 flowchart TD
-    NAME["1. Target Full Name"] --> USER["2. Candidate Usernames
-(Sherlock, Maigret)"]
-    USER --> EMAIL["3. Email Addresses
-(Holehe, Hunter.io)"]
-    EMAIL --> COMP["4. Corporate Affiliations
-(LinkedIn, OpenCorporates)"]
-    COMP --> DOM["5. Domain Infrastructure
-(WHOIS, SecurityTrails)"]
-    DOM --> SOC["6. Social Footprint
-(X/Twitter, Reddit, Telegram)"]
-    SOC --> PUB["7. Public Records & Filings
-(CourtListener, Electoral, News)"]
-    PUB --> VIS["8. Visual & Biometrics
-(EXIF, PimEyes, GeoSpy)"]
+    NAME["1. Target Full Name"] --> USER["2. Candidate Usernames<br>(Sherlock, Maigret)"]
+    USER --> EMAIL["3. Email Addresses<br>(Holehe, Hunter.io)"]
+    EMAIL --> COMP["4. Corporate Affiliations<br>(LinkedIn, OpenCorporates)"]
+    COMP --> DOM["5. Domain Infrastructure<br>(WHOIS, SecurityTrails)"]
+    DOM --> SOC["6. Social Footprint<br>(X/Twitter, Reddit, Telegram)"]
+    SOC --> PUB["7. Public Records & Filings<br>(CourtListener, Electoral, News)"]
+    PUB --> VIS["8. Visual & Biometrics<br>(EXIF, PimEyes, GeoSpy)"]
 
     style NAME fill:#0f172a,stroke:#00e5ff,color:#fff
     style USER fill:#1e293b,stroke:#ffab00,color:#fff
@@ -1793,25 +1753,19 @@ finalrecon --full https://target.com
 A modern, production-grade passive reconnaissance pipeline combines specialized tools into an automated stream:
 
 ```mermaid
-flowchart LR
-    D["Root Domain:
-target.com"] --> S["Subfinder
-(APIs & Chaos)"]
-    D --> A["Amass
-(Passive Graph)"]
-    D --> C["crt.sh
-(CT Logs)"]
-    D --> H["theHarvester
-(Emails & Search)"]
 
-    S --> M["Aggregate & Deduplicate
-(anew / sort -u)"]
+flowchart LR
+    D["Root Domain:<br>target.com"] --> S["Subfinder<br>(APIs & Chaos)"]
+    D --> A["Amass<br>(Passive Graph)"]
+    D --> C["crt.sh<br>(CT Logs)"]
+    D --> H["theHarvester<br>(Emails & Search)"]
+
+    S --> M["Aggregate & Deduplicate<br>(anew / sort -u)"]
     A --> M
     C --> M
     H --> M
 
-    M --> P["Live Probe Filter
-(httpx / dnsx)"]
+    M --> P["Live Probe Filter<br>(httpx / dnsx)"]
 
     style D fill:#0f172a,stroke:#00e5ff,color:#fff
     style S fill:#1e293b,stroke:#ffab00,color:#fff
@@ -1957,18 +1911,13 @@ Audio tracks provide hidden environmental, temporal, and linguistic signals:
 Videos are complex sequences of images accompanied by audio and temporal metadata. Investigating video content requires methodical decomposition:
 
 ```mermaid
+
 flowchart TD
-    VID["Video Asset Received
-(MP4, WebM, Stream)"] --> PRE["1. Preserve & Hash
-(yt-dlp, SHA256 Hash)"]
-    PRE --> META["2. Metadata Extraction
-(FFprobe, ExifTool)"]
-    META --> FRAME["3. Keyframe Extraction
-(InVID, FFmpeg -r 1)"]
-    FRAME --> REV["4. Reverse Visual Search
-(Google Lens, Yandex)"]
-    REV --> GEO["5. Chronolocation & Map Pin
-(SunCalc, Google Earth)"]
+    VID["Video Asset Received<br>(MP4, WebM, Stream)"] --> PRE["1. Preserve & Hash<br>(yt-dlp, SHA256 Hash)"]
+    PRE --> META["2. Metadata Extraction<br>(FFprobe, ExifTool)"]
+    META --> FRAME["3. Keyframe Extraction<br>(InVID, FFmpeg -r 1)"]
+    FRAME --> REV["4. Reverse Visual Search<br>(Google Lens, Yandex)"]
+    REV --> GEO["5. Chronolocation & Map Pin<br>(SunCalc, Google Earth)"]
 
     style VID fill:#0f172a,stroke:#00e5ff,color:#fff
     style PRE fill:#1e293b,stroke:#ffab00,color:#fff
@@ -2179,13 +2128,11 @@ Automated spiders crawl entire web domain hierarchies, discovering unlinked sub-
 Recovering deleted evidence or verifying what an organization looked like at a specific historical point in time requires cross-referencing multiple digital preservation vaults:
 
 ```mermaid
+
 flowchart LR
-    Target["Target URL"] --> Wayback["1. Wayback Machine
-(web.archive.org)"]
-    Target --> ArchiveToday["2. Archive.today
-(archive.ph)"]
-    Target --> CommonCrawl["3. Common Crawl
-(WARC Repositories)"]
+    Target["Target URL"] --> Wayback["1. Wayback Machine<br>(web.archive.org)"]
+    Target --> ArchiveToday["2. Archive.today<br>(archive.ph)"]
+    Target --> CommonCrawl["3. Common Crawl<br>(WARC Repositories)"]
     Target --> GoogleCache["4. Google Cache / Bing Cache"]
 
     Wayback --> MasterTimeline["Reconstructed Historical Timeline"]
@@ -2299,24 +2246,16 @@ Academic literature reveals proprietary algorithms, patent filings, corporate au
 A structured cybersecurity infrastructure investigation maps an organization from its root domain down to individual physical servers:
 
 ```mermaid
+
 flowchart TD
-    D["1. Root Domain
-(target.com)"] --> W["2. WHOIS / RDAP
-(Registrar, Registrant Org)"]
-    W --> DNS["3. Authoritative DNS
-(SOA, NS, MX, TXT SPF)"]
-    DNS --> SUB["4. Passive Subdomains
-(Subfinder, Amass, crt.sh)"]
-    SUB --> IP["5. IP Resolution
-(A, AAAA Records)"]
-    IP --> BGP["6. BGP & ASN Mapping
-(BGPView, Autonomous System)"]
-    BGP --> SHO["7. Port & Service Discovery
-(Shodan, Censys, GreyNoise)"]
-    SHO --> TECH["8. Web Technology Profiling
-(Wappalyzer, urlscan.io)"]
-    TECH --> HIST["9. Historical Topology
-(SecurityTrails, Wayback Machine)"]
+    D["1. Root Domain<br>(target.com)"] --> W["2. WHOIS / RDAP<br>(Registrar, Registrant Org)"]
+    W --> DNS["3. Authoritative DNS<br>(SOA, NS, MX, TXT SPF)"]
+    DNS --> SUB["4. Passive Subdomains<br>(Subfinder, Amass, crt.sh)"]
+    SUB --> IP["5. IP Resolution<br>(A, AAAA Records)"]
+    IP --> BGP["6. BGP & ASN Mapping<br>(BGPView, Autonomous System)"]
+    BGP --> SHO["7. Port & Service Discovery<br>(Shodan, Censys, GreyNoise)"]
+    SHO --> TECH["8. Web Technology Profiling<br>(Wappalyzer, urlscan.io)"]
+    TECH --> HIST["9. Historical Topology<br>(SecurityTrails, Wayback Machine)"]
 
     style D fill:#0f172a,stroke:#00e5ff,color:#fff
     style W fill:#1e293b,stroke:#ffab00,color:#fff
@@ -2444,6 +2383,7 @@ Autonomous harvesters streamline reconnaissance by executing dozens of API calls
 Professional investigations adhere strictly to the standardized 8-stage intelligence lifecycle:
 
 ```mermaid
+
 flowchart TD
     R["1. Requirement Definition (Define PIRs & Scoping)"] --> C["2. Multi-Vector Collection (Harvesting Signals)"]
     C --> P["3. Cross-Domain Pivoting (Hop Across Entities)"]

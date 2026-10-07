@@ -64,6 +64,7 @@ The diagram below details the adversary's tactical progression across the monito
 ![Attack Kill Chain & SOC Triage Architecture](./images/attack_killchain_and_triage_architecture.jpg)
 
 ```mermaid
+
 flowchart TD
     subgraph Adversary ["Adversary Tactical Progression (24 Dec 2025)"]
         A1["07:41 UTC - Account Creation<br/>Local command adds 'eviluser'"] --> A2["07:59 UTC - Remote Ingress<br/>SSH Logon from 10.0.0.11 via 'eviluser'"]

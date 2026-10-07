@@ -511,6 +511,7 @@ Understanding the cryptographic mechanics of the **4-Way EAPOL Handshake** is ma
 ![WPA/WPA2 4-Way EAPOL Handshake Mechanics](./images/wifi_handshake_mechanics.jpg)
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Client as Wireless Station (Supplicant)
@@ -800,6 +801,7 @@ nmcli device status
 # 31. Complete Lab Workflow
 
 ```mermaid
+
 flowchart TD
     Setup["1. Kali Linux + USB Adapter Setup"]
     --> Check["2. airmon-ng check kill"]
@@ -967,6 +969,7 @@ An **Evil Twin** is an unauthorized rogue access point configured with an identi
 Enterprise networks discard Pre-Shared Keys in favor of **WPA2/WPA3-Enterprise (802.1X)**:
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Client as Wireless Station
@@ -1105,6 +1108,7 @@ By concluding this curriculum, you possess the knowledge to:
 # Final Mental Model
 
 ```mermaid
+
 flowchart TD
     Airspace["1. Shared RF Airspace (802.11 Protocol)"]
     --> Observe["2. Observe Telemetry (airodump-ng on wlan0mon)"]

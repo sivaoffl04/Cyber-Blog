@@ -35,6 +35,7 @@ This disconnection created an **operational blind spot**: attacks succeeded not 
 The objective of Purple Teaming is simple: **Turn every offensive action into a permanent defensive capability.**
 
 ```mermaid
+
 flowchart LR
     Red["Red Team: Execute TTP"] 
     --> Observe["Observe Telemetry: Sensor & Logs"]
@@ -72,6 +73,7 @@ flowchart LR
 A structured Purple Team exercise follows a cyclical lifecycle that ensures measurable results:
 
 ```mermaid
+
 flowchart TD
     subgraph Step1["Phase 1: Threat Intelligence & Scoping"]
         A1["Identify Relevant Threat Actor (e.g. APT29, FIN7)"]
@@ -122,6 +124,7 @@ flowchart TD
 Purple Teams rely on the **MITRE ATT&CK framework** as a shared operational taxonomy to evaluate security posture across the entire intrusion lifecycle.
 
 ```mermaid
+
 flowchart LR
     Init["Initial Access: Phishing, Exploits"]
     --> Exec["Execution: PowerShell, WMI"]
@@ -161,6 +164,7 @@ Level 4: AUTOMATED BLOCK   --> SOAR playbook or EDR engine blocks action instant
 Let us walk through a live, atomic Purple Team exercise demonstrating how offensive tradecraft is translated into detection engineering.
 
 ```mermaid
+
 sequenceDiagram
     autonumber
     actor Red as Purple Team (Red Operator)

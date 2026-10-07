@@ -96,6 +96,7 @@ The detection engine deploys 5 specialized inspection rules across the ingested 
 ![Log Anomaly Ruleset Architecture](./images/log_anomaly_ruleset_architecture.jpg)
 
 ```mermaid
+
 flowchart TD
     Raw["Raw Web Server Log Stream (logs.txt)"] --> Parser["Regex Tokenizer & Extractor"]
     
