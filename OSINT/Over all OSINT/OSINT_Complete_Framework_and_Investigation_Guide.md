@@ -14,7 +14,7 @@
   <b>A comprehensive, production-grade technical manual for Cyber Threat Intelligence (CTI) analysts, SOC investigators, penetration testers, purple team operators, and digital forensic researchers.</b>
 </p>
 
-[🏛️ Investigation Lifecycle](#-investigation-lifecycle--pivot-architecture) • [⚡ Terminal Simulation](#-terminal-workflow-demonstration) • [📋 107-Section Directory](#-107-section-investigation-directory)
+[🏛️ Investigation Lifecycle](#investigation-lifecycle--pivot-architecture) • [⚡ Terminal Simulation](#terminal-workflow-demonstration) • [📋 107-Section Directory](#107-section-investigation-directory)
 
 </div>
 
@@ -70,113 +70,113 @@ The terminal demonstration below simulates an end-to-end authorized threat recon
 
 | # | Section Title | Primary Focus & Domain |
 | :-: | :--- | :--- |
-| **01** | [OSINT Frameworks & Master Toolkits](#1-osint-frameworks--master-toolkits) | Frameworks, Curated Directories & Training Platforms |
-| **02** | [Search Engines (General, Specialized & Aggregators)](#2-search-engines) | Indexing Engines, Deep Web Crawlers & Metasearch Engines |
-| **03** | [Google Dorking & GHDB](#3-google-dorking) | Advanced Boolean Operators, GHDB & Sensitive Asset Mining |
-| **04** | [Username OSINT & Cross-Platform Alias Profiling](#4-username-osint) | Sherlock, Maigret, WhatsMyName & Handle Tracking |
-| **05** | [Email OSINT & Address Footprinting](#5-email-osint) | Holehe, Epieos, Hunter.io, Gravatar & Service Binding |
-| **06** | [Email Header Forensics & Authentication Analysis](#6-email-header-analysis) | RFC Headers, Hop Routing, SPF, DKIM, DMARC & MTAs |
-| **07** | [Phone Number OSINT & Telecom Reconnaissance](#7-phone-number-osint) | PhoneInfoga, Truecaller, E.164 Specs & Carrier Metadata |
-| **08** | [Domain OSINT & Registrar Intelligence](#8-domain-osint) | WHOIS, RDAP, History, SecurityTrails & Attack Surface |
-| **09** | [DNS OSINT & Query Protocols](#9-dns-osint) | Dig, Nslookup, DNSDumpster, DNSViz & Zone Transfers |
-| **10** | [Subdomain Enumeration (Passive & Semi-Passive)](#10-subdomain-enumeration) | OWASP Amass, Subfinder, Assetfinder & Chaos |
-| **11** | [IP Address OSINT & Autonomous System Telemetry](#11-ip-address-osint) | BGPView, IPinfo, AbuseIPDB, Hurricane Electric & RIRs |
-| **12** | [Shodan: Internet-Wide Device Scanning](#12-shodan) | Banner Mining, Filters, Exposed Services & Vulnerabilities |
-| **13** | [Censys: Attack Surface & Certificate Analysis](#13-censys) | IPv4 Scans, TLS Certificate Fingerprints & Host Assets |
-| **14** | [Certificate Transparency (CT) Log Mining](#14-certificate-transparency) | Crt.sh, CertSpotter, Wildcard SANs & Subdomain Trails |
-| **15** | [Website Technology Profiling](#15-website-technology-osint) | Wappalyzer, BuiltWith, WhatRuns & CMS Fingerprinting |
-| **16** | [URL Analysis & Sandbox Scanners](#16-url-analysis) | Urlscan.io, VirusTotal, OpenPhish & Hybrid Analysis |
-| **17** | [Malware & Cyber Threat Intelligence Platforms](#17-malware--threat-intelligence-osint) | Abuse.ch, ThreatFox, MalwareBazaar, URLhaus & VX-Underground |
-| **18** | [Cryptographic Hash OSINT](#18-hash-osint) | MD5, SHA1, SHA256 Lookup & Malware Hash Attribution |
-| **19** | [Social Media Intelligence (SOCMINT)](#19-social-media-osint) | Multi-Platform Monitoring, Sentiment & Bot Detection |
-| **20** | [Instagram OSINT & Media Archaeology](#20-instagram-osint) | Profile Scraping, Visual Footprinting & Stories History |
-| **21** | [LinkedIn OSINT & Corporate Hierarchy Mapping](#21-linkedin-osint) | Org Chart Recon, Employee Enumeration & Email Patterning |
-| **22** | [GitHub OSINT & Secret Exposure Hunting](#22-github-osint) | Code Dorking, GitLeaks, TruffleHog & Commit History Mining |
-| **23** | [GitLab OSINT & Project Footprinting](#23-gitlab-osint) | Public Repositories, Snippets, Commits & Pipeline Logs |
-| **24** | [Paste & Text Dump Reconnaissance](#24-paste--text-osint) | Pastebin, GitHub Gists, PrivateBin & Intelligence X |
-| **25** | [Breach & Credential Exposure Intelligence](#25-breach--credential-exposure-osint) | Have I Been Pwned, DeHashed, Hudson Rock & Stealer Logs |
-| **26** | [Dark Web & Tor (.onion) Intelligence](#26-dark-web--tor-osint) | Ahmia, OnionSearch, Ransomwatch & Extortion Portals |
-| **27** | [Cryptocurrency & Blockchain Forensics](#27-cryptocurrency-osint) | Bitcoin UTXO, Ethereum Accounts, Mempool, Etherscan & Arkham |
-| **28** | [Corporate & Business Entity OSINT](#28-company--business-osint) | OpenCorporates, SEC EDGAR, Companies House & ImportYeti |
-| **29** | [Government Open Data & Public Records](#29-government-osint) | USAspending, SEC, PACER, CERT-In, MCA & Public Portals |
-| **30** | [Legal & Court Docket Intelligence](#30-legal--court-osint) | CourtListener, PACER, RECAP, Justia & Indian Kanoon |
-| **31** | [Image OSINT & Reverse Visual Engines](#31-image-osint) | Google Lens, Yandex, TinEye, PimEyes & FotoForensics |
-| **32** | [EXIF & Hardware Metadata Forensics](#32-exif--metadata) | ExifTool Commands, Camera Sensors, Timestamps & GPS |
-| **33** | [Image Geolocation (GEOINT)](#33-image-geolocation) | Google Earth, Mapillary, SunCalc, PeakVisor & Overpass Turbo |
-| **34** | [Satellite Imagery & Remote Sensing](#34-satellite-imagery) | Sentinel Hub, Copernicus, NASA Worldview, Landsat & Planet |
-| **35** | [Mapping Platforms & Geospatial Databases](#35-maps) | OpenStreetMap, Google Earth Pro, ArcGIS, QGIS & Wikimapia |
-| **36** | [Geolocation Heuristics & Visual Clues](#36-geolocation-techniques) | Architecture, Vegetation, Road Markings & Infrastructure |
-| **37** | [Street View & Ground-Level Telemetry](#37-street-view) | Google Street View, Mapillary, KartaView & Yandex Panoramas |
-| **38** | [Flight Tracking & ADS-B Intelligence](#38-flight-osint) | FlightRadar24, ADS-B Exchange, OpenSky Network & Callsigns |
-| **39** | [Maritime & AIS Ship Tracking](#39-maritime--ship-osint) | MarineTraffic, VesselFinder, FleetMon, MMSI & IMO Lookups |
-| **40** | [Weather & Meteorological Verification](#40-weather-osint) | NOAA, NASA, Windy, Meteoblue & Historical Weather APIs |
-| **41** | [Historical Web & Digital Archives](#41-historical-web--archives) | Wayback Machine, Archive.today, Memento & Common Crawl |
-| **42** | [Website Change Monitoring & Webhooks](#42-website-change-monitoring) | Changedetection.io, Visualping, Distill.io & Versionista |
-| **43** | [PDF & Document Metadata Extraction](#43-pdf--document-osint) | PDFInfo, Apache Tika, FOCA, Metagoofil & Strings |
-| **44** | [Automated Metadata Harvesting Engines](#44-metadata-osint) | Multi-File Batch Extraction, Revision History & Authors |
-| **45** | [People OSINT: Holistic Investigation Path](#45-people-osint) | Cross-Domain Identity Pivots (Name ➔ Username ➔ Infrastructure) |
-| **46** | [Username to Email Pivoting Heuristics](#46-username--email) | Correlation Engines, Gravatar Hashing & Epieos |
-| **47** | [Email to Username Pivoting Heuristics](#47-email--username) | Prefix Decomposition, Social Registrations & Leaks |
-| **48** | [Username to Domain & Infrastructure Pivoting](#48-username--domain) | Code Repositories, Domain Registrations & Nameservers |
-| **49** | [Maltego Link Analysis Platform](#49-maltego) | Entities, Transforms, Graph Topologies & Visual Correlation |
-| **50** | [SpiderFoot Attack Surface Automation](#50-spiderfoot) | OSINT Target Automation, Modules & Threat Correlation |
-| **51** | [Recon-ng Framework](#51-recon-ng) | Metasploit-Style Modular Recon, Workspaces & API Keys |
-| **52** | [theHarvester Perimeter Harvester](#52-theharvester) | Passive Email, Subdomain, IP & Employee Harvesting |
-| **53** | [OWASP Amass Attack Surface Mapper](#53-amass) | Graph-Based Asset Discovery, ASN Mapping & DNS Parsing |
-| **54** | [FinalRecon Web Reconnaissance Suite](#54-finalrecon) | Header Audits, SSL, Crawling, Directory & DNS Checks |
-| **55** | [Passive Reconnaissance Core Suite](#55-passive-recon-tools) | Multi-Tool Aggregated Passive Footprinting Pipeline |
-| **56** | [Threat Actor Profiling & CTI Feeds](#56-threat-actor-osint) | MITRE ATT&CK, AlienVault OTX, CISA, Mandiant & Talos |
-| **57** | [MITRE ATT&CK Framework Mapping](#57-mitre-attck) | TTP Attribution, Campaign Chains & Detection Alignment |
-| **58** | [MISP Threat Sharing Platform](#58-misp) | Threat Events, Attributes, Warninglists & Communities |
-| **59** | [STIX 2.1 & TAXII 2.1 Threat Data Models](#59-stix--taxii) | Standardized SDOs, SROs & Automated Threat Feeds |
-| **60** | [Vulnerability OSINT & Exploit Repositories](#60-vulnerability-osint) | NVD, CVE.org, CISA KEV, Exploit-DB & OSV.dev |
-| **61** | [National Vulnerability Database (NVD) Analysis](#61-nvd) | CVSS v3.1/v4.0 Metrics, CPE Dictionary & CWE Mapping |
-| **62** | [CISA KEV Catalog Prioritization](#62-cisa-kev) | Actively Exploited Vulnerabilities vs Theoretical Risk |
-| **63** | [Username & Identity Discovery Suites](#63-username--account-discovery) | Sherlock, Maigret, Blackbird, WhatsMyName & Namechk |
-| **64** | [Facial Recognition & Biometric Search Engines](#64-facial--face-search) | PimEyes, FaceCheck.ID, Yandex Visual & Ethical Limits |
-| **65** | [Audio Forensics & Acoustic Intelligence](#65-audio-osint) | Shazam, ACRCloud, Audacity, FFmpeg & Whisper AI |
-| **66** | [Video OSINT & Verification Workflow](#66-video-osint) | Video Preservation, Keyframes, Chronolocation & Hashes |
-| **67** | [InVID / WeVerify Verification Suite](#67-invid--weverify) | Keyframe Splitting, Reverse Image Lookups & Context |
-| **68** | [YouTube OSINT & Channel Telemetry](#68-youtube-osint) | Video Data API, YouTube DataViewer & Yt-dlp Metadata |
-| **69** | [Reddit OSINT & Thread Archaeology](#69-reddit-osint) | PullPush, Pushshift, Reddit Investigator & Google Dorks |
-| **70** | [Telegram OSINT & Threat Actor Channel Scraping](#70-telegram-osint) | Public Channels, TGStat, Telemetr & Bot Automation |
-| **71** | [Discord OSINT & Guild Reconnaissance](#71-discord-osint) | Guild Lookup, Widget APIs, Invite Analysis & Bot Infrastructure |
-| **72** | [Mastodon & Fediverse Intelligence](#72-mastodon-osint) | ActivityPub Protocol, Instance Scraping & Fediverse DBs |
-| **73** | [Bluesky & AT Protocol Intelligence](#73-bluesky-osint) | AT Protocol Public APIs, DIDs & Post Firehoses |
-| **74** | [X / Twitter Advanced Intelligence Gathering](#74-xtwitter-osint) | Search Operators, Historical Feeds, Hoaxy & Botometer |
-| **75** | [Social Graph & Entity Relationship Analysis](#75-social-graph-analysis) | Node Clustering, Inter-Entity Ties & Centrality Metrics |
-| **76** | [Network Graph Visualization Engines](#76-network-visualization) | Gephi Modularity Algorithms & Neo4j Cypher Property Graphs |
-| **77** | [Essential Browser OSINT Extensions](#77-browser-osint-extensions) | Wappalyzer, BuiltWith, SingleFile, Wayback & HackTools |
-| **78** | [Web Scraping Architecture for Intelligence](#78-web-scraping) | BeautifulSoup, Scrapy, Playwright, Selenium & Requests |
-| **79** | [Command-Line OSINT Toolkit for Linux/Kali](#79-command-line-osint) | Core Unix Pipeline (`curl`, `dig`, `jq`, `grep`, `awk`, `exiftool`) |
-| **80** | [Web Crawlers & Attack Surface Spiders](#80-web-crawlers) | Katana, Hakrawler, GoSpider, Photon & OWASP ZAP |
-| **81** | [Archive Investigation & Temporal Reconstruction](#81-archive-investigation) | Wayback CDX API, Archive.today & Common Crawl WARC |
-| **82** | [Breach Monitoring & Enterprise Credential Exposure](#82-breach-monitoring) | HIBP Enterprise, SpyCloud, Searchlight Cyber & Dark Web |
-| **83** | [Dark-Web Monitoring & Ransomware Tracking](#83-dark-web-monitoring) | Recorded Future, Flashpoint, DarkOwl, KELA & Ransomwatch |
-| **84** | [Brand Monitoring & Digital Risk Protection (DRP)](#84-brand-monitoring) | Google Alerts, Talkwalker, Brand24 & Mention |
-| **85** | [News Intelligence & Global Event Monitoring](#85-news-osint) | GDELT Project, MediaCloud, Event Registry & Factiva |
-| **86** | [Disinformation Analysis & Media Verification](#86-disinformation--verification) | Verification Handbooks, InVID, ELA & Source Validation |
-| **87** | [Fact-Checking Consortia & Open Databases](#87-fact-checking) | Google Fact Check Explorer, Snopes, PolitiFact & Bellingcat |
-| **88** | [Language Intelligence & Translation Engines](#88-language-osint) | DeepL, Google Translate, Yandex Translate & Linguistics |
-| **89** | [Optical Character Recognition (OCR) for OSINT](#89-ocr) | Tesseract CLI, Google Lens, PaddleOCR & EasyOCR |
-| **90** | [Deep Web Academic Repositories & Document Engines](#90-document-search) | Google Books, Internet Archive, HathiTrust, JSTOR & arXiv |
-| **91** | [Academic OSINT & Scholarly Intelligence](#91-academic-osint) | Semantic Scholar, OpenAlex, PubMed, CORE & ResearchGate |
-| **92** | [Infrastructure Relationship Mapping Workflow](#92-infrastructure-relationship-mapping) | End-to-End DNS ➔ BGP ➔ Server ➔ Hosting Pivot Chain |
-| **93** | [Cybersecurity Attack Surface Reconnaissance Matrix](#93-cybersecurity-osint-attack-surface) | Enterprise Inventory Architecture (Domains, Cloud, Code) |
-| **94** | [Cloud Storage OSINT & Bucket Discovery](#94-cloud-osint) | AWS S3, Azure Blob, GCP Storage; CloudEnum & S3Scanner |
-| **95** | [SecurityTrails Historical DNS & WHOIS](#95-securitytrails) | Historical A/NS/MX Changes, Domain Mutations & IP Trails |
-| **96** | [VirusTotal Multi-Hop Graph Analysis](#96-virustotal) | Files, IPs, Domains, URLs, Certificates & Malware Relations |
-| **97** | [urlscan.io Deep Network & DOM Telemetry](#97-urlscanio) | Requests, TLS Handshakes, Scripts, DOM Trees & Screenshots |
-| **98** | [GreyNoise Intelligence for Threat Analysts](#98-greynoise) | Mass Internet Scanners, Benign Actors vs Targeted Worms |
-| **99** | [AbuseIPDB IP Reputation & Malicious Scoring](#99-abuseipdb) | Malicious Confidence Percentage, Abuse Categories & Reports |
-| **100** | [AlienVault Open Threat Exchange (OTX)](#100-alienvault-otx) | Threat Pulses, Community Indicators & API Integration |
-| **101** | [Intelligence X Search Engine & Archive](#101-intelligence-x) | Darknet Portals, Paste Dumps, Historical IP & Document Index |
-| **102** | [OSINT Automation Frameworks & Pipelines](#102-osint-automation) | Autonomous Harvesters (SpiderFoot, theHarvester, sn0int) |
-| **103** | [The 8-Stage OSINT Investigation Lifecycle](#103-osint-investigation-lifecycle) | Requirement ➔ Collection ➔ Pivoting ➔ Correlation ➔ Report |
-| **104** | [End-to-End Enterprise Security Case Study](#104-example-cybersecurity-investigation) | Real-World Investigation Walkthrough on `example.com` |
-| **105** | [The OSINT Pivot Mindset & Cross-Domain Hopping](#105-the-osint-pivot-mindset) | Mastering Email, Domain & Media Cross-Domain Jumps |
-| **106** | [Tiered OSINT Toolkit Recommendations](#106-best-osint-toolkit-for-a-cybersecurity-student) | Tier 1 (Foundations) to Tier 6 (Advanced Enterprise CTI) |
-| **107** | [The Unified OSINT Tool & Relationship Map](#107-osint-tool-map) | Comprehensive Categorical Architecture Diagram & The Top 10 |
+| **01** | [OSINT Frameworks & Master Toolkits](#1-osint-frameworks--master-toolkits) | Frameworks, Curated Directories & Training Platforms  |
+| **02** | [Search Engines (General, Specialized & Aggregators)](#2-search-engines) | Indexing Engines, Deep Web Crawlers & Metasearch Engines  |
+| **03** | [Google Dorking & GHDB](#3-google-dorking) | Advanced Boolean Operators, GHDB & Sensitive Asset Mining  |
+| **04** | [Username OSINT & Cross-Platform Alias Profiling](#4-username-osint) | Sherlock, Maigret, WhatsMyName & Handle Tracking  |
+| **05** | [Email OSINT & Address Footprinting](#5-email-osint) | Holehe, Epieos, Hunter.io, Gravatar & Service Binding  |
+| **06** | [Email Header Forensics & Authentication Analysis](#6-email-header-analysis) | RFC Headers, Hop Routing, SPF, DKIM, DMARC & MTAs  |
+| **07** | [Phone Number OSINT & Telecom Reconnaissance](#7-phone-number-osint) | PhoneInfoga, Truecaller, E.164 Specs & Carrier Metadata  |
+| **08** | [Domain OSINT & Registrar Intelligence](#8-domain-osint) | WHOIS, RDAP, History, SecurityTrails & Attack Surface  |
+| **09** | [DNS OSINT & Query Protocols](#9-dns-osint) | Dig, Nslookup, DNSDumpster, DNSViz & Zone Transfers  |
+| **10** | [Subdomain Enumeration (Passive & Semi-Passive)](#10-subdomain-enumeration) | OWASP Amass, Subfinder, Assetfinder & Chaos  |
+| **11** | [IP Address OSINT & Autonomous System Telemetry](#11-ip-address-osint) | BGPView, IPinfo, AbuseIPDB, Hurricane Electric & RIRs  |
+| **12** | [Shodan: Internet-Wide Device Scanning](#12-shodan) | Banner Mining, Filters, Exposed Services & Vulnerabilities  |
+| **13** | [Censys: Attack Surface & Certificate Analysis](#13-censys) | IPv4 Scans, TLS Certificate Fingerprints & Host Assets  |
+| **14** | [Certificate Transparency (CT) Log Mining](#14-certificate-transparency) | Crt.sh, CertSpotter, Wildcard SANs & Subdomain Trails  |
+| **15** | [Website Technology Profiling](#15-website-technology-osint) | Wappalyzer, BuiltWith, WhatRuns & CMS Fingerprinting  |
+| **16** | [URL Analysis & Sandbox Scanners](#16-url-analysis) | Urlscan.io, VirusTotal, OpenPhish & Hybrid Analysis  |
+| **17** | [Malware & Cyber Threat Intelligence Platforms](#17-malware--cyber-threat-intelligence-osint) | Abuse.ch, ThreatFox, MalwareBazaar, URLhaus & VX-Underground  |
+| **18** | [Cryptographic Hash OSINT](#18-hash-osint) | MD5, SHA1, SHA256 Lookup & Malware Hash Attribution  |
+| **19** | [Social Media Intelligence (SOCMINT)](#19-social-media-intelligence-socmint) | Multi-Platform Monitoring, Sentiment & Bot Detection  |
+| **20** | [Instagram OSINT & Media Archaeology](#20-instagram-osint) | Profile Scraping, Visual Footprinting & Stories History  |
+| **21** | [LinkedIn OSINT & Corporate Hierarchy Mapping](#21-linkedin-osint) | Org Chart Recon, Employee Enumeration & Email Patterning  |
+| **22** | [GitHub OSINT & Secret Exposure Hunting](#22-github-osint) | Code Dorking, GitLeaks, TruffleHog & Commit History Mining  |
+| **23** | [GitLab OSINT & Project Footprinting](#23-gitlab-osint) | Public Repositories, Snippets, Commits & Pipeline Logs  |
+| **24** | [Paste & Text Dump Reconnaissance](#24-paste--text-dump-osint) | Pastebin, GitHub Gists, PrivateBin & Intelligence X  |
+| **25** | [Breach & Credential Exposure Intelligence](#25-breach--credential-exposure-intelligence) | Have I Been Pwned, DeHashed, Hudson Rock & Stealer Logs  |
+| **26** | [Dark Web & Tor (.onion) Intelligence](#26-dark-web--tor-onion-intelligence) | Ahmia, OnionSearch, Ransomwatch & Extortion Portals  |
+| **27** | [Cryptocurrency & Blockchain Forensics](#27-cryptocurrency--blockchain-forensics) | Bitcoin UTXO, Ethereum Accounts, Mempool, Etherscan & Arkham  |
+| **28** | [Corporate & Business Entity OSINT](#28-corporate--business-entity-osint) | OpenCorporates, SEC EDGAR, Companies House & ImportYeti  |
+| **29** | [Government Open Data & Public Records](#29-government-open-data--public-records) | USAspending, SEC, PACER, CERT-In, MCA & Public Portals  |
+| **30** | [Legal & Court Docket Intelligence](#30-legal--court-docket-intelligence) | CourtListener, PACER, RECAP, Justia & Indian Kanoon  |
+| **31** | [Image OSINT & Reverse Visual Engines](#31-image-osint) | Google Lens, Yandex, TinEye, PimEyes & FotoForensics  |
+| **32** | [EXIF & Hardware Metadata Forensics](#32-exif--metadata) | ExifTool Commands, Camera Sensors, Timestamps & GPS  |
+| **33** | [Image Geolocation (GEOINT)](#33-image-geolocation) | Google Earth, Mapillary, SunCalc, PeakVisor & Overpass Turbo  |
+| **34** | [Satellite Imagery & Remote Sensing](#34-satellite-imagery) | Sentinel Hub, Copernicus, NASA Worldview, Landsat & Planet  |
+| **35** | [Mapping Platforms & Geospatial Databases](#35-maps) | OpenStreetMap, Google Earth Pro, ArcGIS, QGIS & Wikimapia  |
+| **36** | [Geolocation Heuristics & Visual Clues](#36-geolocation-techniques) | Architecture, Vegetation, Road Markings & Infrastructure  |
+| **37** | [Street View & Ground-Level Telemetry](#37-street-view) | Google Street View, Mapillary, KartaView & Yandex Panoramas  |
+| **38** | [Flight Tracking & ADS-B Intelligence](#38-flight-osint) | FlightRadar24, ADS-B Exchange, OpenSky Network & Callsigns  |
+| **39** | [Maritime & AIS Ship Tracking](#39-maritime--ship-osint) | MarineTraffic, VesselFinder, FleetMon, MMSI & IMO Lookups  |
+| **40** | [Weather & Meteorological Verification](#40-weather-osint) | NOAA, NASA, Windy, Meteoblue & Historical Weather APIs  |
+| **41** | [Historical Web & Digital Archives](#41-historical-web--archives) | Wayback Machine, Archive.today, Memento & Common Crawl  |
+| **42** | [Website Change Monitoring & Webhooks](#42-website-change-monitoring) | Changedetection.io, Visualping, Distill.io & Versionista  |
+| **43** | [PDF & Document Metadata Extraction](#43-pdf--document-osint) | PDFInfo, Apache Tika, FOCA, Metagoofil & Strings  |
+| **44** | [Automated Metadata Harvesting Engines](#44-metadata-osint) | Multi-File Batch Extraction, Revision History & Authors  |
+| **45** | [People OSINT: Holistic Investigation Path](#45-people-osint-holistic-investigation-path) | Cross-Domain Identity Pivots (Name ➔ Username ➔ Infrastructure)  |
+| **46** | [Username to Email Pivoting Heuristics](#46-username-to-email-pivoting) | Correlation Engines, Gravatar Hashing & Epieos  |
+| **47** | [Email to Username Pivoting Heuristics](#47-email-to-username-pivoting) | Prefix Decomposition, Social Registrations & Leaks  |
+| **48** | [Username to Domain & Infrastructure Pivoting](#48-username-to-domain--infrastructure-pivoting) | Code Repositories, Domain Registrations & Nameservers  |
+| **49** | [Maltego Link Analysis Platform](#49-maltego) | Entities, Transforms, Graph Topologies & Visual Correlation  |
+| **50** | [SpiderFoot Attack Surface Automation](#50-spiderfoot) | OSINT Target Automation, Modules & Threat Correlation  |
+| **51** | [Recon-ng Framework](#51-recon-ng) | Metasploit-Style Modular Recon, Workspaces & API Keys  |
+| **52** | [theHarvester Perimeter Harvester](#52-theharvester) | Passive Email, Subdomain, IP & Employee Harvesting  |
+| **53** | [OWASP Amass Attack Surface Mapper](#53-amass-owasp) | Graph-Based Asset Discovery, ASN Mapping & DNS Parsing  |
+| **54** | [FinalRecon Web Reconnaissance Suite](#54-finalrecon) | Header Audits, SSL, Crawling, Directory & DNS Checks  |
+| **55** | [Passive Reconnaissance Core Suite](#55-passive-recon-tools-suite) | Multi-Tool Aggregated Passive Footprinting Pipeline  |
+| **56** | [Threat Actor Profiling & CTI Feeds](#56-threat-actor-osint) | MITRE ATT&CK, AlienVault OTX, CISA, Mandiant & Talos  |
+| **57** | [MITRE ATT&CK Framework Mapping](#57-mitre-attck-framework) | TTP Attribution, Campaign Chains & Detection Alignment  |
+| **58** | [MISP Threat Sharing Platform](#58-misp-malware-information-sharing-platform) | Threat Events, Attributes, Warninglists & Communities  |
+| **59** | [STIX 2.1 & TAXII 2.1 Threat Data Models](#59-stix--taxii) | Standardized SDOs, SROs & Automated Threat Feeds  |
+| **60** | [Vulnerability OSINT & Exploit Repositories](#60-vulnerability-osint) | NVD, CVE.org, CISA KEV, Exploit-DB & OSV.dev  |
+| **61** | [National Vulnerability Database (NVD) Analysis](#61-national-vulnerability-database-nvd) | CVSS v3.1/v4.0 Metrics, CPE Dictionary & CWE Mapping  |
+| **62** | [CISA KEV Catalog Prioritization](#62-cisa-known-exploited-vulnerabilities-kev-catalog) | Actively Exploited Vulnerabilities vs Theoretical Risk  |
+| **63** | [Username & Identity Discovery Suites](#63-username--account-discovery-suites) | Sherlock, Maigret, Blackbird, WhatsMyName & Namechk  |
+| **64** | [Facial Recognition & Biometric Search Engines](#64-facial-recognition--biometric-search-engines) | PimEyes, FaceCheck.ID, Yandex Visual & Ethical Limits  |
+| **65** | [Audio Forensics & Acoustic Intelligence](#65-audio-forensics--acoustic-intelligence) | Shazam, ACRCloud, Audacity, FFmpeg & Whisper AI  |
+| **66** | [Video OSINT & Verification Workflow](#66-video-osint--verification-workflow) | Video Preservation, Keyframes, Chronolocation & Hashes  |
+| **67** | [InVID / WeVerify Verification Suite](#67-invid--weverify-verification-suite) | Keyframe Splitting, Reverse Image Lookups & Context  |
+| **68** | [YouTube OSINT & Channel Telemetry](#68-youtube-osint) | Video Data API, YouTube DataViewer & Yt-dlp Metadata  |
+| **69** | [Reddit OSINT & Thread Archaeology](#69-reddit-osint) | PullPush, Pushshift, Reddit Investigator & Google Dorks  |
+| **70** | [Telegram OSINT & Threat Actor Channel Scraping](#70-telegram-osint) | Public Channels, TGStat, Telemetr & Bot Automation  |
+| **71** | [Discord OSINT & Guild Reconnaissance](#71-discord-osint) | Guild Lookup, Widget APIs, Invite Analysis & Bot Infrastructure  |
+| **72** | [Mastodon & Fediverse Intelligence](#72-mastodon--fediverse-intelligence) | ActivityPub Protocol, Instance Scraping & Fediverse DBs  |
+| **73** | [Bluesky & AT Protocol Intelligence](#73-bluesky--at-protocol-intelligence) | AT Protocol Public APIs, DIDs & Post Firehoses  |
+| **74** | [X / Twitter Advanced Intelligence Gathering](#74-x--twitter-advanced-intelligence-gathering) | Search Operators, Historical Feeds, Hoaxy & Botometer  |
+| **75** | [Social Graph & Entity Relationship Analysis](#75-social-graph-analysis) | Node Clustering, Inter-Entity Ties & Centrality Metrics  |
+| **76** | [Network Graph Visualization Engines](#76-network-graph-visualization-engines) | Gephi Modularity Algorithms & Neo4j Cypher Property Graphs  |
+| **77** | [Essential Browser OSINT Extensions](#77-essential-browser-osint-extensions) | Wappalyzer, BuiltWith, SingleFile, Wayback & HackTools  |
+| **78** | [Web Scraping Architecture for Intelligence](#78-web-scraping-architecture-for-intelligence) | BeautifulSoup, Scrapy, Playwright, Selenium & Requests  |
+| **79** | [Command-Line OSINT Toolkit for Linux/Kali](#79-command-line-osint-toolkit-for-linuxkali) | Core Unix Pipeline (`curl`, `dig`, `jq`, `grep`, `awk`, `exiftool`)  |
+| **80** | [Web Crawlers & Attack Surface Spiders](#80-web-crawlers--attack-surface-spiders) | Katana, Hakrawler, GoSpider, Photon & OWASP ZAP  |
+| **81** | [Archive Investigation & Temporal Reconstruction](#81-archive-investigation--temporal-reconstruction) | Wayback CDX API, Archive.today & Common Crawl WARC  |
+| **82** | [Breach Monitoring & Enterprise Credential Exposure](#82-breach-monitoring--enterprise-credential-exposure) | HIBP Enterprise, SpyCloud, Searchlight Cyber & Dark Web  |
+| **83** | [Dark-Web Monitoring & Ransomware Tracking](#83-dark-web-monitoring--ransomware-tracking) | Recorded Future, Flashpoint, DarkOwl, KELA & Ransomwatch  |
+| **84** | [Brand Monitoring & Digital Risk Protection (DRP)](#84-brand-monitoring--digital-risk-protection) | Google Alerts, Talkwalker, Brand24 & Mention  |
+| **85** | [News Intelligence & Global Event Monitoring](#85-news-osint--global-event-monitoring) | GDELT Project, MediaCloud, Event Registry & Factiva  |
+| **86** | [Disinformation Analysis & Media Verification](#86-disinformation-analysis--media-verification) | Verification Handbooks, InVID, ELA & Source Validation  |
+| **87** | [Fact-Checking Consortia & Open Databases](#87-fact-checking-consortia--open-databases) | Google Fact Check Explorer, Snopes, PolitiFact & Bellingcat  |
+| **88** | [Language Intelligence & Translation Engines](#88-language-intelligence--translation-engines) | DeepL, Google Translate, Yandex Translate & Linguistics  |
+| **89** | [Optical Character Recognition (OCR) for OSINT](#89-optical-character-recognition-ocr-for-osint) | Tesseract CLI, Google Lens, PaddleOCR & EasyOCR  |
+| **90** | [Deep Web Academic Repositories & Document Engines](#90-deep-web-academic-repositories--document-engines) | Google Books, Internet Archive, HathiTrust, JSTOR & arXiv  |
+| **91** | [Academic OSINT & Scholarly Intelligence](#91-academic-osint--scholarly-intelligence) | Semantic Scholar, OpenAlex, PubMed, CORE & ResearchGate  |
+| **92** | [Infrastructure Relationship Mapping Workflow](#92-infrastructure-relationship-mapping-workflow) | End-to-End DNS ➔ BGP ➔ Server ➔ Hosting Pivot Chain  |
+| **93** | [Cybersecurity Attack Surface Reconnaissance Matrix](#93-cybersecurity-osint-attack-surface) | Enterprise Inventory Architecture (Domains, Cloud, Code)  |
+| **94** | [Cloud Storage OSINT & Bucket Discovery](#94-cloud-storage-osint--bucket-discovery) | AWS S3, Azure Blob, GCP Storage; CloudEnum & S3Scanner  |
+| **95** | [SecurityTrails Historical DNS & WHOIS](#95-securitytrails) | Historical A/NS/MX Changes, Domain Mutations & IP Trails  |
+| **96** | [VirusTotal Multi-Hop Graph Analysis](#96-virustotal-multi-hop-graph-analysis) | Files, IPs, Domains, URLs, Certificates & Malware Relations  |
+| **97** | [urlscan.io Deep Network & DOM Telemetry](#97-urlscanio) | Requests, TLS Handshakes, Scripts, DOM Trees & Screenshots  |
+| **98** | [GreyNoise Intelligence for Threat Analysts](#98-greynoise-intelligence) | Mass Internet Scanners, Benign Actors vs Targeted Worms  |
+| **99** | [AbuseIPDB IP Reputation & Malicious Scoring](#99-abuseipdb) | Malicious Confidence Percentage, Abuse Categories & Reports  |
+| **100** | [AlienVault Open Threat Exchange (OTX)](#100-alienvault-open-threat-exchange-otx) | Threat Pulses, Community Indicators & API Integration  |
+| **101** | [Intelligence X Search Engine & Archive](#101-intelligence-x) | Darknet Portals, Paste Dumps, Historical IP & Document Index  |
+| **102** | [OSINT Automation Frameworks & Pipelines](#102-osint-automation-frameworks) | Autonomous Harvesters (SpiderFoot, theHarvester, sn0int)  |
+| **103** | [The 8-Stage OSINT Investigation Lifecycle](#103-the-8-stage-osint-investigation-lifecycle) | Requirement ➔ Collection ➔ Pivoting ➔ Correlation ➔ Report  |
+| **104** | [End-to-End Enterprise Security Case Study](#104-end-to-end-enterprise-security-case-study) | Real-World Investigation Walkthrough on `example.com`  |
+| **105** | [The OSINT Pivot Mindset & Cross-Domain Hopping](#105-the-osint-pivot-mindset) | Mastering Email, Domain & Media Cross-Domain Jumps  |
+| **106** | [Tiered OSINT Toolkit Recommendations](#106-tiered-osint-toolkit-recommendations) | Tier 1 (Foundations) to Tier 6 (Advanced Enterprise CTI)  |
+| **107** | [The Unified OSINT Tool & Relationship Map](#107-the-unified-osint-tool--relationship-map) | Comprehensive Categorical Architecture Diagram & The Top 10  |
 
 ---
 

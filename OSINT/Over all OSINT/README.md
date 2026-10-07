@@ -90,20 +90,20 @@ The operational playbook includes detailed, frame-by-frame animated command-line
 | **14** | **Certificate Transparency** | crt.sh, CertSpotter, Wildcard SANs, Internal Staging Trails | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#14-certificate-transparency) |
 | **15** | **Website Tech Profiling** | Wappalyzer, BuiltWith, WhatRuns, SecurityHeaders, WhatCMS | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#15-website-technology-osint) |
 | **16** | **URL Analysis & Sandboxes** | urlscan.io, VirusTotal, Google Safe Browsing, Hybrid Analysis | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#16-url-analysis) |
-| **17** | **Malware CTI Platforms** | Abuse.ch, ThreatFox, MalwareBazaar, URLhaus, AlienVault OTX | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#17-malware--threat-intelligence-osint) |
+| **17** | **Malware CTI Platforms** | Abuse.ch, ThreatFox, MalwareBazaar, URLhaus, AlienVault OTX | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#17-malware--cyber-threat-intelligence-osint) |
 | **18** | **Cryptographic Hash OSINT** | MD5, SHA1, SHA256 Search, PE Headers, Outbound C2 Forensics | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#18-hash-osint) |
-| **19** | **SOCMINT & Social Media** | Multi-Platform Monitoring, X/Twitter, Social Searcher, Botometer | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#19-social-media-osint) |
+| **19** | **SOCMINT & Social Media** | Multi-Platform Monitoring, X/Twitter, Social Searcher, Botometer | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#19-social-media-intelligence-socmint) |
 | **20** | **Code Repositories & Secrets** | GitHub Dorks, GitLeaks, TruffleHog, Commit History Mining | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#22-github-osint) |
-| **21** | **Breach & Dark Web Intel** | Have I Been Pwned, DeHashed, Hudson Rock, Tor (.onion), Ransomwatch | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#25-breach--credential-exposure-osint) |
-| **22** | **Cryptocurrency Forensics** | Bitcoin UTXO, Ethereum Accounts, Mempool, Etherscan, Arkham | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#27-cryptocurrency-osint) |
-| **23** | **Corporate & Legal OSINT** | OpenCorporates, SEC EDGAR 10-K, Companies House, ImportYeti | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#28-company--business-osint) |
+| **21** | **Breach & Dark Web Intel** | Have I Been Pwned, DeHashed, Hudson Rock, Tor (.onion), Ransomwatch | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#25-breach--credential-exposure-intelligence) |
+| **22** | **Cryptocurrency Forensics** | Bitcoin UTXO, Ethereum Accounts, Mempool, Etherscan, Arkham | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#27-cryptocurrency--blockchain-forensics) |
+| **23** | **Corporate & Legal OSINT** | OpenCorporates, SEC EDGAR 10-K, Companies House, ImportYeti | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#28-corporate--business-entity-osint) |
 | **24** | **Image Forensics & EXIF** | ExifTool, FotoForensics (ELA), Forensically, Aperi'Solve | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#32-exif--metadata) |
 | **25** | **GEOINT & Satellite** | Google Earth Pro, SunCalc Chronolocation, Sentinel Hub, Overpass Turbo | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#33-image-geolocation) |
 | **26** | **Transportation OSINT** | FlightRadar24, ADS-B Exchange, MarineTraffic AIS, VesselFinder | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#38-flight-osint) |
 | **27** | **Digital Archives** | Wayback Machine CDX API, Archive.today, Common Crawl WARC | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#41-historical-web--archives) |
 | **28** | **Visual Link Analysis** | Maltego Transforms, Gephi Modularity, Neo4j Graph Models | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#49-maltego) |
 | **29** | **Threat Intel & Standards** | MITRE ATT&CK, MISP, STIX 2.1 / TAXII 2.1, CISA KEV Catalog | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#56-threat-actor-osint) |
-| **30** | **Automation & Reporting** | SpiderFoot, Recon-ng, theHarvester, FinalRecon, Executive Dossier | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#102-osint-automation) |
+| **30** | **Automation & Reporting** | SpiderFoot, Recon-ng, theHarvester, FinalRecon, Executive Dossier | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#102-osint-automation-frameworks) |
 
 ---
 

@@ -15,19 +15,19 @@
 ---
 
 ## 📑 Table of Contents
-1. [Executive Summary & Quick Triage Card](#-executive-summary--quick-triage-card)
-2. [SOC Triage & Escalation Workflow Architecture](#-soc-triage--escalation-workflow-architecture)
-3. [Live Case Management Demonstration (Animated GIF)](#-live-case-management-demonstration)
-4. [Lab Environment & Analyst Credentials](#-lab-environment--analyst-credentials)
-5. [Investigation Deep Dive: Step-by-Step Walkthrough](#-investigation-deep-dive-step-by-step-walkthrough)
+1. [Executive Summary & Quick Triage Card](#executive-summary--quick-triage-card)
+2. [SOC Triage & Escalation Workflow Architecture](#soc-triage--escalation-workflow-architecture)
+3. [Live Case Management Demonstration (Animated GIF)](#live-case-management-demonstration)
+4. [Lab Environment & Analyst Credentials](#lab-environment--analyst-credentials)
+5. [Investigation Deep Dive: Step-by-Step Walkthrough](#investigation-deep-dive-step-by-step-walkthrough)
    * [Phase 1: Wazuh SIEM Telemetry & MITRE ATT&CK Triage](#phase-1-wazuh-siem-telemetry--mitre-attck-triage)
    * [Phase 2: Log Drill-Down & False Positive Validation](#phase-2-log-drill-down--false-positive-validation)
    * [Phase 3: TheHive Case Creation & Incident Classification](#phase-3-thehive-case-creation--incident-classification)
    * [Phase 4: Observable Registration & Telemetry Binding](#phase-4-observable-registration--telemetry-binding)
    * [Phase 5: Mandatory Task Assignment & SOC L2 Escalation](#phase-5-mandatory-task-assignment--soc-l2-escalation)
-6. [Complete Step-by-Step Official Screenshot Archive](#-complete-step-by-step-official-screenshot-archive)
-7. [SOC Engineering: TLP, PAP & Detection Tuning](#-soc-engineering-tlp-pap--detection-tuning)
-8. [Conclusion & Key Takeaways](#-conclusion--key-takeaways)
+6. [Complete Step-by-Step Official Screenshot Archive](#complete-step-by-step-official-screenshot-archive)
+7. [SOC Engineering: TLP, PAP & Detection Tuning](#soc-engineering-tlp-pap--detection-tuning)
+8. [Conclusion & Key Takeaways](#conclusion--key-takeaways)
 
 ---
 

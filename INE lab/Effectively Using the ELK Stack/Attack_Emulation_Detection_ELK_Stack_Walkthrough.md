@@ -21,7 +21,7 @@
 1. [Lab Overview](#1-lab-overview)
 2. [HELK Architecture Deep Dive](#2-helk-architecture-deep-dive)
 3. [Environment Setup](#3-environment-setup)
-4. [Task 1–4: Infrastructure Verification & Configuration](#4-tasks-1-4-infrastructure-verification--configuration)
+4. [Task 1-4: Infrastructure Verification & Configuration](#4-tasks-1-4-infrastructure-verification--configuration)
 5. [Task 5: Attack Emulation — Three ATT&CK Techniques](#5-task-5-attack-emulation--three-attck-techniques)
 6. [Task 6: Detection in Kibana Dashboard](#6-task-6-detection-in-kibana-dashboard)
 7. [MITRE ATT&CK Analysis](#7-mitre-attck-analysis)
@@ -144,7 +144,7 @@ The HELK platform diagram shows the complete pipeline from Windows log generatio
 
 ---
 
-## 4. Tasks 1–4: Infrastructure Verification & Configuration
+## 4. Tasks 1-4: Infrastructure Verification & Configuration
 
 ### Task 1 & 2: Verify Lab Environment
 

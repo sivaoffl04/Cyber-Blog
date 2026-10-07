@@ -14,11 +14,11 @@
 ---
 
 ## 📑 Table of Contents
-1. [Executive Summary & Quick Answer Matrix](#-executive-summary--quick-answer-matrix)
-2. [Zeek Architecture & Forensic Pipeline](#-zeek-architecture--forensic-pipeline)
-3. [Live Terminal Demonstration (Animated GIF)](#-live-terminal-demonstration)
-4. [Lab Environment & Architecture](#-lab-environment--architecture)
-5. [Malware 1 Investigation: Bumblebee & Cobalt Strike](#-malware-1-investigation-bumblebee--cobalt-strike)
+1. [Executive Summary & Quick Answer Matrix](#executive-summary--quick-answer-matrix)
+2. [Zeek Architecture & Forensic Pipeline](#zeek-architecture--forensic-pipeline)
+3. [Live Terminal Demonstration (Animated GIF)](#live-terminal-demonstration)
+4. [Lab Environment & Architecture](#lab-environment--architecture)
+5. [Malware 1 Investigation: Bumblebee & Cobalt Strike](#malware-1-investigation-bumblebee--cobalt-strike)
    * [Task 1: Splitting PCAP into Zeek Logs (Q1)](#q1-what-is-the-zeek-command-to-split-the-pcap-file-into-brozeek-logs)
    * [Task 2: Generating JSON Formatted Logs (Q2)](#q2-what-is-the-zeek-command-to-output-logs-in-json-format-of-the-pcap-file)
    * [Task 3: Processing http.log with jq (Q3)](#q3-what-is-the-command-to-process-httplog-file-with-jq-to-output-json-formatted-data)
@@ -28,16 +28,16 @@
    * [Task 7: User-Agent Fingerprinting (Q7)](#q7-what-is-the-user-agent-string-transmitted-by-the-application-to-web-servers)
    * [Task 8: Cobalt Strike C2 DNS & IP Attribution (Q8)](#q8-what-is-the-dns-and-ip-of-the-infected-traffic-of-the-cobalt-strike)
    * [Task 9: Bumblebee C2 IP Identification (Q9)](#q9-what-is-the-ip-of-the-infected-traffic-of-the-bumblebee-c2)
-6. [Malware 2 Investigation: Emotet Phishing Campaign](#-malware-2-investigation-emotet-phishing-campaign)
+6. [Malware 2 Investigation: Emotet Phishing Campaign](#malware-2-investigation-emotet-phishing-campaign)
    * [Task 10: Client MAC Address Extraction (Q10)](#q10-what-is-the-mac-address-of-the-windows-client-at-172171129)
    * [Task 11: Client Hostname Discovery (Q11)](#q11-what-is-the-hostname-for-the-windows-client-at-172171129)
    * [Task 12: Kerberos User Account Identification (Q12)](#q12-based-on-the-kerberos-traffic-what-is-the-windows-user-account-name-used)
    * [Task 13: Identifying Malicious Word Document URL (Q13)](#q13-what-url-in-the-pcap-returned-a-microsoft-word-document)
    * [Task 14: Executable Payload URL & Byte Size (Q14)](#q14-what-url-in-the-pcap-returned-a-windows-executable-file-and-how-many-bytes-is-the-executable-file-returned-from-that-url)
    * [Task 15: Campaign Attribution (Q15)](#q15-what-type-of-infection-occurred-in-this-pcap)
-7. [Complete Step-by-Step Screenshot Archive (22 Images)](#-complete-step-by-step-screenshot-archive)
-8. [Defensive Engineering & Detection Rules](#-defensive-engineering--detection-rules)
-9. [Conclusion & Key Takeaways](#-conclusion--key-takeaways)
+7. [Complete Step-by-Step Screenshot Archive (22 Images)](#complete-step-by-step-screenshot-archive)
+8. [Defensive Engineering & Detection Rules](#defensive-engineering--detection-rules)
+9. [Conclusion & Key Takeaways](#conclusion--key-takeaways)
 
 ---
 

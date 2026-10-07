@@ -16,11 +16,11 @@
 ---
 
 ## 📑 Table of Contents
-1. [Executive Summary & Quick Triage Card](#-executive-summary--quick-triage-card)
-2. [Attack Kill Chain & SOC Triage Architecture](#-attack-kill-chain--soc-triage-architecture)
-3. [Live Incident Triage Demonstration (Animated GIF)](#-live-incident-triage-demonstration)
-4. [Lab Environment & Analyst Credentials](#-lab-environment--analyst-credentials)
-5. [Investigation Deep Dive: Step-by-Step Walkthrough](#-investigation-deep-dive-step-by-step-walkthrough)
+1. [Executive Summary & Quick Triage Card](#executive-summary--quick-triage-card)
+2. [Attack Kill Chain & SOC Triage Architecture](#attack-kill-chain--soc-triage-architecture)
+3. [Live Incident Triage Demonstration (Animated GIF)](#live-incident-triage-demonstration)
+4. [Lab Environment & Analyst Credentials](#lab-environment--analyst-credentials)
+5. [Investigation Deep Dive: Step-by-Step Walkthrough](#investigation-deep-dive-step-by-step-walkthrough)
    * [Phase 1: Wazuh SIEM Telemetry & Endpoint Identification](#phase-1-wazuh-siem-telemetry--endpoint-identification)
    * [Phase 2: MITRE ATT&CK Matrix Correlation (24th Dec 2025)](#phase-2-mitre-attck-matrix-correlation-24th-dec-2025)
    * [Phase 3: Deep Log Forensic Analysis & Kill Chain Reconstruction](#phase-3-deep-log-forensic-analysis--kill-chain-reconstruction)
@@ -29,9 +29,9 @@
    * [Phase 6: SOC Action Item & Mandatory Task Creation](#phase-6-soc-action-item--mandatory-task-creation)
    * [Phase 7: MITRE ATT&CK TTP Association](#phase-7-mitre-attck-ttp-association)
    * [Phase 8: Tier 2 Reassignment & Formal Escalation](#phase-8-tier-2-reassignment--formal-escalation)
-6. [Complete Step-by-Step Official Screenshot Archive (35 Images)](#-complete-step-by-step-official-screenshot-archive)
-7. [Threat Hunting, Incident Response & Containment Playbook](#-threat-hunting-incident-response--containment-playbook)
-8. [Conclusion & Key Takeaways](#-conclusion--key-takeaways)
+6. [Complete Step-by-Step Official Screenshot Archive (35 Images)](#complete-step-by-step-official-screenshot-archive)
+7. [Threat Hunting, Incident Response & Containment Playbook](#threat-hunting-incident-response--containment-playbook)
+8. [Conclusion & Key Takeaways](#conclusion--key-takeaways)
 
 ---
 

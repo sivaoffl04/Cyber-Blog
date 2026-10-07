@@ -19,13 +19,13 @@
 ---
 
 ## 📑 Table of Contents
-1. [Lab Overview & Objectives](#-lab-overview--objectives)
-2. [Executive Summary & Quick Reference Matrix](#-executive-summary--quick-reference-matrix)
-3. [Architecture & Detection Pipeline](#-architecture--detection-pipeline)
-4. [Constant Database (CDB) List Engine Explained](#-constant-database-cdb-list-engine-explained)
-5. [Live Terminal & SIEM Demonstration (Animated GIF)](#-live-terminal--siem-demonstration)
-6. [Lab Environment & Network Topology](#-lab-environment--network-topology)
-7. [Step-by-Step Hands-on Walkthrough](#-step-by-step-hands-on-walkthrough)
+1. [Lab Overview & Objectives](#lab-overview--objectives)
+2. [Executive Summary & Quick Reference Matrix](#executive-summary--quick-reference-matrix)
+3. [Architecture & Detection Pipeline](#architecture--detection-pipeline)
+4. [Constant Database (CDB) List Engine Explained](#constant-database-cdb-list-engine-explained)
+5. [Live Terminal & SIEM Demonstration (Animated GIF)](#live-terminal--siem-demonstration)
+6. [Lab Environment & Network Topology](#lab-environment--network-topology)
+7. [Step-by-Step Hands-on Walkthrough](#step-by-step-hands-on-walkthrough)
    * [Task 1: Deploying the Wazuh Agent on Windows](#task-1-deploying-the-wazuh-agent-on-windows)
      * [Step 1: Accessing the Lab Environment](#step-1-accessing-the-lab-environment)
      * [Step 2: Accessing Wazuh Dashboard & Checking Manager IP](#step-2-accessing-wazuh-dashboard--checking-manager-ip)
@@ -47,11 +47,11 @@
      * [Step 14: Staging HTTP Web Delivery & Netcat Listener](#step-14-staging-http-web-delivery--netcat-listener)
      * [Step 15: Executing Download Cradle on Windows Target](#step-15-executing-download-cradle-on-windows-target)
      * [Step 16: Triage Alert 2 — PowerShell Port 1234 Connection Detected](#step-16-triage-alert-2--powershell-port-1234-connection-detected)
-8. [MITRE ATT&CK Mapping Matrix](#-mitre-attck-mapping-matrix)
-9. [Defensive Engineering & Detection Rules (Wazuh & Sigma)](#-defensive-engineering--detection-rules)
-10. [SOC Analyst Triage & Incident Response Playbook](#-soc-analyst-triage--incident-response-playbook)
-11. [Complete Screenshot Gallery (Steps 1–16)](#-complete-screenshot-gallery)
-12. [Conclusion & References](#-conclusion--references)
+8. [MITRE ATT&CK Mapping Matrix](#mitre-attck-mapping-matrix)
+9. [Defensive Engineering & Detection Rules (Wazuh & Sigma)](#defensive-engineering--detection-rules)
+10. [SOC Analyst Triage & Incident Response Playbook](#soc-analyst-triage--incident-response-playbook)
+11. [Complete Screenshot Gallery (Steps 1–16)](#complete-screenshot-gallery)
+12. [Conclusion & References](#conclusion--references)
 
 ---
 

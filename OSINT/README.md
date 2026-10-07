@@ -1,33 +1,85 @@
+<div align="center">
+
+![Open Source Intelligence and Threat Reconnaissance Banner](./Over%20all%20OSINT/images/osint_masterclass_banner.jpg)
+
 # 🔎 Open Source Intelligence (OSINT) & Threat Reconnaissance
+### Enterprise Investigation Framework • Digital Footprinting • Attack Surface Mapping • SOCMINT • GEOINT • CTI
 
-Welcome to the **OSINT & Threat Reconnaissance Knowledge Base**. This section contains in-depth, production-ready masterclasses on open source intelligence, attack surface mapping, identity profiling, geospatial intelligence, blockchain tracking, and cyber threat intelligence (CTI).
+[![Framework](https://img.shields.io/badge/Architecture-Enterprise%20OSINT%20Framework-00e5ff?style=for-the-badge&logo=target)](https://osintframework.com/)
+[![Standard](https://img.shields.io/badge/Standard-NIST%20SP%20800--61%20%7C%20DoD-blue?style=for-the-badge&logo=shield)](https://csrc.nist.gov/)
+[![Playbook](https://img.shields.io/badge/Playbook-107%20Investigation%20Domains-success?style=for-the-badge&logo=git)](./Over%20all%20OSINT/OSINT_Complete_Framework_and_Investigation_Guide.md)
+
+**A production-grade operational knowledge base covering all 107 specialized disciplines and tool suites of Open Source Intelligence (OSINT) and Cyber Threat Reconnaissance.**
+
+</div>
 
 ---
 
-## 📑 OSINT Masterclasses & Modules
+## 📖 Operational Guide Navigation
 
-| Module / Guide | Category | Primary Focus & Capabilities | Status | Direct Link |
-| :--- | :---: | :--- | :---: | :---: |
-| **🔎 Open Source Intelligence (OSINT) & Threat Reconnaissance** | **Enterprise Framework** | Comprehensive 20-Domain Field Manual: Search Engines, Advanced Dorking, Identity, Telecom, Domains, DNS, Subdomains, Shodan, Censys, SOCMINT, GitLeaks, Breach DBs, Tor, Crypto UTXO, Corporate Registries, GEOINT, EXIF, Video Forensics, CTI (MISP/STIX), Maltego, and Reporting | 🟢 **Complete** | [Explore Framework](./Over%20all%20OSINT/README.md) |
+👉 **[Launch Complete 107-Section Field Operations Manual: `OSINT_Complete_Framework_and_Investigation_Guide.md`](./Over%20all%20OSINT/OSINT_Complete_Framework_and_Investigation_Guide.md)**  
+👉 **[View Master Tool & Domain Quick Index: `Over all OSINT/README.md`](./Over%20all%20OSINT/README.md)**
 
 ---
 
-## 🗺️ Investigation Lifecycle Architecture
+## 🗺️ Investigation Lifecycle & Pivot Architecture
 
-```mermaid
-flowchart LR
-    P["🎯 1. Planning & OPSEC"] 
-    --> C["📥 2. Harvesting Signals"] 
-    --> PV["🔄 3. Multi-Hop Pivots"] 
-    --> A["🧠 4. Correlation & Graph"] 
-    --> D["📑 5. Actionable Intelligence"]
+<div align="center">
 
-    style P fill:#0f172a,stroke:#00e5ff,stroke-width:2px,color:#fff
-    style C fill:#0f172a,stroke:#ffab00,stroke-width:2px,color:#fff
-    style PV fill:#0f172a,stroke:#00e676,stroke-width:2px,color:#fff
-    style A fill:#0f172a,stroke:#b388ff,stroke-width:2px,color:#fff
-    style D fill:#0f172a,stroke:#ff5252,stroke-width:2px,color:#fff
-```
+![OSINT Lifecycle and Pivot Architecture](./Over%20all%20OSINT/images/osint_investigation_lifecycle_pipeline.jpg)
+
+*High-Resolution Operational Execution Flow: 5-Stage Investigation Lifecycle & Cross-Domain Entity Pivot Nexus.*
+
+</div>
+
+---
+
+## ⚡ Terminal Workflow Simulation
+
+<div align="center">
+
+![OSINT Live Investigation Terminal Demo](./Over%20all%20OSINT/images/osint_recon_live_demo.gif)
+
+*Live end-to-end command-line simulation demonstrating multi-hop reconnaissance and threat attribution.*
+
+</div>
+
+---
+
+## 🎬 Interactive Tool Demonstrations & Animated CLI Walkthroughs
+
+The operational playbook includes detailed, frame-by-frame animated command-line executions and analytical walkthroughs for every primary OSINT discipline:
+
+| Demonstration | Target Discipline | Core Toolchain & Commands | Key Operational Capabilities |
+| :--- | :--- | :--- | :--- |
+| **[Username Recon Demo](./Over%20all%20OSINT/images/sherlock_username_recon_demo.gif)** | Section 04: Username Intelligence | `sherlock shadow_operative --timeout 15 --print-found --csv` | Scans 400+ platforms, detects active developer/gaming handles, exports CSV telemetry. |
+| **[Email Intel Demo](./Over%20all%20OSINT/images/holehe_email_investigation_demo.gif)** | Section 05: Email Intelligence | `holehe target.dev@domain.com --only-used` | Zero-alert password-reset probing, recovers Google Gaia ID, unmasks phone numbers. |
+| **[Subdomain Pipeline Demo](./Over%20all%20OSINT/images/subdomain_recon_pipeline_demo.gif)** | Section 10: Subdomain Reconnaissance | `subfinder -d target.com -silent \| httpx -title -tech-detect` | Combines 40+ passive feeds with active HTTP probes to unmask dev portals and Grafana metrics. |
+| **[Shodan CLI Demo](./Over%20all%20OSINT/images/shodan_device_recon_demo.gif)** | Section 12: Device & Infrastructure | `shodan search 'org:"Target"' \| shodan host <ip>` | Indexes IPv4 banners, identifies unpatched perimeter CVEs (Pulse Secure, Ivanti CVSS 10.0). |
+| **[ExifTool Forensics Demo](./Over%20all%20OSINT/images/exiftool_metadata_analysis_demo.gif)** | Section 32: Media & Metadata | `exiftool -GPS* -Make -Model target.jpg \| suncalc` | Extracts camera hardware, coordinates, reverse-geocodes address, validates solar shadows. |
+| **[theHarvester Demo](./Over%20all%20OSINT/images/theharvester_recon_demo.gif)** | Section 52: Multi-Source Scraping | `theHarvester -d target.com -b all -l 500` | Aggregates employee emails, subdomains, and IP netblocks across search engines and threat feeds. |
+
+---
+
+## 🗺️ Cross-Pillar Pivot Blueprint & Methodological Framework
+
+<div align="center">
+
+![OSINT Cross-Pillar Pivot Matrix](./Over%20all%20OSINT/images/osint_pivot_matrix_infographic.jpg)
+
+*Systematic lateral pivot matrix: Converting isolated indicators into comprehensive intelligence dossiers.*
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Geospatial Intelligence Methodology](./Over%20all%20OSINT/images/geospatial_intelligence_methodology.jpg)
+
+*Scientific 4-quadrant GEOINT framework: Solar chronolocation, infrastructure markers, and multispectral satellites.*
+
+</div>
 
 ---
 
@@ -46,4 +98,8 @@ flowchart LR
 
 ---
 
-👉 **[Explore the Complete OSINT Operational Framework & Playbook](./Over%20all%20OSINT/README.md)**
+<div align="center">
+
+👉 **[Explore the Complete 107-Section OSINT Operations Manual & Playbook](./Over%20all%20OSINT/OSINT_Complete_Framework_and_Investigation_Guide.md)**
+
+</div>

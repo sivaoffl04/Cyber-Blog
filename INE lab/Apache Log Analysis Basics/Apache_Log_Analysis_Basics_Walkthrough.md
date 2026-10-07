@@ -11,12 +11,12 @@
 ---
 
 ## 📑 Table of Contents
-1. [Executive Summary & Quick Answer Card](#-executive-summary--quick-answer-card)
-2. [Forensic Architecture & Parsing Pipeline](#-forensic-architecture--parsing-pipeline)
-3. [Attacker Profile & Threat Attribution: IP 91.141.1.150](#-attacker-profile--threat-attribution-ip-911411150)
-4. [Live Terminal Demonstration (Animated GIF)](#-live-terminal-demonstration)
-5. [Apache Access Log Anatomy & Delimiter Mechanics](#-apache-access-log-anatomy--delimiter-mechanics)
-6. [Step-by-Step Question Deep Dive & One-Liners](#-step-by-step-question-deep-dive--one-liners)
+1. [Executive Summary & Quick Answer Card](#executive-summary--quick-answer-card)
+2. [Forensic Architecture & Parsing Pipeline](#forensic-architecture--parsing-pipeline)
+3. [Attacker Profile & Threat Attribution: IP 91.141.1.150](#attacker-profile--threat-attribution-ip-911411150)
+4. [Live Terminal Demonstration (Animated GIF)](#live-terminal-demonstration)
+5. [Apache Access Log Anatomy & Delimiter Mechanics](#apache-access-log-anatomy--delimiter-mechanics)
+6. [Step-by-Step Question Deep Dive & One-Liners](#step-by-step-question-deep-dive--one-liners)
    * [Question 1: Total Record Count](#question-1-total-number-of-logs)
    * [Question 2: Top 5 Client IP Addresses](#question-2-top-5-client-ips-by-requests)
    * [Question 3: Top 5 User-Agent Strings](#question-3-top-5-user-agents)
@@ -24,9 +24,9 @@
    * [Question 5: Top 5 Requested URLs (Visits Only)](#question-5-top-5-requested-urls-visits-only)
    * [Question 6: Non-200 OK Response Status Requests](#question-6-non-200-ok-response-status-requests)
    * [Question 7: Drill-Down on Top Attacker IP 91.141.1.150](#question-7-drill-down-on-top-attacker-ip-911411150)
-7. [Official Lab Walkthrough PDF Screenshots](#-official-lab-walkthrough-pdf-screenshots)
-8. [Defensive Engineering & Detection Rules (Sigma & Fail2ban)](#-defensive-engineering--detection-rules)
-9. [Conclusion & Key Takeaways](#-conclusion--key-takeaways)
+7. [Official Lab Walkthrough PDF Screenshots](#official-lab-walkthrough-pdf-screenshots)
+8. [Defensive Engineering & Detection Rules (Sigma & Fail2ban)](#defensive-engineering--detection-rules)
+9. [Conclusion & Key Takeaways](#conclusion--key-takeaways)
 
 ---
 

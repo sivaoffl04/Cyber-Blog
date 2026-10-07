@@ -1345,7 +1345,7 @@ hashcat -m 0 hash.txt --show                    # Display cracked plaintext cred
 
 ---
 
-# 58. Hashcat A–Z Learning Roadmap
+# 58. Hashcat A-Z Learning Roadmap
 
 ```text
 Level 1: Fundamentals (Hashing vs Encryption, Salts, Entropy, Modes -m and -a)
