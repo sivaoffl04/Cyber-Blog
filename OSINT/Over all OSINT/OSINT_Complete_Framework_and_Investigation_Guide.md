@@ -14,7 +14,15 @@
   <b>A comprehensive, production-grade technical manual for Cyber Threat Intelligence (CTI) analysts, SOC investigators, penetration testers, purple team operators, and digital forensic researchers.</b>
 </p>
 
-[🏛️ Investigation Lifecycle](#investigation-lifecycle--pivot-architecture) • [⚡ Terminal Simulation](#terminal-workflow-demonstration) • [📋 107-Section Directory](#107-section-investigation-directory)
+[🏛️ Investigation Lifecycle](#investigation-lifecycle--pivot-architecture) • [⚡ Investigation Pipeline](#operational-reconnaissance-pipeline-demonstration) • [📋 107-Section Directory](#107-section-investigation-directory)
+
+<div align="center">
+
+[🧭 Module 1: Framework & OPSEC](#module-1-operational-frameworks-methodology-and-opsec) • [👤 Module 2: Identity & SOCMINT](#module-2-identity-social-media-and-alias-profiling) • [🌐 Module 3: Attack Surface](#module-3-domain-network-and-attack-surface-reconnaissance)
+
+[🛡️ Module 4: CTI & Dark Web](#module-4-cyber-threat-intelligence-dark-web-and-crypto) • [🏢 Module 5: Corporate & Legal](#module-5-corporate-records-legal-and-public-data) • [🛰️ Module 6: GEOINT & Operations](#module-6-geospatial-intelligence-media-forensics-and-global-operations)
+
+</div>
 
 </div>
 
@@ -77,11 +85,17 @@ flowchart LR
 
 ---
 
-## ⚡ Terminal Workflow Demonstration
+## ⚡ Operational Reconnaissance Pipeline Demonstration
 
-The terminal demonstration below simulates an end-to-end authorized threat reconnaissance engagement—progressing through environment isolation, passive subdomain harvesting, certificate transparency queries, Shodan port correlation, developer secret recovery via GitLeaks, EXIF chronolocation, breach correlation, and final intelligence dossier generation:
+The interactive investigation dashboard below simulates an end-to-end authorized threat reconnaissance engagement—progressing through environment isolation, passive subdomain harvesting, certificate transparency queries, Shodan port correlation, developer secret recovery via GitLeaks, EXIF chronolocation, breach correlation, and final intelligence dossier generation:
 
-![OSINT Live Investigation Terminal Demo](./images/osint_recon_live_demo.gif)
+<div align="center">
+
+![OSINT Multi-Stage Investigation Pipeline Demo](./images/osint_recon_live_demo.gif)
+
+*Figure 1.2: Modern SaaS Multi-Stage Reconnaissance Pipeline — Cycling dynamically through all 5 phases from alias discovery to executive threat dossier.*
+
+</div>
 
 ---
 
@@ -201,6 +215,12 @@ The terminal demonstration below simulates an end-to-end authorized threat recon
 
 ---
 
+---
+
+## Module 1: Operational Frameworks, Methodology and OPSEC
+
+> **Core Focus:** Establishing intelligence requirements (PIRs), non-attributable sock puppet infrastructure, and foundational search indexing mechanics.
+
 ## 1. OSINT Frameworks & Master Toolkits
 
 Open Source Intelligence (OSINT) practitioners do not reinvent the wheel for every investigation. Master toolkits and curated frameworks provide structured taxonomies that organize tools around specific intelligence requirements, target pivot points, and legal methodologies.
@@ -314,6 +334,21 @@ Google Dorking (also known as **Google Hacking**) utilizes advanced search engin
 
 ### 3.2 High-Impact Cybersecurity Dorking Examples:
 
+<div align="center">
+
+![Google Dorking & GHDB Live Workflow Demo](./images/ghdb_dorking_workflow_demo.gif)
+
+*Figure 3.1: Automated syntax parsing and sensitive configuration file discovery using Google Hacking Database (GHDB) operators.*
+
+</div>
+
+#### Step-by-Step Analytical Breakdown:
+1. **Target Ingestion & Category Selection:** The query restricts scope strictly to the target apex domain (`site:apex-defense.com`) while isolating administrative paths (`-www`).
+2. **Operator Combination:** Pairs `filetype:env` with sensitive strings (`"DB_PASSWORD"`, `"AWS_KEY"`) to isolate configuration dotfiles inadvertently crawled by search spiders.
+3. **SERP Parsing & Credential Exposure:** Inspects indexed title and snippet metadata to recover database connection strings, Stripe API keys, and internal IP addresses.
+4. **Historical Cache Audit:** Leverages `cache:` operators and Wayback Machine CDX endpoints to determine historical exposure duration.
+5. **Mitigation Pivot:** Immediate revocation of exposed secrets and submission of Google Search Console URL removal requests.
+
 ```text
 # 1. Directory Listings & Exposed Server Roots (Finding Open Directories)
 site:example.com intitle:"index of /" OR intitle:"index of /admin"
@@ -349,6 +384,12 @@ site:storage.googleapis.com "example.com"
 * **DorkGPT:** LLM-powered natural language prompt generator converting plain English queries into syntax-validated Google dork strings.
 
 ---
+
+---
+
+## Module 2: Identity, Social Media and Alias Profiling
+
+> **Core Focus:** Cross-platform username resolution, email service binding, phone number telemetry, and social media entity archaeology.
 
 ## 4. Username OSINT
 
@@ -403,6 +444,21 @@ sherlock user1 user2 user3 --folderoutput ./sherlock_results/
 
 #### 2. Maigret
 Advanced fork of Sherlock that extracts user profile metadata (real names, bio, avatars, locations) and parses web pages for secondary links:
+
+<div align="center">
+
+![Maigret Deep Social Media Recon Demo](./images/maigret_deep_social_recon_demo.gif)
+
+*Figure 4.2: Recursive social profile scraping, bio tokenization, and avatar perceptual hash clustering utilizing Maigret.*
+
+</div>
+
+#### Step-by-Step Analytical Breakdown:
+1. **Target Handle Ingestion:** Loads the identified handle (`shadow_operative`) and activates deep recursive parsing across 3,000+ social and developer sites.
+2. **Real Name & Bio Unmasking:** Extracts employee real names (`S. Vance`), corporate locations (`Reston, VA`), and career specialties from developer bios.
+3. **Secondary Alias Recovery:** Parses external links in bios to recover secondary handles (`@svance_dev`) and personal portfolio domains.
+4. **Avatar pHash Clustering:** Computes perceptual image hashes to mathematically prove that identical avatars are shared across disparate accounts.
+5. **Infrastructure Pivot:** Pivots discovered domains and secondary handles into WHOIS and DNS history databases.
 
 ```bash
 # Installation via pipx
@@ -597,6 +653,12 @@ phoneinfoga serve -p 8080
 * **ThatsThem / NumLookup:** Reverse phone directories querying public phonebooks and marketing registries.
 
 ---
+
+---
+
+## Module 3: Domain, Network and Attack Surface Reconnaissance
+
+> **Core Focus:** Passive DNS aggregation, Certificate Transparency mining, Internet-wide port scanning (Shodan/Censys), and code leak excavation.
 
 ## 8. Domain OSINT
 
@@ -847,6 +909,21 @@ shodan count "vuln:CVE-2021-44228"
 
 ## 13. Censys
 
+<div align="center">
+
+![Censys Attack Surface & Certificate Recon Demo](./images/censys_certificate_recon_demo.gif)
+
+*Figure 13.1: Global TLS leaf certificate pivoting and origin web server unmasking utilizing Censys Search 2.0.*
+
+</div>
+
+#### Step-by-Step Analytical Breakdown:
+1. **Structured TLS Querying:** Uses `services.tls.certificates.leaf_data.names: apex-defense.com` to match all servers presenting the organization's SSL certificate.
+2. **Origin Server Unmasking:** Distinguishes between Cloudflare/Akamai edge proxies and naked origin IP addresses hosting identical certificates.
+3. **Protocol & Port Audit:** Dissects exposed services on discovered origin hosts, identifying active debuggers (Python Werkzeug on port 8080) and SSH daemons.
+4. **JARM Fingerprint Pivoting:** Extracts cryptographic TLS client/server JARM hashes to locate sibling test servers across the provider's IP netblock.
+5. **Mitigation Blueprint:** Restricts port 8080/443 ingress at the network firewall exclusively to authorized CDN proxy IP ranges.
+
 Censys provides deep attack surface management and internet scanning capabilities. Created by researchers at the University of Michigan, Censys performs continuous protocol dissections across millions of hosts and certificates.
 
 ### 13.1 Key Capabilities:
@@ -912,6 +989,12 @@ Analyzing suspicious URLs without exposing your own infrastructure is critical d
 * **Hybrid Analysis / ANY.RUN:** Interactive malware sandboxes executing suspicious URLs in live virtual machines to record second-stage payload drops.
 
 ---
+
+---
+
+## Module 4: Cyber Threat Intelligence, Dark Web and Crypto
+
+> **Core Focus:** Malware IoC correlation, Tor (.onion) extortion monitoring, cryptocurrency ledger tracing, and MITRE ATT&CK / MISP alignment.
 
 ## 17. Malware & Cyber Threat Intelligence OSINT
 
@@ -1121,6 +1204,21 @@ The Tor (The Onion Router) network hosts hidden services operating on the `.onio
 
 ## 27. Cryptocurrency & Blockchain Forensics
 
+<div align="center">
+
+![Cryptocurrency Blockchain Forensics Demo](./images/blockchain_crypto_tracing_demo.gif)
+
+*Figure 27.1: UTXO transaction ledger tracking, wallet address clustering, and mixer detection utilizing blockchain forensic analytics.*
+
+</div>
+
+#### Step-by-Step Analytical Breakdown:
+1. **Extortion Wallet Ingestion:** Ingests ransomware ransom note Bitcoin address (`bc1q...`) to initialize immutable ledger tracking.
+2. **UTXO Ledger Traversal:** Confirms transaction confirmation blocks, unmasks payment amounts (14.25 BTC), and traces downstream unspent outputs.
+3. **Address Clustering & Peeling Chains:** Applies Common Input Ownership heuristics to identify affiliate wallet clusters and peeling chain fee dissipation.
+4. **Mixer & Bridge Detection:** Flags CoinJoin mixing attempts (Wasabi/Tornado) and cross-chain decentralized swaps into Monero (XMR).
+5. **Exchange Subpoena Vector:** Tracks deposit transactions into centralized KYC exchanges (Binance, OKX) to enable law enforcement asset freezing.
+
 Public blockchains (Bitcoin, Ethereum, Polygon) operate as immutable, decentralized public ledgers. Every transaction, fee, timestamp, sender, and recipient address is permanently recorded and visible to investigators.
 
 ```mermaid
@@ -1145,6 +1243,12 @@ flowchart LR
 * **Breadcrumbs (`breadcrumbs.app`):** Visual graph analytics platform for mapping fund flows and transaction clustering.
 
 ---
+
+---
+
+## Module 5: Corporate Records, Legal and Public Data
+
+> **Core Focus:** Business registry auditing, regulatory filings, SEC EDGAR disclosures, government procurement, and court docket records.
 
 ## 28. Corporate & Business Entity OSINT
 
@@ -1187,6 +1291,10 @@ Court records and litigation proceedings provide verified affidavits, witness de
 * **Indian Kanoon (`indiankanoon.org`):** High-speed search engine indexing Supreme Court, High Court, and tribunal judgments across India.
 
 ---
+
+## Module 6: Geospatial Intelligence, Media Forensics and Global Operations
+
+> **Core Focus:** Image EXIF hardware forensics, SunCalc solar chronolocation, satellite remote sensing, ADS-B / AIS vehicle tracking, and automation frameworks.
 
 ## 31. Image OSINT
 
@@ -1546,6 +1654,21 @@ How a digital persona links directly to enterprise internet infrastructure:
 ---
 
 ## 49. Maltego
+
+<div align="center">
+
+![Maltego Link Analysis & Graph Topology Demo](./images/maltego_link_analysis_demo.gif)
+
+*Figure 49.1: Multi-hop entity expansion and graph centrality clustering from email seed to infrastructure compromise.*
+
+</div>
+
+#### Step-by-Step Analytical Breakdown:
+1. **Seed Entity Ingestion:** Ingests isolated email address into graph canvas with configured threat intelligence transform hubs.
+2. **Level 1 Entity Expansion:** Resolves parent corporate domain, identified operator personas, and historical credential breach exposures.
+3. **Level 2 Infrastructure Resolution:** Connects domains to active subdomains, DNS records, public IPv4 hosts, and open management ports.
+4. **Level 3 Threat & Vulnerability Correlation:** Maps CVE vulnerabilities and compromised GitHub repositories, revealing full attack paths.
+5. **CTI Export & Sharing:** Exports the validated graph topology into STIX 2.1 format for instant ingestion into enterprise MISP clusters.
 
 Maltego is the industry-standard visual link analysis platform for cyber investigations, threat intelligence, and network reconnaissance.
 

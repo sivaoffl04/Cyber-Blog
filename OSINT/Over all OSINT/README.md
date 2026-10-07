@@ -95,7 +95,13 @@
 
 ## ⚡ Operational Reconnaissance Pipeline Simulation
 
-![OSINT Live Investigation Terminal Demo](./images/osint_recon_live_demo.gif)
+<div align="center">
+
+![OSINT Multi-Stage Investigation Pipeline Demo](./images/osint_recon_live_demo.gif)
+
+*Figure 1.2: Modern SaaS Multi-Stage Reconnaissance Pipeline — Cycling dynamically through all 5 phases from alias discovery to executive threat dossier.*
+
+</div>
 
 ---
 
@@ -106,11 +112,16 @@ The operational playbook includes detailed, frame-by-frame animated command-line
 | Demonstration | Target Discipline | Core Toolchain & Commands | Key Operational Capabilities |
 | :--- | :--- | :--- | :--- |
 | **[Username Recon Demo](./images/sherlock_username_recon_demo.gif)** | Section 04: Username Intelligence | `sherlock shadow_operative --timeout 15 --print-found --csv` | Scans 400+ platforms, detects active developer/gaming handles, exports CSV telemetry. |
+| **[Maigret Deep Social Demo](./images/maigret_deep_social_recon_demo.gif)** | Section 04: Social Archaeology | `maigret target_user -a --parse-all --html --json` | Recursive scraping across 3,000+ sites, unmasks real names, bios, and avatar pHash clusters. |
 | **[Email Intel Demo](./images/holehe_email_investigation_demo.gif)** | Section 05: Email Intelligence | `holehe target.dev@domain.com --only-used` | Zero-alert password-reset probing, recovers Google Gaia ID, unmasks phone numbers. |
+| **[GHDB Web Dorking Demo](./images/ghdb_dorking_workflow_demo.gif)** | Section 03: Google Dorking | `site:target.com filetype:env "DB_PASSWORD"` | Advanced search operator chaining, unmasks exposed databases, API keys, and cloud buckets. |
 | **[Subdomain Pipeline Demo](./images/subdomain_recon_pipeline_demo.gif)** | Section 10: Subdomain Reconnaissance | `subfinder -d target.com -silent \| httpx -title -tech-detect` | Combines 40+ passive feeds with active HTTP probes to unmask dev portals and Grafana metrics. |
-| **[Shodan CLI Demo](./images/shodan_device_recon_demo.gif)** | Section 12: Device & Infrastructure | `shodan search 'org:"Target"' \| shodan host <ip>` | Indexes IPv4 banners, identifies unpatched perimeter CVEs (Pulse Secure, Ivanti CVSS 10.0). |
+| **[Shodan Device Demo](./images/shodan_device_recon_demo.gif)** | Section 12: Device & Infrastructure | `shodan search 'org:"Target"' \| shodan host <ip>` | Indexes IPv4 banners, identifies unpatched perimeter CVEs (Pulse Secure, Ivanti CVSS 10.0). |
+| **[Censys Search Demo](./images/censys_certificate_recon_demo.gif)** | Section 13: Attack Surface | `services.tls.certificates.leaf_data.names: target.com` | Unmasks hidden origin web servers bypassing CDN WAFs using TLS SHA-256 and JARM hashes. |
 | **[ExifTool Forensics Demo](./images/exiftool_metadata_analysis_demo.gif)** | Section 32: Media & Metadata | `exiftool -GPS* -Make -Model target.jpg \| suncalc` | Extracts camera hardware, coordinates, reverse-geocodes address, validates solar shadows. |
 | **[theHarvester Demo](./images/theharvester_recon_demo.gif)** | Section 52: Multi-Source Scraping | `theHarvester -d target.com -b all -l 500` | Aggregates employee emails, subdomains, and IP netblocks across search engines and threat feeds. |
+| **[Maltego Graph Demo](./images/maltego_link_analysis_demo.gif)** | Section 49: Visual Link Analysis | Multi-hop transforms across DNS, emails, IPs & CVEs | Maps multi-hop entity graphs, calculates node betweenness centrality, exports to STIX 2.1. |
+| **[Crypto Forensics Demo](./images/blockchain_crypto_tracing_demo.gif)** | Section 27: Cryptocurrency | UTXO ledger tracking & Common Input Clustering | De-anonymizes ransomware extortion wallets, flags peeling chains, and targets KYC off-ramps. |
 
 ---
 
