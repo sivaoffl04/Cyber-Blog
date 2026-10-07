@@ -7,9 +7,9 @@
 
 [![Framework](https://img.shields.io/badge/Architecture-Enterprise%20OSINT%20Framework-00e5ff?style=for-the-badge&logo=target)](https://osintframework.com/)
 [![Standard](https://img.shields.io/badge/Standard-NIST%20SP%20800--61%20%7C%20DoD-blue?style=for-the-badge&logo=shield)](https://csrc.nist.gov/)
-[![Playbook](https://img.shields.io/badge/Playbook-20%20Operational%20Domains-success?style=for-the-badge&logo=git)](./OSINT_Complete_Framework_and_Investigation_Guide.md)
+[![Playbook](https://img.shields.io/badge/Playbook-107%20Investigation%20Domains-success?style=for-the-badge&logo=git)](./OSINT_Complete_Framework_and_Investigation_Guide.md)
 
-**An enterprise-grade operational playbook covering all 20 specialized disciplines of Open Source Intelligence (OSINT) and Cyber Threat Reconnaissance.**
+**An enterprise-grade operational playbook covering all 107 specialized disciplines and tool suites of Open Source Intelligence (OSINT) and Cyber Threat Reconnaissance.**
 
 </div>
 
@@ -17,7 +17,7 @@
 
 ## 📖 Operational Guide Navigation
 
-👉 **[Launch Complete Investigation Guide: `OSINT_Complete_Framework_and_Investigation_Guide.md`](./OSINT_Complete_Framework_and_Investigation_Guide.md)**
+👉 **[Launch Complete 107-Section Field Operations Manual: `OSINT_Complete_Framework_and_Investigation_Guide.md`](./OSINT_Complete_Framework_and_Investigation_Guide.md)**
 
 ---
 
@@ -33,35 +33,45 @@
 
 ---
 
-## 📂 Operational Domains Directory
+## 📂 Primary Investigation Pillars
 
-| Domain | Specialization | Core Capabilities & Toolchain | Direct Link |
+| Pillar | Focus Area | Core Capabilities & Toolchain | Direct Link |
 | :---: | :--- | :--- | :---: |
-| **01** | **Foundations & OPSEC** | DoD Intelligence Cycle, Sock Puppets, Virtual Personas, CFAA/GDPR | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-01-foundations-intelligence-cycle--opsec-tradecraft) |
-| **02** | **Search Engines & Dorking** | Google Dorking, GHDB, Boolean Logic, SearXNG, Mojeek | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-02-search-engines--advanced-google-dorking) |
-| **03** | **People & Identity** | Sherlock, Maigret, WhatsMyName, Blackbird, Username Profiling | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-03-people--identity-intelligence) |
-| **04** | **Email & Headers** | Holehe, Epieos, Hunter, EmailRep, SPF/DKIM/DMARC Routing | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-04-email-intelligence--header-forensics) |
-| **05** | **Phone & Telecom** | PhoneInfoga, NumVerify, Truecaller, E.164 Standards | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-05-phone-number--telecom-reconnaissance) |
-| **06** | **Domain & DNS** | `dig`, `nslookup`, WHOIS/RDAP, DNSDumpster, Zone Transfers | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-06-domain-dns--infrastructure-osint) |
-| **07** | **Subdomain Mapping** | Amass, Subfinder, Assetfinder, Findomain, crt.sh CT Logs | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-07-subdomain-discovery--attack-surface-mapping) |
-| **08** | **Internet Scanners** | Shodan Filters & API, Censys, GreyNoise, ZoomEye, FOFA | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-08-network-scanners--internet-wide-telemetry) |
-| **09** | **Tech Stack Profiling** | Wappalyzer, BuiltWith, urlscan.io, SecurityHeaders | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-09-web-application--technology-profiling) |
-| **10** | **SOCMINT** | X/Twitter, LinkedIn Company Mapping, Telegram (TGStat), Reddit | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-10-social-media-intelligence-socmint) |
-| **11** | **Code & Secret Hunting** | GitLeaks, TruffleHog, GitHub Search Dorks, Secret Detection | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-11-code-repository--secret-exposure-osint) |
-| **12** | **Breach & Dark Web** | HIBP, DeHashed, Hudson Rock, Tor (.onion), Ahmia, Ransomwatch | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-12-breach-intelligence--dark-web-monitoring) |
-| **13** | **Cryptocurrency OSINT** | UTXO Tracing, Mempool, Etherscan, Arkham Intelligence | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-13-cryptocurrency--blockchain-forensics) |
-| **14** | **Business & Legal** | OpenCorporates, SEC EDGAR 10-K, ImportYeti Bill of Lading, PACER | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-14-corporate-business--legal-osint) |
-| **15** | **GEOINT & Satellite** | Google Earth Pro, SunCalc Chronolocation, Overpass Turbo, Sentinel | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-15-geospatial-intelligence-geoint--satellite) |
-| **16** | **Image Forensics** | ExifTool Metadata, FotoForensics (ELA), Google Lens, PimEyes | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-16-image-forensics--reverse-visual-search) |
-| **17** | **Video & Audio** | InVID / WeVerify Keyframes, `yt-dlp`, FFmpeg, Whisper AI | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-17-video--audio-osint-verification) |
-| **18** | **CTI Frameworks** | MISP, STIX 2.1 / TAXII, AlienVault OTX, MITRE ATT&CK, CISA KEV | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-18-threat-intelligence--cti-frameworks) |
-| **19** | **Graph Correlation** | Maltego Transforms, Gephi Modularity, Neo4j Graph Models | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-19-link-analysis--visual-graph-correlation) |
-| **20** | **Automation & Reports** | Recon-ng, FinalRecon, theHarvester, Professional CTI Dossier | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#module-20-automated-frameworks--intelligence-reporting) |
+| **01** | **Frameworks & Toolkits** | OSINT Framework, Bellingcat, OSINT Dojo, IntelTechniques, Trace Labs | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#1-osint-frameworks--master-toolkits) |
+| **02** | **Search Engines & Aggregators** | Google, Bing, Brave, Yandex, SearXNG, Mojeek, Million Short | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#2-search-engines) |
+| **03** | **Google Dorking & GHDB** | Advanced Boolean Operators, GHDB, DorkSearch, Sensitive File Dorks | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#3-google-dorking) |
+| **04** | **Username OSINT** | Sherlock, Maigret, WhatsMyName, Blackbird, Cross-Platform Profiling | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#4-username-osint) |
+| **05** | **Email OSINT** | Holehe, Epieos, Hunter.io, EmailRep, Gravatar, Service Binding | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#5-email-osint) |
+| **06** | **Email Header Forensics** | RFC Headers, Hop Routing, SPF, DKIM, DMARC, X-Originating-IP | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#6-email-header-analysis) |
+| **07** | **Phone Number OSINT** | PhoneInfoga, Truecaller, NumVerify, E.164 Specs, Carrier Metadata | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#7-phone-number-osint) |
+| **08** | **Domain & WHOIS OSINT** | WHOIS, RDAP, SecurityTrails, ViewDNS, DNSDumpster | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#8-domain-osint) |
+| **09** | **DNS OSINT** | Dig, Nslookup, SOA, MX, TXT SPF, DNSViz, Zone Transfers | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#9-dns-osint) |
+| **10** | **Subdomain Enumeration** | OWASP Amass, Subfinder, Assetfinder, Findomain, Chaos | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#10-subdomain-enumeration) |
+| **11** | **IP & ASN Telemetry** | BGPView, Hurricane Electric, IPinfo, AbuseIPDB, RIR Registries | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#11-ip-address-osint) |
+| **12** | **Shodan Internet Scanner** | Banner Mining, Filters, Exposed Daemons, Unpatched CVEs | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#12-shodan) |
+| **13** | **Censys Attack Surface** | Protocol Dissections, TLS Certificate Fingerprints, Asset Tracking | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#13-censys) |
+| **14** | **Certificate Transparency** | crt.sh, CertSpotter, Wildcard SANs, Internal Staging Trails | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#14-certificate-transparency) |
+| **15** | **Website Tech Profiling** | Wappalyzer, BuiltWith, WhatRuns, SecurityHeaders, WhatCMS | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#15-website-technology-osint) |
+| **16** | **URL Analysis & Sandboxes** | urlscan.io, VirusTotal, Google Safe Browsing, Hybrid Analysis | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#16-url-analysis) |
+| **17** | **Malware CTI Platforms** | Abuse.ch, ThreatFox, MalwareBazaar, URLhaus, AlienVault OTX | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#17-malware--threat-intelligence-osint) |
+| **18** | **Cryptographic Hash OSINT** | MD5, SHA1, SHA256 Search, PE Headers, Outbound C2 Forensics | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#18-hash-osint) |
+| **19** | **SOCMINT & Social Media** | Multi-Platform Monitoring, X/Twitter, Social Searcher, Botometer | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#19-social-media-osint) |
+| **20** | **Code Repositories & Secrets** | GitHub Dorks, GitLeaks, TruffleHog, Commit History Mining | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#22-github-osint) |
+| **21** | **Breach & Dark Web Intel** | Have I Been Pwned, DeHashed, Hudson Rock, Tor (.onion), Ransomwatch | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#25-breach--credential-exposure-osint) |
+| **22** | **Cryptocurrency Forensics** | Bitcoin UTXO, Ethereum Accounts, Mempool, Etherscan, Arkham | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#27-cryptocurrency-osint) |
+| **23** | **Corporate & Legal OSINT** | OpenCorporates, SEC EDGAR 10-K, Companies House, ImportYeti | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#28-company--business-osint) |
+| **24** | **Image Forensics & EXIF** | ExifTool, FotoForensics (ELA), Forensically, Aperi'Solve | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#32-exif--metadata) |
+| **25** | **GEOINT & Satellite** | Google Earth Pro, SunCalc Chronolocation, Sentinel Hub, Overpass Turbo | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#33-image-geolocation) |
+| **26** | **Transportation OSINT** | FlightRadar24, ADS-B Exchange, MarineTraffic AIS, VesselFinder | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#38-flight-osint) |
+| **27** | **Digital Archives** | Wayback Machine CDX API, Archive.today, Common Crawl WARC | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#41-historical-web--archives) |
+| **28** | **Visual Link Analysis** | Maltego Transforms, Gephi Modularity, Neo4j Graph Models | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#49-maltego) |
+| **29** | **Threat Intel & Standards** | MITRE ATT&CK, MISP, STIX 2.1 / TAXII 2.1, CISA KEV Catalog | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#56-threat-actor-osint) |
+| **30** | **Automation & Reporting** | SpiderFoot, Recon-ng, theHarvester, FinalRecon, Executive Dossier | [Read](./OSINT_Complete_Framework_and_Investigation_Guide.md#102-osint-automation) |
 
 ---
 
 <div align="center">
 
-[👉 Explore the Complete OSINT Operational Framework & Playbook](./OSINT_Complete_Framework_and_Investigation_Guide.md)
+[👉 Explore the Full 107-Section Field Operations Manual & Playbook](./OSINT_Complete_Framework_and_Investigation_Guide.md)
 
 </div>

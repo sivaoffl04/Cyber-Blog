@@ -3,47 +3,62 @@
 ![Open Source Intelligence and Threat Reconnaissance Banner](./images/osint_masterclass_banner.jpg)
 
 # 🔎 Open Source Intelligence (OSINT) & Cyber Threat Reconnaissance
-### Enterprise Investigation Framework • Attack Surface Mapping • SOCMINT • GEOINT • Blockchain Forensics • CTI Architecture
+### The Definitive Field Operations Manual, Technical Tool Directory & Investigation Playbook
 
-[![Framework](https://img.shields.io/badge/Framework-OSINT%20Framework-00e5ff?style=for-the-badge&logo=target)](https://osintframework.com/)
+[![Framework](https://img.shields.io/badge/Architecture-Enterprise%20OSINT%20Framework-00e5ff?style=for-the-badge&logo=target)](https://osintframework.com/)
 [![Standard](https://img.shields.io/badge/Standard-NIST%20SP%20800--61%20%7C%20DoD-blue?style=for-the-badge&logo=shield)](https://csrc.nist.gov/)
 [![Intelligence](https://img.shields.io/badge/Intelligence-MISP%20%7C%20STIX%202.1-orange?style=for-the-badge&logo=apache)](https://www.misp-project.org/)
-[![Playbook](https://img.shields.io/badge/Playbook-20%20Operational%20Domains-success?style=for-the-badge&logo=git)](.)
+[![Coverage](https://img.shields.io/badge/Directory-107%20Investigation%20Domains-success?style=for-the-badge&logo=git)](.)
 
 <p align="center">
-  <b>A comprehensive, production-grade Open Source Intelligence (OSINT) operations manual designed for Cybersecurity Analysts, Threat Hunters, Purple Teams, Penetration Testers, and Incident Responders.</b>
+  <b>A comprehensive, production-grade technical manual for Cyber Threat Intelligence (CTI) analysts, SOC investigators, penetration testers, purple team operators, and digital forensic researchers.</b>
 </p>
 
-[🏛️ Architecture & Lifecycle](#-osint-investigation-lifecycle--pivot-architecture) • [⚡ Animated Workflow Demo](#-live-investigation-workflow-demonstration) • [📚 Operational Domains Directory](#-operational-domains-directory-domain-01--20) • [⚖️ Legal & OPSEC](#module-01-foundations-intelligence-cycle--opsec-tradecraft)
+[🏛️ Investigation Lifecycle](#-investigation-lifecycle--pivot-architecture) • [⚡ Terminal Simulation](#-terminal-workflow-demonstration) • [📋 107-Section Directory](#-107-section-investigation-directory)
 
 </div>
 
 ---
 
-## 🏛️ OSINT Investigation Lifecycle & Pivot Architecture
+## 🏛️ Investigation Lifecycle & Pivot Architecture
 
-Modern intelligence operations do not rely on random Google queries. Professional OSINT is an **iterative, multi-stage engineering discipline** structured across the standardized Intelligence Cycle:
+Modern intelligence operations do not rely on passive web searches. Professional OSINT is an **iterative, multi-stage engineering discipline** structured across the standardized Intelligence Cycle:
 
 ![OSINT Lifecycle and Pivot Architecture](./images/osint_investigation_lifecycle_pipeline.jpg)
 
 ```mermaid
 flowchart LR
-    P["🎯 1. Planning & OPSEC\n• Define PIRs\n• Burner / Sock Puppets\n• VPN/Tor Sandboxing"] 
-    --> C["📥 2. Harvesting\n• People & Usernames\n• DNS & Certificates\n• Network Scanners"]
-    --> PV["🔄 3. Multi-Hop Pivoting\n• Email ➔ Dev Handle\n• Handle ➔ GitHub Commit\n• Commit ➔ AWS Key / IP"]
-    --> A["🧠 4. Correlation & Graph\n• Maltego Link Analysis\n• Neo4j Graph Models\n• MISP Threat Sharing"]
-    --> D["📑 5. Dissemination\n• Actionable Dossier\n• Confidence Matrix\n• Blue Team Hardening"]
+    P["🎯 1. Planning & OPSEC
+• Define PIRs
+• Sock Puppets
+• Isolation Sandbox"] 
+    --> C["📥 2. Multi-Vector Harvesting
+• People & Identity
+• Infrastructure & DNS
+• Scanners & CTI"]
+    --> PV["🔄 3. Multi-Hop Pivoting
+• Email ➔ Username
+• Handle ➔ Commit Hash
+• Commit ➔ AWS Key / IP"]
+    --> A["🧠 4. Correlation & Link Graph
+• Maltego Transforms
+• Neo4j Graph Models
+• MISP Threat Sharing"]
+    --> D["📑 5. Dissemination & Action
+• Actionable Dossier
+• Confidence Matrix
+• Perimeter Hardening"]
 
     style P fill:#0f172a,stroke:#00e5ff,stroke-width:2px,color:#fff
     style C fill:#0f172a,stroke:#ffab00,stroke-width:2px,color:#fff
     style PV fill:#0f172a,stroke:#00e676,stroke-width:2px,color:#fff
     style A fill:#0f172a,stroke:#b388ff,stroke-width:2px,color:#fff
-    style D fill:#0f172a,stroke:#ff5252,stroke-width:2px,color:#fff
+    style D fill:#0f172a,stroke:#ff5252,color:#fff
 ```
 
 ---
 
-## ⚡ Live Investigation Workflow Demonstration
+## ⚡ Terminal Workflow Demonstration
 
 The terminal demonstration below simulates an end-to-end authorized threat reconnaissance engagement—progressing through environment isolation, passive subdomain harvesting, certificate transparency queries, Shodan port correlation, developer secret recovery via GitLeaks, EXIF chronolocation, breach correlation, and final intelligence dossier generation:
 
@@ -51,783 +66,2193 @@ The terminal demonstration below simulates an end-to-end authorized threat recon
 
 ---
 
-## 📚 Operational Domains Directory: Domain 01 → 20
+## 📋 107-Section Investigation Directory
 
-| Module | Domain | Key Tools & Technologies | Focus & Capabilities |
-| :---: | :--- | :--- | :--- |
-| [**01**](#module-01-foundations-intelligence-cycle--opsec-tradecraft) | **Foundations & OPSEC** | DoD Cycle, Sock Puppets, Tor, Whonix, CFAA/GDPR | Intelligence cycle, non-attributable environments, operational security |
-| [**02**](#module-02-search-engines--advanced-google-dorking) | **Search Engines & Dorking** | Google Dorking, GHDB, SearXNG, Mojeek, Yandex | Boolean logic, advanced dork syntax, cache mining, search aggregators |
-| [**03**](#module-03-people--identity-intelligence) | **People & Identity** | Sherlock, Maigret, WhatsMyName, Blackbird | Username enumeration across 500+ services, cross-platform aliases |
-| [**04**](#module-04-email-intelligence--header-forensics) | **Email & Headers** | Holehe, Epieos, Hunter, EmailRep, SPF/DKIM/DMARC | Registered services discovery, routing hop analysis, spoof verification |
-| [**05**](#module-05-phone-number--telecom-reconnaissance) | **Phone & Telecom** | PhoneInfoga, NumVerify, Truecaller, E.164 Specs | Carrier routing, line type, country numbering plans, fraud scoring |
-| [**06**](#module-06-domain-dns--infrastructure-osint) | **Domain & DNS** | `dig`, `nslookup`, WHOIS/RDAP, DNSDumpster, DNSViz | Zone transfers, SOA/MX/TXT auditing, DNSSEC chain validation |
-| [**07**](#module-07-subdomain-discovery--attack-surface-mapping) | **Subdomain Mapping** | Amass, Subfinder, Assetfinder, Findomain, crt.sh | Passive attack-surface discovery, Certificate Transparency log mining |
-| [**08**](#module-08-network-scanners--internet-wide-telemetry) | **Internet Scanners** | Shodan, Censys, GreyNoise, ZoomEye, FOFA | Banner harvesting, IoT/SCADA mapping, scanner noise filtering |
-| [**09**](#module-09-web-application--technology-profiling) | **Tech Stack Profiling** | Wappalyzer, BuiltWith, urlscan.io, SecurityHeaders | Framework fingerprinting, DOM analysis, historical CDN/WAF telemetry |
-| [**10**](#module-10-social-media-intelligence-socmint) | **SOCMINT** | X/Twitter, LinkedIn, Telegram (TGStat), Reddit | Corporate hierarchy mapping, threat actor channel monitoring, bot filtering |
-| [**11**](#module-11-code-repository--secret-exposure-osint) | **Code & Secret Hunting** | GitLeaks, TruffleHog, GitHub Dorking, Gitrob | Hardcoded credentials in Git trees, commit diffs, cloud IAM key harvesting |
-| [**12**](#module-12-breach-intelligence--dark-web-monitoring) | **Breach & Dark Web** | HIBP, DeHashed, Hudson Rock, Ahmia, Ransomwatch | Leaked credential database parsing, `.onion` indexing, ransomware monitoring |
-| [**13**](#module-13-cryptocurrency--blockchain-forensics) | **Cryptocurrency OSINT** | Mempool, Etherscan, Blockchair, Arkham, Breadcrumbs | UTXO tracing, smart contract decompilation, exchange wallet clustering |
-| [**14**](#module-14-corporate-business--legal-osint) | **Business & Legal** | OpenCorporates, SEC EDGAR, Companies House, ImportYeti | Corporate subsidiaries, beneficial ownership, bill-of-lading shipments |
-| [**15**](#module-15-geospatial-intelligence-geoint--satellite) | **GEOINT & Imagery** | Google Earth Pro, SunCalc, Overpass Turbo, Sentinel | Chronolocation via shadows, satellite multispectral bands, street landmarks |
-| [**16**](#module-16-image-forensics--reverse-visual-search) | **Image Forensics** | ExifTool, FotoForensics, Google Lens, PimEyes | EXIF metadata extraction, Error Level Analysis (ELA), visual facial pivots |
-| [**17**](#module-17-video--audio-osint-verification) | **Video & Audio** | InVID / WeVerify, `yt-dlp`, FFmpeg, Whisper | Keyframe extraction, reverse video framing, audio spectrum analysis |
-| [**18**](#module-18-threat-intelligence--cti-frameworks) | **CTI & Threat Intel** | MISP, STIX 2.1, TAXII, AlienVault OTX, CISA KEV | Diamond Model, threat actor attribution, automated IOC exchange |
-| [**19**](#module-19-link-analysis--visual-graph-correlation) | **Graph Correlation** | Maltego, Gephi, Neo4j, SpiderFoot | Transform engines, multi-hop entity graphs, centrality & clustering |
-| [**20**](#module-20-automated-frameworks--intelligence-reporting) | **Automation & Reports** | Recon-ng, FinalRecon, theHarvester, CTI Reporting | Workflow pipelines, executive dossier writing, remediation playbooks |
+| # | Section Title | Primary Focus & Domain |
+| :-: | :--- | :--- |
+| **01** | [OSINT Frameworks & Master Toolkits](#1-osint-frameworks--master-toolkits) | Frameworks, Curated Directories & Training Platforms |
+| **02** | [Search Engines (General, Specialized & Aggregators)](#2-search-engines) | Indexing Engines, Deep Web Crawlers & Metasearch Engines |
+| **03** | [Google Dorking & GHDB](#3-google-dorking) | Advanced Boolean Operators, GHDB & Sensitive Asset Mining |
+| **04** | [Username OSINT & Cross-Platform Alias Profiling](#4-username-osint) | Sherlock, Maigret, WhatsMyName & Handle Tracking |
+| **05** | [Email OSINT & Address Footprinting](#5-email-osint) | Holehe, Epieos, Hunter.io, Gravatar & Service Binding |
+| **06** | [Email Header Forensics & Authentication Analysis](#6-email-header-analysis) | RFC Headers, Hop Routing, SPF, DKIM, DMARC & MTAs |
+| **07** | [Phone Number OSINT & Telecom Reconnaissance](#7-phone-number-osint) | PhoneInfoga, Truecaller, E.164 Specs & Carrier Metadata |
+| **08** | [Domain OSINT & Registrar Intelligence](#8-domain-osint) | WHOIS, RDAP, History, SecurityTrails & Attack Surface |
+| **09** | [DNS OSINT & Query Protocols](#9-dns-osint) | Dig, Nslookup, DNSDumpster, DNSViz & Zone Transfers |
+| **10** | [Subdomain Enumeration (Passive & Semi-Passive)](#10-subdomain-enumeration) | OWASP Amass, Subfinder, Assetfinder & Chaos |
+| **11** | [IP Address OSINT & Autonomous System Telemetry](#11-ip-address-osint) | BGPView, IPinfo, AbuseIPDB, Hurricane Electric & RIRs |
+| **12** | [Shodan: Internet-Wide Device Scanning](#12-shodan) | Banner Mining, Filters, Exposed Services & Vulnerabilities |
+| **13** | [Censys: Attack Surface & Certificate Analysis](#13-censys) | IPv4 Scans, TLS Certificate Fingerprints & Host Assets |
+| **14** | [Certificate Transparency (CT) Log Mining](#14-certificate-transparency) | Crt.sh, CertSpotter, Wildcard SANs & Subdomain Trails |
+| **15** | [Website Technology Profiling](#15-website-technology-osint) | Wappalyzer, BuiltWith, WhatRuns & CMS Fingerprinting |
+| **16** | [URL Analysis & Sandbox Scanners](#16-url-analysis) | Urlscan.io, VirusTotal, OpenPhish & Hybrid Analysis |
+| **17** | [Malware & Cyber Threat Intelligence Platforms](#17-malware--threat-intelligence-osint) | Abuse.ch, ThreatFox, MalwareBazaar, URLhaus & VX-Underground |
+| **18** | [Cryptographic Hash OSINT](#18-hash-osint) | MD5, SHA1, SHA256 Lookup & Malware Hash Attribution |
+| **19** | [Social Media Intelligence (SOCMINT)](#19-social-media-osint) | Multi-Platform Monitoring, Sentiment & Bot Detection |
+| **20** | [Instagram OSINT & Media Archaeology](#20-instagram-osint) | Profile Scraping, Visual Footprinting & Stories History |
+| **21** | [LinkedIn OSINT & Corporate Hierarchy Mapping](#21-linkedin-osint) | Org Chart Recon, Employee Enumeration & Email Patterning |
+| **22** | [GitHub OSINT & Secret Exposure Hunting](#22-github-osint) | Code Dorking, GitLeaks, TruffleHog & Commit History Mining |
+| **23** | [GitLab OSINT & Project Footprinting](#23-gitlab-osint) | Public Repositories, Snippets, Commits & Pipeline Logs |
+| **24** | [Paste & Text Dump Reconnaissance](#24-paste--text-osint) | Pastebin, GitHub Gists, PrivateBin & Intelligence X |
+| **25** | [Breach & Credential Exposure Intelligence](#25-breach--credential-exposure-osint) | Have I Been Pwned, DeHashed, Hudson Rock & Stealer Logs |
+| **26** | [Dark Web & Tor (.onion) Intelligence](#26-dark-web--tor-osint) | Ahmia, OnionSearch, Ransomwatch & Extortion Portals |
+| **27** | [Cryptocurrency & Blockchain Forensics](#27-cryptocurrency-osint) | Bitcoin UTXO, Ethereum Accounts, Mempool, Etherscan & Arkham |
+| **28** | [Corporate & Business Entity OSINT](#28-company--business-osint) | OpenCorporates, SEC EDGAR, Companies House & ImportYeti |
+| **29** | [Government Open Data & Public Records](#29-government-osint) | USAspending, SEC, PACER, CERT-In, MCA & Public Portals |
+| **30** | [Legal & Court Docket Intelligence](#30-legal--court-osint) | CourtListener, PACER, RECAP, Justia & Indian Kanoon |
+| **31** | [Image OSINT & Reverse Visual Engines](#31-image-osint) | Google Lens, Yandex, TinEye, PimEyes & FotoForensics |
+| **32** | [EXIF & Hardware Metadata Forensics](#32-exif--metadata) | ExifTool Commands, Camera Sensors, Timestamps & GPS |
+| **33** | [Image Geolocation (GEOINT)](#33-image-geolocation) | Google Earth, Mapillary, SunCalc, PeakVisor & Overpass Turbo |
+| **34** | [Satellite Imagery & Remote Sensing](#34-satellite-imagery) | Sentinel Hub, Copernicus, NASA Worldview, Landsat & Planet |
+| **35** | [Mapping Platforms & Geospatial Databases](#35-maps) | OpenStreetMap, Google Earth Pro, ArcGIS, QGIS & Wikimapia |
+| **36** | [Geolocation Heuristics & Visual Clues](#36-geolocation-techniques) | Architecture, Vegetation, Road Markings & Infrastructure |
+| **37** | [Street View & Ground-Level Telemetry](#37-street-view) | Google Street View, Mapillary, KartaView & Yandex Panoramas |
+| **38** | [Flight Tracking & ADS-B Intelligence](#38-flight-osint) | FlightRadar24, ADS-B Exchange, OpenSky Network & Callsigns |
+| **39** | [Maritime & AIS Ship Tracking](#39-maritime--ship-osint) | MarineTraffic, VesselFinder, FleetMon, MMSI & IMO Lookups |
+| **40** | [Weather & Meteorological Verification](#40-weather-osint) | NOAA, NASA, Windy, Meteoblue & Historical Weather APIs |
+| **41** | [Historical Web & Digital Archives](#41-historical-web--archives) | Wayback Machine, Archive.today, Memento & Common Crawl |
+| **42** | [Website Change Monitoring & Webhooks](#42-website-change-monitoring) | Changedetection.io, Visualping, Distill.io & Versionista |
+| **43** | [PDF & Document Metadata Extraction](#43-pdf--document-osint) | PDFInfo, Apache Tika, FOCA, Metagoofil & Strings |
+| **44** | [Automated Metadata Harvesting Engines](#44-metadata-osint) | Multi-File Batch Extraction, Revision History & Authors |
+| **45** | [People OSINT: Holistic Investigation Path](#45-people-osint) | Cross-Domain Identity Pivots (Name ➔ Username ➔ Infrastructure) |
+| **46** | [Username to Email Pivoting Heuristics](#46-username--email) | Correlation Engines, Gravatar Hashing & Epieos |
+| **47** | [Email to Username Pivoting Heuristics](#47-email--username) | Prefix Decomposition, Social Registrations & Leaks |
+| **48** | [Username to Domain & Infrastructure Pivoting](#48-username--domain) | Code Repositories, Domain Registrations & Nameservers |
+| **49** | [Maltego Link Analysis Platform](#49-maltego) | Entities, Transforms, Graph Topologies & Visual Correlation |
+| **50** | [SpiderFoot Attack Surface Automation](#50-spiderfoot) | OSINT Target Automation, Modules & Threat Correlation |
+| **51** | [Recon-ng Framework](#51-recon-ng) | Metasploit-Style Modular Recon, Workspaces & API Keys |
+| **52** | [theHarvester Perimeter Harvester](#52-theharvester) | Passive Email, Subdomain, IP & Employee Harvesting |
+| **53** | [OWASP Amass Attack Surface Mapper](#53-amass) | Graph-Based Asset Discovery, ASN Mapping & DNS Parsing |
+| **54** | [FinalRecon Web Reconnaissance Suite](#54-finalrecon) | Header Audits, SSL, Crawling, Directory & DNS Checks |
+| **55** | [Passive Reconnaissance Core Suite](#55-passive-recon-tools) | Multi-Tool Aggregated Passive Footprinting Pipeline |
+| **56** | [Threat Actor Profiling & CTI Feeds](#56-threat-actor-osint) | MITRE ATT&CK, AlienVault OTX, CISA, Mandiant & Talos |
+| **57** | [MITRE ATT&CK Framework Mapping](#57-mitre-attck) | TTP Attribution, Campaign Chains & Detection Alignment |
+| **58** | [MISP Threat Sharing Platform](#58-misp) | Threat Events, Attributes, Warninglists & Communities |
+| **59** | [STIX 2.1 & TAXII 2.1 Threat Data Models](#59-stix--taxii) | Standardized SDOs, SROs & Automated Threat Feeds |
+| **60** | [Vulnerability OSINT & Exploit Repositories](#60-vulnerability-osint) | NVD, CVE.org, CISA KEV, Exploit-DB & OSV.dev |
+| **61** | [National Vulnerability Database (NVD) Analysis](#61-nvd) | CVSS v3.1/v4.0 Metrics, CPE Dictionary & CWE Mapping |
+| **62** | [CISA KEV Catalog Prioritization](#62-cisa-kev) | Actively Exploited Vulnerabilities vs Theoretical Risk |
+| **63** | [Username & Identity Discovery Suites](#63-username--account-discovery) | Sherlock, Maigret, Blackbird, WhatsMyName & Namechk |
+| **64** | [Facial Recognition & Biometric Search Engines](#64-facial--face-search) | PimEyes, FaceCheck.ID, Yandex Visual & Ethical Limits |
+| **65** | [Audio Forensics & Acoustic Intelligence](#65-audio-osint) | Shazam, ACRCloud, Audacity, FFmpeg & Whisper AI |
+| **66** | [Video OSINT & Verification Workflow](#66-video-osint) | Video Preservation, Keyframes, Chronolocation & Hashes |
+| **67** | [InVID / WeVerify Verification Suite](#67-invid--weverify) | Keyframe Splitting, Reverse Image Lookups & Context |
+| **68** | [YouTube OSINT & Channel Telemetry](#68-youtube-osint) | Video Data API, YouTube DataViewer & Yt-dlp Metadata |
+| **69** | [Reddit OSINT & Thread Archaeology](#69-reddit-osint) | PullPush, Pushshift, Reddit Investigator & Google Dorks |
+| **70** | [Telegram OSINT & Threat Actor Channel Scraping](#70-telegram-osint) | Public Channels, TGStat, Telemetr & Bot Automation |
+| **71** | [Discord OSINT & Guild Reconnaissance](#71-discord-osint) | Guild Lookup, Widget APIs, Invite Analysis & Bot Infrastructure |
+| **72** | [Mastodon & Fediverse Intelligence](#72-mastodon-osint) | ActivityPub Protocol, Instance Scraping & Fediverse DBs |
+| **73** | [Bluesky & AT Protocol Intelligence](#73-bluesky-osint) | AT Protocol Public APIs, DIDs & Post Firehoses |
+| **74** | [X / Twitter Advanced Intelligence Gathering](#74-xtwitter-osint) | Search Operators, Historical Feeds, Hoaxy & Botometer |
+| **75** | [Social Graph & Entity Relationship Analysis](#75-social-graph-analysis) | Node Clustering, Inter-Entity Ties & Centrality Metrics |
+| **76** | [Network Graph Visualization Engines](#76-network-visualization) | Gephi Modularity Algorithms & Neo4j Cypher Property Graphs |
+| **77** | [Essential Browser OSINT Extensions](#77-browser-osint-extensions) | Wappalyzer, BuiltWith, SingleFile, Wayback & HackTools |
+| **78** | [Web Scraping Architecture for Intelligence](#78-web-scraping) | BeautifulSoup, Scrapy, Playwright, Selenium & Requests |
+| **79** | [Command-Line OSINT Toolkit for Linux/Kali](#79-command-line-osint) | Core Unix Pipeline (`curl`, `dig`, `jq`, `grep`, `awk`, `exiftool`) |
+| **80** | [Web Crawlers & Attack Surface Spiders](#80-web-crawlers) | Katana, Hakrawler, GoSpider, Photon & OWASP ZAP |
+| **81** | [Archive Investigation & Temporal Reconstruction](#81-archive-investigation) | Wayback CDX API, Archive.today & Common Crawl WARC |
+| **82** | [Breach Monitoring & Enterprise Credential Exposure](#82-breach-monitoring) | HIBP Enterprise, SpyCloud, Searchlight Cyber & Dark Web |
+| **83** | [Dark-Web Monitoring & Ransomware Tracking](#83-dark-web-monitoring) | Recorded Future, Flashpoint, DarkOwl, KELA & Ransomwatch |
+| **84** | [Brand Monitoring & Digital Risk Protection (DRP)](#84-brand-monitoring) | Google Alerts, Talkwalker, Brand24 & Mention |
+| **85** | [News Intelligence & Global Event Monitoring](#85-news-osint) | GDELT Project, MediaCloud, Event Registry & Factiva |
+| **86** | [Disinformation Analysis & Media Verification](#86-disinformation--verification) | Verification Handbooks, InVID, ELA & Source Validation |
+| **87** | [Fact-Checking Consortia & Open Databases](#87-fact-checking) | Google Fact Check Explorer, Snopes, PolitiFact & Bellingcat |
+| **88** | [Language Intelligence & Translation Engines](#88-language-osint) | DeepL, Google Translate, Yandex Translate & Linguistics |
+| **89** | [Optical Character Recognition (OCR) for OSINT](#89-ocr) | Tesseract CLI, Google Lens, PaddleOCR & EasyOCR |
+| **90** | [Deep Web Academic Repositories & Document Engines](#90-document-search) | Google Books, Internet Archive, HathiTrust, JSTOR & arXiv |
+| **91** | [Academic OSINT & Scholarly Intelligence](#91-academic-osint) | Semantic Scholar, OpenAlex, PubMed, CORE & ResearchGate |
+| **92** | [Infrastructure Relationship Mapping Workflow](#92-infrastructure-relationship-mapping) | End-to-End DNS ➔ BGP ➔ Server ➔ Hosting Pivot Chain |
+| **93** | [Cybersecurity Attack Surface Reconnaissance Matrix](#93-cybersecurity-osint-attack-surface) | Enterprise Inventory Architecture (Domains, Cloud, Code) |
+| **94** | [Cloud Storage OSINT & Bucket Discovery](#94-cloud-osint) | AWS S3, Azure Blob, GCP Storage; CloudEnum & S3Scanner |
+| **95** | [SecurityTrails Historical DNS & WHOIS](#95-securitytrails) | Historical A/NS/MX Changes, Domain Mutations & IP Trails |
+| **96** | [VirusTotal Multi-Hop Graph Analysis](#96-virustotal) | Files, IPs, Domains, URLs, Certificates & Malware Relations |
+| **97** | [urlscan.io Deep Network & DOM Telemetry](#97-urlscanio) | Requests, TLS Handshakes, Scripts, DOM Trees & Screenshots |
+| **98** | [GreyNoise Intelligence for Threat Analysts](#98-greynoise) | Mass Internet Scanners, Benign Actors vs Targeted Worms |
+| **99** | [AbuseIPDB IP Reputation & Malicious Scoring](#99-abuseipdb) | Malicious Confidence Percentage, Abuse Categories & Reports |
+| **100** | [AlienVault Open Threat Exchange (OTX)](#100-alienvault-otx) | Threat Pulses, Community Indicators & API Integration |
+| **101** | [Intelligence X Search Engine & Archive](#101-intelligence-x) | Darknet Portals, Paste Dumps, Historical IP & Document Index |
+| **102** | [OSINT Automation Frameworks & Pipelines](#102-osint-automation) | Autonomous Harvesters (SpiderFoot, theHarvester, sn0int) |
+| **103** | [The 8-Stage OSINT Investigation Lifecycle](#103-osint-investigation-lifecycle) | Requirement ➔ Collection ➔ Pivoting ➔ Correlation ➔ Report |
+| **104** | [End-to-End Enterprise Security Case Study](#104-example-cybersecurity-investigation) | Real-World Investigation Walkthrough on `example.com` |
+| **105** | [The OSINT Pivot Mindset & Cross-Domain Hopping](#105-the-osint-pivot-mindset) | Mastering Email, Domain & Media Cross-Domain Jumps |
+| **106** | [Tiered OSINT Toolkit Recommendations](#106-best-osint-toolkit-for-a-cybersecurity-student) | Tier 1 (Foundations) to Tier 6 (Advanced Enterprise CTI) |
+| **107** | [The Unified OSINT Tool & Relationship Map](#107-osint-tool-map) | Comprehensive Categorical Architecture Diagram & The Top 10 |
 
 ---
 
-## Module 01: Foundations, Intelligence Cycle & OPSEC Tradecraft
+---
 
-### 1.1 The Intelligence Cycle
-Open Source Intelligence (OSINT) is intelligence produced from publicly available information that is collected, exploited, and disseminated in a timely manner to an appropriate audience for the purpose of addressing a specific intelligence requirement.
+## 1. OSINT Frameworks & Master Toolkits
+
+Open Source Intelligence (OSINT) practitioners do not reinvent the wheel for every investigation. Master toolkits and curated frameworks provide structured taxonomies that organize tools around specific intelligence requirements, target pivot points, and legal methodologies.
+
+### Primary Frameworks & Collections:
+
+| Framework / Resource | Maintainer / Organization | Primary Purpose & Analytical Role | Access / Reference |
+| :--- | :--- | :--- | :--- |
+| **OSINT Framework** | Justin Nordine | Interactive web-based tree organizing hundreds of tools by data pivot (Username, Email, Domain, IP, Public Records, Telephone) | [osintframework.com](https://osintframework.com/) |
+| **Bellingcat Online Investigation Toolkit** | Bellingcat Research Team | Battle-tested, practitioner-reviewed investigative toolkit covering satellite imagery, geolocation, social media verification, and conflict tracking | [bellingcat.gitbook.io/toolkit](https://bellingcat.gitbook.io/toolkit) |
+| **OSINT Dojo** | OSINT Dojo Community | Structured gamified methodology, certifications, training pathways, and resource index for intelligence analysts | [osintdojo.com/resources](https://www.osintdojo.com/resources/) |
+| **Awesome OSINT** | Jivoi & Community | Massive, continuously updated GitHub repository listing thousands of categorized OSINT tools, libraries, and APIs | [github.com/jivoi/awesome-osint](https://github.com/jivoi/awesome-osint) |
+| **OSINT Combine** | OSINT Combine Pty Ltd | Enterprise operational utilities, Academy training, and specialized web scrapers for global investigations | [osintcombine.com](https://www.osintcombine.com/) |
+| **OSINT Techniques** | Hatless1der / OSINT Techniques | Practical investigative methodologies, workflow guides, and categorized search resources | [osinttechniques.com](https://osinttechniques.com/) |
+| **IntelTechniques** | Michael Bazzell | The industry gold standard for privacy, personal security, and structured digital reconnaissance workflows | [inteltechniques.com](https://inteltechniques.com/) |
+| **Sector035 (Week in OSINT)** | Sector035 | Weekly intelligence newsletter compiling new investigative tools, articles, community discoveries, and case techniques | [sector035.nl](https://sector035.nl/) |
+| **Nixintel OSINT Resource List** | Nixintel | Extensive curated guide detailing operational links across domains, social networks, and imagery | [nixintel.info](https://nixintel.info/) |
+| **OSINT.Link** | OSINT.Link Directory | Fast-access categorized bookmark directory for investigators covering corporate, social, and technical sources | [osint.link](https://osint.link/) |
+| **OSINT4All** | Community Project | Open resource catalogue mapping digital investigation utilities across borders | [osint4all.com](https://osint4all.com/) |
+| **Trace Labs** | Trace Labs (Non-Profit) | Crowdsourced intelligence platform crowdsourcing missing persons search operations using ethical OSINT | [tracelabs.org](https://www.tracelabs.org/) |
+| **The OSINT Curious Project** | OSINT Curious Community | Educational podcasts, blogs, video tutorials, and technical deep-dives into modern investigative tradecraft | [osintcurio.us](https://osintcurio.us/) |
+
+> **Operational Tip:** The **OSINT Framework** is uniquely powerful because it visually structures your research around pivots. If you only possess an email address, expanding the `Email Address` branch immediately yields search utilities, breach checkers, reputation engines, and mail exchanger diagnostics.
+
+---
+
+## 2. Search Engines
+
+Search engines serve as the foundational indexing layer of the World Wide Web. However, relying on a single engine introduces severe cognitive bias, as search algorithms tailor results based on geography, advertising models, and filtering algorithms.
 
 ```mermaid
 flowchart TD
-    D["1. Direction & Planning\n(Define PIRs & Scoping)"] --> C["2. Collection\n(Harvesting Public Signals)"]
-    C --> P["3. Processing\n(Normalization & Decryption)"]
-    P --> A["4. Analysis & Production\n(Correlation, Attribution & Confidence)"]
-    A --> DS["5. Dissemination\n(Actionable Report & Defense)"]
-    DS --> F["6. Feedback & Evaluation"]
-    F --> D
+    Q["Search Query"] --> GE["General Indexers
+(Google, Bing, Brave, Yandex, Baidu)"]
+    Q --> SE["Specialized Engines
+(Google Scholar, Patents, Archive, Common Crawl)"]
+    Q --> SA["Metasearch Aggregators
+(SearXNG, Carrot2, Dogpile, Million Short)"]
 
-    style D fill:#1e293b,stroke:#00e5ff,color:#fff
-    style C fill:#1e293b,stroke:#ffab00,color:#fff
-    style P fill:#1e293b,stroke:#00e676,color:#fff
-    style A fill:#1e293b,stroke:#b388ff,color:#fff
-    style DS fill:#1e293b,stroke:#ff5252,color:#fff
-    style F fill:#1e293b,stroke:#90caf9,color:#fff
+    GE --> D["De-Duplicated Global Intelligence"]
+    SE --> D
+    SA --> D
+
+    style Q fill:#0f172a,stroke:#00e5ff,color:#fff
+    style GE fill:#1e293b,stroke:#ffab00,color:#fff
+    style SE fill:#1e293b,stroke:#00e676,color:#fff
+    style SA fill:#1e293b,stroke:#b388ff,color:#fff
+    style D fill:#0f172a,stroke:#ff5252,color:#fff
 ```
 
-### 1.2 Passive vs. Active Reconnaissance
-* **Passive Reconnaissance:** The investigator communicates **exclusively with third-party aggregators, caches, and public registries** (e.g., querying DNS records from Google Public DNS, reviewing Shodan cache, pulling Certificate Transparency logs from `crt.sh`). **Zero network packets touch the target's perimeter.**
-* **Semi-Passive Reconnaissance:** Queries that simulate normal user traffic (e.g., standard browser visit to the homepage, retrieving `robots.txt`) without triggering intrusion alerts.
-* **Active Reconnaissance:** Packets directly interact with the target's infrastructure (e.g., SYN port scanning with Nmap, directory brute-forcing, SNMP walks). **Requires explicit written authorization.**
+### 2.1 General Crawlers & Search Engines:
+* **Google:** The largest global web index (>50 billion pages). Exceptional algorithm for natural language understanding and real-time indexing.
+* **Bing:** Powers Yahoo and DuckDuckGo backends. Features strong document search capabilities and distinct image indexing algorithms.
+* **Brave Search:** Operates an independent index independent of Google or Microsoft, preserving search privacy and uncurated web rankings.
+* **DuckDuckGo:** Privacy-focused proxy querying multiple upstream APIs while eliminating personalization bubbles and tracking telemetry.
+* **Yahoo:** Legacy search engine utilizing Bing syndication alongside historical content partnerships.
+* **Yandex:** Leading engine in Eastern Europe and Russia. Exceptional algorithmic capabilities in reverse image search and facial matching.
+* **Baidu:** The primary search engine for the Chinese internet, indexing platforms unreachable behind the Great Firewall.
+* **Mojeek:** Truly independent UK-based crawler building its own independent index without scraping secondary providers.
+* **Startpage:** Delivers Google search results via an anonymizing privacy proxy that strips tracking headers and IP logs.
+* **Swisscows:** Family-friendly, Swiss-based privacy engine using semantic data analysis and zero data storage.
+* **Qwant:** European privacy engine based in France adhering strictly to GDPR compliance.
+* **SearXNG:** Self-hosted, open-source metasearch engine combining results from over 70 search services without tracking user queries.
+* **Kagi:** High-signal, paid search engine completely free from advertisements, affiliate spam, and SEO-optimized clickbait.
+* **Yep:** Independent web crawler created by Ahrefs that indexes pages directly and shares ad revenue with creators.
 
-### 1.3 Operational Security (OPSEC) Architecture
-Investigators must prevent target awareness and identity leakage:
-1. **Dedicated Hardware / Virtual Sandbox:** Operate exclusively from dedicated virtual machines (Whonix, Tails, or ephemeral Kali containers). Never conduct research from your primary host workstation.
-2. **Network Masking:** Route research traffic through multi-hop VPNs or Tor circuits. Rotate exit nodes when performing bulk queries to prevent rate-limiting and geo-location poisoning.
-3. **Sock Puppets (Virtual Personas):**
-   * Never tie research accounts to personal phone numbers, recovery emails, or payment cards.
-   * Generate realistic, consistent persona backstories (age, occupation, location, interests).
-   * Utilize burner SIMs or VoIP services (paid via privacy-centric methods) for two-factor verification.
-   * Strip browser canvas fingerprints using privacy-hardened profiles (Brave, LibreWolf, Firefox with `privacy.resistFingerprinting = true`).
+### 2.2 Specialized Search Engines:
+* **Google Scholar:** Comprehensive index of peer-reviewed academic literature, patents, theses, legal opinions, and court dockets.
+* **Google Books:** Full-text searchable database of millions of digitized books, historic literature, and out-of-print magazines.
+* **Google News:** Real-time aggregator indexing thousands of regional and international news publishers with temporal filtering.
+* **Google Patents:** Search interface covering patent applications and grant documents from 100+ global patent offices.
+* **Google Finance:** Real-time financial markets, corporate entity affiliations, executive rosters, and equity tracking.
+* **WolframAlpha:** Computational knowledge engine answering factual questions by processing structured algorithms rather than indexing raw HTML.
+* **Internet Archive:** Digital library maintaining billions of web captures, digitized books, audio records, and television broadcasts.
+* **Common Crawl:** Open repository of web crawl data containing petabytes of raw web page data collected over 15+ years.
+* **Marginalia:** Custom non-commercial search engine prioritizing early web text documents and independent blogs over modern commercial sites.
+* **Wiby:** Search engine designed exclusively for classical, lightweight, text-only web pages and legacy web directory designs.
 
-### 1.4 Legal Boundaries & Ethics
-* **United States:** Adhere strictly to the Computer Fraud and Abuse Act (CFAA, 18 U.S.C. § 1030). Scraping public data is generally protected under *Van Buren v. United States* and *hiQ Labs v. LinkedIn*, but bypassing technical barriers (firewalls, CAPTCHAs, authenticated sessions) without authorization is illegal.
-* **European Union:** General Data Protection Regulation (GDPR) mandates lawful processing of personal identifiable information (PII). Collecting, indexing, or redistributing EU citizens' personal data without a legitimate interest can result in administrative fines.
-* **Ethics:** Never use exposed credentials found in breach databases to log into unauthorized systems. OSINT is observational; unauthorized access constitutes illegal intrusion.
+### 2.3 Search Aggregators & Metasearch Engines:
+* **Carrot2:** Organizes search results into thematic topic clusters, visually highlighting related themes and concepts.
+* **Dogpile:** Classic metasearch engine combining results from Google, Yahoo, Bing, and secondary directories into a unified stream.
+* **Boardreader:** Search engine specifically dedicated to indexing public forums, message boards, Reddit, and bulletin boards.
+* **Searchcode:** Deep search engine indexing over 75 billion lines of open-source software code across GitHub, Bitbucket, and GitLab.
+* **Million Short:** Enables researchers to exclude the top 100, 1,000, 10,000, or 1,000,000 most popular commercial websites to discover obscure pages.
+* **SearchMySite:** Non-profit independent search engine focusing on open web blogs, personal sites, and digital gardens.
 
 ---
 
-## Module 02: Search Engines & Advanced Google Dorking
+## 3. Google Dorking
 
-### 2.1 Boolean Search Heuristics
-Search engines crawl and index trillions of documents. Advanced operators filter out 99.9% of irrelevant internet noise:
+Google Dorking (also known as **Google Hacking**) utilizes advanced search engine operators to filter through Google's index to uncover exposed configuration files, database dumps, unindexed admin portals, and sensitive corporate credentials.
 
-| Operator | Syntax | Function & Practical Use Case |
+### 3.1 Essential Search Operators:
+
+| Operator | Syntax | Purpose & Analytical Mechanics |
 | :--- | :--- | :--- |
-| `site:` | `site:target.com` | Restricts search strictly to a domain or top-level domain (e.g., `site:gov`) |
-| `filetype:` | `filetype:pdf` | Limits results to specific document extensions (`pdf`, `docx`, `xlsx`, `env`, `sql`) |
-| `inurl:` | `inurl:admin` | Locates strings embedded directly within the URL path or query parameters |
-| `intitle:` | `intitle:"index of"` | Discovers web server directory listings and exposed file directories |
+| `site:` | `site:example.com` | Restricts queries exclusively to a specific domain, subdomain, or top-level domain (`.gov`, `.edu`) |
+| `filetype:` / `ext:` | `filetype:pdf` | Limits search results to specific file extensions (`sql`, `env`, `log`, `docx`, `xml`, `json`) |
+| `intitle:` | `intitle:"Dashboard"` | Searches for specific keywords within the HTML `<title>` element of indexed web pages |
+| `allintitle:` | `allintitle:admin login` | Restricts results to pages where ALL specified keywords appear in the HTML title |
+| `inurl:` | `inurl:admin/login.php` | Matches character strings located anywhere within the URL path or query string |
+| `allinurl:` | `allinurl:wp-content uploads`| Matches pages where all keywords appear within the URL path |
 | `intext:` | `intext:"confidential"` | Searches for specific keywords within the visible body text of indexed pages |
-| `cache:` | `cache:target.com` | Renders Google's cached snapshot of a page (useful for recently deleted pages) |
-| `-` (NOT) | `site:target.com -www` | Excludes terms (e.g., excludes the primary website to surface subdomains) |
-| `""` | `"internal use only"` | Enforces an exact verbatim phrase match |
-| `OR` / `\|` | `ext:sql OR ext:bak` | Logical OR operation across multiple parameters |
+| `allintext:` | `allintext:password username`| Enforces that all specified terms must appear within the body text |
+| `before:` / `after:` | `after:2025-01-01` | Restricts indexed results to documents indexed before or after a specific calendar date (ISO 8601) |
+| `cache:` | `cache:example.com` | Renders Google's cached snapshot of a page (useful for recently deleted pages) |
+| `related:` | `related:example.com` | Identifies web pages that Google's algorithm considers structurally or topically similar |
+| `""` | `"exact phrase"` | Enforces literal verbatim phrase matching, disabling algorithmic synonyms |
+| `-` (Hyphen) | `site:example.com -www` | Boolean NOT operator; excludes specific keywords, subdomains, or file extensions |
+| `OR` / `\|` | `ext:sql OR ext:bak` | Boolean OR operator; matches either the left or right search condition |
 
-### 2.2 High-Yield Cybersecurity Dorking Cheatsheet
+### 3.2 High-Impact Cybersecurity Dorking Examples:
 
 ```text
-# 1. Exposed Directory Listings & Web Server Roots
-site:target.com intitle:"index of /" OR intitle:"index of /admin"
-site:target.com intitle:"index of" "parent directory"
+# 1. Directory Listings & Exposed Server Roots (Finding Open Directories)
+site:example.com intitle:"index of /" OR intitle:"index of /admin"
+site:example.com intitle:"index of" "parent directory"
+site:example.com intitle:"index of /" "dcim"
 
 # 2. Exposed Database Dumps & Configuration Files
-site:target.com filetype:sql OR filetype:db OR filetype:sqlite OR filetype:mdb
-site:target.com filetype:env "DB_PASSWORD" OR "AWS_SECRET_ACCESS_KEY"
-site:target.com inurl:wp-config.php OR inurl:configuration.php OR inurl:settings.py
+site:example.com filetype:sql OR filetype:db OR filetype:sqlite OR filetype:mdb
+site:example.com filetype:env "DB_PASSWORD" OR "AWS_SECRET_ACCESS_KEY"
+site:example.com inurl:wp-config.php OR inurl:configuration.php OR inurl:settings.py
 
-# 3. Sensitive Corporate Documents & PII
-site:target.com filetype:xls OR filetype:xlsx "salary" OR "budget" OR "confidential"
-site:target.com filetype:pdf "not for public distribution" OR "proprietary"
+# 3. Sensitive Corporate Documents & PII Leaks
+site:example.com filetype:xls OR filetype:xlsx "salary" OR "budget" OR "confidential"
+site:example.com filetype:pdf "not for public distribution" OR "proprietary" OR "strictly private"
+site:example.com filetype:doc OR filetype:docx "internal use only" "security policy"
 
 # 4. Exposed Log Files & Debug Telemetry
-site:target.com filetype:log intext:"error" OR intext:"password" OR intext:"token"
-site:target.com inurl:phpinfo.php OR inurl:info.php "PHP Version"
+site:example.com filetype:log intext:"error" OR intext:"password" OR intext:"token"
+site:example.com inurl:phpinfo.php OR inurl:info.php "PHP Version"
+site:example.com filetype:json intext:"client_secret" OR intext:"api_key"
 
 # 5. Cloud Storage Leaks (AWS S3, Azure Blob, Google Cloud Storage)
-site:s3.amazonaws.com "target-company"
-site:blob.core.windows.net "target-company"
-site:storage.googleapis.com "target-company"
+site:s3.amazonaws.com "example.com"
+site:blob.core.windows.net "example.com"
+site:storage.googleapis.com "example.com"
 ```
 
-### 2.3 Alternative & Specialized Search Engines
-* **Brave Search / Mojeek:** Independent search index engines that do not rely on Google or Bing crawl databases.
-* **SearXNG:** Self-hosted, privacy-respecting metasearch engine combining results from 70+ search services without tracking queries.
-* **Yandex:** Exceptional reverse image recognition capabilities and indexing of Eastern European/Russian networks.
-* **Baidu:** Necessary for Asian/Chinese infrastructure, domains, and regional web platforms.
+> ⚠️ **Legal & Ethical Notice:** Utilize dorking queries strictly against infrastructure and corporate assets you are authorized to assess. Accessing exposed administrative portals or downloading confidential database dumps without authorization violates the Computer Fraud and Abuse Act (CFAA) and equivalent international statutes.
+
+### 3.3 Authoritative Dorking Repositories:
+* **Exploit-DB Google Hacking Database (GHDB):** The definitive public index of thousands of community-submitted dorks organized into categories (Vulnerable Servers, Sensitive Directories, Files Containing Passwords).
+* **DorkSearch:** Web application providing high-speed autocomplete and indexing over GHDB dorks with single-click query generation.
+* **DorkGPT:** LLM-powered natural language prompt generator converting plain English queries into syntax-validated Google dork strings.
 
 ---
 
-## Module 03: People & Identity Intelligence
+## 4. Username OSINT
 
-### 3.1 Username Enumeration & Behavioral Profiling
-Adversaries and targets frequently reuse usernames or handle variants (`johndoe`, `johndoe_sec`, `j_doe99`) across development, social, and gaming platforms.
+Adversaries, targets, and investigators frequently reuse aliases and usernames across online platforms, gaming networks, development forums, and social media. Username reconnaissance builds comprehensive behavioral footprints from a single digital handle.
 
-### 3.2 Core Tools & Practical Execution
+### 4.1 Automated CLI Toolchain:
 
 #### 1. Sherlock
-Searches over 400 social platforms and sites via HTTP status checks and response signatures:
+The industry standard Python CLI utility scanning over 400 social platforms via HTTP status codes and signature detection:
 
 ```bash
 # Installation
 sudo apt update && sudo apt install -y sherlock
 
-# Scan target username across all platforms
-sherlock target_alias --print-found
+# Scan target username across all 400+ indexed sites
+sherlock username123 --print-found
 
 # Scan multiple candidate usernames and output to folder
-sherlock user1 user2 user3 --folderoutput ./recon_results/
+sherlock user1 user2 user3 --folderoutput ./sherlock_results/
 ```
 
 #### 2. Maigret
-Maigret is an advanced fork of Sherlock that extracts user profile metadata (real names, bio, avatars, locations) and parses web pages for secondary links:
+Advanced fork of Sherlock that extracts user profile metadata (real names, bio, avatars, locations) and parses web pages for secondary links:
 
 ```bash
 # Installation via pipx
 pipx install maigret
 
-# Deep search with parsing of profile metadata
-maigret target_alias -a --parse-all
-
-# Generate comprehensive HTML & JSON dossier report
-maigret target_alias --html --json
+# Deep search with metadata parsing and report export
+maigret username123 -a --parse-all --html --json
 ```
 
 #### 3. WhatsMyName
-High-speed Python engine querying the WhatsMyName curated JSON signature database:
+High-speed Python engine querying the curated WhatsMyName JSON signature database (maintained by WebBreacher):
 
 ```bash
 git clone https://github.com/WebBreacher/WhatsMyName.git
 cd WhatsMyName
 pip3 install -r requirements.txt
-python3 whatsmyname.py -u target_alias
+python3 whatsmyname.py -u username123
 ```
+
+#### 4. Blackbird
+Fast async OSINT tool written in Python that searches for accounts by username across 570+ websites with low false-positive rates:
+
+```bash
+git clone https://github.com/p1ngul1n0/blackbird
+cd blackbird
+pip install -r requirements.txt
+python blackbird.py -u username123
+```
+
+### 4.2 Web-Based Username Portals:
+* **WhatsMyName Web (`whatsmyname.app`):** Web client interface for rapid querying across 600+ platforms.
+* **KnowEm / Namechk / NameCheckup:** Brand protection and domain availability lookup engines that verify handle availability across major registries.
+* **UserSearch (`usersearch.org`):** Deep search engine for usernames, dating profiles, gaming accounts, and crypto forums.
+* **Instant Username Search:** Real-time JavaScript search engine checking username availability across 100+ social networks simultaneously.
 
 ---
 
-## Module 04: Email Intelligence & Header Forensics
+## 5. Email OSINT
 
-### 4.1 Email Discovery & Account Binding
-Given an email address (`analyst@target.com`), investigators determine:
-1. Is the email address deliverable?
-2. Which third-party online platforms (GitHub, Twitter, Spotify, Adobe) have an account registered with this address?
-3. What is the associated Gravatar profile, avatar hash, or Google account ID?
+Email addresses (`user@example.com`) are unique digital identifiers. Investigating an email address enables analysts to pivot across enterprise domains, breach records, social media profiles, and cloud services.
 
-### 4.2 Automated Email Reconnaissance Tools
+```mermaid
+flowchart TD
+    E["Target Email:
+user@example.com"]
+    E --> D["Domain Recon
+(MX Records, SPF, Office365)"]
+    E --> H["Service Registration
+(Holehe: GitHub, Twitter, Spotify)"]
+    E --> G["Google / Gravatar
+(Epieos: Maps Reviews, Profile Pic)"]
+    E --> B["Breach Records
+(HIBP, DeHashed, Hudson Rock)"]
+    E --> R["Reputation & Fraud
+(EmailRep.io, IPQS)"]
+
+    style E fill:#0f172a,stroke:#00e5ff,color:#fff
+    style D fill:#1e293b,stroke:#ffab00,color:#fff
+    style H fill:#1e293b,stroke:#00e676,color:#fff
+    style G fill:#1e293b,stroke:#b388ff,color:#fff
+    style B fill:#1e293b,stroke:#ff5252,color:#fff
+    style R fill:#1e293b,stroke:#90caf9,color:#fff
+```
+
+### 5.1 Automated Tooling:
 
 #### 1. Holehe
-Checks account registration status across 120+ platforms using password reset and signup endpoint side-channels without alerting the target:
+Checks if an email is registered on over 120 services (Twitter, Instagram, GitHub, Discord, Adobe, Office365) by leveraging password reset and signup endpoints without alerting the target:
 
 ```bash
 # Installation
 pipx install holehe
 
-# Query email address
-holehe target@example.com
+# Execute non-intrusive service enumeration
+holehe user@example.com
 ```
 
-#### 2. Epieos
-Web service (`https://epieos.com/`) that queries Google account metadata, reveals linked Google Reviews, Google Maps edits, calendar availability, and profile photos from a simple email query.
+#### 2. Epieos (`epieos.com`)
+Pioneering web service that inspects Google account metadata tied to an email address. Uncovers linked Google Reviews, Google Maps location edits, profile avatars, and calendar availability.
 
-#### 3. Hunter.io / Phonebook.cz
-* **Hunter.io:** Identifies the corporate email formatting pattern (e.g., `{first}.{last}@company.com`) and lists all public indexed emails for an enterprise domain.
-* **Phonebook.cz:** Free search interface indexing over 40 billion records from Intelligence X.
+#### 3. EmailRep (`emailrep.io`)
+Queries community telemetry and risk databases to assess whether an email address is suspicious, has been involved in malicious campaigns, is a disposable address, or has active social presence:
 
-### 4.3 Email Header Forensic Analysis
-During phishing and business email compromise (BEC) investigations, dissect the raw RFC 822 email header:
+```bash
+# Query EmailRep API via curl
+curl -s "https://emailrep.io/user@example.com" | jq .
+```
+
+#### 4. Corporate Email Harvesting:
+* **Hunter.io:** Analyzes corporate email structures (e.g., `{first}.{last}@company.com`) and indexes publicly visible corporate addresses.
+* **Phonebook.cz:** Free intelligence portal powered by Intelligence X containing billions of indexed email addresses, URLs, and domains.
+* **VoilaNorbert / Snov.io / RocketReach / Clearbit:** Enterprise lead verification platforms mapping employee roles and direct email routes.
+
+---
+
+## 6. Email Header Analysis
+
+In phishing, Business Email Compromise (BEC), and spoofing investigations, the visible `From:` address in an email client is easily forged. Dissecting raw RFC 5322 headers reveals the true cryptographic routing chain and originating infrastructure.
+
+### 6.1 Anatomical Dissection of Email Headers:
 
 ```text
 Received: from mail-relay.attacker.com (mail-relay.attacker.com [198.51.100.45])
-    by mx.google.com with ESMTPS id ...
-    for <victim@target.com>; Mon, 14 Sep 2026 10:14:22 -0700 (PDT)
+    by mx.google.com with ESMTPS id a12-20020a056...
+    for <victim@example.com>; Mon, 14 Sep 2026 10:14:22 -0700 (PDT)
 Authentication-Results: mx.google.com;
-    dkim=pass header.i=@legitimate-partner.com;
-    spf=fail (google.com: domain of sender@attacker.com does not designate 198.51.100.45 as permitted sender)
-Return-Path: <spoofed@attacker.com>
+    dkim=pass header.i=@legitimate-bank.com;
+    spf=fail (google.com: domain of alert@attacker.com does not designate 198.51.100.45 as permitted sender)
+Return-Path: <bounce@attacker.com>
 Message-ID: <20260914171422.12345@attacker.com>
+From: Security Alert <alert@legitimate-bank.com>
+Reply-To: credential-harvest@phishing-relay.org
 X-Originating-IP: [203.0.113.88]
 ```
 
-#### Header Verification Checklist:
-1. **Trace the `Received:` chain from bottom to top:** The bottom-most `Received:` line represents the original sending mail transfer agent (MTA) or mail client.
-2. **SPF (Sender Policy Framework):** Verifies if the sending IP is authorized by the domain's DNS `v=spf1` TXT record.
-3. **DKIM (DomainKeys Identified Mail):** Cryptographic signature verifying that the email content was not modified in transit.
-4. **DMARC (Domain-based Message Authentication, Reporting, and Conformance):** Specifies the receiving server's action (`none`, `quarantine`, `reject`) when SPF/DKIM fail.
-5. **Inspect `X-Originating-IP`:** Captures the client IP behind webmail portals (Outlook Web App, roundcube).
+### 6.2 Key Header Fields to Inspect:
+1. **`Received:` (Bottom to Top):** Trace the path of Mail Transfer Agents (MTAs). The bottom-most `Received:` line represents the original sending mail server or originating client.
+2. **`Authentication-Results:`:** Shows whether the message passed **SPF**, **DKIM**, and **DMARC** validation checks at the destination mail gateway.
+3. **`SPF (Sender Policy Framework):`** Checks whether the sending IP address is listed in the sender domain's DNS `v=spf1` TXT record.
+4. **`DKIM (DomainKeys Identified Mail):`** Uses cryptographic public-key cryptography to verify that the message body was not altered in transit.
+5. **`DMARC (Domain-based Message Authentication, Reporting, and Conformance):`** Tells receiving servers how to handle failures (`p=none`, `p=quarantine`, `p=reject`).
+6. **`X-Originating-IP:`:** Exposes the true client IP address behind webmail gateways (Outlook Web Access, Roundcube).
+
+### 6.3 Header Analysis Engines:
+* **MXToolbox Header Analyzer:** Parses raw email headers into structured tables with hop delay timings and DNS checks.
+* **Google Admin Toolbox Messageheader:** Visualizes delivery hops and latency across Google infrastructure.
+* **Microsoft Message Header Analyzer (MHA):** Official tool for parsing Exchange and Office 365 routing telemetry.
+* **Mailheader.org / CentralOps:** Instant online header parsers highlighting IP geolocation and authentication failures.
 
 ---
 
-## Module 05: Phone Number & Telecom Reconnaissance
+## 7. Phone Number OSINT
 
-### 5.1 Telecom Routing & E.164 Standards
-International telecommunication numbers adhere to the ITU E.164 recommendation (e.g., `+[Country Code][Subscriber Number]`).
+Phone numbers adhere to international telecommunication standards (ITU E.164). While a lookup result should never be treated as conclusive legal proof of identity without corroboration, telecom OSINT reveals carrier routing, line types, and public associations.
 
-### 5.2 Investigative Vectors:
-* **Carrier & Line Type:** Distinguish landline, cellular, and VoIP numbers (Google Voice, Skype, Twilio). VoIP numbers indicate burner accounts.
-* **HLR (Home Location Register) Lookups:** Discloses the current Mobile Country Code (MCC), Mobile Network Code (MNC), and whether the SIM card is currently active or roaming.
-* **Caller ID Aggregators:** Services like Truecaller, Whoscall, and Sync.ME crowdsource address books, revealing real names attached to unlisted numbers.
+### 7.1 Key Telecommunication Pivot Metrics:
+* **Number Format:** E.164 standard (`+[Country Code][Subscriber Number]`), RFC 3966 URI formatting.
+* **Line Type:** Distinguishes fixed line (landline), mobile cellular, and **VoIP (Voice over IP)**. VoIP numbers (Twilio, Google Voice, Skype) indicate virtual or temporary burner numbers.
+* **Original Network Operator (MNO) vs. Current Carrier:** Identifies Mobile Number Portability (MNP) mutations where a user transferred their number to a new carrier.
+* **HLR (Home Location Register) Status:** Verifies whether the SIM card is currently active, connected to a tower, or roaming.
 
-### 5.3 Automated Phone OSINT with PhoneInfoga
+### 7.2 Core Tooling:
+
+#### 1. PhoneInfoga
+Advanced Python and Go utility scanning phone numbers using international numbering plan databases, search engine footprints, and NumVerify APIs:
 
 ```bash
-# Download and install PhoneInfoga binary
+# Installation
 curl -sSL https://raw.githubusercontent.com/sundowndev/phoneinfoga/master/support/scripts/install | bash
 sudo mv ./phoneinfoga /usr/local/bin/
 
-# Scan single phone number
+# CLI Scan on international number
 phoneinfoga scan -n "+14155552671"
 
-# Launch local investigative web GUI
+# Launch local investigative web interface
 phoneinfoga serve -p 8080
 ```
 
+#### 2. Caller ID Crowdsourced Portals:
+* **Truecaller / Whoscall / Sync.ME:** Crowdsourced address book databases that reveal registered subscriber names and spam ratings.
+* **NumVerify / Veriphone / AbstractAPI:** REST APIs providing carrier name, country code, line type, and telecom validation.
+* **ThatsThem / NumLookup:** Reverse phone directories querying public phonebooks and marketing registries.
+
 ---
 
-## Module 06: Domain, DNS & Infrastructure OSINT
+## 8. Domain OSINT
 
-### 6.1 Domain Registration & RDAP
-* **WHOIS:** Classical text-based protocol querying registrar databases on port 43. Frequently redacted due to GDPR.
-* **RDAP (Registration Data Access Protocol):** RESTful, JSON-based replacement for WHOIS providing machine-readable registrar, registrant, and nameserver structures.
+Domain names (`example.com`) are the central anchors of internet infrastructure. Investigating a domain reveals DNS servers, registrar details, historical hosting providers, linked email servers, and corporate subsidiaries.
 
-```bash
-# Query RDAP via curl
-curl -s "https://rdap.org/domain/example.com" | jq '{registrar: .entities[0].vcardArray[1][1][3], status: .status}'
+### 8.1 Primary Domain Investigation Utilities:
+* **WHOIS / RDAP:** Queries top-level registrars for ownership, administrative contacts, creation dates, and status codes (`clientTransferProhibited`).
+* **SecurityTrails:** The industry benchmark for historical DNS data, recording past A, AAAA, MX, and NS records spanning over a decade.
+* **ViewDNS.info:** Swiss Army knife providing reverse IP lookups, reverse WHOIS, DNS record auditing, and port scans.
+* **DNSDumpster:** Free domain research tool generating graphical network topology diagrams of discovered subdomains and mail servers.
+* **crt.sh:** Search engine parsing public Certificate Transparency logs for SSL/TLS certificates issued to any domain or wildcard.
+* **DomainTools / RiskIQ (Microsoft Defender EASM):** Enterprise threat infrastructure mapping correlating shared SSL certificates and IP blocks.
+
+---
+
+## 9. DNS OSINT
+
+The Domain Name System (DNS) translates human-readable hostnames into machine-routable IP addresses. Querying authoritative nameservers provides critical passive and semi-passive intelligence regarding enterprise architecture.
+
+```mermaid
+flowchart LR
+    Target["example.com"]
+    Target -->|"A"| IPv4["198.51.100.25 (Hosting / CDN)"]
+    Target -->|"AAAA"| IPv6["2001:db8::1"]
+    Target -->|"MX"| Mail["example-com.mail.protection.outlook.com"]
+    Target -->|"TXT"| SPF["v=spf1 include:_spf.google.com ~all"]
+    Target -->|"NS"| Nameserver["ns1.cloudflare.com"]
+    Target -->|"SOA"| Admin["hostmaster@example.com (Zone Serial)"]
+
+    style Target fill:#0f172a,stroke:#00e5ff,color:#fff
+    style IPv4 fill:#1e293b,stroke:#ffab00,color:#fff
+    style IPv6 fill:#1e293b,stroke:#ffab00,color:#fff
+    style Mail fill:#1e293b,stroke:#00e676,color:#fff
+    style SPF fill:#1e293b,stroke:#b388ff,color:#fff
+    style Nameserver fill:#1e293b,stroke:#ff5252,color:#fff
+    style Admin fill:#1e293b,stroke:#90caf9,color:#fff
 ```
 
-### 6.2 DNS Anatomy & Command-Line Queries
-The Domain Name System translates human-readable hostnames to IP addresses. It provides critical attack-surface intelligence:
+### 9.1 Standard DNS CLI Commands:
 
 ```bash
 # 1. Query IPv4 (A) and IPv6 (AAAA) records
-dig +short A target.com
-dig +short AAAA target.com
+dig +short A example.com
+dig +short AAAA example.com
 
-# 2. Query Mail Exchange (MX) records (Reveals email hosting: Office365, Google Workspace, on-prem)
-dig +short MX target.com
+# 2. Query Mail Exchange (MX) records (Reveals email provider: Google, Microsoft, Proofpoint)
+dig +short MX example.com
 
 # 3. Query Authoritative Nameservers (NS)
-dig +short NS target.com
+dig +short NS example.com
 
-# 4. Query TXT records (Reveals SPF email routes, verification tokens, third-party SaaS bindings)
-dig +short TXT target.com
+# 4. Query TXT records (Extracts SPF, domain verification tokens, DMARC pointers)
+dig +short TXT example.com
+dig +short TXT _dmarc.example.com
 
-# 5. Full Zone Transfer Attempt (AXFR - Test for misconfigured nameservers)
-dig axfr @ns1.target.com target.com
+# 5. Query Start of Authority (SOA) (Reveals primary master nameserver and admin email)
+dig +short SOA example.com
+
+# 6. Test for Misconfigured DNS Zone Transfer (AXFR)
+dig axfr @ns1.example.com example.com
 ```
+
+### 9.2 DNS Diagnostics Portals:
+* **DNSViz (`dnsviz.net`):** Visualizes the entire cryptographic DNSSEC chain of trust, highlighting broken parent-child delegation chains.
+* **IntoDNS:** Rapid health checker validating NS record consistency, SOA serial numbers, and mail exchange responsiveness.
+* **HackerTarget DNS Tools:** Free API suite for fast reverse DNS lookups, ASNs, and shared DNS servers.
+
+---
+
+## 10. Subdomain Enumeration
+
+Organizations rarely expose vulnerabilities on their primary corporate web homepage (`example.com`). Instead, compromises occur through forgotten development testbeds, staging servers, obsolete VPN portals, and internal documentation sites (`dev-api.example.com`, `vpn-legacy.example.com`, `jira.corp.example.com`).
+
+### 10.1 Passive Subdomain Toolchain:
+
+#### 1. OWASP Amass
+The industry benchmark for attack surface mapping and asset discovery:
+
+```bash
+# Passive enumeration without sending packets to target
+amass enum -passive -d example.com -o amass_subs.txt
+```
+
+#### 2. Subfinder (ProjectDiscovery)
+Blazing-fast passive subdomain discovery tool querying over 40 passive data sources (Chaos, Shodan, Censys, OTX):
+
+```bash
+# Passive scan across all passive sources
+subfinder -d example.com -all -silent -o subfinder_subs.txt
+```
+
+#### 3. Assetfinder
+Lightweight Go utility designed to find domains and subdomains related to a given domain:
+
+```bash
+assetfinder --subs-only example.com > assetfinder_subs.txt
+```
+
+#### 4. Findomain
+High-speed Rust binary querying multiple public APIs and web archives:
+
+```bash
+findomain -t example.com -u findomain_subs.txt
+```
+
+#### 5. Unified Passive Aggregation Pipeline:
+
+```bash
+# Combine and de-duplicate across all passive tools
+cat amass_subs.txt subfinder_subs.txt assetfinder_subs.txt findomain_subs.txt | sort -u > all_subdomains.txt
+
+# Probe for live HTTP/HTTPS services using httpx
+cat all_subdomains.txt | httpx -silent -status-code -title -o live_services.txt
+```
+
+---
+
+## 11. IP Address OSINT
+
+Given a raw IPv4 or IPv6 address (e.g., `8.8.8.8` or `198.51.100.14`), investigators determine ownership, hosting provider, Autonomous System Number (ASN), geographical location, reputation, and exposed services.
+
+### 11.1 Key Investigative Questions:
+1. **Who owns this IP?** Which Organization, ISP, or Hosting Provider holds the allocation?
+2. **Which ASN (Autonomous System Number) routes this prefix?**
+3. **What is the IP's physical jurisdiction and registration country?**
+4. **What services, ports, and software daemons are exposed to the public internet?**
+5. **Has this IP address been flagged for malicious activity (brute-forcing, malware C2, spam)?**
+6. **What SSL/TLS certificates have been observed on this address?**
+7. **What historical domains resolved to this IP address?**
+
+### 11.2 Core IP Telemetry Engines:
+* **BGPView (`bgpview.io`):** The definitive portal for Autonomous System (AS) and BGP prefix routing, upstream providers, and IXP peers.
+* **Hurricane Electric BGP Toolkit (`bgp.he.net`):** Comprehensive routing visualization, DNS records, and IP WHOIS.
+* **IPinfo.io:** High-accuracy IP geolocation, ASN assignment, company ownership, and VPN/Tor/Proxy detection flags.
+* **AbuseIPDB:** Crowdsourced database where system administrators report malicious IPs engaged in attacks.
+* **Spur (`spur.us`):** Specialized intelligence provider tracking commercial VPN services, residential proxies, and bulletproof hosting.
+* **Regional Internet Registries (RIRs):** Querying authoritative registries directly:
+  * **ARIN:** North America & parts of the Caribbean
+  * **RIPE NCC:** Europe, Central Asia, and the Middle East
+  * **APNIC:** Asia-Pacific region
+  * **AFRINIC:** African continent
+  * **LACNIC:** Latin America and the Caribbean
+
+---
+
+## 12. Shodan
+
+Shodan is the world's first search engine for Internet-connected devices. Rather than crawling web pages, Shodan continuously sends probes across the entire IPv4 address space, interrogating ports 1 through 65535 and indexing raw banners returned by daemons, web servers, industrial control systems (ICS/SCADA), IoT cameras, and database services.
 
 ```mermaid
-flowchart TD
-    D["target.com"]
-    D -->|"A / AAAA"| IP["198.51.100.25 (Hosting Provider / CDN)"]
-    D -->|"MX"| M["target-com.mail.protection.outlook.com (Office 365)"]
-    D -->|"TXT"| S["v=spf1 include:sendgrid.net include:_spf.google.com ~all"]
-    D -->|"NS"| NS["ns1.cloudflare.com (WAF / DDoS Shield)"]
-    D -->|"SOA"| SOA["Admin Email: hostmaster.target.com"]
+flowchart LR
+    S["Shodan Crawler Engines"] --> P["TCP/UDP Port Probes
+(80, 443, 22, 3389, 502, 9200)"]
+    P --> B["Raw Banner Capture
+(HTTP Headers, SSL Certs, SSH Strings)"]
+    B --> I["Indexed Telemetry Database
+(Searchable via Filters & API)"]
 
-    style D fill:#1e293b,stroke:#00e5ff,color:#fff
-    style IP fill:#0f172a,stroke:#ffab00,color:#fff
-    style M fill:#0f172a,stroke:#00e676,color:#fff
-    style S fill:#0f172a,stroke:#b388ff,color:#fff
-    style NS fill:#0f172a,stroke:#ff5252,color:#fff
-    style SOA fill:#0f172a,stroke:#90caf9,color:#fff
+    style S fill:#0f172a,stroke:#00e5ff,color:#fff
+    style P fill:#1e293b,stroke:#ffab00,color:#fff
+    style B fill:#1e293b,stroke:#00e676,color:#fff
+    style I fill:#1e293b,stroke:#b388ff,color:#fff
 ```
 
----
+### 12.1 High-Yield Shodan Search Filters:
 
-## Module 07: Subdomain Discovery & Attack Surface Mapping
-
-### 7.1 Passive Subdomain Harvesting Mechanics
-Attackers rarely breach well-guarded root domains (`target.com`). Instead, they target forgotten staging portals, developer testbeds, and legacy VPN appliances (`dev-api.target.com`, `vpn-legacy.target.com`).
-
-### 7.2 Primary Toolchain
-
-#### 1. Subfinder (ProjectDiscovery)
-Blazing-fast passive subdomain discovery tool leveraging over 40 public APIs (AlienVault OTX, Chaos, Censys, VirusTotal):
-
-```bash
-# Installation
-sudo apt install -y subfinder
-
-# Passive scan across all passive sources
-subfinder -d target.com -all -silent -o subdomains_subfinder.txt
-```
-
-#### 2. OWASP Amass
-The industry benchmark in passive attack surface discovery and graph correlation:
-
-```bash
-# Installation
-sudo apt install -y amass
-
-# Passive enumeration without sending traffic to target
-amass enum -passive -d target.com -o subdomains_amass.txt
-```
-
-#### 3. Certificate Transparency (CT) Log Mining
-Whenever a Certificate Authority issues a TLS certificate, it must log the issuance to public Certificate Transparency logs. This allows analysts to discover newly created internal subdomains instantly:
-
-```bash
-# Query crt.sh API via curl and parse with jq
-curl -s "https://crt.sh/?q=%.target.com&output=json" | \
-  jq -r '.[].name_value' | \
-  sed 's/\*\.//g' | \
-  sort -u > subdomains_crtsh.txt
-```
-
-#### 4. Unified Discovery Pipeline
-
-```bash
-# High-Throughput Aggregation Bash Pipeline
-subfinder -d target.com -silent | \
-  assetfinder --subs-only | \
-  anew subdomains_raw.txt
-
-cat subdomains_raw.txt | sort -u | dnsx -silent -a -resp -o resolved_hosts.txt
-```
-
----
-
-## Module 08: Network Scanners & Internet-Wide Telemetry
-
-### 8.1 Shodan: The Search Engine for Internet-Connected Devices
-Shodan continuously crawls the entire IPv4 address space, sending service probes and indexing raw banner responses from ports 1 to 65535.
-
-#### Master Shodan Filters & Syntax:
-
-| Filter | Example | Description |
+| Filter | Example Query | Purpose & Analytical Mechanics |
 | :--- | :--- | :--- |
-| `net:` | `net:198.51.100.0/24` | Scans an entire CIDR network block |
-| `org:` | `org:"Target Corporation"` | Filters by registered organization name in BGP/WHOIS |
-| `ssl:` | `ssl:"target.com"` | Matches certificates containing the target's domain name |
-| `port:` | `port:3389,8080,445` | Filters specific exposed network ports |
-| `has_vuln:true` | `has_vuln:true org:"Target"` | Surfaces hosts with known unpatched CVEs |
-| `product:` | `product:"Apache httpd"` | Filters by specific software daemon |
-| `http.title:` | `http.title:"Dashboard"` | Searches for specific title strings in HTML responses |
+| `net:` | `net:198.51.100.0/24` | Scans all discovered banners across a specific CIDR subnetwork block |
+| `org:` | `org:"Target Corporation"` | Filters hosts by the registered BGP organization name |
+| `hostname:` | `hostname:example.com` | Matches systems whose reverse DNS matches a specific domain string |
+| `ssl:` | `ssl:"example.com"` | Matches hosts presenting certificates containing the target domain |
+| `ssl.cert.subject.cn:` | `ssl.cert.subject.cn:example.com` | Matches the Common Name (CN) field of leaf SSL/TLS certificates |
+| `port:` | `port:3389,8080,445` | Restricts search results to specific open network ports |
+| `product:` | `product:"Apache httpd"` | Identifies hosts running specific server software daemons |
+| `version:` | `version:"2.4.49"` | Identifies hosts running specific software versions (useful for CVE triage) |
+| `has_vuln:true` | `has_vuln:true org:"Target"` | Surfaces hosts with confirmed unpatched CVE vulnerabilities |
+| `http.title:` | `http.title:"Dashboard"` | Searches HTML `<title>` strings returned on web ports |
+
+### 12.2 Shodan CLI Workflow:
 
 ```bash
-# Shodan CLI Setup
-pip install shodan
+# Initialize Shodan API Key
 shodan init YOUR_SHODAN_API_KEY
 
-# Query host details and open ports
+# Query all exposed ports and banners for a single IP address
 shodan host 198.51.100.14
 
-# Search for exposed ElasticSearch clusters with no authentication
-shodan search "port:9200 json:\"cluster_name\"" --fields ip_str,port,org
-```
+# Search for open ElasticSearch instances lacking authentication
+shodan search "port:9200 json:"cluster_name"" --fields ip_str,port,org
 
-### 8.2 Censys
-Censys monitors public certificates and hosts with deep protocol dissections (HTTP/2, SSH, SMB, TLS):
-
-```bash
-# Censys CLI search
-censys search "services.tls.certificates.leaf_data.subject.common_name: target.com"
-```
-
-### 8.3 GreyNoise: Separating Targeted Attacks from Mass Scanners
-GreyNoise categorizes Internet noise—differentiating benign crawlers (Shodan, Qualys, Censys), indiscriminate malicious worms (Mirai, mass exploiters), and stealthy targeted traffic.
-
-```bash
-# Query IP reputation
-greynoise ip 198.51.100.14
+# Count total global exposures of an unpatched CVE
+shodan count "vuln:CVE-2021-44228"
 ```
 
 ---
 
-## Module 09: Web Application & Technology Profiling
+## 13. Censys
 
-### 9.1 Framework & Header Fingerprinting
-Understanding the target's software stack reveals known CVE attack vectors:
-* **HTTP Response Headers:** `Server: nginx/1.18.0`, `X-Powered-By: PHP/7.4`, `Set-Cookie: PHPSESSID` (PHP), `csrftoken` (Django), `JSESSIONID` (Java/Spring).
-* **HTML DOM Signatures:** Script source paths (`/wp-content/themes/` indicates WordPress, `_next/static/` indicates Next.js).
+Censys provides deep attack surface management and internet scanning capabilities. Created by researchers at the University of Michigan, Censys performs continuous protocol dissections across millions of hosts and certificates.
 
-### 9.2 Tooling:
-* **Wappalyzer CLI:** Analyzes HTML, headers, cookies, and scripts:
-  ```bash
-  wappalyzer https://target.com
-  ```
-* **urlscan.io:** Automated headless browser crawler executing JavaScript, capturing DOM snapshots, loaded external resources, outbound connections, and full page screenshots:
-  ```bash
-  curl -s -X POST "https://urlscan.io/api/v1/scan/" \
-    -H "Content-Type: application/json" \
-    -H "API-Key: $URLSCAN_API_KEY" \
-    -d '{"url": "https://target.com", "visibility": "public"}'
+### 13.1 Key Capabilities:
+* **Host & Service Profiling:** Performs protocol-level handshakes on dozens of application protocols (HTTP, TLS, SSH, SMB, Telnet, RDP).
+* **Certificate Discovery:** Maintains the world's most exhaustive repository of X.509 certificates, enabling analysts to trace enterprise infrastructure through shared TLS certificates.
+* **Censys Search Query Syntax:**
+  ```text
+  services.service_name: "HTTP" and services.banner: "nginx"
+  services.tls.certificates.leaf_data.subject.common_name: "example.com"
+  location.country: "United States" and autonomous_system.asn: 15169
   ```
 
 ---
 
-## Module 10: Social Media Intelligence (SOCMINT)
+## 14. Certificate Transparency
 
-### 10.1 Corporate Footprint & Employee Target Mapping
-SOCMINT gathers operational intelligence from human assets:
+Certificate Transparency (CT) is an open cryptographic framework designed to audit and monitor the issuance of SSL/TLS certificates. Whenever any Certificate Authority (CA) issues a certificate, it must cryptographically log the certificate to public append-only CT logs.
+
+### 14.1 Investigative Value:
+* **Real-Time Discovery:** Internal development servers, staging environments, and subsidiary domains (`staging-auth.example.com`, `vpn-us-west.example.com`) are logged publicly the instant an SSL certificate is generated.
+* **Historical Certificate Mining:** Reveals historical hostnames, retired infrastructure, and shared cryptographic keys.
+
+### 14.2 Querying CT Logs:
+* **crt.sh:** The primary web and API interface for querying CT logs:
+  ```bash
+  # Query crt.sh API via curl and parse unique hostnames with jq
+  curl -s "https://crt.sh/?q=%.example.com&output=json" |     jq -r '.[].name_value' |     sed 's/\*\.//g' |     sort -u > ct_subdomains.txt
+  ```
+* **CertSpotter / SSLMate:** Real-time CT log monitoring alerting administrators the moment a certificate is issued for their domain.
+
+---
+
+## 15. Website Technology OSINT
+
+Fingerprinting the technology stack powering a target web application reveals underlying frameworks, CMS engines, analytics scripts, and hosting infrastructure—highlighting known vulnerabilities.
+
+### 15.1 Core Tooling:
+* **Wappalyzer:** Software profiler detecting over 2,500 web technologies (CMS, web frameworks, e-commerce platforms, JavaScript libraries, server software):
+  ```bash
+  # CLI execution
+  wappalyzer https://example.com
+  ```
+* **BuiltWith (`builtwith.com`):** Comprehensive historical technology profiler tracking tracking codes, CDN usage, advertising tags, and historical tech migrations.
+* **WhatRuns:** Lightweight browser extension and analysis tool detailing frameworks, fonts, and WordPress plugins.
+* **SecurityHeaders (`securityheaders.com`):** Audits HTTP security response headers (`Content-Security-Policy`, `Strict-Transport-Security`, `X-Frame-Options`).
+* **WhatCMS (`whatcms.org`):** Accurately identifies over 400 content management systems (WordPress, Drupal, Joomla, Ghost).
+
+---
+
+## 16. URL Analysis
+
+Analyzing suspicious URLs without exposing your own infrastructure is critical during phishing, fraud, and malware investigations.
+
+### 16.1 Automated URL Sandboxes:
+* **urlscan.io:** Submits URLs to a sandboxed headless browser, recording outbound HTTP requests, loaded DOM resources, JavaScript executions, TLS handshakes, and capturing a full-page screenshot.
+  ```bash
+  # Submit URL to urlscan.io via API
+  curl -s -X POST "https://urlscan.io/api/v1/scan/"     -H "Content-Type: application/json"     -H "API-Key: $URLSCAN_API_KEY"     -d '{"url": "https://suspicious-domain.com", "visibility": "public"}'
+  ```
+* **VirusTotal:** Aggregates URL reputation data across 70+ antivirus and web categorization scanners.
+* **Google Safe Browsing:** Authoritative database flagging malware, social engineering, and unwanted software distribution.
+* **PhishTank / OpenPhish:** Real-time community feeds tracking active phishing landing pages.
+* **Hybrid Analysis / ANY.RUN:** Interactive malware sandboxes executing suspicious URLs in live virtual machines to record second-stage payload drops.
+
+---
+
+## 17. Malware & Cyber Threat Intelligence OSINT
+
+Cyber Threat Intelligence (CTI) platforms correlate technical Indicators of Compromise (IOCs)—such as IPs, domains, hashes, and mutexes—to identify threat actors, campaigns, and malware families.
 
 ```mermaid
 flowchart TD
-    LI["LinkedIn Corporate Page"] --> HR["Employee Directory & Roles"]
-    HR --> ORG["Org Chart & Tech Stack Roles\n(e.g., 'AWS DevOps Engineer')"]
-    ORG --> EX["Identify Key Admins & C-Level"]
-    EX --> TW["Twitter / X Personal Profiles\n(Operational complaints, hobbies)"]
-    EX --> GH["Personal GitHub Repositories\n(Accidental internal code uploads)"]
-    EX --> TG["Telegram / Discord Participation"]
+    IOC["Indicator of Compromise (IOC)
+(Hash, Domain, IP, Mutex)"]
+    IOC --> VT["VirusTotal / AlienVault OTX"]
+    IOC --> MB["MalwareBazaar / ThreatFox"]
+    IOC --> HA["Hybrid Analysis / Triage Sandbox"]
+    
+    VT --> CORR["Threat Actor & Campaign Attribution
+(e.g., APT29, Cobalt Strike, Bumblebee)"]
+    MB --> CORR
+    HA --> CORR
 
-    style LI fill:#1e293b,stroke:#00e5ff,color:#fff
-    style HR fill:#0f172a,stroke:#ffab00,color:#fff
-    style ORG fill:#0f172a,stroke:#00e676,color:#fff
-    style EX fill:#0f172a,stroke:#b388ff,color:#fff
-    style TW fill:#0f172a,stroke:#ff5252,color:#fff
-    style GH fill:#0f172a,stroke:#90caf9,color:#fff
-    style TG fill:#0f172a,stroke:#f48fb1,color:#fff
+    style IOC fill:#0f172a,stroke:#00e5ff,color:#fff
+    style VT fill:#1e293b,stroke:#ffab00,color:#fff
+    style MB fill:#1e293b,stroke:#00e676,color:#fff
+    style HA fill:#1e293b,stroke:#b388ff,color:#fff
+    style CORR fill:#0f172a,stroke:#ff5252,color:#fff
 ```
 
-### 10.2 Platform-Specific Techniques:
-* **LinkedIn:** Search `site:linkedin.com/in/ "Target Company" "Software Engineer"` to bypass LinkedIn viewing limits.
-* **X/Twitter Advanced Queries:**
-  ```text
-  from:TargetUser since:2025-01-01 until:2025-12-31
-  to:TargetUser "vpn" OR "bug" OR "outage"
-  ```
-* **Telegram OSINT:** Threat actors communicate via public Telegram channels. Tools like **TGStat** (`https://tgstat.com/`) and **Telemetr** archive and index channel messages, forward chains, and user lists.
-* **Reddit:** Utilize **PullPush** / **Pushshift** archives to review deleted posts and comments from corporate handles or developers discussing internal architecture problems.
+### 17.1 Major Threat Intelligence Platforms:
+* **Abuse.ch Ecosystem:**
+  * **MalwareBazaar:** Open repository for sharing and analyzing verified malware samples.
+  * **ThreatFox:** Real-time database for sharing technical IOCs (C2 IPs, domains, botnet controllers).
+  * **URLhaus:** Focused on tracking malicious URLs distributing malware payloads.
+* **AlienVault OTX (Open Threat Exchange):** Global crowd-sourced computer-aided threat intelligence platform providing community "pulses."
+* **VX-Underground:** The largest collection of malware source code, samples, and historical papers on the internet.
+* **ThreatMiner / Pulsedive:** CTI search engines correlating domains, whois data, and malware hashes.
 
 ---
 
-## Module 11: Code Repository & Secret Exposure OSINT
+## 18. Hash OSINT
 
-### 11.1 The GitHub Attack Surface
-Developers frequently upload sensitive enterprise keys, database passwords, and internal staging URLs to public personal GitHub repositories or commit histories.
+Cryptographic hashes (MD5, SHA1, SHA256) serve as unique mathematical fingerprints of malicious binaries, scripts, and documents.
 
-### 11.2 High-Impact GitHub Search Dorks
+### 18.1 Key Hash Algorithms:
+* **MD5 (128-bit):** Legacy algorithm prone to collisions, but widely indexed across older threat databases.
+* **SHA1 (160-bit):** Deprecated for digital signatures, but universal across legacy antivirus logs.
+* **SHA256 (256-bit):** The modern cybersecurity standard for immutable file identification.
+
+### 18.2 Investigation Workflow:
+Querying a hash across VirusTotal, MalwareBazaar, or Intezer reveals:
+1. First and last seen submission timestamps.
+2. Original compiled file name and portable executable (PE) headers.
+3. Antivirus detection names (e.g., `Trojan.Bumblebee`, `Win64.CobaltStrike`).
+4. Outbound C2 network connections made during sandbox execution.
+
+---
+
+## 19. Social Media Intelligence (SOCMINT)
+
+Social Media Intelligence (SOCMINT) involves collecting, analyzing, and verifying information from social platforms (X/Twitter, LinkedIn, Reddit, Facebook, Telegram, Discord, TikTok, Instagram).
+
+### 19.1 Primary SOCMINT Utilities:
+* **Social Searcher:** Real-time search engine monitoring keywords and user sentiments across multiple social networks simultaneously.
+* **Social Blade:** Analyzes statistical growth, follower anomalies, and engagement metrics on YouTube, Twitter, and Instagram.
+* **Twemex / Twiiit:** Focused tools for parsing X/Twitter timelines and historical high-engagement posts.
+* **Hoaxy / Botometer:** Academic tools measuring bot activity, coordinated inauthentic behavior, and disinformation propagation.
+
+---
+
+## 20. Instagram OSINT
+
+Instagram investigations present unique challenges due to strict API restrictions and aggressive anti-scraping mechanisms.
+
+### 20.1 Practical Investigation Heuristics:
+1. **Google & Bing Advanced Dorking:**
+   ```text
+   site:instagram.com "Target Full Name" OR "Target Alias"
+   site:instagram.com inurl:p/ "Target Keyword"
+   ```
+2. **Web Viewer Proxies:** Platforms like Picuki and Imginn allow viewing public posts, reels, and stories without authenticating via a personal Instagram account.
+3. **Visual Reverse Pivots:** Download high-resolution profile avatars and feed photographs, then submit them to **Yandex Images** or **FaceCheck.ID** to discover secondary accounts across VK, LinkedIn, and dating apps.
+
+---
+
+## 21. LinkedIn OSINT
+
+LinkedIn provides rich corporate and human organizational intelligence. Mapping an enterprise on LinkedIn reveals internal reporting hierarchies, administrative roles, technology stacks, and direct employee targets for authorized security assessments.
+
+```mermaid
+flowchart TD
+    LI["LinkedIn Corporate Page"] --> EMP["Employee Directory & Title Enumeration"]
+    EMP --> PAT["Email Structure Derivation
+(e.g., first.last@company.com)"]
+    EMP --> ROLES["Tech Stack Attribution
+('Kubernetes Admin', 'AWS Cloud Architect')"]
+    ROLES --> SEC["Targeted Phishing Defense
+& Attack Surface Discovery"]
+
+    style LI fill:#0f172a,stroke:#00e5ff,color:#fff
+    style EMP fill:#1e293b,stroke:#ffab00,color:#fff
+    style PAT fill:#1e293b,stroke:#00e676,color:#fff
+    style ROLES fill:#1e293b,stroke:#b388ff,color:#fff
+    style SEC fill:#0f172a,stroke:#ff5252,color:#fff
+```
+
+### 21.1 Core Investigation Flow:
+1. **Search Dorking to Bypass LinkedIn Rate-Limits:**
+   ```text
+   site:linkedin.com/in/ "Target Corporation" "DevOps Engineer"
+   site:linkedin.com/in/ "Target Corporation" "CISO" OR "Security Analyst"
+   ```
+2. **Pivoting to Corporate Footprints:**
+   * Combining LinkedIn profile data with **Epieos**, **RocketReach**, **Hunter.io**, and **Apollo** correlates personal names with active corporate email inboxes and direct telephone numbers.
+   * Mapping job descriptions often exposes internal tooling (e.g., "Responsible for maintaining internal Jira on AWS EC2, Splunk SIEM, and Fortinet Firewalls").
+
+---
+
+## 22. GitHub OSINT
+
+Software developers frequently upload production secrets, private keys, database connection strings, and internal hostnames to public repositories. GitHub reconnaissance is one of the highest-yield activities during authorized red-team and purple-team engagements.
+
+### 22.1 High-Yield GitHub Code Search Dorks:
 
 ```text
-"target.com" filename:.env
-"target.com" filename:wp-config.php
-"target.com" extension:pem "PRIVATE KEY"
-"target.com" "password =" OR "api_key ="
-"target.com" "AWS_SECRET_ACCESS_KEY"
+"example.com" filename:.env
+"example.com" filename:wp-config.php
+"example.com" extension:pem "PRIVATE KEY"
+"example.com" "password =" OR "api_key ="
+"example.com" "AWS_SECRET_ACCESS_KEY"
 org:target-company "Authorization: Bearer"
 ```
 
-### 11.3 Automated Secret Hunting Tools
+### 22.2 Automated Secret Hunting Utilities:
 
 #### 1. GitLeaks
-Blazing-fast SAST engine for auditing git repositories for hardcoded secrets, API tokens, and private keys:
+Blazing-fast Go tool for auditing git repositories, commit histories, and pull requests for exposed secrets:
 
 ```bash
 # Installation
 sudo apt install -y gitleaks
 
-# Audit remote public repository commit history
+# Scan remote public repository commit history
 gitleaks detect --source https://github.com/developer/repo --verbose
 ```
 
 #### 2. TruffleHog
-Deep scanner that checks entropy and verifies if discovered API keys are **active and valid**:
+Advanced secret scanner featuring active verification engines that test discovered API keys against upstream cloud providers to confirm if they are live:
 
 ```bash
-# Run TruffleHog on a git repo
+# Scan git repository with active key verification
 trufflehog git https://github.com/developer/repo --json
 ```
 
+#### 3. Gitrob / Octosuite
+* **Octosuite:** Comprehensive OSINT framework for gathering intelligence on GitHub users, organizations, and repositories.
+* **Gitrob:** Classical command-line tool that scans organizations for files matching sensitive file patterns.
+
 ---
 
-## Module 12: Breach Intelligence & Dark Web Monitoring
+## 23. GitLab OSINT
 
-### 12.1 Credential Exposure Analysis
-When third-party services suffer data breaches (LinkedIn, Dropbox, Canva), hashed and plaintext passwords circulate among cybercriminals. Threat actors test these credentials in **Credential Stuffing** attacks.
+Like GitHub, self-hosted and public GitLab instances host private and public codebases, CI/CD pipeline definitions (`.gitlab-ci.yml`), and issue discussions.
 
-### 12.2 Breach Telemetry Platforms:
-* **Have I Been Pwned (HIBP):** Industry standard maintaining records of billions of compromised accounts.
-  ```bash
-  # Query HIBP API v3
-  curl -s "https://haveibeenpwned.com/api/v3/breachedaccount/target@corp.com" \
-    -H "hibp-api-key: $HIBP_KEY" -H "user-agent: OSINT-App" | jq .
+### 23.1 Key Vectors:
+* **Public Snippets:** Developers frequently post temporary scripts containing hardcoded credentials as public snippets.
+* **GitLab Public API:** Querying `/api/v4/projects` and `/api/v4/users` reveals public repositories, commit histories, and deployment tokens.
+* **CI/CD Job Logs:** Misconfigured pipelines often output sensitive environment variables into public build logs.
+
+---
+
+## 24. Paste & Text Dump OSINT
+
+Text paste repositories (Pastebin, Ghostbin, PrivateBin) are frequently used by threat actors and insiders to publish stolen data dumps, leak lists, database samples, and developer credentials.
+
+### 24.1 Key Portals & Search Vectors:
+* **Pastebin Search:** Utilizing specialized search aggregators or Google dorking:
+  ```text
+  site:pastebin.com "example.com"
+  site:pastebin.com "example.com" password
   ```
-* **DeHashed / Hudson Rock:** Advanced platforms indexing parsed breaches, revealing partial hashes, associated usernames, IP addresses, and Infostealer malware logs (RedLine, Vidar, Lumma).
-
-### 12.3 Dark Web (.onion) Reconnaissance
-* **Tor Network:** Onion services provide anonymity for underground leak sites, ransomware extortion portals, and hacking forums.
-* **Ahmia (`http://juhanurmih5wuprs5hxakybmamflzgapqbgystepehduw62crlobadjyd.onion/`):** Clearnet-accessible search engine for Tor services.
-* **Ransomwatch / Ransomware.live:** Automated aggregators that monitor and archive ransomware gang leak sites, alerting organizations if their name appears on an extortion showcase.
+* **Intelligence X (`intelx.io`):** Continuously archives paste sites, darknet sites, and public document dumps, allowing temporal historical queries.
+* **GitHub Gists:** Searching public gists for hardcoded API keys and internal infrastructure scripts.
 
 ---
 
-## Module 13: Cryptocurrency & Blockchain Forensics
+## 25. Breach & Credential Exposure Intelligence
 
-### 13.1 Blockchain Architecture & Ledger Openness
-Unlike traditional banking systems, public blockchains (Bitcoin, Ethereum, Solana) are **immutable, decentralized public ledgers**. Every transaction, fee, timestamp, and wallet address is accessible to investigators.
+When third-party web platforms suffer database compromises, threat actors harvest the resulting credential dumps to execute automated **Credential Stuffing** attacks against corporate portals and employee single sign-on (SSO) gateways.
 
-### 13.2 Core Concepts:
-* **UTXO Model (Bitcoin):** Unspent Transaction Outputs. Bitcoins exist as outputs from prior transactions. Transactions consume inputs and generate new outputs.
-* **Account Model (Ethereum):** Global state where accounts maintain live balances and execute bytecode within smart contracts.
-* **Clustering Heuristics:**
-  1. *Common Input Ownership:* If Transaction A spends UTXOs from Address 1 and Address 2 together as inputs, both addresses belong to the same wallet entity.
-  2. *Change Address Heuristic:* The remaining change output returns to an address controlled by the sender.
+### 25.1 Breach Telemetry Platforms:
+* **Have I Been Pwned (HIBP):** Created by Troy Hunt, indexing billions of breached accounts and hashes.
+* **DeHashed (`dehashed.com`):** Comprehensive search engine indexing parsed breaches, providing cross-referencing between email addresses, usernames, IP addresses, cleartext passwords, and password hashes.
+* **Hudson Rock (`hudsonrock.com`):** Specialized cybercrime intelligence database indexing billions of credentials compromised specifically by **Infostealer malware** (RedLine, Vidar, Lumma, Racoon).
+* **Intelligence X / Snusbase / LeakCheck:** Secondary breach search aggregators utilized by enterprise threat intelligence teams.
 
-### 13.3 Blockchain Explorers & Analytical Platforms:
-* **Mempool.space:** Real-time Bitcoin transaction explorer, fee tracker, and address visualizer.
-* **Etherscan.io:** Comprehensive explorer for Ethereum transactions, ERC-20 token transfers, and verified Solidity source code.
-* **Arkham Intelligence (`https://platform.arkhamintelligence.com/`):** Deanonymization platform linking public addresses to institutional entities, mixers, exchanges, and cybercrime syndicates.
+> ⚠️ **Defensive Rule:** Never use breached credentials discovered in intelligence databases to authenticate to systems without explicit legal authorization.
 
 ---
 
-## Module 14: Corporate, Business & Legal OSINT
+## 26. Dark Web & Tor (.onion) Intelligence
 
-### 14.1 Corporate Entity Structure
-Enterprises operate complex corporate hierarchies: holding companies, shell corporations, joint ventures, and international subsidiaries.
+The Tor (The Onion Router) network hosts hidden services operating on the `.onion` top-level domain. Threat actors utilize Tor hidden services for ransomware leak showcases, illicit marketplaces, and underground hacking forums.
 
-### 14.2 Registry Portals:
-* **OpenCorporates:** The largest open database of corporate entities globally (>220 million companies). Maps registered directors, active status, incorporation dates, and registered agent addresses.
-* **SEC EDGAR (United States):** Public corporate disclosures:
-  * **Form 10-K:** Annual comprehensive financial report detailing corporate structure, physical facilities, and risk disclosures.
-  * **Form 8-K:** Material unscheduled events (e.g., disclosure of a cyber incident).
-* **ImportYeti (`https://www.importyeti.com/`):** Visualizes ocean freight bill-of-lading shipment records, revealing a company's international supply chain, suppliers, logistics routes, and partners.
-* **CourtListener / PACER:** United States Federal court dockets, pleadings, and civil/criminal litigation records.
+### 26.1 Investigative Infrastructure & Safety:
+* **Tor Browser:** Official Mozilla-based browser routing traffic through encrypted volunteer relays.
+* **OnionSearch / Ahmia (`ahmia.fi`):** Clearnet-accessible search engines indexing public `.onion` portals.
+* **Ransomwatch (`ransomwatch.telemetry.ltd`) / Ransomware.live:** Automated trackers monitoring ransomware gang extortion portals in real time, alerting defenders if a corporate name or subsidiary appears on a victim list.
 
 ---
 
-## Module 15: Geospatial Intelligence (GEOINT) & Satellite Imagery
+## 27. Cryptocurrency & Blockchain Forensics
 
-### 15.1 The Art of Geolocation
-GEOINT determines the exact physical location where a photograph or video was captured by cross-referencing environmental features:
+Public blockchains (Bitcoin, Ethereum, Polygon) operate as immutable, decentralized public ledgers. Every transaction, fee, timestamp, sender, and recipient address is permanently recorded and visible to investigators.
 
 ```mermaid
 flowchart LR
-    IMG["Photograph Target"] --> EX["1. Check EXIF GPS Data"]
-    IMG --> BD["2. Built Environment\n(Architecture, signage, road markings)"]
-    IMG --> NAT["3. Natural Environment\n(Mountain silhouettes, vegetation)"]
-    IMG --> SUN["4. Chronolocation\n(Sun position, shadow angles)"]
-    
-    EX --> MAP["Plot Exact Coordinates\n(Google Earth / OpenStreetMap)"]
-    BD --> MAP
-    NAT --> MAP
-    SUN --> MAP
+    W1["Wallet Address A
+(1A1zP1eP...)"] -->|0.5 BTC| TX["Transaction Hash
+(f4184fc6...)"]
+    TX -->|0.48 BTC| W2["Wallet Address B (Destination)"]
+    TX -->|0.02 BTC (Change)| W3["Wallet Address C (Change Output)"]
 
-    style IMG fill:#1e293b,stroke:#00e5ff,color:#fff
-    style EX fill:#0f172a,stroke:#ffab00,color:#fff
-    style BD fill:#0f172a,stroke:#00e676,color:#fff
-    style NAT fill:#0f172a,stroke:#b388ff,color:#fff
-    style SUN fill:#0f172a,stroke:#ff5252,color:#fff
-    style MAP fill:#0f172a,stroke:#90caf9,color:#fff
+    style W1 fill:#0f172a,stroke:#00e5ff,color:#fff
+    style TX fill:#1e293b,stroke:#ffab00,color:#fff
+    style W2 fill:#0f172a,stroke:#00e676,color:#fff
+    style W3 fill:#0f172a,stroke:#b388ff,color:#fff
 ```
 
-### 15.2 Chronolocation with SunCalc
-Shadow length and angle reveal the exact time and orientation of a photograph:
-* **SunCalc (`https://www.suncalc.org/`):** Simulates sun position, sunrise/sunset times, azimuth, and shadow lengths for any coordinate on Earth at any historical date and time.
-* By aligning a building's shadow angle in a photograph against SunCalc's azimuth overlay, you can pinpoint the hour and minute of capture.
-
-### 15.3 Overpass Turbo (OpenStreetMap Query Language)
-Query OpenStreetMap for specific physical combinations (e.g., "find all two-lane roads near a church and a cell tower in this region"):
-
-```text
-[out:json];
-(
-  node["amenity"="place_of_worship"](around:500, 37.7749, -122.4194);
-  node["man_made"="tower"](around:500, 37.7749, -122.4194);
-);
-out body;
-```
+### 27.1 Blockchain Explorers & Tools:
+* **Mempool.space:** The premier visual explorer for the Bitcoin blockchain, displaying unconfirmed transactions, memory pool congestion, and UTXO trees.
+* **Etherscan.io:** Comprehensive explorer for Ethereum smart contracts, token transfers (ERC-20/ERC-721), and contract bytecode.
+* **Blockchair / Blockchain.com:** Universal multi-chain search engines querying transactions across BTC, ETH, BCH, LTC, and Doge.
+* **Arkham Intelligence (`arkhamintelligence.com`):** Entity deanonymization platform attributing crypto wallet addresses to real-world exchanges, hedge funds, mixers, and threat actors.
+* **Breadcrumbs (`breadcrumbs.app`):** Visual graph analytics platform for mapping fund flows and transaction clustering.
 
 ---
 
-## Module 16: Image Forensics & Reverse Visual Search
+## 28. Corporate & Business Entity OSINT
 
-### 16.1 EXIF Metadata Extraction
-Exchangeable Image File Format (EXIF) stores camera settings, lens model, timestamps, software, and GPS coordinates inside image files.
+Corporate records reveal legal structures, holding companies, beneficial owners, executive leadership, international trade, and registered office addresses.
+
+### 28.1 Key Public Registries:
+* **OpenCorporates (`opencorporates.com`):** The world's largest open database of corporate entities (>220 million companies). Maps registered directors, active corporate standing, and corporate parent/subsidiary relationships.
+* **SEC EDGAR (United States):** Public corporate filings for publicly traded entities:
+  * **Form 10-K:** Annual comprehensive financial report detailing corporate structure, cloud hosting dependencies, physical facilities, and risk disclosures.
+  * **Form 8-K:** Material unscheduled corporate events (such as mandatory SEC Form 8-K Item 1.05 cybersecurity breach disclosures).
+* **Companies House (UK):** Free public registry detailing corporate accounts, director appointments, and persons with significant control (PSC).
+* **ImportYeti (`importyeti.com`):** Searches ocean freight bill-of-lading shipment records, mapping international supply chains, vendors, and logistics routes.
+
+---
+
+## 29. Government Open Data & Public Records
+
+Government databases provide authoritative, legally verified public information regarding contracts, corporate filings, and regulatory compliance.
+
+### 29.1 Primary Portals:
+* **United States:**
+  * **USAspending.gov:** Official open data source tracking federal spending, government defense contracts, and grants awarded to corporations.
+  * **Data.gov:** The home of the US Government's open data repositories across energy, agriculture, and defense.
+  * **CISA / NVD:** Official repositories for national cybersecurity directives and vulnerability metrics.
+* **India:**
+  * **Ministry of Corporate Affairs (MCA):** Central registry for company master data, charges, and director information.
+  * **Data.gov.in:** National open data sharing and accessibility portal.
+  * **CERT-In / eCourts:** National cyber incident reporting and electronic court records system.
+
+---
+
+## 30. Legal & Court Docket Intelligence
+
+Court records and litigation proceedings provide verified affidavits, witness depositions, forensic exhibits, and corporate dispute documentation.
+
+### 30.1 Legal Databases:
+* **CourtListener / RECAP (`courtlistener.com`):** Free search engine for United States federal and state case law, court dockets, and RECAP-donated PACER documents.
+* **PACER (Public Access to Court Electronic Records):** Official US federal judiciary system for searching case and docket information.
+* **Justia / FindLaw:** Searchable repositories of legal precedents, appellate rulings, and commercial regulations.
+* **Indian Kanoon (`indiankanoon.org`):** High-speed search engine indexing Supreme Court, High Court, and tribunal judgments across India.
+
+---
+
+## 31. Image OSINT
+
+Image intelligence involves extracting geographic, biometric, temporal, and forensic data from static visual media.
+
+### 31.1 Reverse Image Search Engines:
+* **Google Lens:** General visual object and text recognition. Excellent for identifying commercial consumer goods, vehicles, architectural styles, and logos.
+* **Yandex Visual Search:** The most powerful reverse image engine for recognizing identical photographs, background landmarks, and human faces across social media.
+* **Bing Visual Search:** Offers interactive cropping tools for isolating sub-regions of an image (e.g., a specific church tower or mountain peak).
+* **TinEye:** Algorithmic crawler identifying the earliest historical web appearance and uncropped original versions of an image.
+* **PimEyes / FaceCheck.ID:** Facial recognition engines matching faces against billions of indexed online photographs.
+
+### 31.2 Image Forensics Tools:
+* **FotoForensics (`fotoforensics.com`):** Uses **Error Level Analysis (ELA)** to highlight compression artifacts, revealing cloned, spliced, or digitally modified sections of an image.
+* **Forensically (`29a.ch/sandbox/forensically/`):** Browser-based digital forensics toolkit featuring clone detection, noise analysis, level sweeps, and string extraction.
+* **Aperi'Solve (`aperisolve.fr`):** Automated steganography analysis platform executing `binwalk`, `steghide`, `zsteg`, and `outguess` against uploaded media.
+
+---
+
+## 32. EXIF & Metadata
+
+Exchangeable Image File Format (EXIF) metadata stores technical camera settings, hardware serial numbers, timestamps, and GPS coordinates directly within JPEG, TIFF, and HEIC files.
+
+### 32.1 Command-Line Extraction with ExifTool:
 
 ```bash
-# Install ExifTool
-sudo apt install -y exiftool
+# Installation
+sudo apt update && sudo apt install -y libimage-exiftool-perl
 
-# Extract all metadata tags including GPS
+# Extract all metadata tags from target photograph
+exiftool target_image.jpg
+
+# Filter specifically for GPS, timestamps, camera make and model
 exiftool -GPS* -DateTimeOriginal -Make -Model target_image.jpg
 
-# Export raw coordinates formatted for Google Maps
+# Format GPS coordinates for direct input into Google Maps
 exiftool -c "%.6f" -p "$GPSLatitude, $GPSLongitude" target_image.jpg
 ```
 
-> **Note:** Major social media networks (Twitter, Facebook, Instagram) strip EXIF metadata on upload to protect user privacy. Raw images shared via messaging apps (as uncompressed documents), cloud drives, or email attachments retain full EXIF data.
-
-### 16.2 Error Level Analysis (ELA)
-* **FotoForensics (`https://fotoforensics.com/`):** ELA highlights differences in compression levels across an image. Edited or spliced areas compress at different error rates than the original background, surfacing digital manipulation.
-
-### 16.3 Reverse Image Engines
-* **Google Lens:** General visual recognition (identifies consumer products, landmarks, street signs).
-* **Yandex Visual Search:** The most powerful reverse image engine for faces, clothing, and background landmarks.
-* **PimEyes / FaceCheck.ID:** Facial recognition engines matching faces against billions of indexed websites.
+> **Operational Reality:** Social media platforms (X/Twitter, Facebook, Instagram, Reddit) automatically strip EXIF metadata upon image upload to protect user privacy. However, raw media sent via messaging apps (as uncompressed documents), cloud drives (Google Drive, Dropbox), or downloaded from personal blogs and forums frequently retains full EXIF data.
 
 ---
 
-## Module 17: Video & Audio OSINT Verification
+## 33. Image Geolocation
 
-### 17.1 Video Verification Architecture
-Videos are sequences of static frames accompanied by audio tracks. Video OSINT requires breaking media down into individual components:
-
-1. **Extraction & Preservation:** Use `yt-dlp` to download media at maximum available quality:
-   ```bash
-   yt-dlp -f bestvideo+bestaudio --write-thumbnail --write-info-json "https://video-url"
-   ```
-2. **Keyframe Splitting with InVID / WeVerify:**
-   * Browser extension developed for journalists to extract keyframes from web video streams.
-   * Keyframes are subjected to reverse image searches to identify original upload dates and historical footage reuse.
-3. **Frame-by-Frame Extraction via FFmpeg:**
-   ```bash
-   # Extract 1 frame per second as high-resolution PNG
-   ffmpeg -i video.mp4 -r 1 -f image2 frame_%04d.png
-   ```
-
-### 17.2 Audio Analysis & Transcription
-* **FFmpeg Audio Demuxing:**
-  ```bash
-  ffmpeg -i video.mp4 -vn -acodec copy audio_track.aac
-  ```
-* **Whisper AI:** Open-source automatic speech recognition (ASR) to transcribe and translate audio in foreign languages:
-  ```bash
-  pip install openai-whisper
-  whisper audio_track.aac --model medium --language auto
-  ```
-
----
-
-## Module 18: Threat Intelligence & CTI Frameworks
-
-### 18.1 Cyber Threat Intelligence (CTI) Mechanics
-CTI converts raw data into actionable context regarding adversary intent, capabilities, and infrastructure.
+Image Geolocation (GEOINT) determines the precise real-world geographic coordinates where a visual photograph or video frame was captured.
 
 ```mermaid
 flowchart TD
-    T["Threat Actor / APT"] --> C["Campaign"]
-    C --> TTP["MITRE ATT&CK Techniques\n(T1566 Phishing, T1059 Scripting)"]
-    TTP --> IOC["Indicators of Compromise (IOCs)\n(IPs, Domains, Hashes, SSL Certs)"]
-    IOC --> MISP["MISP / STIX 2.1 Threat Sharing"]
-    MISP --> DEF["SOC & EDR Detection Rules\n(Sigma, YARA, Snort)"]
+    IMG["Target Photograph"] --> EX["1. Check EXIF GPS Data
+(ExifTool)"]
+    IMG --> BUILT["2. Built Infrastructure
+(Street lamps, curb markings, signage)"]
+    IMG --> NAT["3. Natural Topography
+(Mountain ridgelines via PeakVisor)"]
+    IMG --> TIME["4. Chronolocation
+(Solar shadow angles via SunCalc)"]
 
-    style T fill:#1e293b,stroke:#ff5252,color:#fff
-    style C fill:#1e293b,stroke:#ffab00,color:#fff
-    style TTP fill:#1e293b,stroke:#00e5ff,color:#fff
-    style IOC fill:#0f172a,stroke:#00e676,color:#fff
-    style MISP fill:#0f172a,stroke:#b388ff,color:#fff
-    style DEF fill:#0f172a,stroke:#90caf9,color:#fff
+    EX --> LOC["Verified GPS Pin
+(Google Earth / OpenStreetMap)"]
+    BUILT --> LOC
+    NAT --> LOC
+    TIME --> LOC
+
+    style IMG fill:#0f172a,stroke:#00e5ff,color:#fff
+    style EX fill:#1e293b,stroke:#ffab00,color:#fff
+    style BUILT fill:#1e293b,stroke:#00e676,color:#fff
+    style NAT fill:#1e293b,stroke:#b388ff,color:#fff
+    style TIME fill:#1e293b,stroke:#ff5252,color:#fff
+    style LOC fill:#0f172a,stroke:#90caf9,color:#fff
 ```
 
-### 18.2 Industry CTI Standards & Sharing Platforms:
-* **STIX 2.1 (Structured Threat Information Expression):** Standardized JSON schema for exchanging cyber threat intelligence.
-* **TAXII 2.1 (Trusted Automated eXchange of Intelligence Information):** Application layer protocol over HTTPS to exchange STIX data.
-* **MISP (Malware Information Sharing Platform):** Open-source platform for sharing indicators, malware telemetry, and threat actor profiles among trust circles.
-* **AlienVault OTX (Open Threat Exchange):** Free community CTI platform crowdsourcing pulses of active IOCs.
-* **CISA KEV (Known Exploited Vulnerabilities Catalog):** Authoritative database of vulnerabilities actively leveraged in the wild by threat actors.
+### 33.1 Specialized Geolocation Utilities:
+* **SunCalc (`suncalc.org`):** Simulates solar position, azimuth angle, and shadow lengths for any coordinate on Earth at any historical date and time.
+* **PeakVisor (`peakvisor.com`):** High-precision 3D topographic mountain recognition tool matching horizon ridgelines against global digital elevation models.
+* **Overpass Turbo (`overpass-turbo.eu`):** Web-based data mining tool for OpenStreetMap that executes queries based on physical proximity (e.g., "locate all tram stations within 200m of a pharmacy and a church in Munich").
 
 ---
 
-## Module 19: Link Analysis & Visual Graph Correlation
+## 34. Satellite Imagery
 
-### 19.1 Visual Graph Analysis Concepts
-Humans struggle to identify patterns across thousands of disconnected rows in spreadsheets. Graph analysis connects nodes (entities) via directed edges (relationships):
-```text
-(Person: Jane Doe) --[REGISTERED]--> (Domain: dev-target.com)
-(Domain: dev-target.com) --[RESOLVES_TO]--> (IP: 198.51.100.22)
-(IP: 198.51.100.22) --[EXPOSES]--> (Port: 22 / OpenSSH)
+Commercial satellite constellations provide open and multi-spectral earth observation data, enabling researchers to track industrial expansion, military logistics, and environmental changes.
+
+### 34.1 Satellite Platforms:
+* **Copernicus Browser / Sentinel Hub (`browser.dataspace.copernicus.eu`):** Free European Space Agency imagery (Sentinel-1 SAR radar, Sentinel-2 optical multispectral bands) updated every 5 days globally at 10m resolution.
+* **Google Earth Pro (Desktop):** Offers historical satellite imagery sliders stretching back decades, allowing analysts to compare physical structural developments over time.
+* **NASA Worldview (`worldview.earthdata.nasa.gov`):** Near real-time global satellite imagery updated daily (MODIS, VIIRS), ideal for tracking large weather systems, wildfires, and smoke plumes.
+* **Commercial High-Resolution Providers:** Maxar, Planet Labs, Airbus Defence & Space (sub-meter resolution imagery for enterprise operations).
+
+---
+
+## 35. Maps
+
+Open-source mapping platforms provide detailed spatial data, topological layers, and geographic points of interest.
+
+### 35.1 Leading Geospatial Engines:
+* **OpenStreetMap (OSM):** Collaborative, open-source world map containing crowd-sourced metadata on building heights, road surface types, speed limits, and power lines.
+* **Wikimapia:** Open-content collaborative map tagging military facilities, administrative complexes, and industrial plants worldwide.
+* **ArcGIS / QGIS:** Professional Geographic Information Systems (GIS) used to layer satellite imagery, vector shapefiles, and spatial threat intelligence.
+
+---
+
+## 36. Geolocation Techniques
+
+Elite geolocation relies on methodical deduction across subtle background features:
+
+1. **Road Infrastructure:**
+   * Paint markings (dashed vs solid, white vs yellow centerlines).
+   * Guardrail designs and roadside reflective bollards (specific to individual nations).
+2. **Utility Poles & Wiring:**
+   * Concrete vs wooden utility poles.
+   * Transformer shapes, hook designs, and electrical insulator configurations.
+3. **Architecture & Building Features:**
+   * Roof tile materials, chimney types, air conditioning unit placements, balcony railings.
+4. **Vehicles & License Plates:**
+   * License plate dimensions (long European vs square American plates), country registration bands.
+   * Make and model prevalence (e.g., right-hand drive vs left-hand drive vehicles).
+5. **Vegetation & Biomes:**
+   * Tree species (deciduous, coniferous, palm species), soil color, agricultural crop types.
+
+---
+
+## 37. Street View
+
+Ground-level panoramic imagery validates architectural features, business signs, and road furniture identified during satellite and photographic analysis.
+
+### 37.1 Primary Platforms:
+* **Google Street View:** The most exhaustive ground-level imagery coverage globally, with historical timestamp archives stretching back to 2007.
+* **Mapillary (`mapillary.com`):** Street-level imagery platform crowdsourced by Meta, featuring millions of community-contributed dashcam drives.
+* **KartaView (`kartaview.org`):** Open-source, crowd-sourced street-level imagery platform.
+* **Yandex Panoramas:** High-resolution ground-level coverage across Russia, Belarus, Kazakhstan, and Eastern Europe.
+
+---
+
+## 38. Flight OSINT
+
+Civilian aircraft broadcast their identity, position, altitude, and velocity over unencrypted radio frequencies via **ADS-B (Automatic Dependent Surveillance–Broadcast)** on 1090 MHz.
+
+### 38.1 Flight Tracking Portals:
+* **ADS-B Exchange (`adsbexchange.com`):** The world's largest co-op of unfiltered flight data. Unlike commercial trackers, it **does not censor military, VIP, or corporate private aircraft**.
+* **FlightRadar24 (`flightradar24.com`):** Commercial flight tracking platform with global coverage, route histories, and 3D playback.
+* **OpenSky Network (`opensky-network.org`):** Non-profit community-based receiver network providing open historical flight dataset archives for academic research.
+* **Key Identifiers to Track:**
+  * **ICAO 24-bit Mode S Address:** Unique hex identifier assigned to the aircraft airframe (e.g., `A0B1C2`).
+  * **Callsign:** Operating flight number (e.g., `UAL123`).
+  * **Tail Registration Number:** Civilian registration mark (e.g., `N12345`).
+
+---
+
+## 39. Maritime & Ship OSINT
+
+Commercial maritime vessels broadcast identification, GPS coordinates, heading, and speed over VHF radio via the **Automatic Identification System (AIS)**.
+
+### 39.1 Key Maritime Intelligence Metrics:
+* **MMSI (Maritime Mobile Service Identity):** Nine-digit unique number identifying the ship's radio station (first 3 digits indicate flag state).
+* **IMO Number:** Unique 7-digit permanent hull number assigned by the International Maritime Organization that stays with the vessel throughout its operational life, regardless of name changes.
+
+### 39.2 Maritime Portals:
+* **MarineTraffic (`marinetraffic.com`):** Leading real-time vessel tracking platform with port arrival forecasts and vessel photo directories.
+* **VesselFinder (`vesselfinder.com`):** Free real-time AIS vessel tracking and port call histories.
+* **Global Fishing Watch (`globalfishingwatch.org`):** Tracks commercial fishing fleets worldwide, mapping industrial fishing vessel movements.
+
+---
+
+## 40. Weather OSINT
+
+Meteorological records verify the timeline and credibility of photographs, videos, and reported events by confirming historical environmental conditions.
+
+### 40.1 Meteorological Resources:
+* **Windy.com:** Visual weather radar displaying global wind currents, temperature, pressure systems, and cloud cover layers.
+* **Weather Underground / OpenWeatherMap:** Search historical weather archives for any city on any historical date (hourly temperature, precipitation, cloud ceiling, wind speed).
+* **Copernicus Atmosphere Monitoring Service (CAMS):** Tracks atmospheric data, aerosol optical depth, dust storms, and smoke plumes.
+
+---
+
+## 41. Historical Web & Archives
+
+The Internet is transient—web pages are modified, deleted, or hidden behind paywalls daily. Digital archives preserve historical captures of websites, providing an immutable record of past employees, obsolete contact numbers, deleted blog disclosures, and retired infrastructure.
+
+```mermaid
+flowchart TD
+    URL["Target Web Page
+(Deleted or Modified)"]
+    URL --> WB["Wayback Machine
+(web.archive.org)"]
+    URL --> AT["Archive.today
+(archive.is)"]
+    URL --> CC["Common Crawl
+(WARC Data)"]
+
+    WB --> EX["Extracted Historical Intelligence
+(Former staff, deleted API endpoints, legacy IP records)"]
+    AT --> EX
+    CC --> EX
+
+    style URL fill:#0f172a,stroke:#00e5ff,color:#fff
+    style WB fill:#1e293b,stroke:#ffab00,color:#fff
+    style AT fill:#1e293b,stroke:#00e676,color:#fff
+    style CC fill:#1e293b,stroke:#b388ff,color:#fff
+    style EX fill:#0f172a,stroke:#ff5252,color:#fff
 ```
 
-### 19.2 Industry Link Analysis Software:
-* **Maltego:** The industry gold standard for visual link analysis. Uses **Transforms** (API queries) to dynamically pivot from an IP to a Netblock, a Netblock to an Organization, or an Email to Social Profiles.
-* **Gephi:** Open-source network visualization tool computing modularity, betweenness centrality, and graph clustering to identify key influencers or hub servers in massive datasets.
-* **Neo4j:** Graph database utilizing the Cypher query language to query complex multi-hop relationships at enterprise scale:
-  ```cypher
-  MATCH (p:Person)-[:OWNS]->(d:Domain)-[:RESOLVES_TO]->(ip:IP)
-  WHERE ip.country = 'RU'
-  RETURN p, d, ip;
+### 41.1 Primary Digital Archives:
+* **Internet Archive Wayback Machine (`web.archive.org`):** Maintains over 800 billion web page snapshots. Analysts can inspect historical changes via the CDX Server API:
+  ```bash
+  # Query all historical URLs archived for a domain via CDX API
+  curl -s "http://web.archive.org/cdx/search/cdx?url=*.example.com/*&output=text&fl=original&collapse=urlkey" | head -n 20
   ```
+* **Archive.today (`archive.is` / `archive.ph`):** Instant on-demand web archiver that stores static screenshots and uneditable HTML snapshots, successfully bypassing many client-side paywalls.
+* **Common Crawl (`commoncrawl.org`):** Open repository providing monthly multi-terabyte web crawl data in Web ARChive (WARC) format.
+* **Perma.cc:** Academic and legal archiving platform generating cryptographically preserved citation records.
 
 ---
 
-## Module 20: Automated Frameworks & Professional Intelligence Reporting
+## 42. Website Change Monitoring
 
-### 20.1 Reconnaissance Automation Frameworks
+Monitoring corporate websites, competitor announcements, terms of service changes, and government portals requires automated continuous differential tracking.
 
-#### 1. Recon-ng
-Modular, interactive reconnaissance framework mirroring the Metasploit interface:
+### 42.1 Change Detection Tools:
+* **changedetection.io:** Open-source, self-hosted web page change detection and notification service that can trigger alerts via Discord, Telegram, or Webhooks when specific DOM elements change.
+* **Visualping (`visualping.io`):** Commercial monitoring tool comparing visual screenshots and text blocks, alerting users when a site mutates.
+* **Distill.io / ChangeTower:** Browser extensions and cloud trackers for monitoring specific HTML elements.
+
+---
+
+## 43. PDF & Document OSINT
+
+Enterprise documents (PDFs, Word documents, Excel spreadsheets, PowerPoint decks) uploaded to public websites contain rich hidden metadata left behind by authoring software.
+
+### 43.1 Metadata Extraction Utilities:
+* **pdfinfo / strings:** Standard Linux utilities for rapid document inspection:
+  ```bash
+  # Extract basic PDF metadata
+  pdfinfo annual_report.pdf
+  
+  # Search for author and computer names in binary strings
+  strings corporate_document.docx | grep -i "author"
+  ```
+* **Apache Tika:** Powerful Java toolkit extracting text content and metadata from over a thousand different file formats (PDF, DOCX, XLSX, ODF).
+* **FOCA (Fingerprinting Organizations with Collected Archives):** Classical forensic tool developed by ElevenPaths that crawls a website, downloads all indexed documents, and extracts software versions, internal usernames, printer names, and network paths.
+
+---
+
+## 44. Metadata OSINT
+
+Metadata represents "data about data." In digital investigations, metadata frequently leaks more actionable intelligence than the actual content of the file:
+* **Author / Creator / Operator:** Real names, employee initials, internal corporate usernames.
+* **Software Version:** Exact application builds (e.g., `Microsoft Office Word 2016 16.0.4266.1001`), highlighting unpatched vulnerabilities.
+* **Operating System & Network Shares:** File paths such as `C:\Users\jdoe\Documents\Projects\Secret\` expose internal domain conventions.
+* **Device Serial Numbers:** Specific camera bodies or mobile phone identifiers.
+
+---
+
+## 45. People OSINT: Holistic Investigation Path
+
+People-centric intelligence should follow a structured, multi-hop investigation path rather than random searching:
+
+```mermaid
+flowchart TD
+    NAME["1. Target Full Name"] --> USER["2. Candidate Usernames
+(Sherlock, Maigret)"]
+    USER --> EMAIL["3. Email Addresses
+(Holehe, Hunter.io)"]
+    EMAIL --> COMP["4. Corporate Affiliations
+(LinkedIn, OpenCorporates)"]
+    COMP --> DOM["5. Domain Infrastructure
+(WHOIS, SecurityTrails)"]
+    DOM --> SOC["6. Social Footprint
+(X/Twitter, Reddit, Telegram)"]
+    SOC --> PUB["7. Public Records & Filings
+(CourtListener, Electoral, News)"]
+    PUB --> VIS["8. Visual & Biometrics
+(EXIF, PimEyes, GeoSpy)"]
+
+    style NAME fill:#0f172a,stroke:#00e5ff,color:#fff
+    style USER fill:#1e293b,stroke:#ffab00,color:#fff
+    style EMAIL fill:#1e293b,stroke:#00e676,color:#fff
+    style COMP fill:#1e293b,stroke:#b388ff,color:#fff
+    style DOM fill:#0f172a,stroke:#ff5252,color:#fff
+    style SOC fill:#1e293b,stroke:#90caf9,color:#fff
+    style PUB fill:#1e293b,stroke:#f48fb1,color:#fff
+    style VIS fill:#0f172a,stroke:#00e5ff,color:#fff
+```
+
+---
+
+## 46. Username to Email Pivoting
+
+Given a target's confirmed handle (e.g., `cyber_ninja99`), pivoting to their underlying email address:
+1. **GitHub Commit Logs:** Check public commit histories for raw email signatures:
+   ```bash
+   curl -s "https://api.github.com/users/cyber_ninja99/events/public" |      grep -E ""email": "[^"]+"" | sort -u
+   ```
+2. **Gravatar MD5 Hashes:** Querying Gravatar profiles:
+   * Gravatar calculates an MD5 hash of the user's lowercased email: `md5("user@example.com") = 44d88612fea8a8f36de82e1278abb02f`.
+   * Reversing common email structures against known hash dictionaries.
+3. **Epieos / Holehe:** Testing username variations against standard webmail services (`gmail.com`, `proton.me`, `outlook.com`).
+
+---
+
+## 47. Email to Username Pivoting
+
+Given an email address (`johndoe@target.com`), derive likely online usernames:
+1. **Strip Username Prefix:** Test `johndoe`, `john.doe`, `jdoe` against **Sherlock** and **Maigret**.
+2. **Breach Databases:** Querying **DeHashed** reveals past registered usernames associated with that email in historical breaches.
+3. **Google Account ID:** Querying **Epieos** surfaces the numeric Google User ID (`Gaia ID`), revealing linked YouTube channels, Google Maps reviews, and public albums.
+
+---
+
+## 48. Username to Domain & Infrastructure Pivoting
+
+How a digital persona links directly to enterprise internet infrastructure:
+1. Target handle creates a personal repository on GitHub or GitLab.
+2. The repository contains configuration scripts (`docker-compose.yml`, `nginx.conf`, `settings.py`) referencing a personal domain name (`johndoe-labs.io`).
+3. Querying **WHOIS** and historical DNS reveals the developer's server IP address.
+4. Scanning the server on **Shodan** exposes unpatched management ports (SSH, Grafana, Portainer) leading directly into the corporate perimeter.
+
+---
+
+## 49. Maltego
+
+Maltego is the industry-standard visual link analysis platform for cyber investigations, threat intelligence, and network reconnaissance.
+
+### 49.1 Architectural Concepts:
+* **Entities:** Visual nodes representing real-world assets (Person, Email Address, Domain, IP Address, Netblock, Organization, Phrase).
+* **Transforms:** API-driven Python or Java scripts that query external intelligence databases (Shodan, VirusTotal, Have I Been Pwned, SecurityTrails) to expand an entity.
+* **Multi-Hop Link Graph:** Visually maps relationships between nodes, identifying clusters, hub nodes, and unexpected interconnectivity.
+
+---
+
+## 50. SpiderFoot
+
+SpiderFoot is an open-source, automated OSINT collection and threat reconnaissance engine.
+
+### 50.1 Operational Capabilities:
+* **Target Ingestion:** Accepts IP addresses, domain names, hostnames, network subnets, ASN numbers, email addresses, phone numbers, or person names.
+* **Module Ecosystem:** Over 200 modular plugins querying Shodan, Censys, VirusTotal, GreyNoise, ThreatFox, Have I Been Pwned, and Bitcoin block explorers.
+* **Automated Correlation:** Surfaces high-risk attack surface vulnerabilities, exposed credentials, leaked subdomains, and malicious IP reputations automatically in an interactive web GUI.
+
+---
+
+## 51. Recon-ng
+
+Recon-ng is a full-featured, modular reconnaissance framework written in Python. Featuring a command-line interface mirroring Metasploit, it manages workspaces, database tables, and modular reconnaissance tasks cleanly.
+
+### 51.1 Workflow & Commands:
 
 ```bash
 # Launch Recon-ng
 recon-ng
 
-# Workflow commands inside recon-ng console
-[recon-ng][default] > workspaces create TargetEngagement
-[recon-ng][TargetEngagement] > modules load recon/domains-hosts/brute_hosts
-[recon-ng][TargetEngagement] > options set SOURCE target.com
-[recon-ng][TargetEngagement] > run
-[recon-ng][TargetEngagement] > show hosts
+# 1. Create a dedicated project workspace
+[recon-ng][default] > workspaces create TargetCorp
+[recon-ng][TargetCorp] > db schema
+
+# 2. Add seed domains to the workspace database
+[recon-ng][TargetCorp] > db insert domains
+domain (TEXT): target.com
+notes (TEXT): Primary corporate root
+
+# 3. Search and install modules from marketplace
+[recon-ng][TargetCorp] > marketplace search brute_hosts
+[recon-ng][TargetCorp] > marketplace install recon/domains-hosts/brute_hosts
+
+# 4. Load, configure, and execute module
+[recon-ng][TargetCorp] > modules load recon/domains-hosts/brute_hosts
+[recon-ng][TargetCorp][brute_hosts] > info
+[recon-ng][TargetCorp][brute_hosts] > run
+
+# 5. Review discovered hosts in local SQLite database
+[recon-ng][TargetCorp][brute_hosts] > show hosts
 ```
 
-#### 2. FinalRecon
-Fast Python reconnaissance framework providing comprehensive domain, header, WHOIS, DNS, and SSL profiling in one pass:
+---
+
+## 52. theHarvester
+
+theHarvester is a classic, battle-tested Python command-line utility designed for external perimeter reconnaissance. It gathers publicly indexed emails, employee names, subdomains, open ports, and employee LinkedIn handles.
+
+### 52.1 Command Syntax & Execution:
 
 ```bash
+# Run comprehensive scan querying all passive search engines
+theHarvester -d target.com -b all -l 500 -f target_recon_report.html
+
+# Arguments:
+# -d : Target domain
+# -b : Data source engine (google, bing, duckduckgo, crtsh, certspotter, otx, shodan)
+# -l : Limit number of search results per engine
+# -f : Save findings as HTML and XML report
+```
+
+---
+
+## 53. Amass (OWASP)
+
+The OWASP Amass tool suite performs network mapping of attack surfaces and external asset discovery using open-source information gathering and active reconnaissance techniques.
+
+### 53.1 Primary Subcommands:
+* **`amass enum`:** Executes domain mapping, Certificate Transparency log harvesting, DNS record brute-forcing, reverse DNS sweeps, and IP range correlation.
+* **`amass intel`:** Discovers additional root domains belonging to an organization via reverse WHOIS, ASN lookups, and CIDR range tracking.
+* **`amass viz`:** Generates interactive D3.js force-directed network graphs visualising discovered topology.
+* **`amass track`:** Compares reconnaissance runs over time, highlighting newly added or removed subdomains and IP addresses.
+
+---
+
+## 54. FinalRecon
+
+FinalRecon is a fast, multi-threaded Python reconnaissance engine that aggregates header checks, SSL/TLS certificate verification, WHOIS queries, DNS enumeration, sub-directory crawling, and link scraping in a single pass:
+
+```bash
+# Execute full reconnaissance pass against web target
 finalrecon --full https://target.com
 ```
 
-### 20.2 Professional OSINT Intelligence Dossier Template
+---
 
-When completing an engagement, document your findings using an executive-ready intelligence reporting format:
+## 55. Passive Recon Tools Suite
 
-```markdown
-# EXECUTIVE THREAT INTELLIGENCE DOSSIER
+A modern, production-grade passive reconnaissance pipeline combines specialized tools into an automated stream:
 
-## 1. ENGAGEMENT METADATA
-* Target Organization / Subject: [Organization Name]
-* Investigation Scope: [Primary Domains, Infrastructure Ranges, Key Personas]
-* Analyst Identifier: [Analyst Name / Call-Sign]
-* Assessment Date: [YYYY-MM-DD]
-* Classification: TLP:AMBER (Restricted to Authorized Stakeholders)
+```mermaid
+flowchart LR
+    D["Root Domain:
+target.com"] --> S["Subfinder
+(APIs & Chaos)"]
+    D --> A["Amass
+(Passive Graph)"]
+    D --> C["crt.sh
+(CT Logs)"]
+    D --> H["theHarvester
+(Emails & Search)"]
 
-## 2. EXECUTIVE SUMMARY
-[High-level summary of findings: Critical vulnerabilities discovered, exposed sensitive keys, compromised employee credentials, and executive exposure level.]
+    S --> M["Aggregate & Deduplicate
+(anew / sort -u)"]
+    A --> M
+    C --> M
+    H --> M
 
-## 3. THREAT EXPOSURE MATRIX
-| Finding | Asset Affected | Risk Level | Evidence / IOC | Remediation |
-| :--- | :--- | :---: | :--- | :--- |
-| Exposed AWS API Key | GitHub Repository | 🔴 Critical | AKIAIOSFODNN7EXAMPLE | Revoke IAM Key, Cycle Secrets |
-| Pulse Secure SSL-VPN CVE | 198.51.100.14:443 | 🔴 Critical | CVE-2019-11510 | Patch Firmware Immediately |
-| Breached C-Level Passwords | Active Directory | 🟠 High | 24 Cleartext Creds | Force Enterprise Password Reset |
+    M --> P["Live Probe Filter
+(httpx / dnsx)"]
 
-## 4. INFRASTRUCTURE & ATTACK SURFACE TOPOLOGY
-* Discovered Subdomains: [Count]
-* Exposed Autonomous Systems (ASNs): [ASN List]
-* Cloud Assets Identified: [S3 Buckets, Azure Blobs, GCP Instances]
-
-## 5. IDENTITY & CREDENTIAL EXPOSURE
-* Publicly Exposed Employee Emails: [List]
-* Infostealer Logs Identified: [Malware Variants]
-
-## 6. TIMELINE & PIVOT CHAIN
-[Mermaid diagram or narrative documenting the step-by-step path taken from the initial indicator to the compromise finding.]
-
-## 7. RECOMMENDED MITIGATION PLAYBOOK
-1. Immediate Containment Controls (0-24 Hours)
-2. Tactical Hardening Policies (1-7 Days)
-3. Strategic Governance & Policy Enhancements (30 Days)
+    style D fill:#0f172a,stroke:#00e5ff,color:#fff
+    style S fill:#1e293b,stroke:#ffab00,color:#fff
+    style A fill:#1e293b,stroke:#00e676,color:#fff
+    style C fill:#1e293b,stroke:#b388ff,color:#fff
+    style H fill:#1e293b,stroke:#ff5252,color:#fff
+    style M fill:#0f172a,stroke:#90caf9,color:#fff
+    style P fill:#0f172a,stroke:#00e5ff,color:#fff
 ```
+
+---
+
+## 56. Threat Actor OSINT
+
+Threat actor profiling tracks Advanced Persistent Threat (APT) groups, cybercriminal syndicates, and hacktivist cells through their historical tradecraft, infrastructure, and targets.
+
+### 56.1 Leading Threat Research Sources:
+* **MITRE ATT&CK Groups:** Profiles over 140 adversary groups (e.g., APT28, APT29, FIN7, Lazarus Group) detailing their documented TTPs and software.
+* **Mandiant / Google Threat Intelligence:** Authoritative whitepapers detailing state-sponsored espionage campaigns and novel malware families.
+* **CrowdStrike Global Threat Report:** Annual adversary analysis detailing adversary breakout times and emerging criminal syndicates.
+* **Cisco Talos Intelligence:** Real-time threat research, IOC drops, and reverse-engineering reports.
+* **Kaspersky Securelist:** Deep technical analyses of complex cyber espionage operations.
+
+---
+
+## 57. MITRE ATT&CK Framework
+
+The MITRE Adversarial Tactics, Techniques, and Common Knowledge (ATT&CK) matrix is a globally accessible knowledge base of adversary behavior based on real-world observations.
+
+### 57.1 Threat Mapping Hierarchy:
+```text
+Threat Actor (e.g., APT29)
+  └── Campaign (e.g., SolarWinds Supply Chain)
+        └── Tactic (e.g., TA0001: Initial Access)
+              └── Technique (e.g., T1195.002: Compromise Software Supply Chain)
+                    └── Procedure (Specific script, tool, or binary configuration)
+                          └── Indicator of Compromise (Hash, IP, Domain)
+                                └── Detection Rule (Sigma, YARA, Snort)
+```
+
+---
+
+## 58. MISP (Malware Information Sharing Platform)
+
+MISP is an open-source threat intelligence platform (TIP) designed to collect, store, distribute, and share cyber security indicators and threat context between organizations, trusted communities, and national CERTs.
+
+### 58.1 Core Entities:
+* **Events:** Central collections of context-linked indicators related to a specific incident or campaign.
+* **Attributes:** Individual indicators (IP address, domain, MD5 hash, YARA rule, filename, mutex).
+* **Warninglists:** Curated lists of benign indicators (e.g., Google DNS `8.8.8.8`, Cloudflare CDN) preventing false-positive alert generation.
+
+---
+
+## 59. STIX & TAXII
+
+Industry standards maintained by OASIS for structuring and transporting threat intelligence machine-to-machine.
+
+### 59.1 STIX 2.1 (Structured Threat Information Expression):
+Standardized JSON schema defining cyber threat objects:
+* **SDOs (STIX Domain Objects):** `indicator`, `malware`, `threat-actor`, `campaign`, `attack-pattern`, `identity`, `vulnerability`.
+* **SROs (STIX Relationship Objects):** `relationship` (e.g., *indicates*, *uses*, *targets*), `sighting`.
+
+### 59.2 TAXII 2.1 (Trusted Automated eXchange of Intelligence Information):
+RESTful protocol operating over HTTPS that serves as the transport medium for distributing STIX 2.1 intelligence collections through real-time subscriptions and channels.
+
+---
+
+## 60. Vulnerability OSINT
+
+Tracking software vulnerabilities in the wild allows defenders to patch weaknesses before automated adversary exploit scripts compromise perimeter systems.
+
+### 60.1 Primary Vulnerability Repositories:
+* **CVE.org:** The authoritative global registry of Common Vulnerabilities and Exposures.
+* **National Vulnerability Database (NVD):** Maintained by NIST, providing standardized CVSS scoring, CWE categories, and affected CPE vendor configurations.
+* **Exploit Database (Exploit-DB):** Public repository of working Proof-of-Concept (PoC) exploit scripts and shellcode.
+* **Packet Storm:** Security portal archiving daily zero-day advisories, exploit scripts, and tool updates.
+* **OSV.dev (Open Source Vulnerabilities):** Distributed vulnerability database for open-source dependencies (Go, npm, PyPI, Rust).
+
+---
+
+## 61. National Vulnerability Database (NVD)
+
+The National Vulnerability Database (NVD) is the U.S. government repository of standards-based vulnerability management data.
+
+### 61.1 Information Provided by NVD:
+* **Common Vulnerability Scoring System (CVSS):** Standardized framework (v3.1 and v4.0) scoring severity from 0.0 to 10.0 based on Base, Temporal, and Environmental metrics (Attack Vector, Attack Complexity, Privileges Required, User Interaction).
+* **Common Platform Enumeration (CPE):** Standardized URI string identifying affected software packages and hardware versions:
+  ```text
+  cpe:2.3:a:apache:http_server:2.4.49:*:*:*:*:*:*:*
+  ```
+* **Common Weakness Enumeration (CWE):** Identifies the root architectural software flaw (e.g., `CWE-79: Cross-Site Scripting`, `CWE-22: Path Traversal`).
+
+---
+
+## 62. CISA Known Exploited Vulnerabilities (KEV) Catalog
+
+The Cybersecurity and Infrastructure Security Agency (CISA) maintains the **Known Exploited Vulnerabilities (KEV) Catalog**, the gold standard for vulnerability prioritization.
+
+### 62.1 Why KEV Outperforms Raw CVSS:
+A software flaw may have a theoretical CVSS score of 9.8 (Critical), but if no weaponized exploit exists, threat actors cannot leverage it. Conversely, a CVSS 7.2 flaw actively leveraged by ransomware gangs poses an immediate crisis.
+* **The Rule of Defense:** Remediate vulnerabilities on the **CISA KEV catalog immediately**, as they represent confirmed, in-the-wild exploitation.
+
+---
+
+## 63. Username & Account Discovery Suites
+
+Automating digital account discovery across hundreds of web services relies on signature databases that map response codes:
+
+```bash
+# Python multi-account discovery via Sherlock
+sherlock target_alias --timeout 5 --print-found --csv output.csv
+```
+
+### 63.1 Mechanics of Handle Discovery:
+* **HTTP Status Codes:** Services return HTTP `200 OK` if a user exists and HTTP `404 Not Found` if the handle is unregistered.
+* **Response Body Signatures:** Web services utilizing Single Page Applications (SPAs) return `200 OK` for all requests, requiring scanners to search for error strings (e.g., `"User not found"`, `"This account has been suspended"`).
+
+---
+
+## 64. Facial Recognition & Biometric Search Engines
+
+Facial recognition search engines utilize deep convolutional neural networks to generate mathematical face vectors from uploaded photos, searching against billions of scraped images.
+
+### 64.1 Platforms:
+* **PimEyes (`pimeyes.com`):** Highly accurate facial search engine indexing the public open web, revealing photos where the subject appears in background crowds, news articles, or unlinked blogs.
+* **FaceCheck.ID (`facecheck.id`):** Visual search engine comparing uploaded faces against mugshots, scam registries, adult sites, and social media.
+
+> ⚠️ **Investigative Caution:** Biometric algorithms produce false-positive matches, particularly across lower-resolution captures or similar ethnic features. Always corroborate facial matches with secondary signals (tattoos, unique jewelry, context, clothing, geographic corroboration).
+
+---
+
+## 65. Audio Forensics & Acoustic Intelligence
+
+Audio tracks provide hidden environmental, temporal, and linguistic signals:
+* **Acoustic Fingerprinting:** Services like **Shazam**, **SoundHound**, and **ACRCloud** identify background music playing in videos, establishing commercial location context.
+* **Spectral Analysis (Audacity / Sonic Visualiser):** Visualizing audio frequencies as spectrograms reveals hidden acoustic signatures, telephone touch-tone DTMF dialing frequencies, and voice pitches.
+* **Whisper AI:** Open-source automatic speech recognition (ASR) capable of transcribing dialogue and identifying obscure regional dialects across noisy audio files.
+
+---
+
+## 66. Video OSINT & Verification Workflow
+
+Videos are complex sequences of images accompanied by audio and temporal metadata. Investigating video content requires methodical decomposition:
+
+```mermaid
+flowchart TD
+    VID["Video Asset Received
+(MP4, WebM, Stream)"] --> PRE["1. Preserve & Hash
+(yt-dlp, SHA256 Hash)"]
+    PRE --> META["2. Metadata Extraction
+(FFprobe, ExifTool)"]
+    META --> FRAME["3. Keyframe Extraction
+(InVID, FFmpeg -r 1)"]
+    FRAME --> REV["4. Reverse Visual Search
+(Google Lens, Yandex)"]
+    REV --> GEO["5. Chronolocation & Map Pin
+(SunCalc, Google Earth)"]
+
+    style VID fill:#0f172a,stroke:#00e5ff,color:#fff
+    style PRE fill:#1e293b,stroke:#ffab00,color:#fff
+    style META fill:#1e293b,stroke:#00e676,color:#fff
+    style FRAME fill:#1e293b,stroke:#b388ff,color:#fff
+    style REV fill:#0f172a,stroke:#ff5252,color:#fff
+    style GEO fill:#0f172a,stroke:#90caf9,color:#fff
+```
+
+---
+
+## 67. InVID / WeVerify Verification Suite
+
+The **InVID / WeVerify** browser extension is the gold standard for digital journalists, human rights investigators, and intelligence analysts verifying video content.
+
+### 67.1 Core Features:
+* **Keyframe Splitting:** Automatically slices web videos into representative visual thumbnails.
+* **Reverse Image Multi-Search:** Submits extracted frames directly to Google, Yandex, Bing, Baidu, and TinEye with a single click.
+* **Contextual Twitter Verification:** Searches for historical micro-blogging discussions matching video keywords around the alleged event date.
+
+---
+
+## 68. YouTube OSINT
+
+YouTube hosts immense public video archives containing technical, corporate, and regional data.
+
+### 68.1 Investigative Techniques:
+* **YouTube DataViewer (Amnesty International):** Converts YouTube video links into precise UTC upload timestamps and extracts thumbnail URLs for reverse search.
+* **`yt-dlp` Video Metadata Harvesting:**
+  ```bash
+  # Extract comprehensive JSON metadata without downloading entire video stream
+  yt-dlp --dump-json "https://www.youtube.com/watch?v=VIDEO_ID" | jq '{title: .title, upload_date: .upload_date, uploader_id: .uploader_id, tags: .tags}'
+  ```
+
+---
+
+## 69. Reddit OSINT
+
+Reddit is a vast discussion forum where users, developers, and threat actors frequently disclose technical details, system configurations, and personal frustrations.
+
+### 69.1 Reddit Search Utilities:
+* **PullPush / Pushshift API:** Historical indexing engines allowing researchers to recover deleted comments, banned submissions, and historic user posting chronologies:
+  ```bash
+  curl -s "https://api.pullpush.io/reddit/search/comment/?author=TargetUser" | jq .
+  ```
+* **Redective (`redective.com`):** Generates analytical profiles of Reddit accounts, highlighting active subreddits, top keywords, and posting hour heatmaps.
+
+---
+
+## 70. Telegram OSINT
+
+Telegram has become the primary communications channel for cybercrime forums, hacktivist collectives, ransomware leak updates, and illicit marketplaces.
+
+### 70.1 Telegram Reconnaissance Tools:
+* **TGStat (`tgstat.com`) / Telemetr (`telemetr.io`):** Analytics databases archiving public Telegram channels, tracking channel growth, post forwards, view counts, and citation networks.
+* **Public Search Engines:** Platforms like `t.me/s/channel_name` allow previewing public channels in web browsers without creating an active Telegram account.
+
+---
+
+## 71. Discord OSINT
+
+Discord servers host gaming communities, open-source projects, and underground hacker circles.
+
+### 71.1 Investigative Entrypoints:
+* **Public Server Directories:** Portals like **Disboard (`disboard.org`)** index public servers by tag, topic, and invite link.
+* **Discord Widget API:** Public servers frequently expose JSON widgets revealing live online member counts and voice channel activity:
+  ```bash
+  curl -s "https://discord.com/api/guilds/SERVER_ID/widget.json" | jq .
+  ```
+
+---
+
+## 72. Mastodon & Fediverse Intelligence
+
+The Fediverse is a decentralized collection of independent social servers communicating via the **ActivityPub** open protocol.
+
+### 72.1 Fediverse Reconnaissance:
+* **Instance Directories:** Platforms like **FediDB (`fedidb.org`)** and **Fediverse Observer** track active instances, software versions, and user populations.
+* **Federated Search:** Unlike centralized platforms, Fediverse searches require querying across instance nodes or leveraging cross-instance crawlers.
+
+---
+
+## 73. Bluesky & AT Protocol Intelligence
+
+Bluesky operates on the **Authenticated Transfer (AT) Protocol**, an open federated network for social media.
+
+### 73.1 Open Data Model:
+* All public posts, likes, reposts, and profile metadata on the AT Protocol are open and queryable via public REST APIs and Decentralized Identifiers (DIDs).
+* Developers and analysts can stream firehose events in real time without restrictive API access keys.
+
+---
+
+## 74. X / Twitter Advanced Intelligence Gathering
+
+X (formerly Twitter) provides rich real-time event reporting, developer discussions, and political telemetry.
+
+### 74.1 Advanced Search Operators:
+
+```text
+from:username "keyword"
+to:username "query"
+from:username since:2025-01-01 until:2025-06-30
+"target.com" min_faves:50
+geocode:37.7749,-122.4194,5km
+```
+
+---
+
+## 75. Social Graph Analysis
+
+Social graph analysis models relationships between human actors, accounts, and infrastructure:
+* **Directed Ties:** User A follows User B, User B comments on User C's post.
+* **Centrality Metrics:**
+  * **Degree Centrality:** Identifies accounts with the highest total connections.
+  * **Betweenness Centrality:** Identifies "bridge" accounts that connect distinct communities.
+
+---
+
+## 76. Network Graph Visualization Engines
+
+When dealing with thousands of correlated nodes (people, emails, domains, IPs, phone numbers), visualization tools translate complex datasets into actionable network graphs.
+
+### 76.1 Primary Graph Suites:
+* **Gephi (`gephi.org`):** Open-source desktop software for graph and network analysis. Runs modularity clustering, ForceAtlas2 layouts, and identifies hidden sub-networks.
+* **Neo4j:** The leading enterprise graph database. Models entities as property nodes connected by typed relationships:
+  ```cypher
+  MATCH (a:Person)-[:OWNS]->(d:Domain)-[:RESOLVES_TO]->(ip:IP)
+  WHERE ip.asn = 13335
+  RETURN a, d, ip;
+  ```
+* **Graphistry (`graphistry.com`):** Cloud-native GPU-accelerated visual graph intelligence platform capable of rendering millions of nodes and edges in real time.
+
+---
+
+## 77. Essential Browser OSINT Extensions
+
+Browser extensions transform analysts' web browsers into automated reconnaissance workstations:
+
+| Extension | Primary Function & Utility |
+| :--- | :--- |
+| **Wappalyzer / BuiltWith** | Instant identification of web frameworks, CMS, programming languages, and analytics scripts |
+| **uBlock Origin** | High-performance content blocker preventing malware execution, tracking scripts, and IP fingerprinting |
+| **SingleFile / Save Page WE** | Saves an entire complete web page (HTML, images, CSS, fonts) as a single standalone offline file |
+| **Wayback Machine Extension** | Automatically detects HTTP 404 dead links and displays historical Internet Archive captures |
+| **InVID & WeVerify** | Keyframe extraction, reverse image querying, and forensic metadata parsing for web video |
+| **HackTools** | Web penetration testing and OSINT cheat sheet extension featuring reverse shell and payload generators |
+| **Link Gopher** | Extracts, deduplicates, and sorts all hyperlinks present on any visited web page |
+
+---
+
+## 78. Web Scraping Architecture for Intelligence
+
+When public APIs are unavailable, web scraping extracts structured intelligence from raw HTML documents.
+
+### 78.1 Core Python Scraping Libraries:
+* **Requests / HTTPX:** High-speed HTTP clients supporting connection pooling, cookies, proxies, and custom User-Agent headers.
+* **BeautifulSoup4:** Elegant library for parsing HTML/XML documents and extracting elements via CSS selectors:
+  ```python
+  from bs4 import BeautifulSoup
+  import requests
+
+  res = requests.get("https://example.com", headers={"User-Agent": "Mozilla/5.0"})
+  soup = BeautifulSoup(res.text, "html.parser")
+  for link in soup.find_all("a", href=True):
+      print(link["href"])
+  ```
+* **Playwright / Selenium:** Headless browser automation executing dynamic JavaScript, interacting with forms, and bypassing client-side rendering.
+* **Scrapy:** Enterprise-grade asynchronous web crawling framework for scraping millions of pages across distributed workers.
+
+---
+
+## 79. Command-Line OSINT Toolkit for Linux/Kali
+
+The Unix terminal provides high-speed, scriptable text processing utilities that process massive log files and intelligence feeds without GUI overhead:
+
+```bash
+# 1. High-Speed Web Querying
+curl -s -A "Mozilla/5.0" "https://api.example.com/data" | jq .
+
+# 2. Extract Specific JSON Fields with jq
+curl -s "https://crt.sh/?q=%.target.com&output=json" | jq -r '.[].name_value' | sort -u
+
+# 3. Stream Filtering and RegEx with grep, sed, and awk
+cat web_server.log | awk '{print $1}' | sort | uniq -c | sort -nr | head -n 10
+
+# 4. Extract Human-Readable Strings from Compiled Binaries
+strings -a suspicious_sample.exe | grep -E "http://|https://"
+
+# 5. Extract Hardware & GPS Metadata from Images
+exiftool -GPSPosition -DateTimeOriginal photo.jpg
+```
+
+---
+
+## 80. Web Crawlers & Attack Surface Spiders
+
+Automated spiders crawl entire web domain hierarchies, discovering unlinked sub-paths, hidden JavaScript endpoints, and administrative interfaces.
+
+### 80.1 Leading Web Crawlers:
+* **Katana (ProjectDiscovery):** Next-generation crawling engine featuring headless and standard crawling modes with automated JavaScript parsing.
+* **Hakrawler:** Ultra-fast Go crawler written by Hakluke for scraping endpoints from web assets and Wayback machine archives.
+* **GoSpider:** Multi-threaded web spider supporting sitemap parsing, robots.txt inspection, and JavaScript link extraction.
+
+---
+
+## 81. Archive Investigation & Temporal Reconstruction
+
+Recovering deleted evidence or verifying what an organization looked like at a specific historical point in time requires cross-referencing multiple digital preservation vaults:
+
+```mermaid
+flowchart LR
+    Target["Target URL"] --> Wayback["1. Wayback Machine
+(web.archive.org)"]
+    Target --> ArchiveToday["2. Archive.today
+(archive.ph)"]
+    Target --> CommonCrawl["3. Common Crawl
+(WARC Repositories)"]
+    Target --> GoogleCache["4. Google Cache / Bing Cache"]
+
+    Wayback --> MasterTimeline["Reconstructed Historical Timeline"]
+    ArchiveToday --> MasterTimeline
+    CommonCrawl --> MasterTimeline
+    GoogleCache --> MasterTimeline
+
+    style Target fill:#0f172a,stroke:#00e5ff,color:#fff
+    style Wayback fill:#1e293b,stroke:#ffab00,color:#fff
+    style ArchiveToday fill:#1e293b,stroke:#00e676,color:#fff
+    style CommonCrawl fill:#1e293b,stroke:#b388ff,color:#fff
+    style GoogleCache fill:#1e293b,stroke:#ff5252,color:#fff
+    style MasterTimeline fill:#0f172a,stroke:#90caf9,color:#fff
+```
+
+---
+
+## 82. Breach Monitoring & Enterprise Credential Exposure
+
+Defenders monitor credential exposure to revoke compromised sessions before attackers execute credential-stuffing attacks:
+* **Have I Been Pwned Enterprise:** Real-time domain subscription alerting corporate SOC teams the moment an employee email appears in new breaches.
+* **SpyCloud / Searchlight Cyber / Constella:** Enterprise darknet monitoring tracking Infostealer malware infections across corporate endpoints.
+
+---
+
+## 83. Dark-Web Monitoring & Ransomware Tracking
+
+Enterprise dark-web intelligence identifies data leaks and threat actor chatter before attacks occur:
+* **Ransomwatch (`ransomwatch.telemetry.ltd`):** Monitors ransomware gang leak blogs (LockBit, BlackCat, Akira), archiving victim announcements in real time.
+* **DarkOwl / Flashpoint / KELA:** Deep-web intelligence platforms providing search access to closed underground cybercrime forums and encrypted channels.
+
+---
+
+## 84. Brand Monitoring & Digital Risk Protection
+
+Monitoring brand abuse, trademark infringement, typo-squatting, and executive impersonation:
+* **Google Alerts / Talkwalker Alerts:** Real-time email notifications whenever specified keywords appear across indexed web pages and news articles.
+* **Brand24 / Mention:** Multi-platform media monitoring tracking brand reputation and sudden sentiment shifts.
+
+---
+
+## 85. News OSINT & Global Event Monitoring
+
+News aggregators provide real-time situational awareness during kinetic conflicts, critical infrastructure attacks, and corporate crises:
+* **GDELT Project (Global Database of Events, Language, and Tone):** Supported by Google, GDELT monitors broadcast, print, and web news in over 100 languages, updating every 15 minutes to quantify global human conflict and diplomacy.
+* **MediaCloud:** Open-source research platform analyzing digital media ecosystems and tracking narrative diffusion across global publishers.
+
+---
+
+## 86. Disinformation Analysis & Media Verification
+
+Verifying user-generated media during breaking news events:
+1. **Source Verification:** Who originally uploaded the file? What is their historical posting track record?
+2. **Date & Temporal Verification:** Cross-reference weather reports (Rain, sunlight angle) against the alleged date.
+3. **Forensic Image Verification:** Run ELA checks via **FotoForensics** to verify against cloned or manipulated pixels.
+
+---
+
+## 87. Fact-Checking Consortia & Open Databases
+
+Authoritative databases cataloging debunked claims, propaganda campaigns, and manipulated media:
+* **Google Fact Check Explorer (`toolbox.google.com/factcheck/explorer`):** Searchable index of fact-checked claims produced by verified global journalistic organizations.
+* **Snopes / PolitiFact / Bellingcat Investigation Vaults:** Rigorous investigative reports detailing methodology and open-source evidence chains.
+
+---
+
+## 88. Language Intelligence & Translation Engines
+
+Navigating foreign-language forums and target regions requires automated linguistic processing:
+* **DeepL Translator:** The industry benchmark for nuanced, context-aware translation across European and Asian languages.
+* **Google Translate / Yandex Translate:** Broad language coverage, optical translation, and document parsing.
+
+---
+
+## 89. Optical Character Recognition (OCR) for OSINT
+
+Converting text contained within images, scanned documents, and video frames into searchable text:
+* **Tesseract OCR:** Open-source OCR engine maintained by Google:
+  ```bash
+  # Extract text from image using Tesseract
+  sudo apt install -y tesseract-ocr
+  tesseract document_scan.png output_text
+  cat output_text.txt
+  ```
+* **EasyOCR / PaddleOCR:** Python machine learning libraries providing high-accuracy multilingual OCR for street signs and license plates.
+
+---
+
+## 90. Deep Web Academic Repositories & Document Engines
+
+Searching peer-reviewed literature, historical dissertations, and technical whitepapers:
+* **Google Books / Internet Archive Books:** Full-text searchable database of digitized historical literature.
+* **JSTOR / HathiTrust:** Academic journals and digital research archives.
+* **arXiv.org:** Open-access repository for hundreds of thousands of pre-print research papers in computer science and cryptography.
+
+---
+
+## 91. Academic OSINT & Scholarly Intelligence
+
+Academic literature reveals proprietary algorithms, patent filings, corporate author collaborations, and technical vulnerabilities documented by security researchers.
+
+### 91.1 Academic Search Portals:
+* **Semantic Scholar (`semanticscholar.org`):** AI-powered scholarly search engine extracting key findings, citation velocity, and influential references.
+* **OpenAlex (`openalex.org`):** Fully open catalog indexing hundreds of millions of scientific papers, researchers, institutions, and citation graphs.
+* **PubMed / CORE / ResearchGate:** Life sciences research, global open-access repositories, and researcher social networks.
+
+---
+
+## 92. Infrastructure Relationship Mapping Workflow
+
+A structured cybersecurity infrastructure investigation maps an organization from its root domain down to individual physical servers:
+
+```mermaid
+flowchart TD
+    D["1. Root Domain
+(target.com)"] --> W["2. WHOIS / RDAP
+(Registrar, Registrant Org)"]
+    W --> DNS["3. Authoritative DNS
+(SOA, NS, MX, TXT SPF)"]
+    DNS --> SUB["4. Passive Subdomains
+(Subfinder, Amass, crt.sh)"]
+    SUB --> IP["5. IP Resolution
+(A, AAAA Records)"]
+    IP --> BGP["6. BGP & ASN Mapping
+(BGPView, Autonomous System)"]
+    BGP --> SHO["7. Port & Service Discovery
+(Shodan, Censys, GreyNoise)"]
+    SHO --> TECH["8. Web Technology Profiling
+(Wappalyzer, urlscan.io)"]
+    TECH --> HIST["9. Historical Topology
+(SecurityTrails, Wayback Machine)"]
+
+    style D fill:#0f172a,stroke:#00e5ff,color:#fff
+    style W fill:#1e293b,stroke:#ffab00,color:#fff
+    style DNS fill:#1e293b,stroke:#00e676,color:#fff
+    style SUB fill:#1e293b,stroke:#b388ff,color:#fff
+    style IP fill:#0f172a,stroke:#ff5252,color:#fff
+    style BGP fill:#1e293b,stroke:#90caf9,color:#fff
+    style SHO fill:#1e293b,stroke:#f48fb1,color:#fff
+    style TECH fill:#0f172a,stroke:#00e5ff,color:#fff
+    style HIST fill:#1e293b,stroke:#ffab00,color:#fff
+```
+
+---
+
+## 93. Cybersecurity OSINT Attack Surface
+
+During an authorized assessment, analysts construct an external perimeter inventory matrix:
+
+```text
+Target Organization
+ ├── Domains & Subdomains
+ │    ├── www.target.com (Primary Web)
+ │    ├── api.target.com (Production REST API)
+ │    ├── dev-portal.target.com (Developer Staging)
+ │    └── vpn.target.com (Corporate SSL-VPN Gateway)
+ ├── IP Ranges & Autonomous Systems
+ │    ├── AS64496 (Target Corp CIDR: 198.51.100.0/24)
+ │    └── Cloud Hosting Egress IPs (AWS US-East, Azure West)
+ ├── Cloud Storage Assets
+ │    ├── s3://target-backups-internal/ (Amazon S3 Bucket)
+ │    └── https://targetcorp.blob.core.windows.net/assets/
+ ├── Certificate Transparency Records
+ │    └── Wildcard SANs: *.corp.target.com
+ ├── Code Repositories & Developer Personas
+ │    ├── github.com/target-corp
+ │    └── Personal employee repositories leaking credentials
+ └── Third-Party SaaS Footprint
+      ├── target.okta.com (Identity Provider)
+      ├── target.atlassian.net (Jira / Confluence)
+      └── target.slack.com (Internal Chat)
+```
+
+---
+
+## 94. Cloud Storage OSINT & Bucket Discovery
+
+Misconfigured public cloud buckets (AWS S3, Azure Blob Storage, Google Cloud Storage) leak database backups, source code, and employee records.
+
+### 94.1 Discovery Tooling:
+* **CloudEnum (`github.com/initstring/cloud_enum`):** Multi-cloud OSINT tool discovering public buckets across AWS, Azure, and Google Cloud using permutations of target company names.
+* **S3Scanner / GrayhatWarfare:** Dedicated engines searching and indexing billions of publicly exposed Amazon S3 buckets.
+
+> ⚠️ **Authorization Warning:** Never download proprietary corporate data from open buckets unless you are performing an explicitly scoped and authorized penetration test.
+
+---
+
+## 95. SecurityTrails
+
+SecurityTrails is the industry standard for historical domain intelligence.
+* **Historical DNS:** Tracks when a domain changed web hosts, uncovering the original server IP before a Cloudflare reverse proxy was installed.
+* **Reverse DNS & IP Mapping:** Locates all domains hosted on a specific shared server or netblock.
+
+---
+
+## 96. VirusTotal Multi-Hop Graph Analysis
+
+VirusTotal functions as a multi-directional graph engine:
+* Starting with a suspicious file hash, analysts pivot to the URL that dropped the file.
+* From the URL, analysts pivot to the domain name.
+* From the domain name, analysts pivot to the resolving IP address.
+* From the IP address, analysts discover all other malware samples communicating with that C2 server.
+
+---
+
+## 97. urlscan.io
+
+urlscan.io executes deep behavioral analysis of web applications:
+* Records every outbound network connection, DNS query, and TLS handshake.
+* Captures the full DOM tree and extracts all embedded JavaScript source files.
+* Identifies malicious tracking codes, phishing kit forms, and credential exfiltration webhooks.
+
+---
+
+## 98. GreyNoise Intelligence
+
+GreyNoise categorizes opportunistic internet scanning traffic:
+* **The Noise:** Identifies whether scanning activity originates from mass research projects (Shodan, Censys, University scanners) or automated botnets.
+* **The RIOT (Rule It Out):** Whitelist verifying whether an IP belongs to trusted business SaaS providers (Microsoft, Google, Cloudflare), allowing SOC analysts to filter out benign background noise.
+
+---
+
+## 99. AbuseIPDB
+
+AbuseIPDB is an open crowd-sourced database for reporting malicious IPs:
+* Provides an **Abuse Confidence Score (0–100%)** indicating the likelihood of an IP address being malicious.
+* Details attack categories: SSH brute forcing, port scanning, web application exploits, and email spamming.
+
+---
+
+## 100. AlienVault Open Threat Exchange (OTX)
+
+AlienVault OTX is a free, crowd-sourced cyber threat intelligence platform:
+* Threat researchers publish "Pulses" detailing IOCs observed in real-world campaigns.
+* Analysts query OTX for domains, IPs, or file hashes to review community notes and linked malware families.
+
+---
+
+## 101. Intelligence X
+
+Intelligence X (`intelx.io`) is an investigative search engine that archives public data breaches, Tor hidden services, paste sites, and public document dumps without censorship or algorithmic filtering.
+
+---
+
+## 102. OSINT Automation Frameworks
+
+Autonomous harvesters streamline reconnaissance by executing dozens of API calls and web scrapers sequentially:
+* **SpiderFoot:** Autonomous attack surface mapper and OSINT engine.
+* **Recon-ng:** Modular command-line reconnaissance environment.
+* **sn0int:** Semi-automatic OSINT framework and package manager designed for operational investigation tracking.
+
+---
+
+## 103. The 8-Stage OSINT Investigation Lifecycle
+
+Professional investigations adhere strictly to the standardized 8-stage intelligence lifecycle:
+
+```mermaid
+flowchart TD
+    R["1. Requirement Definition (Define PIRs & Scoping)"] --> C["2. Multi-Vector Collection (Harvesting Signals)"]
+    C --> P["3. Cross-Domain Pivoting (Hop Across Entities)"]
+    P --> CR["4. Correlation & Enrichment (Link Analysis & Graphs)"]
+    CR --> V["5. Verification & Corroboration (Eliminate False Positives)"]
+    V --> A["6. Intelligence Analysis (Context & Threat Modeling)"]
+    A --> I["7. Production of Intelligence (Synthesize Findings)"]
+    I --> RP["8. Executive Dissemination & Report (Actionable Playbooks)"]
+
+    style R fill:#0f172a,stroke:#00e5ff,color:#fff
+    style C fill:#1e293b,stroke:#ffab00,color:#fff
+    style P fill:#1e293b,stroke:#00e676,color:#fff
+    style CR fill:#1e293b,stroke:#b388ff,color:#fff
+    style V fill:#0f172a,stroke:#ff5252,color:#fff
+    style A fill:#1e293b,stroke:#90caf9,color:#fff
+    style I fill:#1e293b,stroke:#f48fb1,color:#fff
+    style RP fill:#0f172a,stroke:#00e5ff,color:#fff
+```
+
+---
+
+## 104. End-to-End Enterprise Security Case Study
+
+### Target: `example.com` (Authorized Assessment Scenario)
+1. **Step 1 — Domain Registration:** Run `whois example.com` to identify the registrar, creation date, and nameservers (`ns1.awsdns.com`).
+2. **Step 2 — DNS Profiling:** Run `dig example.com MX` to identify Microsoft 365 email routing, and check `TXT` records to discover SPF inclusion of SendGrid and Mailchimp.
+3. **Step 3 — Passive Subdomain Discovery:** Run `subfinder -d example.com -silent` discovering 85 subdomains, including `jira.internal.example.com` and `vpn.example.com`.
+4. **Step 4 — Certificate Transparency:** Query `crt.sh` discovering an unindexed wildcard certificate `*.dev.example.com` issued 48 hours ago.
+5. **Step 5 — Infrastructure Port Scanning:** Run `shodan search "ssl:example.com"` revealing an exposed server on port `8443` running an unauthenticated Prometheus metrics dashboard.
+6. **Step 6 — Technology Stack:** Use `wappalyzer` to identify that the primary application runs on Laravel 9 and React with an Amazon Web Services backend.
+7. **Step 7 — GitHub Secret Reconnaissance:** Execute `gitleaks detect` on a public developer repository belonging to an employee, recovering a hardcoded AWS IAM Access Key.
+8. **Step 8 — Threat Intelligence Correlation:** Query discovered server IPs on **GreyNoise** and **AbuseIPDB** to ensure they are not known malicious honeypots.
+9. **Step 9 — Dossier Compilation:** Document all verified exposures in a structured intelligence report with immediate remediation instructions.
+
+---
+
+## 105. The OSINT Pivot Mindset
+
+The core differentiator between a casual searcher and a professional intelligence analyst is the **Pivot Mindset**—the ability to jump from one entity type into another across disparate data domains:
+
+```text
+EMAIL
+  └── USERNAME (via prefix analysis)
+        └── SOCIAL MEDIA (via Sherlock / Maigret)
+              └── GITHUB (via public developer handle)
+                    └── COMPANY NAME (via git commit email)
+                          └── DOMAIN (via corporate website)
+                                └── DNS (via dig / nslookup)
+                                      └── IP ADDRESS (via A record)
+                                            └── ASN (via BGPView)
+                                                  └── SSL CERTIFICATE (via Shodan / crt.sh)
+                                                        └── SERVER INFRASTRUCTURE
+```
+
+---
+
+## 106. Tiered OSINT Toolkit Recommendations
+
+Structured progression for students, analysts, and enterprise purple teams:
+
+| Operational Tier | Category | Essential Core Tools |
+| :---: | :--- | :--- |
+| **Tier 1** | **Foundations (Master First)** | Google / Bing Advanced Dorks, Wayback Machine, Google Lens, ExifTool, WHOIS/RDAP, `dig`, `crt.sh`, Shodan, Censys, VirusTotal, urlscan.io, Have I Been Pwned |
+| **Tier 2** | **CLI & Automation** | Sherlock, Maigret, theHarvester, OWASP Amass, Subfinder, Assetfinder, SpiderFoot, Recon-ng, Maltego, FinalRecon |
+| **Tier 3** | **Cyber Threat Intel (CTI)** | MITRE ATT&CK, MISP, AlienVault OTX, AbuseIPDB, GreyNoise, ThreatFox, URLhaus, MalwareBazaar, CISA KEV, NVD |
+| **Tier 4** | **Geospatial (GEOINT)** | Google Earth Pro, OpenStreetMap, Mapillary, SunCalc, Overpass Turbo, Copernicus Browser, NASA Worldview, QGIS |
+| **Tier 5** | **Media Verification** | InVID / WeVerify, Google Lens, Yandex Images, TinEye, ExifTool, FFmpeg, MediaInfo, Tesseract OCR |
+| **Tier 6** | **Enterprise & Advanced** | Neo4j, Gephi, Graphistry, MISP, STIX 2.1 / TAXII, GDELT Project, Common Crawl, Intelligence X, SecurityTrails |
+
+---
+
+## 107. The Unified OSINT Tool & Relationship Map
+
+```text
+                                         OSINT DOMAIN ECOSYSTEM
+                                                   │
+                ┌──────────────────────────────────┼──────────────────────────────────┐
+                │                                  │                                  │
+          👤 PEOPLE & IDENTITY            🌐 NETWORK & TECHNOLOGY               🖼️ MEDIA & GEOINT
+                │                                  │                                  │
+        ┌───────┼───────┐                  ┌───────┼───────┐                  ┌───────┼───────┐
+        │       │       │                  │       │       │                  │       │       │
+      EMAIL  USERNAME PHONE              DOMAINS  DNS/IP  DEVICES           IMAGES  VIDEO   GEOLOC
+        │       │       │                  │       │       │                  │       │       │
+     Holehe Sherlock PhoneInfoga        Subfinder dig    Shodan            ExifTool InVID   SunCalc
+     Epieos Maigret  Truecaller         Amass    BGPView Censys            Lens     yt-dlp  GoogleEarth
+     HIBP   Blackbird NumVerify         crt.sh   IPinfo  GreyNoise         ELA      FFmpeg  Overpass
+        │       │       │                  │       │       │                  │       │       │
+        └───────┬───────┘                  └───────┬───────┘                  └───────┬───────┘
+                │                                  │                                  │
+                └──────────────────────────────────┼──────────────────────────────────┘
+                                                   │
+                                      🔄 MULTI-HOP CORRELATION
+                                                   │
+                                     ┌─────────────┴─────────────┐
+                                     │                           │
+                                  Maltego                      Neo4j
+                                 SpiderFoot                    Gephi
+                                     │                           │
+                                     └─────────────┬─────────────┘
+                                                   │
+                                        🧠 THREAT INTELLIGENCE
+                                        (MISP, STIX 2.1, CTI)
+                                                   │
+                                      📑 ACTIONABLE REPORTING
+```
+
+### The 10 Core Tools Every Cybersecurity Analyst Must Master:
+1. **Google / Bing Advanced Dorks:** Rapid web indexing, directory listings, and document hunting.
+2. **Shodan:** Comprehensive passive discovery of exposed servers, IoT banners, industrial controls, and SSL certificates.
+3. **Censys:** Deep protocol analysis, leaf certificate discovery, and attack surface tracking.
+4. **Maltego:** Visual link analysis, graph generation, and automated multi-hop transform chains.
+5. **SpiderFoot:** End-to-end automated collection across hundreds of threat intelligence APIs.
+6. **OWASP Amass & Subfinder:** High-speed passive subdomain enumeration and attack surface mapping.
+7. **theHarvester:** Fast passive email, subdomain, IP, and employee harvesting.
+8. **Sherlock & Maigret:** Multi-platform username hunting and digital identity footprinting.
+9. **VirusTotal & AlienVault OTX:** Threat intelligence correlation, domain reputation, and malware pivoting.
+10. **ExifTool & SunCalc:** Hardware metadata extraction and solar shadow chronolocation.
 
 ---
 
 <div align="center">
 
-**🎯 Open Source Intelligence (OSINT) Framework Complete — 20 Operational Domains**
+**🎯 Open Source Intelligence (OSINT) Operations Manual Complete**
 
 *Ethical • Actionable • Enterprise-Grade Cyber Threat Intelligence*
 
