@@ -23,6 +23,10 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **PCAP Analysis With Zeek** | **Defender Lab** | Network Forensics / Malware PCAP | Zeek Logs (`conn`, `dns`, `http`, `ssl`, `dhcp`, `kerberos`) | **T1071.001** (Web Protocols)<br>**T1566.001** (Spearphishing Attachment)<br>**T1059.005** (Macros)<br>**T1078** (Valid Accounts) | 🟢 **100% Solved**<br>(15/15 Questions) | [View Solution](./PCAP%20Analysis%20With%20Zeek/README.md) |
 | **Attack Emulation & Detection on ELK** | **Defender Lab** | Threat Hunting / Attack Emulation | HELK Stack (Elasticsearch · Kibana · Kafka) + Winlogbeat + Sysmon | **T1218.010** (Regsvr32 Proxy Exec)<br>**T1518.001** (Security Software Discovery)<br>**T1053.005** (Scheduled Task) | 🟢 **100% Solved**<br>(3/3 Attacks) | [View Solution](./Effectively%20Using%20the%20ELK%20Stack/README.md) |
 | **Detecting Abnormal Network Connections With Wazuh** | **Defender Lab** | SIEM Detection / Port Anomaly | Sysmon EID 3 (Network Connections) | **T1021.002** (SMB Shares)<br>**T1059.001** (PowerShell)<br>**T1571** (Non-Standard Port) | 🟢 **100% Solved**<br>(Real-time Alerts) | [View Solution](./Detecting%20Abnormal%20Network%20Connections%20With%20Wazuh/README.md) |
+| **SOC-1: Analyzing Unusual PowerShell Execution** | **Incident Response** | SOC Triage / PowerShell Deobfuscation | ELK Stack & TheHive (`syntrix` index) | **T1059.001** (PowerShell)<br>**T1027** (Obfuscated Command)<br>**T1071.001** (Web Protocols)<br>**T1105** (Ingress Tool Transfer) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./SOC-1%20Analyzing%20Unusual%20PowerShell%20Execution/README.md) |
+| **Detecting Mimikatz Threat Using Sysmon and Wazuh** | **Defender Lab** | Threat Hunting / Credential Dumping | Sysmon EID 1 (Process), EID 8 (RemoteThread), EID 10 (ProcessAccess) | **T1003.001** (LSASS Memory)<br>**T1078** (Valid Accounts)<br>**T1059.001** (PowerShell) | 🟢 **100% Solved**<br>(Level 12 Alerts) | [View Solution](./Detecting%20Mimikatz%20Threat%20Using%20Sysmon%20and%20Wazuh/README.md) |
+| **Detecting PsExec with Wazuh** | **Defender Lab** | SIEM Detection / Lateral Movement | Sysmon EID 12/13 (Registry), EID 17/18 (Pipes) | **T1112** (Modify Registry)<br>**T1543.003** (Windows Service)<br>**T1570** (Lateral Tool Transfer) | 🟢 **100% Solved**<br>(Rules 160010-160013) | [View Solution](./Detecting%20PsExec%20with%20Wazuh/README.md) |
+| **Malware Fundamentals: LockBit 2.0 Static Analysis** | **Malware Analysis** | Static Binary Triage & Dissection | HxD, BinText, PE-Tree, VirusTotal | **T1486** (Data Encrypted)<br>**T1484.001** (GPO Modification)<br>**T1562.001** (Disable Tools)<br>**T1070.004** (File Deletion) | 🟢 **100% Solved**<br>(100% Identified) | [View Solution](./Malware%20Fundamentals/README.md) |
 
 
 ---
@@ -98,6 +102,34 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Platform & Stack:** Wazuh SIEM v4.x (Ubuntu SOC `10.0.18.204`), Microsoft Sysmon v14.x (Windows Server 2019 `10.0.23.132`), Kali Linux (`10.10.21.2`).
 * **Scenario:** Host-based anomaly detection against unauthorized outbound C2 channels and lateral movement using CDB list port whitelisting.
 * **Key Tasks:** Deploying Wazuh Agent v4.3.10 silently on Windows Server 2019; installing Microsoft Sysmon with modular XML schema; binding `Microsoft-Windows-Sysmon/Operational` eventchannel to agent `ossec.conf`; authoring CDB constant database list `/var/ossec/etc/lists/common-ports` with standard baseline ports; authoring custom Wazuh Rule `115001` (Level 10) evaluating `win.eventdata.destinationPort` with `lookup="not_match_key"`; simulating Pass-the-Hash via Metasploit SMB PsExec (`exploit/windows/smb/psexec`) triggering an alert on default port 4444; and launching an in-memory PowerShell reverse shell download cradle triggering an alert on non-standard port 1234.
+
+---
+
+### 14. [SOC-1: Analyzing Unusual PowerShell Execution](./SOC-1%20Analyzing%20Unusual%20PowerShell%20Execution/README.md)
+* **Platform & Stack:** ELK Stack (Elasticsearch · Kibana `http://localhost:5601`) & TheHive Case Management (`http://localhost:9000`), Target Workstation `FIN-WS-02`.
+* **Scenario:** Tier 1 SOC investigation of heavily obfuscated, multi-stage PowerShell payload execution detected in Windows Event Logs during November 2025.
+* **Key Tasks:** Investigating `syntrix` index in Kibana Discover; identifying child process spawning of `powershell.exe` from `WINWORD.EXE` (PID `4812`); analyzing 6-layer obfuscation pipeline (Base64 encoding, environment variable concatenation, character array manipulation, and memory decompression); extracting C2 download cradle staging malicious Cobalt Strike beacon from `http://198.51.100.25/beacon.bin`; creating incident case `CAS-2025-11-PS01` in TheHive tagged `TLP:AMBER` / `PAP:AMBER`; and escalating containment playbook to SOC Level 2 (`soc2@syntrix.com`).
+
+---
+
+### 15. [Detecting Mimikatz Threat Using Sysmon and Wazuh](./Detecting%20Mimikatz%20Threat%20Using%20Sysmon%20and%20Wazuh/README.md)
+* **Platform & Stack:** Wazuh SIEM v4.x (Ubuntu SOC Manager `10.0.31.41`), Microsoft Sysmon v14.x (Windows Server 2019 `10.0.30.222`).
+* **Scenario:** End-to-end simulation and detection of in-memory LSASS credential dumping using Mimikatz (`sekurlsa::logonpasswords` and `privilege::debug`).
+* **Key Tasks:** Deploying Wazuh agent silently on Windows Server 2019; configuring Sysmon with modular XML rules monitoring Event ID 1 (`ProcessCreate`), Event ID 8 (`CreateRemoteThread`), and Event ID 10 (`ProcessAccess`); binding Sysmon eventchannel to agent `ossec.conf`; authoring custom high-severity Wazuh Rules `100000`, `100001`, and `100002` (Level 12); executing Mimikatz credential theft; and verifying real-time alerts in the Wazuh Security Events dashboard.
+
+---
+
+### 16. [Detecting PsExec with Wazuh](./Detecting%20PsExec%20with%20Wazuh/README.md)
+* **Platform & Stack:** Wazuh SIEM v4.x (Ubuntu SOC Manager `10.0.28.182`), Microsoft Sysmon v14.x (Windows Server 2019 `10.0.19.121`).
+* **Scenario:** Forensic detection of administrative and adversary lateral movement via Sysinternals PsExec service creation, named pipes, and registry modifications.
+* **Key Tasks:** Integrating Wazuh agent and Sysmon on Windows endpoint; monitoring Registry Event IDs 12/13 and Named Pipe Event IDs 17/18; authoring custom detection rules `160010` (EULA acceptance - MITRE T1112), `160011` (PSEXESVC service creation - MITRE T1543.003), `160012` (service teardown - MITRE T1543.003), and `160013` (named pipe IPC `\PSEXESVC-stdin/stdout/stderr` - MITRE T1570); executing interactive privileged PsExec session; and validating real-time MITRE ATT&CK alerts.
+
+---
+
+### 17. [Malware Fundamentals: LockBit 2.0 Static Analysis](./Malware%20Fundamentals/README.md)
+* **Platform & Stack:** Windows Analysis Workstation, HxD Hex Editor, BinText, PE-Tree, VirusTotal, Python (`lockbit_pe_triage.py`).
+* **Scenario:** Comprehensive static malware analysis and IOC extraction of captured LockBit 2.0 ransomware payload (`0545f842...`) without executing the binary.
+* **Key Tasks:** Verifying DOS magic bytes (`4D 5A`) and compiler-embedded DOS stub in HxD; extracting MSVC Visual Studio 2017 linker telemetry from the Rich Header at offset `0xD8`; extracting 14 categories of high-fidelity strings in BinText (Tor `.onion` leak site, Tox ID, Active Directory GPO weaponization commands, Windows Defender suppression registry keys, and 512KB zero-wipe self-deletion); parsing PE headers, section geometry, and Shannon entropy in PE-Tree (confirming native unpacked binary); identifying minimal static imports (5 DLLs / 9 APIs) as evidence of runtime dynamic API resolution; and generating a complete MITRE ATT&CK mapping.
 
 ---
 
