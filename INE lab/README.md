@@ -28,6 +28,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **Detecting PsExec with Wazuh** | **Defender Lab** | SIEM Detection / Lateral Movement | Sysmon EID 12/13 (Registry), EID 17/18 (Pipes) | **T1112** (Modify Registry)<br>**T1543.003** (Windows Service)<br>**T1570** (Lateral Tool Transfer) | 🟢 **100% Solved**<br>(Rules 160010-160013) | [View Solution](./Detecting%20PsExec%20with%20Wazuh/README.md) |
 | **Malware Fundamentals: LockBit 2.0 Static Analysis** | **Malware Analysis** | Static Binary Triage & Dissection | HxD, BinText, PE-Tree, VirusTotal | **T1486** (Data Encrypted)<br>**T1484.001** (GPO Modification)<br>**T1562.001** (Disable Tools)<br>**T1070.004** (File Deletion) | 🟢 **100% Solved**<br>(100% Identified) | [View Solution](./Malware%20Fundamentals/README.md) |
 | **SOC-1: Scanning for IOCs** | **Incident Response** | Host Forensics / IOC Triage | LOKI IOC Scanner, TheHive 5, VirusTotal | **T1059.001** (PowerShell)<br>**T1547.001** (Startup Folder)<br>**T1562.001** (Disable Tools)<br>**T1003.002** (SAM Dump)<br>**T1003** (Mimikatz) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./SOC-1%20Scanning%20for%20IOCs/README.md) |
+| **SOC-1: Detecting Malware** | **Incident Response** | Wazuh FIM & Sysmon / WannaCry | Wazuh syscheck & Sysmon EID 1 (Process Creation) | **T1204.002** (Malicious File)<br>**T1059.003** (Command Shell)<br>**T1547.001** (Registry Run)<br>**T1490** (Inhibit Recovery)<br>**T1486** (Data Encrypted) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./SOC-1%20Detecting%20Malware/README.md) |
 
 
 
@@ -139,6 +140,13 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Platform & Stack:** Windows Victim Workstation (Syntrix Enterprise), LOKI Simple IOC Scanner, VirusTotal, TheHive 5 Platform (Ubuntu `http://localhost:9000`), Python (`loki_ioc_triage.py`).
 * **Scenario:** Host-based forensic triage of a flagged Windows endpoint following user reports of performance degradation and pop-up activity, identifying multi-stage compromise artifacts.
 * **Key Tasks:** Executing LOKI full storage volume scan (`.\loki.exe --allhds`); identifying renamed Mimikatz x64 binary in `C:\ProgramData\haha.exe` (Risk Score: 415, VT: 66/72); uncovering Metasploit persistence backdoor `winfix.exe` in the Administrator Startup folder listening on port 4444 (PID 4500 bind shell); identifying unauthorized SAM registry hive backup in `C:\Users\Public`; isolating malicious defense evasion PowerShell script `C:\Windows\Disable.ps1`; initializing incident Case #1 in TheHive (`Severity: Critical`, `TLP:Amber`); registering 7 observables, 4 MITRE ATT&CK TTPs, and 2 investigation tasks; and formally escalating case ownership to SOC Level 2 (`soc2@syntrix.com`).
+
+---
+
+### 19. [SOC-1: Detecting Malware](./SOC-1%20Detecting%20Malware/README.md)
+* **Platform & Stack:** Wazuh SIEM v4.x (`http://localhost`), Microsoft Sysmon v14.x, TheHive 5 Platform (`http://localhost:9000`), VirusTotal, Python (`wannacry_wazuh_triage.py`).
+* **Scenario:** Incident triage of corporate Windows endpoint `Syntrix-PC04` (`10.0.0.67`) exhibiting high-velocity file modifications and anomalous process spawning following execution under user `daisy`.
+* **Key Tasks:** Filtering Wazuh FIM `syscheck` events for December 2025; tracking mass deletion and `.wncry` encrypted file recreation across user directories; isolating initial dropper `C:\Users\daisy\Downloads\CleanXpro.exe`; analyzing Sysmon Event ID 1 process creation events to uncover startup persistence via `tasksche.exe` in the `Run` registry key (MITRE T1547.001); identifying execution of `@WanaDecryptor@.exe` (MD5: `7BF2B57F2A205768755C07F238FB32CC`, confirmed WannaCry on VirusTotal 69/72); analyzing anti-recovery command sequences deleting Volume Shadow Copies (`vssadmin delete shadows /all /quiet`), purging backup catalogs (`wbadmin delete catalog`), and disabling recovery boot options (`bcdedit recoveryenabled no`); creating a Critical Severity incident case in TheHive with `TLP:Amber` / `PAP:Amber`; registering 7 observables and 5 MITRE ATT&CK TTPs; configuring investigation tasks; and escalating case ownership to SOC Level 2 (`soc2@syntrix.com`).
 
 ---
 
