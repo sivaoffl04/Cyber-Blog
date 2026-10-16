@@ -27,6 +27,8 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **Detecting Mimikatz Threat Using Sysmon and Wazuh** | **Defender Lab** | Threat Hunting / Credential Dumping | Sysmon EID 1 (Process), EID 8 (RemoteThread), EID 10 (ProcessAccess) | **T1003.001** (LSASS Memory)<br>**T1078** (Valid Accounts)<br>**T1059.001** (PowerShell) | 🟢 **100% Solved**<br>(Level 12 Alerts) | [View Solution](./Detecting%20Mimikatz%20Threat%20Using%20Sysmon%20and%20Wazuh/README.md) |
 | **Detecting PsExec with Wazuh** | **Defender Lab** | SIEM Detection / Lateral Movement | Sysmon EID 12/13 (Registry), EID 17/18 (Pipes) | **T1112** (Modify Registry)<br>**T1543.003** (Windows Service)<br>**T1570** (Lateral Tool Transfer) | 🟢 **100% Solved**<br>(Rules 160010-160013) | [View Solution](./Detecting%20PsExec%20with%20Wazuh/README.md) |
 | **Malware Fundamentals: LockBit 2.0 Static Analysis** | **Malware Analysis** | Static Binary Triage & Dissection | HxD, BinText, PE-Tree, VirusTotal | **T1486** (Data Encrypted)<br>**T1484.001** (GPO Modification)<br>**T1562.001** (Disable Tools)<br>**T1070.004** (File Deletion) | 🟢 **100% Solved**<br>(100% Identified) | [View Solution](./Malware%20Fundamentals/README.md) |
+| **SOC-1: Scanning for IOCs** | **Incident Response** | Host Forensics / IOC Triage | LOKI IOC Scanner, TheHive 5, VirusTotal | **T1059.001** (PowerShell)<br>**T1547.001** (Startup Folder)<br>**T1562.001** (Disable Tools)<br>**T1003.002** (SAM Dump)<br>**T1003** (Mimikatz) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./SOC-1%20Scanning%20for%20IOCs/README.md) |
+
 
 
 ---
@@ -130,6 +132,13 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Platform & Stack:** Windows Analysis Workstation, HxD Hex Editor, BinText, PE-Tree, VirusTotal, Python (`lockbit_pe_triage.py`).
 * **Scenario:** Comprehensive static malware analysis and IOC extraction of captured LockBit 2.0 ransomware payload (`0545f842...`) without executing the binary.
 * **Key Tasks:** Verifying DOS magic bytes (`4D 5A`) and compiler-embedded DOS stub in HxD; extracting MSVC Visual Studio 2017 linker telemetry from the Rich Header at offset `0xD8`; extracting 14 categories of high-fidelity strings in BinText (Tor `.onion` leak site, Tox ID, Active Directory GPO weaponization commands, Windows Defender suppression registry keys, and 512KB zero-wipe self-deletion); parsing PE headers, section geometry, and Shannon entropy in PE-Tree (confirming native unpacked binary); identifying minimal static imports (5 DLLs / 9 APIs) as evidence of runtime dynamic API resolution; and generating a complete MITRE ATT&CK mapping.
+
+---
+
+### 18. [SOC-1: Scanning for IOCs](./SOC-1%20Scanning%20for%20IOCs/README.md)
+* **Platform & Stack:** Windows Victim Workstation (Syntrix Enterprise), LOKI Simple IOC Scanner, VirusTotal, TheHive 5 Platform (Ubuntu `http://localhost:9000`), Python (`loki_ioc_triage.py`).
+* **Scenario:** Host-based forensic triage of a flagged Windows endpoint following user reports of performance degradation and pop-up activity, identifying multi-stage compromise artifacts.
+* **Key Tasks:** Executing LOKI full storage volume scan (`.\loki.exe --allhds`); identifying renamed Mimikatz x64 binary in `C:\ProgramData\haha.exe` (Risk Score: 415, VT: 66/72); uncovering Metasploit persistence backdoor `winfix.exe` in the Administrator Startup folder listening on port 4444 (PID 4500 bind shell); identifying unauthorized SAM registry hive backup in `C:\Users\Public`; isolating malicious defense evasion PowerShell script `C:\Windows\Disable.ps1`; initializing incident Case #1 in TheHive (`Severity: Critical`, `TLP:Amber`); registering 7 observables, 4 MITRE ATT&CK TTPs, and 2 investigation tasks; and formally escalating case ownership to SOC Level 2 (`soc2@syntrix.com`).
 
 ---
 
