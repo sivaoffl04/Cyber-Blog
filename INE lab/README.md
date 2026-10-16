@@ -29,6 +29,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **Malware Fundamentals: LockBit 2.0 Static Analysis** | **Malware Analysis** | Static Binary Triage & Dissection | HxD, BinText, PE-Tree, VirusTotal | **T1486** (Data Encrypted)<br>**T1484.001** (GPO Modification)<br>**T1562.001** (Disable Tools)<br>**T1070.004** (File Deletion) | 🟢 **100% Solved**<br>(100% Identified) | [View Solution](./Malware%20Fundamentals/README.md) |
 | **SOC-1: Scanning for IOCs** | **Incident Response** | Host Forensics / IOC Triage | LOKI IOC Scanner, TheHive 5, VirusTotal | **T1059.001** (PowerShell)<br>**T1547.001** (Startup Folder)<br>**T1562.001** (Disable Tools)<br>**T1003.002** (SAM Dump)<br>**T1003** (Mimikatz) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./SOC-1%20Scanning%20for%20IOCs/README.md) |
 | **SOC-1: Detecting Malware** | **Incident Response** | Wazuh FIM & Sysmon / WannaCry | Wazuh syscheck & Sysmon EID 1 (Process Creation) | **T1204.002** (Malicious File)<br>**T1059.003** (Command Shell)<br>**T1547.001** (Registry Run)<br>**T1490** (Inhibit Recovery)<br>**T1486** (Data Encrypted) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./SOC-1%20Detecting%20Malware/README.md) |
+| **Malware Analysis: Trojan** | **Malware Analysis** | Disguised PDF Dropper / REMnux | `base64dump.py`, `scite`, `iconv`, VirusTotal | **T1036.008** (Masquerade File Type)<br>**T1027** (Obfuscated Command)<br>**T1059.001** (PowerShell)<br>**T1564.003** (Hidden Window)<br>**T1105** (Ingress Tool Transfer) | 🟢 **100% Solved**<br>(Payload Deobfuscated) | [View Solution](./Malware%20Analysis%20Trojan/README.md) |
 
 
 
@@ -147,6 +148,13 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Platform & Stack:** Wazuh SIEM v4.x (`http://localhost`), Microsoft Sysmon v14.x, TheHive 5 Platform (`http://localhost:9000`), VirusTotal, Python (`wannacry_wazuh_triage.py`).
 * **Scenario:** Incident triage of corporate Windows endpoint `Syntrix-PC04` (`10.0.0.67`) exhibiting high-velocity file modifications and anomalous process spawning following execution under user `daisy`.
 * **Key Tasks:** Filtering Wazuh FIM `syscheck` events for December 2025; tracking mass deletion and `.wncry` encrypted file recreation across user directories; isolating initial dropper `C:\Users\daisy\Downloads\CleanXpro.exe`; analyzing Sysmon Event ID 1 process creation events to uncover startup persistence via `tasksche.exe` in the `Run` registry key (MITRE T1547.001); identifying execution of `@WanaDecryptor@.exe` (MD5: `7BF2B57F2A205768755C07F238FB32CC`, confirmed WannaCry on VirusTotal 69/72); analyzing anti-recovery command sequences deleting Volume Shadow Copies (`vssadmin delete shadows /all /quiet`), purging backup catalogs (`wbadmin delete catalog`), and disabling recovery boot options (`bcdedit recoveryenabled no`); creating a Critical Severity incident case in TheHive with `TLP:Amber` / `PAP:Amber`; registering 7 observables and 5 MITRE ATT&CK TTPs; configuring investigation tasks; and escalating case ownership to SOC Level 2 (`soc2@syntrix.com`).
+
+---
+
+### 20. [Malware Analysis: Trojan](./Malware%20Analysis%20Trojan/README.md)
+* **Platform & Stack:** REMnux v7.x Forensic Workstation (`https://remnux.ine.local:6901`), Debian Staging Bridge (`172.17.0.1:8000`), `base64dump.py`, SciTE, `iconv`, VirusTotal, Python (`trojan_static_triage.py`).
+* **Scenario:** Rigorous static malware triage of weaponized document `info.pdf` masquerading as a benign PDF to uncover embedded droppers and download cradles without detonating malware.
+* **Key Tasks:** Staging and hosting `info.zip` via Python HTTP server on port 8000; ingesting and extracting `info.pdf` into REMnux; calculating MD5 hash `e98b04a9d7092c424ae151e3c83ee302` and correlating across VirusTotal (confirmed Trojan.Downloader); parsing Base64 object streams with `base64dump.py` to isolate high-density Object ID 2 (280 bytes); inspecting raw PDF object structure in SciTE editor to isolate `-EncodedCommand` Unicode parameter; deobfuscating UTF-16LE payload via `base64 -d | iconv -f utf-16 -t utf-8`; extracting C2 endpoint `http://ncdbuganda.org/.css/awori.exe` and drop location `%APPDATA%\awori.exe`; and formulating automated triage scripts and Sigma/YARA detection rules.
 
 ---
 
