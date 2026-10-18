@@ -215,11 +215,12 @@ Each tool course is structured as an end-to-end masterclass featuring packet dia
 * **Attack Tradecraft:** Service Principal Name (SPN) harvesting, Kerberoasting (`T1558.003`), AS-REP Roasting (`T1558.004`), Golden/Silver ticket forging, and tooling with Rubeus, Impacket `GetUserSPNs.py`, and Kerbrute.
 * **Detection & Hardening:** High-fidelity Windows Event ID 4768/4769/4771 SIEM detection, Splunk SPL queries, Group Managed Service Accounts (gMSA), and AES-256 Kerberos encryption enforcement.
 
-### [6. Metasploit Framework — Professional Penetration Testing, Exploit Architecture & Security Assessment Guide](./tools/Metasploit/README.md)
+### [6. Metasploit Framework — Technical Tool Architecture & Systems Guide](./tools/Metasploit/README.md)
 * **Official Project Portal:** [metasploit.com](https://www.metasploit.com/) • **Official Docs:** [docs.metasploit.com](https://docs.metasploit.com/) • **Open-Source GitHub:** [rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework)
-* **Framework Architecture:** Rex library primitives, MSF Core and Base APIs, PostgreSQL workspace integration (`db_nmap`, hosts, services, creds), and 7 module families.
-* **Payload Engineering:** Staged vs. Stageless architecture, Meterpreter in-memory reflective DLL execution, `msfvenom` CLI generation, network pivoting, and SOCKS proxies.
-* **SOC Telemetry & Defense:** Windows Sysmon Event IDs (1 process spawn, 3 outbound socket, 7 DLL load, 10 LSASS injection), Splunk SPL correlation, and enterprise patch governance.
+* **Framework Architecture:** Rex low-level protocol primitives, MSF Core engine, MSF Base console API, PostgreSQL workspace integration (`db_nmap`, hosts, services, creds), and 7 module subsystems.
+* **Payload Engineering:** Staged vs. Stageless architecture, Meterpreter in-memory Reflective DLL injection & encrypted TLV protocol, `msfvenom` CLI generation, network pivoting, and SOCKS proxies.
+* **Multi-Domain Technical Applications:** Tool mechanics across 12 domains (Network, Web, Windows, Linux, Active Directory, Wireless, Cloud, Containers, IoT, Mobile, Exploit Dev, and SOC/EDR operations).
+* **SOC Telemetry & Defense:** Windows Sysmon Event IDs (1 process creation, 3 outbound socket, 7 DLL load, 10 LSASS injection), Splunk SPL correlation queries, and enterprise patch governance.
 
 
 
