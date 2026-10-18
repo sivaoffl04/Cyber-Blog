@@ -1,4 +1,4 @@
-# Hashcat — Complete A–Z Cybersecurity Course
+# Hashcat — Advanced GPU Cryptanalysis, Rule Engineering & Credential Auditing Guide
 
 > **Scope:** Authorized password auditing, CTFs, security operations, active directory assessments, incident response, and defensive credential hardening only.
 >
@@ -10,6 +10,10 @@
 
 <div align="center">
 
+<p align="center">
+  <img src="./images/official_hashcat_logo.png" alt="Official Hashcat Logo" width="360" />
+</p>
+
 ![Hashcat Masterclass Hero Banner](./images/hashcat_hero_banner.jpg)
 
 # ⚡ Hashcat: Advanced GPU Cracking & Cryptanalysis ⚡
@@ -20,7 +24,6 @@
 [![Standard](https://img.shields.io/badge/Standard-NIST%20SP%20800--63B-blue?style=for-the-badge&logo=shield)](https://pages.nist.gov/800-63-3/sp800-63b.html)
 [![Acceleration](https://img.shields.io/badge/Acceleration-NVIDIA%20CUDA%20%2F%20OpenCL-76B900?style=for-the-badge&logo=nvidia)](https://hashcat.net/hashcat/)
 [![Focus](https://img.shields.io/badge/Focus-Enterprise%20Audit%20%26%20Purple%20Defense-purple?style=for-the-badge&logo=securityscorecard)](https://github.com/sivaoffl04/Cyber-Blog)
-
 
 </div>
 

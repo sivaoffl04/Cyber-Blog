@@ -1,4 +1,4 @@
-# Nmap: The Complete A-Z Network Discovery & Vulnerability Auditing Masterclass
+# Nmap — Network Discovery, Packet Analysis & Security Auditing Guide
 
 > **Category:** Network Security & Reconnaissance | **Series:** Tooling Masterclass | **Level:** Beginner to Advanced
 
@@ -12,9 +12,13 @@ Nmap does not rely on operating system assumptions; it transmits customized raw 
 
 <div align="center">
 
+<p align="center">
+  <img src="./images/official_nmap_logo.png" alt="Official Nmap Logo" width="220" />
+</p>
+
 ![Nmap Masterclass Hero Banner](./images/nmap_hero_banner.jpg)
 
-# 🌐 Nmap: Network Discovery & Security Auditing Masterclass 🌐
+# 🌐 Nmap: Network Discovery & Security Auditing Guide 🌐
 ### Low-Level TCP/IP Packet Mechanics • NSE Lua Engine • Firewall Evasion • Vulnerability Detection
 
 [![Official Site](https://img.shields.io/badge/Official%20Site-nmap.org-0078D4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://nmap.org/)
@@ -102,6 +106,18 @@ Nmap systematically answers eight fundamental security questions:
 # Basic Nmap scan against a single IP address
 nmap 192.168.1.10
 ```
+
+### 🗺️ Graphical Reconnaissance: Zenmap GUI & Interactive Topology
+
+While security operators and automated assessment pipelines execute Nmap via the command line, **Zenmap** serves as the official cross-platform graphical user interface (GUI) and network topology visualizer for Nmap. Zenmap allows security teams to save scan profiles, compare diffs between historical scans, and render interactive graphical network topology rings:
+
+<div align="center">
+
+![Zenmap Official Interface & Topology Visualization](./images/official_zenmap_interface.png)
+*Figure: Zenmap GUI frontend rendering target topology rings and service profiling.*
+
+</div>
+
 
 ```mermaid
 

@@ -185,37 +185,37 @@ Open Source Intelligence is far more than simple search engine queries. This ent
 
 Each tool course is structured as an end-to-end masterclass featuring packet diagrams, hardware breakdowns, animated command executions, and defensive telemetry detection:
 
-### [1. Nmap Complete Course](./tools/Nmap/README.md)
+### [1. Nmap — Complete Network Discovery, Packet Analysis & Security Auditing Guide](./tools/Nmap/README.md) • [Companion Guide](./tools/Nmap/Nmap_Network_Discovery_and_Vulnerability_Auditing_Guide.md)
 * **Official Project Portal:** [nmap.org](https://nmap.org/) • **Open-Source GitHub:** [nmap/nmap](https://github.com/nmap/nmap)
 * **Under The Hood:** Full TCP Connect (`-sT`) vs. SYN Half-Open Stealth (`-sS`) three-way handshake mechanics.
 * **Scanning Heuristics:** Comprehensive examination of all 6 RFC-defined port states (`open`, `closed`, `filtered`, `unfiltered`, `open|filtered`, `closed|filtered`).
-* **Advanced NSE & Evasion:** Writing custom Lua scripts, packet fragmentation (`-f`), MTU manipulation, decoy IP generation (`-D`), and timing template tuning (`-T0` to `-T5`).
+* **Advanced NSE & Evasion:** Writing custom Lua scripts, packet fragmentation (`-f`), MTU manipulation, decoy IP generation (`-D`), timing template tuning (`-T0` to `-T5`), and Zenmap GUI network topology visualization.
 
-### [2. John the Ripper Complete Course](./tools/John%20the%20ripper/README.md)
+### [2. John the Ripper — Enterprise Password Cryptanalysis, Hash Auditing & Defensive Hardening Guide](./tools/John%20the%20ripper/README.md) • [Companion Guide](./tools/John%20the%20ripper/John_the_Ripper_Password_Cryptanalysis_and_Security_Guide.md)
 * **Official Project Portal:** [openwall.com/john](https://www.openwall.com/john/) • **Open-Source GitHub:** [openwall/john](https://github.com/openwall/john)
 * **Cracking Modes:** Single Crack heuristic mode, Wordlist mode with custom regex mutation rules, and Incremental brute-force mode.
 * **The `*2john` Toolchain:** Deep dive into format conversion utilities (`ssh2john`, `zip2john`, `keepass2john`, `bitlocker2john`, `rar2john`).
 * **Session Management:** Restoring interrupted multi-day cracking sessions, managing `.pot` caches, and CPU SIMD acceleration.
 
-### [3. Hashcat Complete Course](./tools/Hashcat/README.md)
+### [3. Hashcat — Advanced GPU Cryptanalysis, Rule Engineering & Credential Auditing Guide](./tools/Hashcat/README.md) • [Companion Guide](./tools/Hashcat/Hashcat_Advanced_GPU_Cracking_and_Cryptanalysis_Guide.md)
 * **Official Project Portal:** [hashcat.net](https://hashcat.net/hashcat/) • **Open-Source GitHub:** [hashcat/hashcat](https://github.com/hashcat/hashcat)
 * **GPU Compute Architecture:** Massively parallel cryptanalysis leveraging NVIDIA CUDA Tensor Cores and AMD ROCm OpenCL kernels.
 * **Attack Modes Dissected:** Straight (`-a 0`), Combination (`-a 1`), Pure Mask Brute-Force (`-a 3`), Hybrid Wordlist+Mask (`-a 6`), and Hybrid Mask+Wordlist (`-a 7`).
 * **Cryptographic Algorithms:** Auditing NTLM, Kerberos 5 TGS (Kerberoasting), WPA/WPA2 PMKID, and slow memory-hard hashes (bcrypt, scrypt, Argon2).
 
-### [4. Aircrack-ng Wi-Fi Security Course](./tools/Aircrack-ng/README.md)
+### [4. Aircrack-ng — Wireless Security Architecture, 802.11 Protocol Cryptanalysis & Defense Guide](./tools/Aircrack-ng/README.md) • [Companion Guide](./tools/Aircrack-ng/Aircrack-ng_Wireless_Security_and_Protocol_Auditing_Guide.md)
 * **Official Project Portal:** [aircrack-ng.org](https://www.aircrack-ng.org/) • **Open-Source GitHub:** [aircrack-ng/aircrack-ng](https://github.com/aircrack-ng/aircrack-ng)
 * **802.11 Layer 2 Mechanics:** Management, control, and data frames; RF beacon frames; and active monitor mode sniffing.
 * **Handshake Auditing:** EAPOL 4-Way Handshake capture, targeted Layer 2 802.11 deauthentication attacks, and PMKID harvesting.
 * **Next-Gen Standards:** WPA3 Simultaneous Authentication of Equals (SAE) Dragonfly handshake and 802.11w Protected Management Frames (PMF) defense.
 
-### [5. Kerberos — Deep Explanation, Tools, Attack Research & Practical Lab Guide](./tools/Kerberos/README.md)
+### [5. Kerberos — Deep Explanation, Tools, Attack Research & Practical Lab Guide](./tools/Kerberos/README.md) • [Companion Guide](./tools/Kerberos/Kerberos_Deep_Explanation_Tools_Attack_Research_and_Lab_Guide.md)
 * **Official Protocol & Docs:** [web.mit.edu/kerberos](https://web.mit.edu/kerberos/) • [Microsoft Kerberos Docs](https://learn.microsoft.com/en-us/windows-server/security/kerberos/kerberos-authentication-overview) • **Open-Source GitHub:** [GhostPack/Rubeus](https://github.com/GhostPack/Rubeus) & [fortra/impacket](https://github.com/fortra/impacket)
 * **RFC 4120 Protocol Mechanics:** Low-level AS-REQ/REP, TGS-REQ/REP, and AP-REQ handshakes, PAC structures, Pre-Authentication (`PA-ENC-TIMESTAMP`), and mutual authentication.
 * **Attack Tradecraft:** Service Principal Name (SPN) harvesting, Kerberoasting (`T1558.003`), AS-REP Roasting (`T1558.004`), Golden/Silver ticket forging, and tooling with Rubeus, Impacket `GetUserSPNs.py`, and Kerbrute.
 * **Detection & Hardening:** High-fidelity Windows Event ID 4768/4769/4771 SIEM detection, Splunk SPL queries, Group Managed Service Accounts (gMSA), and AES-256 Kerberos encryption enforcement.
 
-### [6. Metasploit Framework — Technical Tool Architecture & Systems Guide](./tools/Metasploit/README.md)
+### [6. Metasploit Framework — Technical Tool Architecture & Systems Guide](./tools/Metasploit/README.md) • [Companion Guide](./tools/Metasploit/Metasploit_Framework_Technical_Architecture_and_Security_Tool_Guide.md)
 * **Official Project Portal:** [metasploit.com](https://www.metasploit.com/) • **Official Docs:** [docs.metasploit.com](https://docs.metasploit.com/) • **Open-Source GitHub:** [rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework)
 * **Framework Architecture:** Rex low-level protocol primitives, MSF Core engine, MSF Base console API, PostgreSQL workspace integration (`db_nmap`, hosts, services, creds), and 7 module subsystems.
 * **Payload Engineering:** Staged vs. Stageless architecture, Meterpreter in-memory Reflective DLL injection & encrypted TLV protocol, `msfvenom` CLI generation, network pivoting, and SOCKS proxies.

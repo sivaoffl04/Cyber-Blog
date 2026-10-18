@@ -1,4 +1,4 @@
-# John the Ripper — A–Z Complete Cybersecurity Course
+# John the Ripper — Enterprise Password Cryptanalysis, Hash Auditing & Defensive Hardening Guide
 
 > **Scope:** Authorized password auditing, CTFs, security labs, incident response, and defensive password-strength testing only.
 >
@@ -10,6 +10,12 @@
 
 <div align="center">
 
+<p align="center">
+  <img src="./images/official_openwall_logo.png" alt="Official Openwall Logo" width="280" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./images/official_john_artwork.png" alt="Official John Artwork" width="150" />
+</p>
+
 ![John the Ripper Masterclass Hero Banner](./images/john_hero_banner.jpg)
 
 # ⚔️ John the Ripper (JtR) Masterclass ⚔️
@@ -20,7 +26,6 @@
 [![Standard](https://img.shields.io/badge/Standard-NIST%20SP%20800--63B-blue?style=for-the-badge&logo=shield)](https://pages.nist.gov/800-63-3/sp800-63b.html)
 [![Tool](https://img.shields.io/badge/Engine-John%20the%20Ripper%20Jumbo-red?style=for-the-badge&logo=kali-linux)](https://www.openwall.com/john/)
 [![Focus](https://img.shields.io/badge/Focus-Offensive%20Audit%20%26%20Purple%20Defense-purple?style=for-the-badge&logo=securityscorecard)](https://github.com/sivaoffl04/Cyber-Blog)
-
 
 </div>
 

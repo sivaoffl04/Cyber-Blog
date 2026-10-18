@@ -10,6 +10,10 @@
 
 <div align="center">
 
+<p align="center">
+  <img src="./images/official_metasploit_logo.png" alt="Official Metasploit Logo" width="200" />
+</p>
+
 ![Metasploit Masterclass Hero Banner](./images/metasploit_hero_banner.jpg)
 
 # ⚔️ Metasploit Framework: Technical Tool Architecture & Systems Guide ⚔️

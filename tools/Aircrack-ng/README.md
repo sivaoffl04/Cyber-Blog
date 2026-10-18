@@ -1,4 +1,4 @@
-# Aircrack-ng & Wi-Fi Security — Complete Course
+# Aircrack-ng — Wireless Security Architecture, 802.11 Protocol Cryptanalysis & Defense Guide
 
 > **Scope:** Authorized wireless penetration testing, CTFs, security research labs, and defensive wireless hardening only.
 >
@@ -10,6 +10,10 @@
 
 <div align="center">
 
+<p align="center">
+  <img src="./images/official_aircrack_logo.jpg" alt="Official Aircrack-ng Logo" width="280" />
+</p>
+
 ![Aircrack-ng Wireless Security Masterclass Banner](./images/aircrack_hero_banner.jpg)
 
 # 📡 Aircrack-ng & Wireless Security Masterclass 📡
@@ -20,7 +24,6 @@
 [![Standard](https://img.shields.io/badge/Standard-IEEE%20802.11ax%2Fbe-blue?style=for-the-badge&logo=wi-fi)](https://www.ieee.org/)
 [![Tool](https://img.shields.io/badge/Suite-Aircrack--ng%20Suite-red?style=for-the-badge&logo=kali-linux)](https://www.aircrack-ng.org/)
 [![Focus](https://img.shields.io/badge/Focus-Wireless%20Audit%20%26%20Purple%20Defense-purple?style=for-the-badge&logo=securityscorecard)](https://github.com/sivaoffl04/Cyber-Blog)
-
 
 </div>
 

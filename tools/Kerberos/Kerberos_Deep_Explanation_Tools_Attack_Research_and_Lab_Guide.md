@@ -11,6 +11,12 @@
 
 <div align="center">
 
+<p align="center">
+  <img src="./images/official_kerberos_logo.png" alt="Official Kerberos Protocol Logo" width="200" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./images/official_mit_kerberos_dog.jpg" alt="MIT Kerberos Cerberus Seal" width="160" />
+</p>
+
 ![Kerberos Masterclass Hero Banner](./images/kerberos_hero_banner.jpg)
 
 # 🛡️ Kerberos Protocol & Active Directory Identity Security 🛡️
@@ -22,7 +28,6 @@
 [![MITRE ATT&CK](https://img.shields.io/badge/MITRE%20ATT%26CK-T1558-orange?style=for-the-badge&logo=target)](https://attack.mitre.org/techniques/T1558/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20Server%20%7C%20Active%20Directory-blue?style=for-the-badge&logo=windows)](https://learn.microsoft.com/en-us/windows-server/security/kerberos/kerberos-authentication-overview)
 [![Focus](https://img.shields.io/badge/Focus-Red%20%26%20Purple%20Team%20%7C%20SOC%20Hunting-purple?style=for-the-badge&logo=securityscorecard)](https://github.com/sivaoffl04/Cyber-Blog)
-
 
 </div>
 
