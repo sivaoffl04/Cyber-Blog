@@ -42,6 +42,8 @@ This research case study is divided into 11 dedicated, deep-dive technical chapt
     *The illusion of single-factor authentication; CISO mandates for Device Health Attestation (Zero Trust) and Phishing-Resistant MFA (FIDO2/WebAuthn); Cryptographic Token Binding (DPoP); why infrastructure takedowns do not end the underlying economy.*
 12. [**12: Deep R&D — Reverse Engineering, Cryptographic Dissection & Forensic Deconstruction**](./12-deep-rnd-reverse-engineering-and-forensics.md)  
     *Low-level byte-by-byte Chromium cookie ciphertext analysis; Chrome 127+ App-Bound Encryption; full forensic post-mortem of the 2021 EA Slack breach ($10 bot to 780 GB Frostbite code theft); Genesis OS V8 runtime API hooking; blockchain tracking and undercover law enforcement tradecraft.*
+13. [**13: Primary Source Forensic R&D — Unsealed FBI Seizure Affidavit & Internet Archive OSINT Dissection**](./13-fbi-affidavit-forensic-dissection.md)  
+    *Deep-dive analysis of unsealed federal court filings (Case 2:23-mj-00365-SCD, E.D. Wisconsin); 115 undercover FBI bot purchases; BTC Address 1 cluster (...J43QW); forensic breakdown of Backend Server #1 (2020) vs. Backend Server #2 (2022); fatal OPSEC failures (mezina.svet@yandex.ru, client@gen2dev.net); complete Internet Archive (archive.org) OSINT triage and disambiguation matrix.*
 
 ---
 
@@ -190,3 +192,6 @@ python scripts/session_cookie_audit.py --user-dir "C:\Users\TargetUser" --export
 * [MITRE ATT&CK Framework — Technique T1539: Steal Web Session Cookie](https://attack.mitre.org/techniques/T1539/)
 * [MITRE ATT&CK Framework — Technique T1555.003: Credentials from Web Browsers](https://attack.mitre.org/techniques/T1555/003/)
 * [IETF RFC 9449 — Demonstrating Proof-of-Possession at the Application Layer (DPoP)](https://datatracker.ietf.org/doc/html/rfc9449)
+* [Internet Archive (Archive.org) — Genesis Market Seizure Affidavit (Case 2:23-mj-00365-SCD)](https://archive.org/details/genesis-market-affidavit)
+* [Internet Archive (Archive.org) — Sega Genesis Console Collection (Retro Preservation Disambiguation)](https://archive.org/download/genesis-collection)
+* [Internet Archive (Archive.org) — Sega Genesis Homebrew Games (Developer Ecosystem Disambiguation)](https://archive.org/download/255-sega-genesis-homebrew-games/HOMEBREWS/)
