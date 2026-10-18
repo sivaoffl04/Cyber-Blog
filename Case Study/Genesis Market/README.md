@@ -16,7 +16,7 @@
 
 ## 📑 Complete Chapter Index
 
-This research case study is divided into 14 dedicated, deep-dive technical chapters:
+This research case study is divided into 15 dedicated, deep-dive technical chapters:
 
 1. [**01: Genesis Market Overview — The Paradigm Shift to "Identity-as-a-Service"**](./01-genesis-market-overview.md)  
    *The death of the simple password dump; genesis of Genesis Market (2018–2023); the "Bot" concept as a digital twin; market economics ($0.70 to hundreds of dollars).*
@@ -46,6 +46,8 @@ This research case study is divided into 14 dedicated, deep-dive technical chapt
     *Deep-dive analysis of unsealed federal court filings (Case 2:23-mj-00365-SCD, E.D. Wisconsin); 115 undercover FBI bot purchases; BTC Address 1 cluster (...J43QW); forensic breakdown of Backend Server #1 (2020) vs. Backend Server #2 (2022); fatal OPSEC failures (mezina.svet@yandex.ru, client@gen2dev.net); complete Internet Archive (archive.org) OSINT triage and disambiguation matrix.*
 14. [**14: Industry Reports Synthesis & Comparative Landmark Case Studies**](./14-industry-reports-synthesis-and-comparative-case-studies.md)  
     *Synthesis of authoritative threat intelligence reports (Trellix, Sophos X-Ops, Group-IB, Mandiant, CISA); dynamic bot update daemon analysis; CDP protocol hooking; comparative post-mortem matrix (EA Breach vs. Uber MFA fatigue vs. CircleCI supply chain theft); post-Genesis landscape (Russian Market, 2easy, Telegram Log Clouds); 3-pillar defensive architecture (FIDO2, CAE, RFC 9449 DPoP).*
+15. [**15: Authentic Web Infrastructure, Source Code Dissection & Portal Cloning**](./15-authentic-web-infrastructure-source-code-and-portal-cloning.md)  
+    *Primary source web application reverse engineering; raw HTML/JavaScript source code analysis from live Internet Archive snapshots; Yii 2.0 PHP framework footprint; client-side RSA-2048 password encryption; invite token regex validation; dual-language Terms of Service and CIS safe-harbor doctrine; raw 4 April 2023 seizure page dissection.*
 
 ---
 
@@ -57,9 +59,15 @@ As part of this case study, we built an interactive, standalone simulation web a
 * **Historical Wayback Scrubber:** Switch between 2021–2022 (Live Market), June 2021 (EA Breach), and April 4, 2023 (Operation Cookie Monster Seizure Banner).
 * **Live Catalog & Domain Search:** Search simulated bots by corporate domain (`@ea.com`, `@paypal.com`, `@okta.com`, `@aws.com`) with real-time filtering by cookie count, country, and OS.
 * **Interactive Bot Profile Inspector:** Click on any bot to inspect its replicated hardware fingerprint (Canvas hash, WebGL renderer string, screen resolution) and decrypted session cookies.
+* **Authentic Portal Clone:** Exact 1:1 reconstruction of the Yii framework Sign-In and Invite-Only Registration interface with vector brand graphics, RSA-2048 password encryption preview, and the authentic CIS safe-harbor Terms of Service.
 * **Genesis Plugin Simulator:** Interactive emulation of the Chrome DevTools Protocol (CDP) hooking engine that injects stolen cookies into live browser sessions.
 * **Zero Trust Defensive Lab:** Compare why traditional authentication failed and how modern Zero Trust (FIDO2 WebAuthn, CAE, DPoP token binding) neutralizes cookie theft.
-* **Media & Video Intelligence Hub:** Direct gallery showcasing authentic Europol action photos, Wikimedia seizure screengrabs, the official Politie documentary breakdown, and 10 high-resolution forensic research infographics with lightbox zoom.
+* **Politie CheckYourHack Verification Engine:** Interactive simulation of the official Dutch National Police victim portal testing whether enterprise emails were compromised in Genesis.
+* **Media & Video Intelligence Hub:** Direct gallery showcasing authentic Europol action photos, Wikimedia seizure screengrabs, the official Politie documentary breakdown, and 13 high-resolution forensic research infographics with lightbox zoom.
+* **Raw Historical Web Captures:**
+  * Raw 4 April 2023 Seizure Landing Page: [`demo-site/authentic-seizure-page.html`](./demo-site/authentic-seizure-page.html)
+  * Raw 2021 Sign-In Portal: [`demo-site/authentic-login-page.html`](./demo-site/authentic-login-page.html)
+  * Raw 2021 Registration & Terms Portal: [`demo-site/authentic-register-page.html`](./demo-site/authentic-register-page.html)
 
 **To run the interactive demo:** Open [`demo-site/index.html`](./demo-site/index.html) in any web browser.
 

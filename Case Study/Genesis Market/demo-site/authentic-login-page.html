@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="csrf-param" content="_csrf-clientzone">
+    <meta name="csrf-token" content="lhaC9tmzDr-DjJoxTOFQRGgad0yOkoVwT_t6cIKeZdt95kg_hNYIETNxkjlXkov1NopSysFgJAixpapZ895Zzg==">
+    <title>Sign In</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script type="text/javascript">
+        var app = {};
+        // FIXME: This code is only used by ckeditor. Find a prettier way.
+        window.base_path = "";
+    </script>
+    <link href="/css/essentials.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/font-awesome-improvements.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/flag-icon.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/maybe.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/resources.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/app.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/app.gridview.min.css?v=1619261301" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.min.js"></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->    <script type="text/javascript">
+        // Fix for Firefox autofocus CSS bug
+        // See: http://stackoverflow.com/questions/18943276/html-5-autofocus-messes-up-css-loading/18945951#18945951
+    </script>
+    <style>
+        body, span.label._label_transparent {
+          color: #333;
+        }
+    </style>
+</head>
+
+<body class="cover">
+        <div class="login-wrap">
+    <span class="brand">
+        <img src="/img/logo/genesis.svg" alt="Genesis" style="width: 150px;">    </span>
+    <div class="panel">
+                <div class="panel-heading">
+            <h3 class="panel-title">Sign In</h3>
+        </div>
+                <div class="panel-body">
+                        <form id="login-form" class="prevent-doublesubmit" action="/guest/login/index" method="post" data-nonce="bB-949V9ebg0ZcqZ">
+<input type="hidden" name="_csrf-clientzone" value="lhaC9tmzDr-DjJoxTOFQRGgad0yOkoVwT_t6cIKeZdt95kg_hNYIETNxkjlXkov1NopSysFgJAixpapZ895Zzg==">    <div class="form-group field-loginform-login required">
+
+<input type="text" id="loginform-login" class="form-control" name="LoginForm[login]" placeholder="Login" autofocus aria-required="true">
+
+<p class="help-block help-block-error"></p>
+</div>    <input type="hidden" id="loginform-password-hash" name="LoginForm[password]" value="">    <div class="form-group field-loginform-password required">
+
+<input type="password" id="loginform-password" class="form-control" value="" placeholder="Password" aria-required="true">
+
+<p class="help-block help-block-error"></p>
+</div>    <div class="form-group field-loginform-rememberme">
+<div class="checkbox">
+<label for="loginform-rememberme">
+<input type="hidden" name="LoginForm[rememberMe]" value="0"><input type="checkbox" id="loginform-rememberme" name="LoginForm[rememberMe]" value="1" checked>
+Remember me for 2 weeks
+</label>
+<p class="help-block help-block-error"></p>
+
+</div>
+</div>    <button type="submit" class="btn btn-primary ready-enable" disabled data-loading-text="Logging in...">Login</button>    <br>
+    <br>
+
+    Don't have an account yet? <a href="/guest/register">Sign Up!</a></form>        </div>
+    </div>
+</div>
+    <script src="/js/essentials.min.js?v=1619261302"></script>
+<script src="/assets/afe82d8/yii.js?v=1617716624"></script>
+<script src="/assets/afe82d8/yii.validation.js?v=1617716624"></script>
+<script src="/assets/afe82d8/yii.activeForm.js?v=1617716624"></script>
+<script src="/js/ark/ark.core.min.js?v=1619261301"></script>
+<script src="/js/ark/ark.core-afterwards.min.js?v=1619261301"></script>
+<script src="/js/login.min.js?v=1619261302"></script>
+<script src="/js/app/app.core.min.js?v=1619261301"></script>
+<script src="/js/app/app.login.min.js?v=1619261301"></script>
+<script src="/js/app/app.core-afterwards.min.js?v=1619261301"></script>
+<script type="text/javascript">jQuery(document).ready(function () {
+jQuery('#login-form').yiiActiveForm([{"id":"loginform-login","name":"login","container":".field-loginform-login","input":"#loginform-login","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {value = yii.validation.trim($form, attribute, []);yii.validation.required(value, messages, {"message":"Login cannot be blank."});yii.validation.regularExpression(value, messages, {"pattern":/^[a-zA-Z][a-zA-Z0-9_]*$/,"not":false,"message":"Login is invalid.","skipOnEmpty":1});}},{"id":"loginform-password","name":"password","container":".field-loginform-password","input":"#loginform-password","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"Password cannot be blank."});}},{"id":"loginform-rememberme","name":"rememberMe","container":".field-loginform-rememberme","input":"#loginform-rememberme","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.boolean(value, messages, {"trueValue":"1","falseValue":"0","message":"Remember me must be either \"1\" or \"0\".","skipOnEmpty":1});}}], []);
+});</script></body>
+</html>

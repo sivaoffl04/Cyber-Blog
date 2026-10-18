@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="csrf-param" content="_csrf-clientzone">
+    <meta name="csrf-token" content="C3yQe-iSwC37k0SyCACm6bX8FJv89sGRRWuMNSKAkw2B8APZ1BW_dAxsemCwURVAYbHHpUstDqKywqbX_960hA==">
+    <title>Sign Up</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script type="text/javascript">
+        var app = {};
+        // FIXME: This code is only used by ckeditor. Find a prettier way.
+        window.base_path = "";
+    </script>
+    <link href="/css/essentials.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/font-awesome-improvements.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/flag-icon.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/maybe.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/resources.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/app.min.css?v=1619261301" rel="stylesheet">
+<link href="/css/app.gridview.min.css?v=1619261301" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.min.js"></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->    <script type="text/javascript">
+        // Fix for Firefox autofocus CSS bug
+        // See: http://stackoverflow.com/questions/18943276/html-5-autofocus-messes-up-css-loading/18945951#18945951
+    </script>
+    <style>
+        body, span.label._label_transparent {
+          color: #333;
+        }
+    </style>
+</head>
+
+<body class="cover">
+        <div class="login-wrap">
+    <span class="brand">
+        <img src="/img/logo/genesis.svg" alt="Genesis" style="width: 150px;">    </span>
+    <div class="panel">
+                <div class="panel-heading">
+            <h3 class="panel-title">Sign Up</h3>
+        </div>
+                <div class="panel-body">
+                        <form id="register-form" class="prevent-doublesubmit" action="/guest/register" method="post" data-rsa-exponent="010001" data-rsa-modulus="a44583a2277517b0625c9c005984967e694f1a322bd751de0ceb3b6726b906eeb8a0f3602bc1df5b231b225cebf5453ec8f16621c7c398b88e5f5c520e4a0519c8c2ae3df08cbdfe8a928981a822f7ea209870a9c4252aaaa462cfc96a1f5b8f0559ade8b5eed1de8ac1aa1542fa8f2fdf587b00dfb037b8860e05bc8a15e02ec583100889efd86498d687766aeb5cd4bf8199ed9e2509f63fe9d5333b9e7c2fd181444d77cd34c36b95567ca2caf8f7d7a6b541f84153efdece72c6a3b0ec7b5639f746bea7d8f38ef4d5dcea5ffe269baa8ce84db0b70ca13462324b9d382198dde78cff17963ea754cce90cd2194eba3c37b40fa5c92e8a9463d10112fbf1" data-rsa-keysize="2048">
+<input type="hidden" name="_csrf-clientzone" value="C3yQe-iSwC37k0SyCACm6bX8FJv89sGRRWuMNSKAkw2B8APZ1BW_dAxsemCwURVAYbHHpUstDqKywqbX_960hA==">    <div class="form-group field-registerform-login required">
+
+<input type="text" id="registerform-login" class="form-control" name="RegisterForm[login]" placeholder="Login" autofocus aria-required="true">
+
+<p class="help-block help-block-error"></p>
+</div>    <input type="hidden" id="registerform-password-encrypted" name="RegisterForm[password]" value="">    <div class="form-group field-registerform-password required">
+
+<input type="password" id="registerform-password" class="form-control" value="" placeholder="Password" aria-required="true">
+
+<p class="help-block help-block-error"></p>
+</div>    <input type="hidden" id="registerform-password2-encrypted" name="RegisterForm[password2]" value="">    <div class="form-group field-registerform-password2 required">
+
+<input type="password" id="registerform-password2" class="form-control" value="" placeholder="Password confirmation" aria-required="true">
+
+<p class="help-block help-block-error"></p>
+</div>    <div class="form-group field-registerform-jabber_id required">
+
+<input type="email" id="registerform-jabber_id" class="form-control" name="RegisterForm[jabber_id]" placeholder="Jabber" aria-required="true">
+
+<p class="help-block help-block-error"></p>
+</div>    <div class="form-group field-registerform-invite required">
+
+<input type="text" id="registerform-invite" class="form-control" name="RegisterForm[invite]" placeholder="Invite" aria-required="true">
+
+<p class="help-block help-block-error"></p>
+</div>    <div class="form-group field-registerform-agree required">
+<div class="checkbox">
+<label for="registerform-agree">
+<input type="hidden" name="RegisterForm[agree]" value="0"><input type="checkbox" id="registerform-agree" name="RegisterForm[agree]" value="1">
+I agree with <a data-toggle="modal" data-target="#terms-and-conditions-modal">Terms & conditions</a>
+</label>
+<p class="help-block help-block-error"></p>
+
+</div>
+</div>    <button type="submit" class="btn btn-primary ready-enable" disabled data-loading-text="Registering...">Register</button>    <br>
+    <br>
+
+    Already have an account? <a href="/guest/login">Sign In!</a></form>
+<div id="terms-and-conditions-modal" class="fade modal" role="dialog" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<h4 class="modal-title">Terms & conditions</h4>
+</div>
+<div class="modal-body">
+    <div class="modal-scrollable-content" style="max-height: 500px;">
+        <div style="cursor:pointer;float: right;font-size: 24px;"><code style="display:none" onclick="$('#ru_version').hide();$('#en_version').show();$(this).hide().next().show();"><strong>En</strong></code><code onclick="$('#ru_version').show();$('#en_version').hide();$(this).hide().prev().show();"><strong>Ru</strong></code></div>
+<div id="en_version">
+
+<h3>Genesis Store &amp; Genesis Security Terms of Service</h3>
+
+<p style="text-decoration: underline;"><strong>General rules:</strong></p>
+
+<ol>
+  <li>All <strong>payments</strong> are made via the web-site <strong>automatically</strong>.</li>
+  <li><strong>Refund</strong> is <strong>not possible</strong> in any way.</li>
+  <li>The Store has a right to <strong>deny</strong> a customer of service, <strong>block</strong> access to an account <strong>without explanation</strong>.</li>
+  <li>If a customer does not use the account for <strong>more than 3 months</strong> &ndash; the access is blocked, more than 6 months &ndash; account is deleted with no option to restore.</li>
+  <li>The contents of the site, such as text, graphics, images and other materials are <strong>informational purposes only</strong>.</li>
+  <li>The Store <strong>does not use or sell</strong> any products connected with <strong>CIS</strong>-countries&rsquo; web-resources.</li>
+  <li>The Store <strong>is not liable for</strong> any moral or financial <strong>damage</strong> caused by using the acquired information.</li>
+  <li>By signing up with the Store, you <strong>accept</strong> these rules.</li>
+</ol>
+
+<p style="text-decoration: underline;"><strong>Rules of the Store:</strong></p>
+
+<ol>
+  <li>The Store sells a bot with full information <strong>available at the moment</strong>.</li>
+  <li>The Store does not sell a fingerprint, access to or other information on the bot separately.</li>
+  <li>The Store <strong>does not check the validity</strong> of bots accesses.</li>
+  <li>We are <strong>not liable</strong> for the correctness and actuality of the information <strong>entered by a bot</strong>.&nbsp;</li>
+  <li>We do not provide any consultations and tutoring on the topics not directly connected with our product.</li>
+  <li>Passing of <strong>the access to the Stores account</strong> or products will cause denial of service on all purchased products and further <strong>account blocking</strong>.</li>
+</ol>
+</div>
+<div id="ru_version" style="display:none">
+
+<h3>Genesis Store &amp; Genesis Security Terms of Service</h3>
+
+<p style="text-decoration: underline;"><strong>Общие правила:</strong></p>
+
+<ol>
+  <li>Все <strong>расчеты</strong> осуществляются на сайте в <strong>автоматическом</strong> режиме.</li>
+  <li><strong>Возврат</strong> денежных средств клиенту <strong>не возможен</strong> ни в каком объеме.</li>
+  <li>Магазин имеет право <strong>отказать</strong> клиенту в обслуживании, <strong>заблокировать</strong> аккаунт/доступ <strong>без объяснения причин</strong>.</li>
+  <li>Если клиент не пользуется аккаунтом/сервисом <strong>более 3 месяцев</strong> - доступ блокируется, если 6 месяцев - аккаунт удаляется без возможности восстановления.</li>
+  <li>Вся информация на сайте предоставляется <strong>в ознакомительных целях</strong>.</li>
+  <li>Магазин <strong>не использует и не продаёт</strong> продукты под ресурсы стран <strong>СНГ</strong>.</li>
+  <li>Магазин <strong>не несет ответственности</strong> за приченённый моральный/финансовый <strong>ущерб</strong> при использовании приобретенной информации.</li>
+  <li>Регистрацией в магазине <strong>вы подтверждаете</strong> факт ознакомления с правилами.</li>
+</ol>
+
+<p style="text-decoration: underline;"><strong>Правила магазина:</strong></p>
+
+<ol>
+  <li>Магазин продает бота в полном объеме имеющейся на него информации <strong>в текущий момент времени</strong>.</li>
+  <li>Магазин не продает отдельно фингерпринт бота, доступ бота, информацию бота.</li>
+  <li>Магазин <strong>не занимается проверкой на валид</strong> доступов бота.</li>
+  <li>Мы <strong>не несем ответственности</strong> за правильность и актуальность информации вводимой ботом.</li>
+  <li>Мы не занимаемся консультацией и обучением по вопросам не касающихся предоставляемых продуктов.</li>
+  <li><strong>Передача доступа либо самих продуктов шопа</strong> повлечет за собой отказ в обслуживании на все приобретенные продукты с последующей <strong>блокировкой аккаунта</strong>.</li>
+</ol>
+</div>
+
+    </div>
+
+</div>
+
+</div>
+</div>
+</div>        </div>
+    </div>
+</div>
+    <script src="/js/essentials.min.js?v=1619261302"></script>
+<script src="/assets/afe82d8/yii.js?v=1617716624"></script>
+<script src="/assets/afe82d8/yii.validation.js?v=1617716624"></script>
+<script src="/assets/afe82d8/yii.activeForm.js?v=1617716624"></script>
+<script src="/js/ark/ark.core.min.js?v=1619261301"></script>
+<script src="/js/ark/ark.core-afterwards.min.js?v=1619261301"></script>
+<script src="/js/login.min.js?v=1619261302"></script>
+<script src="/js/app/app.core.min.js?v=1619261301"></script>
+<script src="/js/app/app.login.min.js?v=1619261301"></script>
+<script src="/js/app/app.core-afterwards.min.js?v=1619261301"></script>
+<script type="text/javascript">jQuery(document).ready(function () {
+jQuery('#register-form').yiiActiveForm([{"id":"registerform-login","name":"login","container":".field-registerform-login","input":"#registerform-login","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {value = yii.validation.trim($form, attribute, []);yii.validation.required(value, messages, {"message":"Login cannot be blank."});yii.validation.string(value, messages, {"message":"Login must be a string.","min":3,"tooShort":"Login should contain at least 3 characters.","max":20,"tooLong":"Login should contain at most 20 characters.","skipOnEmpty":1});yii.validation.regularExpression(value, messages, {"pattern":/^[a-zA-Z][a-zA-Z0-9_]*$/,"not":false,"message":"Login first character must be a letter; it may contain only latin letters, numbers and underscore.","skipOnEmpty":1});}},{"id":"registerform-password","name":"password","container":".field-registerform-password","input":"#registerform-password","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"Password cannot be blank."});yii.validation.string(value, messages, {"message":"Password must be a string.","min":6,"tooShort":"Password should contain at least 6 characters.","max":30,"tooLong":"Password should contain at most 30 characters.","skipOnEmpty":1});yii.validation.regularExpression(value, messages, {"pattern":/^(?:[^\s](?:.*[^\s])?)?$/,"not":false,"message":"Password can\u0027t start or end with space.","skipOnEmpty":1});}},{"id":"registerform-password2","name":"password2","container":".field-registerform-password2","input":"#registerform-password2","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"Password confirmation cannot be blank."});yii.validation.compare(value, messages, {"operator":"==","type":"string","compareAttribute":"registerform-password","skipOnEmpty":1,"message":"Password mismatch."});}},{"id":"registerform-jabber_id","name":"jabber_id","container":".field-registerform-jabber_id","input":"#registerform-jabber_id","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {value = yii.validation.trim($form, attribute, []);yii.validation.required(value, messages, {"message":"Jabber cannot be blank."});yii.validation.email(value, messages, {"pattern":/^[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/,"fullPattern":/^[^@]*<[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?>$/,"allowName":false,"message":"Jabber is not valid.","enableIDN":false,"skipOnEmpty":1});}},{"id":"registerform-invite","name":"invite","container":".field-registerform-invite","input":"#registerform-invite","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {value = yii.validation.trim($form, attribute, []);yii.validation.required(value, messages, {"message":"Invite cannot be blank."});yii.validation.regularExpression(value, messages, {"pattern":/^invite_[a-zA-Z0-9_]{25}$/,"not":false,"message":"Invite must be valid and generated by registered clients, must contain exactly 32 symbols and starts with invite_....","skipOnEmpty":1});}},{"id":"registerform-agree","name":"agree","container":".field-registerform-agree","input":"#registerform-agree","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"You should agree to terms before registration","requiredValue":1});}}], []);
+jQuery('#terms-and-conditions-modal').modal({"show":false});
+});</script></body>
+</html>

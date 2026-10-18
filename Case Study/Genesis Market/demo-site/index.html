@@ -703,6 +703,141 @@
         .play-button-overlay:hover {
             transform: scale(1.1);
         }
+
+        /* Authentic Portal Clone Styling */
+        .portal-panel {
+            display: none;
+            background: #111827;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .portal-subtabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .portal-subtab-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .portal-subtab-btn:hover {
+            color: var(--text-main);
+            border-color: var(--accent-cyan);
+        }
+
+        .portal-subtab-btn.active {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .portal-card {
+            background: #162032;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .portal-form-group {
+            margin-bottom: 16px;
+        }
+
+        .portal-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .portal-input {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            outline: none;
+        }
+
+        .portal-input:focus {
+            border-color: var(--accent-green);
+        }
+
+        .tos-container {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            max-height: 380px;
+            overflow-y: auto;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .tos-rule-cis {
+            background: rgba(239, 68, 68, 0.15);
+            border-left: 4px solid var(--accent-red);
+            padding: 8px 12px;
+            margin: 8px 0;
+            color: #fca5a5;
+        }
+
+        /* CheckYourHack Panel */
+        .checkyourhack-panel {
+            display: none;
+            background: #002244;
+            color: #fff;
+            border: 2px solid #0055a5;
+            border-radius: 12px;
+            padding: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 34, 68, 0.6);
+        }
+
+        .police-badge-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+
+        .police-btn {
+            background: #ffcc00;
+            color: #002244;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .police-btn:hover {
+            background: #ffd633;
+        }
     </style>
 </head>
 <body>
@@ -736,8 +871,10 @@
         </div>
         <div class="nav-tabs">
             <button class="nav-tab active" onclick="switchTab('catalog')">Bot Catalog</button>
+            <button class="nav-tab" onclick="switchTab('portal')">Authentic Portal Clone</button>
             <button class="nav-tab" onclick="switchTab('plugin')">Genesis Plugin</button>
             <button class="nav-tab" onclick="switchTab('lab')">Zero Trust Lab</button>
+            <button class="nav-tab" onclick="switchTab('checkyourhack')">Politie CheckYourHack</button>
             <button class="nav-tab" onclick="switchTab('media')">Media & Video Intelligence</button>
         </div>
         <div class="header-meta">
@@ -762,8 +899,12 @@
             </div>
             <div style="margin-top: 20px; font-size: 0.92rem; color:#4b5563; line-height: 1.6;">
                 <p>Been active on Genesis Market? In contact with administrators? Email: <strong style="color:#1e3a8a;">FBIMW-Genesis@fbi.gov</strong></p>
-                <p>Check if your credentials were compromised: <a href="https://politie.nl/checkyourhack" target="_blank" style="color:#1d4ed8; font-weight:700;">politie.nl/checkyourhack</a> | <a href="https://haveibeenpwned.com" target="_blank" style="color:#1d4ed8; font-weight:700;">haveibeenpwned.com</a></p>
                 <p style="margin-top: 10px;">Primary Court Source: <a href="https://archive.org/details/genesis-market-affidavit" target="_blank" style="color:#047857; font-weight:700; text-decoration: underline;">Internet Archive — Unsealed Seizure Affidavit (Case 23-M-365)</a></p>
+                <p style="margin-top: 14px;">
+                    <a href="./authentic-seizure-page.html" target="_blank" style="display:inline-block; background:#b91c1c; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.85rem; box-shadow:0 4px 10px rgba(185,28,28,0.4);">
+                        🌐 Open Raw Authentic Seizure HTML Document (Captured April 4, 2023) ↗
+                    </a>
+                </p>
             </div>
         </div>
 
@@ -1054,6 +1195,145 @@
                 </div>
             </div>
         </div>
+
+        <!-- Authentic Portal Clone View -->
+        <div class="portal-panel" id="portalView">
+            <div style="text-align:center; margin-bottom: 24px;">
+                <img src="../images/genesis_logo_vector.svg" style="width: 170px; margin-bottom: 8px; filter: drop-shadow(0 0 10px rgba(16,185,129,0.3));" alt="Genesis Logo">
+                <p style="font-size:0.85rem; color:var(--text-muted);">Authentic 1:1 Frontend Clone of Seized <code>genesis.market</code> Portal (Yii PHP Framework Architecture)</p>
+            </div>
+
+            <div class="portal-subtabs">
+                <button class="portal-subtab-btn active" id="pTabLogin" onclick="switchPortalSubTab('login')">Sign In (/guest/login)</button>
+                <button class="portal-subtab-btn" id="pTabRegister" onclick="switchPortalSubTab('register')">Sign Up (/guest/register)</button>
+                <button class="portal-subtab-btn" id="pTabTos" onclick="switchPortalSubTab('tos')">Terms of Service (CIS Rule)</button>
+                <button class="portal-subtab-btn" id="pTabRsa" onclick="switchPortalSubTab('rsa')">RSA-2048 Client Crypto</button>
+            </div>
+
+            <!-- Login Subtab -->
+            <div id="subtabLogin" class="portal-card">
+                <h3 style="font-size:1.1rem; color:#fff; margin-bottom:16px;">Sign In</h3>
+                <div class="portal-form-group">
+                    <label class="portal-label">Login</label>
+                    <input type="text" class="portal-input" value="ShadowBuyer_99" placeholder="Enter username">
+                </div>
+                <div class="portal-form-group">
+                    <label class="portal-label">Password</label>
+                    <input type="password" class="portal-input" value="••••••••••••••••" placeholder="Enter password">
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; font-size:0.82rem; color:var(--text-muted);">
+                    <label><input type="checkbox" checked> Remember me for 2 weeks</label>
+                    <span style="font-family:var(--font-mono); color:var(--accent-cyan); font-size:0.75rem;">CSRF: _csrf-clientzone [VALID]</span>
+                </div>
+                <button class="btn-inspect" style="width:100%; padding:10px; font-size:0.9rem;" onclick="alert('Authentic Simulation: Logged in as ShadowBuyer_99 with session genesis-clientzone=tk8jnfd8f2jjvt1j7elq88r3f0')">Login</button>
+            </div>
+
+            <!-- Register Subtab -->
+            <div id="subtabRegister" class="portal-card" style="display:none;">
+                <h3 style="font-size:1.1rem; color:#fff; margin-bottom:16px;">Sign Up (Invite-Only Gate)</h3>
+                <div class="portal-form-group">
+                    <label class="portal-label">Login (3-20 characters)</label>
+                    <input type="text" id="regLogin" class="portal-input" placeholder="e.g. cyber_analyst">
+                </div>
+                <div class="portal-form-group">
+                    <label class="portal-label">Password</label>
+                    <input type="password" id="regPass" class="portal-input" placeholder="Min 6 characters">
+                </div>
+                <div class="portal-form-group">
+                    <label class="portal-label">Jabber / XMPP ID (Mandatory for Criminal Escrow)</label>
+                    <input type="email" id="regJabber" class="portal-input" placeholder="user@exploit.im">
+                </div>
+                <div class="portal-form-group">
+                    <label class="portal-label">Invite Code (Pattern: invite_[25 characters])</label>
+                    <input type="text" id="regInvite" class="portal-input" placeholder="invite_xxxxxxxxxxxxxxxxxxxxxxxxx" onkeyup="validateInviteCode()">
+                    <div id="inviteFeedback" style="font-size:0.75rem; margin-top:4px; font-family:var(--font-mono); color:var(--text-dim);">Format required: exactly 32 symbols starting with invite_</div>
+                </div>
+                <div style="margin-bottom:18px; font-size:0.82rem; color:var(--text-muted);">
+                    <label><input type="checkbox" id="regAgree"> I agree with <a href="#" onclick="switchPortalSubTab('tos'); return false;" style="color:var(--accent-cyan);">Terms & conditions</a></label>
+                </div>
+                <button class="btn-inspect" id="regSubmitBtn" style="width:100%; padding:10px; font-size:0.9rem;" disabled onclick="simulateRegistration()">Register</button>
+            </div>
+
+            <!-- Terms of Service Subtab -->
+            <div id="subtabTos" class="portal-card" style="display:none;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                    <h3 style="font-size:1.1rem; color:#fff;">Terms of Service & Rules</h3>
+                    <div>
+                        <button class="portal-subtab-btn active" id="btnLangEn" onclick="toggleTosLanguage('en')">English</button>
+                        <button class="portal-subtab-btn" id="btnLangRu" onclick="toggleTosLanguage('ru')">Русский (Original)</button>
+                    </div>
+                </div>
+
+                <div class="tos-container" id="tosContentEn">
+                    <h4 style="color:var(--accent-green); margin-bottom:8px;">General Store Rules:</h4>
+                    <ol style="padding-left:18px; display:flex; flex-direction:column; gap:6px;">
+                        <li>All settlements on the site are carried out automatically in cryptocurrency.</li>
+                        <li>No refund of funds to the client is possible in any amount.</li>
+                        <li>The store reserves the right to deny service or block an account without explanation.</li>
+                        <li>If an account is inactive for >3 months, access is suspended; after 6 months, permanently deleted.</li>
+                        <li>All information is provided for informational purposes only.</li>
+                        <li class="tos-rule-cis"><strong>6. CIS Safe-Harbor Clause:</strong> The store does not use and does not sell products for resources of the CIS (Commonwealth of Independent States / post-Soviet nations).</li>
+                        <li>The store is not responsible for any moral or financial damage caused by purchased data.</li>
+                        <li>By registering, you confirm your full agreement with these rules.</li>
+                    </ol>
+                </div>
+
+                <div class="tos-container" id="tosContentRu" style="display:none;">
+                    <h4 style="color:var(--accent-green); margin-bottom:8px;">Общие правила магазина:</h4>
+                    <ol style="padding-left:18px; display:flex; flex-direction:column; gap:6px;">
+                        <li>Все расчеты осуществляются на сайте в автоматическом режиме.</li>
+                        <li>Возврат денежных средств клиенту не возможен ни в каком объеме.</li>
+                        <li>Магазин имеет право отказать клиенту в обслуживании, заблокировать аккаунт без объяснения причин.</li>
+                        <li>Если клиент не пользуется сервисом более 3 месяцев - доступ блокируется; если 6 месяцев - аккаунт удаляется.</li>
+                        <li>Вся информация на сайте предоставляется в ознакомительных целях.</li>
+                        <li class="tos-rule-cis"><strong>6. Правило СНГ:</strong> Магазин не использует и не продаёт продукты под ресурсы стран СНГ.</li>
+                        <li>Магазин не несет ответственности за причиненный моральный/финансовый ущерб.</li>
+                        <li>Регистрацией в магазине вы подтверждаете факт ознакомления с правилами.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- RSA-2048 Subtab -->
+            <div id="subtabRsa" class="portal-card" style="display:none;">
+                <h3 style="font-size:1.1rem; color:var(--accent-cyan); margin-bottom:12px;">Client-Side RSA-2048 Cryptography Pipeline</h3>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:14px;">The real Genesis frontend included client-side JavaScript encryption using RSA-2048. Passwords were encrypted in the user's browser before transmission to prevent cleartext interception.</p>
+                
+                <div style="font-size:0.75rem; font-family:var(--font-mono); color:var(--text-dim); margin-bottom:6px;">DATA-RSA-EXPONENT:</div>
+                <div class="code-block" style="padding:8px 12px; margin-bottom:12px;">010001 (65537)</div>
+
+                <div style="font-size:0.75rem; font-family:var(--font-mono); color:var(--text-dim); margin-bottom:6px;">DATA-RSA-MODULUS (2048-bit Public Key Extracted from Live DOM):</div>
+                <div class="code-block" style="padding:8px 12px; font-size:0.75rem; word-break:break-all;">a44583a2277517b0625c9c005984967e694f1a322bd751de0ceb3b6726b906eeb8a0f3602bc1df5b231b225cebf5453ec8f16621c7c398b88e5f5c520e4a0519c8c2ae3df08cbdfe8a928981a822f7ea209870a9c4252aaaa462cfc96a1f5b8f0559ade8b5eed1de8ac1aa1542fa8f2fdf587b00dfb037b8860e05bc8a15e02ec583100889efd86498d687766aeb5cd4bf8199ed9e2509f63fe9d5333b9e7c2fd181444d77cd34c36b95567ca2caf8f7d7a6b541f84153efdece72c6a3b0ec7b5639f746bea7d8f38ef4d5dcea5ffe269baa8ce84db0b70ca13462324b9d382198dde78cff17963ea754cce90cd2194eba3c37b40fa5c92e8a9463d10112fbf1</div>
+            </div>
+        </div>
+
+        <!-- CheckYourHack Victim Portal Simulation -->
+        <div class="checkyourhack-panel" id="checkyourhackView">
+            <div class="police-badge-header">
+                <div style="font-size:2.2rem;">👮‍♂️</div>
+                <div>
+                    <h2 style="font-size:1.5rem; letter-spacing:1px; color:#ffcc00; text-transform:uppercase;">POLITIE NEDERLAND — CHECKYOURHACK</h2>
+                    <p style="font-size:0.85rem; color:#cbd5e1;">Official National Police Cybercrime Verification Service — Operation Cookie Monster</p>
+                </div>
+            </div>
+
+            <p style="font-size:0.92rem; line-height:1.6; margin-bottom:20px; color:#f1f5f9;">
+                During <strong>Operation Cookie Monster</strong>, the Dutch National Police (Politie) seized over <strong>2 million digital identities</strong> and 1.5 million compromised device profiles from Genesis Market. Enter an email address below to check if your credentials and session cookies were recovered.
+            </p>
+
+            <div style="display:flex; gap:10px; margin-bottom:12px;">
+                <input type="email" id="checkEmailInput" class="portal-input" style="flex:1; border-color:#0055a5; background:#001830;" placeholder="Enter email address (e.g. employee@ea.com, victim@syntrix.com)">
+                <button class="police-btn" onclick="runCheckYourHack()">Verify Email</button>
+            </div>
+
+            <div style="display:flex; gap:8px; align-items:center; margin-bottom:20px; font-size:0.8rem; color:#cbd5e1;">
+                <span>Quick Test:</span>
+                <a href="#" onclick="quickCheck('employee@ea.com'); return false;" style="color:#ffcc00; text-decoration:underline;">employee@ea.com</a> |
+                <a href="#" onclick="quickCheck('victim@syntrix.com'); return false;" style="color:#ffcc00; text-decoration:underline;">victim@syntrix.com</a> |
+                <a href="#" onclick="quickCheck('clean_user@secure.org'); return false;" style="color:#ffcc00; text-decoration:underline;">clean_user@secure.org</a>
+            </div>
+
+            <div id="checkResultBox" style="display:none; background:#001830; border-radius:8px; padding:20px; border:1px solid #0055a5;"></div>
+        </div>
     </main>
 
     <!-- Modal Lightbox for Image Enlarge -->
@@ -1279,8 +1559,10 @@
         function switchTab(tab) {
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             document.getElementById('catalogView').style.display = tab === 'catalog' ? 'grid' : 'none';
+            document.getElementById('portalView').style.display = tab === 'portal' ? 'block' : 'none';
             document.getElementById('pluginView').style.display = tab === 'plugin' ? 'block' : 'none';
             document.getElementById('labView').style.display = tab === 'lab' ? 'block' : 'none';
+            document.getElementById('checkyourhackView').style.display = tab === 'checkyourhack' ? 'block' : 'none';
             document.getElementById('mediaView').style.display = tab === 'media' ? 'block' : 'none';
 
             const activeBtn = Array.from(document.querySelectorAll('.nav-tab')).find(b => {
@@ -1288,6 +1570,100 @@
                 return attr.includes(`'${tab}'`);
             });
             if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        function switchPortalSubTab(subtab) {
+            document.querySelectorAll('.portal-subtab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('subtabLogin').style.display = subtab === 'login' ? 'block' : 'none';
+            document.getElementById('subtabRegister').style.display = subtab === 'register' ? 'block' : 'none';
+            document.getElementById('subtabTos').style.display = subtab === 'tos' ? 'block' : 'none';
+            document.getElementById('subtabRsa').style.display = subtab === 'rsa' ? 'block' : 'none';
+
+            if (subtab === 'login') document.getElementById('pTabLogin').classList.add('active');
+            if (subtab === 'register') document.getElementById('pTabRegister').classList.add('active');
+            if (subtab === 'tos') document.getElementById('pTabTos').classList.add('active');
+            if (subtab === 'rsa') document.getElementById('pTabRsa').classList.add('active');
+        }
+
+        function validateInviteCode() {
+            const val = document.getElementById('regInvite').value;
+            const feedback = document.getElementById('inviteFeedback');
+            const btn = document.getElementById('regSubmitBtn');
+            const regex = /^invite_[a-zA-Z0-9_]{25}$/;
+
+            if (regex.test(val)) {
+                feedback.innerHTML = '<span style="color:var(--accent-green)">✔ VALID INVOICE / INVITE TOKEN (32 symbols, verified client seed)</span>';
+                btn.removeAttribute('disabled');
+            } else {
+                feedback.innerHTML = '<span style="color:var(--accent-amber)">✖ INVALID: Must be exactly 32 symbols starting with "invite_" followed by 25 alphanumeric chars</span>';
+                btn.setAttribute('disabled', 'true');
+            }
+        }
+
+        function toggleTosLanguage(lang) {
+            if (lang === 'ru') {
+                document.getElementById('tosContentRu').style.display = 'block';
+                document.getElementById('tosContentEn').style.display = 'none';
+                document.getElementById('btnLangRu').classList.add('active');
+                document.getElementById('btnLangEn').classList.remove('active');
+            } else {
+                document.getElementById('tosContentRu').style.display = 'none';
+                document.getElementById('tosContentEn').style.display = 'block';
+                document.getElementById('btnLangEn').classList.add('active');
+                document.getElementById('btnLangRu').classList.remove('active');
+            }
+        }
+
+        function simulateRegistration() {
+            alert("Authentic Genesis Flow: Password encrypted with RSA-2048 public key. Form dispatched with CSRF _csrf-clientzone token. Account successfully provisioned in invite ledger.");
+        }
+
+        function quickCheck(email) {
+            document.getElementById('checkEmailInput').value = email;
+            runCheckYourHack();
+        }
+
+        function runCheckYourHack() {
+            const email = document.getElementById('checkEmailInput').value.trim().toLowerCase();
+            const box = document.getElementById('checkResultBox');
+            box.style.display = 'block';
+
+            if (email === 'employee@ea.com') {
+                box.innerHTML = `
+                    <div style="border-left: 4px solid #ef4444; padding-left: 14px;">
+                        <h3 style="color:#ef4444; font-size:1.1rem; margin-bottom:6px;">⚠️ COMPROMISED: Record Found in Seized Genesis Market Database</h3>
+                        <p style="font-size:0.85rem; color:#f1f5f9; margin-bottom:10px;">
+                            Email <strong>${email}</strong> was identified in Genesis Bot <strong>BOT_849102</strong> (seized 4 April 2023). Compromised assets include active corporate Slack bearer session cookies (<code>xoxd-s1v4...</code>), internal Okta SSO tokens, and browser autofill passwords.
+                        </p>
+                        <div style="background:#002953; padding:12px; border-radius:6px; font-size:0.82rem; line-height:1.6; color:#cbd5e1;">
+                            <strong style="color:#ffcc00;">Official Politie Nederland Remediation Notice:</strong><br>
+                            1. Disconnect and re-image the infected endpoint immediately.<br>
+                            2. <strong>CRITICAL:</strong> Invalidate all active cloud session tokens via Okta / Slack Admin APIs (password change alone is insufficient!).<br>
+                            3. Enforce FIDO2 WebAuthn hardware security keys.
+                        </div>
+                    </div>
+                `;
+            } else if (email === 'victim@syntrix.com') {
+                box.innerHTML = `
+                    <div style="border-left: 4px solid #ef4444; padding-left: 14px;">
+                        <h3 style="color:#ef4444; font-size:1.1rem; margin-bottom:6px;">⚠️ COMPROMISED: Record Found in Seized Genesis Market Database</h3>
+                        <p style="font-size:0.85rem; color:#f1f5f9; margin-bottom:10px;">
+                            Email <strong>${email}</strong> was recovered in Genesis Bot <strong>BOT_551982</strong>. Over 1,650 decrypted session cookies for AWS, Google Workspace, and corporate email were listed for sale at $22.00 USD.
+                        </p>
+                    </div>
+                `;
+            } else if (email.includes('@')) {
+                box.innerHTML = `
+                    <div style="border-left: 4px solid #10b981; padding-left: 14px;">
+                        <h3 style="color:#10b981; font-size:1.1rem; margin-bottom:6px;">✅ CLEAN: No Record in Seized Database</h3>
+                        <p style="font-size:0.85rem; color:#f1f5f9;">
+                            Email <strong>${email}</strong> does not appear in the seized Genesis Market inventory of 2 million victim profiles.
+                        </p>
+                    </div>
+                `;
+            } else {
+                box.innerHTML = `<span style="color:#ef4444;">Please enter a valid email address.</span>`;
+            }
         }
 
         function openLightbox(src, caption) {
@@ -1333,18 +1709,31 @@
             const catalog = document.getElementById('catalogView');
             const header = document.getElementById('mainHeader');
 
+            const panels = ['catalogView', 'portalView', 'pluginView', 'labView', 'checkyourhackView', 'mediaView'];
+
             if (era === 'seized') {
                 seizure.style.display = 'block';
-                catalog.style.display = 'none';
+                panels.forEach(p => {
+                    const el = document.getElementById(p);
+                    if (el) el.style.display = 'none';
+                });
                 header.style.opacity = '0.4';
             } else if (era === 'ea-breach') {
                 seizure.style.display = 'none';
+                panels.forEach(p => {
+                    const el = document.getElementById(p);
+                    if (el) el.style.display = 'none';
+                });
                 catalog.style.display = 'grid';
                 header.style.opacity = '1';
                 document.getElementById('domainSearch').value = 'ea.com';
                 filterBots();
             } else {
                 seizure.style.display = 'none';
+                panels.forEach(p => {
+                    const el = document.getElementById(p);
+                    if (el) el.style.display = 'none';
+                });
                 catalog.style.display = 'grid';
                 header.style.opacity = '1';
                 resetFilters();
