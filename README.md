@@ -55,6 +55,8 @@ flowchart TD
     Tools --> T3["Hashcat Complete Course"]
     Tools --> T4["Aircrack-ng Wi-Fi Course"]
     Tools --> T5["Kerberos Deep Dive & Lab Guide"]
+    Tools --> T6["Metasploit Exploit Framework Guide"]
+
 
     Osint --> O1["OSINT Operational Framework & Playbook"]
     Osint --> O2["Infrastructure, Shodan & Censys"]
@@ -114,6 +116,8 @@ flowchart TD
 | 🧰 **Tools** | **Hashcat Masterclass** | GPU Acceleration, Attack Modes (0,1,3,6,7), Cryptanalysis | All Levels | [Explore](./tools/Hashcat/README.md) |
 | 🧰 **Tools** | **Aircrack-ng Wi-Fi Security** | 802.11 Frames, EAPOL 4-Way Handshake, WPA2/WPA3, PMF | All Levels | [Explore](./tools/Aircrack-ng/README.md) |
 | 🧰 **Tools** | **Kerberos Identity Security** | RFC 4120, AS/TGS/AP Exchanges, SPNs, Kerberoasting (T1558.003), AS-REP Roasting, Rubeus, Event 4769 | All Levels | [Explore](./tools/Kerberos/README.md) |
+| 🧰 **Tools** | **Metasploit Framework** | Modular Exploits, Aux Scanners, Meterpreter, msfvenom, SIEM EID 1/3 | All Levels | [Explore](./tools/Metasploit/README.md) |
+
 | 🎯 **Labs** | **Kibana: Event Logs I (CID 1182)** | Sysmon EID 1, Atomic Red Team, LOLBAS, `schtasks`, `sdelete` | Hands-on | [Explore](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) |
 | 🎯 **Labs** | **Kibana: Event Logs II (CID 1185)** | Sysmon EID 3, Active Directory, `Invoke-UserHunter`, LDAP/SMB | Hands-on | [Explore](./INE%20lab/Kibana%20Windows%20Event%20Logs%20II/README.md) |
 | 🎯 **Labs** | **Kibana: Event Logs III (CID 1186)** | Sysmon EID 1, IIS Webshell, In-Memory XOR Decryption, `appcmd` | Hands-on | [Explore](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
@@ -210,6 +214,13 @@ Each tool course is structured as an end-to-end masterclass featuring packet dia
 * **RFC 4120 Protocol Mechanics:** Low-level AS-REQ/REP, TGS-REQ/REP, and AP-REQ handshakes, PAC structures, Pre-Authentication (`PA-ENC-TIMESTAMP`), and mutual authentication.
 * **Attack Tradecraft:** Service Principal Name (SPN) harvesting, Kerberoasting (`T1558.003`), AS-REP Roasting (`T1558.004`), Golden/Silver ticket forging, and tooling with Rubeus, Impacket `GetUserSPNs.py`, and Kerbrute.
 * **Detection & Hardening:** High-fidelity Windows Event ID 4768/4769/4771 SIEM detection, Splunk SPL queries, Group Managed Service Accounts (gMSA), and AES-256 Kerberos encryption enforcement.
+
+### [6. Metasploit Framework — Professional Penetration Testing, Exploit Architecture & Security Assessment Guide](./tools/Metasploit/README.md)
+* **Official Project Portal:** [metasploit.com](https://www.metasploit.com/) • **Official Docs:** [docs.metasploit.com](https://docs.metasploit.com/) • **Open-Source GitHub:** [rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework)
+* **Framework Architecture:** Rex library primitives, MSF Core and Base APIs, PostgreSQL workspace integration (`db_nmap`, hosts, services, creds), and 7 module families.
+* **Payload Engineering:** Staged vs. Stageless architecture, Meterpreter in-memory reflective DLL execution, `msfvenom` CLI generation, network pivoting, and SOCKS proxies.
+* **SOC Telemetry & Defense:** Windows Sysmon Event IDs (1 process spawn, 3 outbound socket, 7 DLL load, 10 LSASS injection), Splunk SPL correlation, and enterprise patch governance.
+
 
 
 

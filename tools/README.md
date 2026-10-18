@@ -15,6 +15,8 @@ Every tool featured below is paired with its **official project domain** and **o
 | **Hashcat** | High-Performance Password Recovery | [hashcat.net](https://hashcat.net/hashcat/) | [hashcat/hashcat](https://github.com/hashcat/hashcat) | GPU (CUDA, ROCm, OpenCL), PCIe, Tensor Cores | [Hashcat Masterclass](./Hashcat/README.md) |
 | **Aircrack-ng** | Wireless Security & 802.11 Auditing | [aircrack-ng.org](https://www.aircrack-ng.org/) | [aircrack-ng/aircrack-ng](https://github.com/aircrack-ng/aircrack-ng) | 802.11 a/b/g/n/ac/ax, RF Channels, WPA2/WPA3 | [Aircrack-ng Masterclass](./Aircrack-ng/README.md) |
 | **Kerberos** (AD Identity Suite) | Network Authentication & AD Security | [web.mit.edu/kerberos](https://web.mit.edu/kerberos/) & [Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/security/kerberos/kerberos-authentication-overview) | [GhostPack/Rubeus](https://github.com/GhostPack/Rubeus) & [fortra/impacket](https://github.com/fortra/impacket) | Kerberos V5 (RFC 4120), RC4 / AES, LDAP, Event 4769 | [Kerberos Masterclass](./Kerberos/README.md) |
+| **Metasploit** (Exploit Framework) | Penetration Testing & Exploit Verification | [metasploit.com](https://www.metasploit.com/) & [docs](https://docs.metasploit.com/) | [rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework) | Exploits, Auxiliary, Meterpreter, Post, msfvenom | [Metasploit Masterclass](./Metasploit/README.md) |
+
 
 ---
 
@@ -55,3 +57,10 @@ Every tool featured below is paired with its **official project domain** and **o
   - **MIT Kerberos V5 Core:** [https://github.com/krb5/krb5](https://github.com/krb5/krb5)
 * **What You'll Learn:** RFC 4120 protocol mechanics; AS-REQ/REP, TGS-REQ/REP, and AP-REQ exchanges; Pre-Authentication; Service Principal Name (SPN) architecture; Kerberoasting (`T1558.003`) and AS-REP Roasting (`T1558.004`); Rubeus and Impacket GetUserSPNs tooling; offline GPU cracking with Hashcat Mode 13100; Windows Security Event Log analysis (4768, 4769, 4771); Splunk SPL detection engineering; and enterprise defense via gMSA and AES encryption.
 * **Key Artifacts:** Authentication sequence flowchart, Kerberoasting attack and defense architecture diagram, live auditing and SIEM alert GIF, and Splunk detection queries.
+
+### 6. [Metasploit Framework — Professional Penetration Testing, Exploit Architecture & Security Assessment Guide](./Metasploit/README.md)
+* **🌐 Official Project Domain:** [https://www.metasploit.com](https://www.metasploit.com/) • **Official Docs:** [https://docs.metasploit.com](https://docs.metasploit.com/)
+* **🐙 Official Open-Source GitHub:** [https://github.com/rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework)
+* **What You'll Learn:** Metasploit Framework architecture (Rex, Core, Base); 7 module families (Exploits, Auxiliary, Payloads, Post, Encoders, NOPs, Evasion); `msfconsole` command mastery; PostgreSQL database integration (`db_nmap`, hosts, services, creds); Staged vs. Stageless payload engineering; Meterpreter runtime memory execution; `msfvenom` CLI binary generation; multi-domain security assessments (Network, Web, Windows AD, Linux, Cloud); Sysmon endpoint telemetry forensics (Event IDs 1, 3, 7, 10); production Splunk SPL correlation queries; and enterprise vulnerability remediation.
+* **Key Artifacts:** Module architecture infographic, attack and defense assessment lifecycle diagram, live terminal session walkthrough GIF, and Splunk detection queries.
+

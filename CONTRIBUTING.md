@@ -186,6 +186,8 @@ Each tool guide follows the same deep-dive structure:
 | [John the Ripper](./tools/John%20the%20ripper/README.md) | `*2john` converters, rule mutation, sessions | eJPT, eCPPT |
 | [Aircrack-ng](./tools/Aircrack-ng/README.md) | 802.11 frames, EAPOL, WPA2/WPA3, PMF | Wireless specializations |
 | [Kerberos](./tools/Kerberos/README.md) | RFC 4120, AS/TGS/AP exchanges, SPNs, Kerberoast, Event 4769 | CRTP, CRTE, OSCP, eCPPT, CySA+ |
+| [Metasploit](./tools/Metasploit/README.md) | Modular exploits, auxiliary scanners, Meterpreter, msfvenom | eJPT, eCPPT, OSCP, CEH, GPEN |
+
 
 
 ---
