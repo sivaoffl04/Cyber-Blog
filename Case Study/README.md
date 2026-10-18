@@ -22,7 +22,7 @@ Each case study breaks down:
 ## 📂 Case Study Deep-Dives
 
 ### 1. [Genesis Market: A Full Cybersecurity Case Study (Operation Cookie Monster)](./Genesis%20Market/README.md)
-* **Status:** 🟢 **100% Complete — 13 Technical Chapters + Master Report + Interactive Demo Site + Python Audit Script**
+* **Status:** 🟢 **100% Complete — 14 Technical Chapters + Master Report + Interactive Demo Site + Python Audit Script**
 * **Featured Incident:** The 2021 Electronic Arts (EA) $10 Slack Bot Breach (FIFA 21 & Frostbite Engine source code theft).
 * **Key Mechanics:** How Genesis Market combined session cookies, browser fingerprints (WebGL, Canvas, AudioContext), and hardware specs into custom Chromium plugins to bypass MFA without passwords.
 * **Chapters Included:**
@@ -39,5 +39,6 @@ Each case study breaks down:
   * [11: Lessons Learned — Strategic & Tactical Recommendations](./Genesis%20Market/11-lessons-learned.md)
   * [12: Deep R&D — Reverse Engineering, Cryptographic Dissection & Forensic Deconstruction](./Genesis%20Market/12-deep-rnd-reverse-engineering-and-forensics.md)
   * [13: Primary Source Forensic R&D — Unsealed FBI Seizure Affidavit & Internet Archive OSINT Dissection](./Genesis%20Market/13-fbi-affidavit-forensic-dissection.md)
+  * [14: Industry Reports Synthesis & Comparative Landmark Case Studies](./Genesis%20Market/14-industry-reports-synthesis-and-comparative-case-studies.md)
 * **Interactive Web Lab:** [**Interactive Genesis Market & Zero Trust Simulation**](./Genesis%20Market/demo-site/index.html) (Live catalog search, bot profile inspector, and Zero Trust vs. session replay lab).
 * **Custom Tooling:** [`session_cookie_audit.py`](./Genesis%20Market/scripts/session_cookie_audit.py) (Local browser datastore and infostealer staging audit tool).

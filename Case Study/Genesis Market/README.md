@@ -44,6 +44,8 @@ This research case study is divided into 11 dedicated, deep-dive technical chapt
     *Low-level byte-by-byte Chromium cookie ciphertext analysis; Chrome 127+ App-Bound Encryption; full forensic post-mortem of the 2021 EA Slack breach ($10 bot to 780 GB Frostbite code theft); Genesis OS V8 runtime API hooking; blockchain tracking and undercover law enforcement tradecraft.*
 13. [**13: Primary Source Forensic R&D — Unsealed FBI Seizure Affidavit & Internet Archive OSINT Dissection**](./13-fbi-affidavit-forensic-dissection.md)  
     *Deep-dive analysis of unsealed federal court filings (Case 2:23-mj-00365-SCD, E.D. Wisconsin); 115 undercover FBI bot purchases; BTC Address 1 cluster (...J43QW); forensic breakdown of Backend Server #1 (2020) vs. Backend Server #2 (2022); fatal OPSEC failures (mezina.svet@yandex.ru, client@gen2dev.net); complete Internet Archive (archive.org) OSINT triage and disambiguation matrix.*
+14. [**14: Industry Reports Synthesis & Comparative Landmark Case Studies**](./14-industry-reports-synthesis-and-comparative-case-studies.md)  
+    *Synthesis of authoritative threat intelligence reports (Trellix, Sophos X-Ops, Group-IB, Mandiant, CISA); dynamic bot update daemon analysis; CDP protocol hooking; comparative post-mortem matrix (EA Breach vs. Uber MFA fatigue vs. CircleCI supply chain theft); post-Genesis landscape (Russian Market, 2easy, Telegram Log Clouds); 3-pillar defensive architecture (FIDO2, CAE, RFC 9449 DPoP).*
 
 ---
 
