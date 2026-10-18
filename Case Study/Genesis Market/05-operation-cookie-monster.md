@@ -45,6 +45,15 @@ Visitors attempting to reach Genesis Market domains on both the clear web and th
 
 The U.S. Department of Justice confirmed that a federal court in the Central District of California had authorized the **seizure of 11 domain names** used by Genesis Market, effectively severing clear-web access to the platform.
 
+### Visual Comparison: The Internet Archive (Wayback Machine) Preservation vs. Seizure
+Historical snapshots on the Internet Archive preserve both the operational demo search page and the permanent law enforcement seizure splash screen:
+
+![Internet Archive Wayback Demo & Seizure Breakdown](./images/genesis_market_demo_search_ui.jpg)
+
+* **Wayback Machine Header (Top):** Reflects the historical crawling timeline of `genesis.market` from 2018 up to the April 2023 takedown.
+* **Public Demo Search Interface (Left):** Preserves the unauthenticated preview portal where prospective buyers could query target corporate domains (e.g., `@company.com`), review matched bot counts, inspect masked email addresses (`j***@company.com`), and view cookie counts before registering with an invite code.
+* **Official Seizure Notice (Right):** Preserves the final landing page deployed on 4 April 2023 by the FBI, Dutch National Police, Europol, and Eurojust during Operation Cookie Monster.
+
 ---
 
 ## 📊 3. Operational Statistics & Impact

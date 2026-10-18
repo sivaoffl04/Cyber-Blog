@@ -64,6 +64,15 @@ When an infostealer infected an endpoint, it compiled an exhaustive hardware and
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+### Visual Dissection: The Authenticated Genesis Market Storefront
+Threat intelligence researchers (F5 Labs, Sophos, Recorded Future) documented the commercial, e-commerce-style design of the Genesis Market portal:
+
+![Real Genesis Market Portal UI](./images/genesis_market_real_website_ui.jpg)
+
+* **Account Header & Balance:** Displays the authenticated buyer's username, active balance in USD and Bitcoin (BTC), cart, and navigation tabs (`Bots`, `Search`, `Wiki`, `API`, `Support`).
+* **Granular Filter Sidebar:** Allows adversaries to filter 1.5M+ bots by specific corporate service (`Okta`, `AWS`, `Slack`, `Google`, `Chase`), country, operating system, and cookie weight.
+* **Live Bot Catalog:** Presents compromised endpoints with unique Bot IDs, OS icons, country flags, compromised account badges, cookie density counters, price tags ($0.70 to $100s), and one-click purchase triggers.
+
 ---
 
 ## 🖥️ 3. The Genesis Chromium Plugin & Genesis Browser
