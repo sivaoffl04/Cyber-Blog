@@ -110,7 +110,7 @@ The animated demonstration below showcases a live high-speed password auditing s
 55. [Hashcat + SOC](#55-hashcat--soc)
 56. [Purple-Team Perspective](#56-purple-team-perspective)
 57. [Important Hashcat Commands Cheat Sheet](#57-important-hashcat-commands-cheat-sheet)
-58. [Hashcat A–Z Learning Roadmap](#58-hashcat-a-z-learning-roadmap)
+58. [Hashcat Professional Competency Roadmap](#58-hashcat-professional-competency-roadmap)
 59. [Labs I Recommend](#59-labs-i-recommend)
 - [The Most Important Hashcat Mental Model](#the-most-important-hashcat-mental-model)
 - [Final Takeaway](#final-takeaway)
@@ -1355,7 +1355,7 @@ hashcat -m 0 hash.txt --show                    # Display cracked plaintext cred
 
 ---
 
-# 58. Hashcat A-Z Learning Roadmap
+# 58. Hashcat Professional Competency Roadmap
 
 ```text
 Level 1: Fundamentals (Hashing vs Encryption, Salts, Entropy, Modes -m and -a)

@@ -60,7 +60,7 @@ The animated demonstration below illustrates the internal execution lifecycle in
 19. [SOC, EDR Telemetry & Purple-Team Operations](#19-soc-edr-telemetry--purple-team-operations)
 20. [Plugins & Framework Extensibility](#20-plugins--framework-extensibility)
 21. [Source Code Repository Structure & Module Tree](#21-source-code-repository-structure--module-tree)
-22: [Comprehensive Command Reference Matrix](#22-comprehensive-command-reference-matrix)
+22. [Comprehensive Command Reference Matrix](#22-comprehensive-command-reference-matrix)
 23. [Architectural Boundaries & Technical Limitations](#23-architectural-boundaries--technical-limitations)
 24. [Official Authoritative Documentation & Source Repositories](#24-official-authoritative-documentation--source-repositories)
 
