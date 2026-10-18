@@ -53,6 +53,8 @@ Genesis Market emerged as the **world's largest, automated Initial Access Broker
 
 ## 🎮 2. Case Study: The 2021 Electronic Arts (EA) Breach
 
+![The 2021 EA Breach Forensic Killchain](./images/ea_breach_killchain_dissection.jpg)
+
 The most prominent, publicly documented enterprise intrusion directly attributed to Genesis Market was the **June 2021 intrusion of video gaming giant Electronic Arts (EA)**.
 
 This incident serves as a textbook example of how a low-cost commodity bot can unravel multi-layered enterprise defenses.

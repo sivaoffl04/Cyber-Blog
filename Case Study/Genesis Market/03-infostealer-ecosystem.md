@@ -62,6 +62,8 @@ An **infostealer** is a specialized category of lightweight commodity trojan des
 
 ## 🔓 3. How Infostealers Decrypt Browser Vaults
 
+![Chromium DPAPI Decryption Flowchart](./images/chromium_dpapi_decryption_flowchart.jpg)
+
 To understand why traditional browser storage is vulnerable to infostealers, we must examine the internal cryptographic architecture of Chromium-based browsers (Google Chrome, Microsoft Edge, Brave, Opera, Vivaldi).
 
 ### The Chromium Encryption Architecture (v80+):

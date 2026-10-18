@@ -40,6 +40,22 @@ This research case study is divided into 11 dedicated, deep-dive technical chapt
     *Complete enterprise matrix correlation across 11 tactics and 24 techniques spanning Initial Access (T1189), Execution (T1204), Credential Access (T1539, T1555.003), Collection, and Impact (T1486).*
 11. [**11: Lessons Learned — Strategic & Tactical Recommendations**](./11-lessons-learned.md)  
     *The illusion of single-factor authentication; CISO mandates for Device Health Attestation (Zero Trust) and Phishing-Resistant MFA (FIDO2/WebAuthn); Cryptographic Token Binding (DPoP); why infrastructure takedowns do not end the underlying economy.*
+12. [**12: Deep R&D — Reverse Engineering, Cryptographic Dissection & Forensic Deconstruction**](./12-deep-rnd-reverse-engineering-and-forensics.md)  
+    *Low-level byte-by-byte Chromium cookie ciphertext analysis; Chrome 127+ App-Bound Encryption; full forensic post-mortem of the 2021 EA Slack breach ($10 bot to 780 GB Frostbite code theft); Genesis OS V8 runtime API hooking; blockchain tracking and undercover law enforcement tradecraft.*
+
+---
+
+## 💻 Interactive Educational Demo Website
+
+As part of this case study, we built an interactive, standalone simulation web application: [**`demo-site/index.html`**](./demo-site/index.html).
+
+### Features of the Interactive Demo Lab:
+* **Historical Wayback Scrubber:** Switch between 2021–2022 (Live Market), June 2021 (EA Breach), and April 4, 2023 (Operation Cookie Monster Seizure Banner).
+* **Live Catalog & Domain Search:** Search simulated bots by corporate domain (`@ea.com`, `@paypal.com`, `@okta.com`, `@aws.com`) with real-time filtering by cookie count, country, and OS.
+* **Interactive Bot Profile Inspector:** Click on any bot to inspect its replicated hardware fingerprint (Canvas hash, WebGL renderer string, screen resolution) and decrypted session cookies.
+* **Session Replay vs. Zero Trust Defensive Lab:** Compare why traditional authentication failed and how modern Zero Trust (FIDO2 WebAuthn, CAE, DPoP token binding) neutralizes cookie theft.
+
+**To run the interactive demo:** Open [`demo-site/index.html`](./demo-site/index.html) in any web browser.
 
 ---
 
