@@ -43,7 +43,20 @@ Visitors attempting to reach Genesis Market domains on both the clear web and th
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-The U.S. Department of Justice confirmed that a federal court in the Central District of California had authorized the **seizure of 11 domain names** used by Genesis Market, effectively severing clear-web access to the platform.
+The U.S. Department of Justice confirmed that a federal court had authorized the **seizure of 11 domain names** used by Genesis Market, effectively severing clear-web access to the platform.
+
+### 📸 Authentic Law Enforcement Evidence & Seizure Photos
+
+![Official Europol Action Day Splash Image](./images/europol_splash_page_official.jpg)
+*Figure 5.2: Official Europol Action Day Press Photograph displaying the coordinated Operation Cookie Monster splash banner and international cybercrime coalition.*
+
+<div align="center">
+  <img src="./images/genesis_market_official_logo.webp" width="160" alt="Official Genesis Market Logo" />
+  <p><em>Figure 5.3: Authentic Genesis Market Logo with distinctive biometric thumbprint motif.</em></p>
+</div>
+
+![Genesis Market Live Seizure Web Screengrab](./images/genesis_market_live_seizure_screengrab.webp)
+*Figure 5.4: Live high-resolution screengrab of the seized Genesis.market web portal captured on 5 April 2023 following server infrastructure confiscation.*
 
 ### Visual Comparison: The Internet Archive (Wayback Machine) Preservation vs. Seizure
 Historical snapshots on the Internet Archive preserve both the operational demo search page and the permanent law enforcement seizure splash screen:
@@ -104,5 +117,50 @@ Troy Hunt's globally recognized breach repository, **Have I Been Pwned**, partne
 
 ---
 
+## 🎬 6. Official Documentary & Video Intelligence: "The Story Behind Operation Cookie Monster"
+
+Following the successful takedown of Genesis Market, the **Dutch National Police (Politie Eenheid Rotterdam)**, in collaboration with **Europol**, published an official investigative documentary detailing the inside story of Operation Cookie Monster:
+
+> **Official Documentary:** *"The story behind the international cybercrime investigation - Operation Cookie Monster (English)"*  
+> **Publishing Agencies:** Politie Nederland & Europol EC3  
+> **Investigative Scope:** 2019 to April 2023 synchronized raids  
+> **Key Focus Areas:** Undercover infiltration, real-time database cloning, coordinated multi-national execution, and psychological disruption tactics.
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│              POLITIE & EUROPOL DOCUMENTARY: OPERATIONAL TIMELINE                │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│   [Phase 1: Covert Infiltration]                                                │
+│   • NHTCU undercover analysts register verified buyer profiles.                 │
+│   • Covert purchases of bots to trace backend cryptocurrency wallet flows.       │
+│   • Forensic reverse engineering of the custom Genesis Chromium Extension.     │
+│                                                                                 │
+│   [Phase 2: The Hague Joint Operational Command Post]                           │
+│   • Multi-national task force deployed at Europol HQ in The Hague.              │
+│   • Live cross-jurisdictional de-confliction across 17 national police forces.  │
+│   • Simultaneous sync with FBI Cyber Task Force in Milwaukee and Washington.    │
+│                                                                                 │
+│   [Phase 3: Synchronized Strike Hour (08:00 CEST)]                              │
+│   • Armed tactical entries across the UK, Netherlands, Canada, and Spain.       │
+│   • Seizure of 11 DNS domains and live server clusters in European data centers.│
+│   • Live confiscation of physical hardware, cold storage crypto, and laptops.    │
+│                                                                                 │
+│   [Phase 4: Psychological Interruption & Remediation]                           │
+│   • Replacing Genesis frontend with seized splash page across all mirrors.      │
+│   • Dynamic video warning messages displayed to logged-in cybercriminals.      │
+│   • Activation of the public 'CheckYourHack' verification infrastructure.       │
+│                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Key Takeaways from the Video Intelligence:
+1. **The Tactical Advantage of Time:** In the documentary, lead Dutch cyber detectives revealed that law enforcement had gained silent access to the core Genesis database months before the public takedown. This allowed investigators to log every purchase, download, and login event committed by active cybercriminals in real time.
+2. **Psychological Deterrence (The Takedown Video):** When users tried to log into Genesis on 4 April 2023, the portal did not just show a static FBI notice. In several mirrors, visitors were presented with an interactive warning screen showing that law enforcement possessed their full registration history, IP logs, and purchased bot identifiers.
+3. **The Global Ripple Effect:** The documentary highlights footage from synchronized arrests in suburban homes across the United Kingdom, Quebec, and Western Europe, proving that buying stolen corporate identities on the dark web carries real-world criminal liability.
+
+---
+
 ## ⏭️ Next Chapter
 Proceed to [**06: Digital Forensics & Law Enforcement Intelligence Exploitation**](./06-investigation-and-forensics.md) to explore how investigators extracted actionable forensic intelligence from the seized Genesis servers.
+

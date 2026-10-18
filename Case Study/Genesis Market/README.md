@@ -16,7 +16,7 @@
 
 ## 📑 Complete Chapter Index
 
-This research case study is divided into 11 dedicated, deep-dive technical chapters:
+This research case study is divided into 14 dedicated, deep-dive technical chapters:
 
 1. [**01: Genesis Market Overview — The Paradigm Shift to "Identity-as-a-Service"**](./01-genesis-market-overview.md)  
    *The death of the simple password dump; genesis of Genesis Market (2018–2023); the "Bot" concept as a digital twin; market economics ($0.70 to hundreds of dollars).*
@@ -27,7 +27,7 @@ This research case study is divided into 11 dedicated, deep-dive technical chapt
 4. [**04: Initial Access Brokerage (IAB) & The Cybercrime Division of Labor**](./04-initial-access-broker.md)  
    *The IAB economic model; ransomware syndicates (Conti, LockBit, BlackCat) outsourcing initial access; Deep-Dive Case Study: The 2021 Electronic Arts (EA) $10 Slack bot breach and Frostbite source code theft.*
 5. [**05: Operation Cookie Monster — The Global Law Enforcement Takedown**](./05-operation-cookie-monster.md)  
-   *The 4-year joint investigation (FBI, Politie, Europol EC3, Eurojust); April 4, 2023 takedown; 119 arrests, 208 searches, 97 knock-and-talks, 11 seized domains; the CheckYourHack victim notification portal.*
+   *The 4-year joint investigation (FBI, Politie, Europol EC3, Eurojust); April 4, 2023 takedown; 119 arrests, 208 searches, 97 knock-and-talks, 11 seized domains; authentic Europol action day evidence; official video documentary.*
 6. [**06: Digital Forensics & Law Enforcement Intelligence Exploitation**](./06-investigation-and-forensics.md)  
    *Dual-direction intelligence exploitation (upstream suppliers vs. downstream buyers); database and crypto ledger analysis; host-based forensic artifacts on infected endpoints (DPAPI Event ID 4692, staging paths).*
 7. [**07: SOC Detection Engineering — Detecting Infostealers & Session Hijacking**](./07-soc-detection.md)  
@@ -57,7 +57,9 @@ As part of this case study, we built an interactive, standalone simulation web a
 * **Historical Wayback Scrubber:** Switch between 2021–2022 (Live Market), June 2021 (EA Breach), and April 4, 2023 (Operation Cookie Monster Seizure Banner).
 * **Live Catalog & Domain Search:** Search simulated bots by corporate domain (`@ea.com`, `@paypal.com`, `@okta.com`, `@aws.com`) with real-time filtering by cookie count, country, and OS.
 * **Interactive Bot Profile Inspector:** Click on any bot to inspect its replicated hardware fingerprint (Canvas hash, WebGL renderer string, screen resolution) and decrypted session cookies.
-* **Session Replay vs. Zero Trust Defensive Lab:** Compare why traditional authentication failed and how modern Zero Trust (FIDO2 WebAuthn, CAE, DPoP token binding) neutralizes cookie theft.
+* **Genesis Plugin Simulator:** Interactive emulation of the Chrome DevTools Protocol (CDP) hooking engine that injects stolen cookies into live browser sessions.
+* **Zero Trust Defensive Lab:** Compare why traditional authentication failed and how modern Zero Trust (FIDO2 WebAuthn, CAE, DPoP token binding) neutralizes cookie theft.
+* **Media & Video Intelligence Hub:** Direct gallery showcasing authentic Europol action photos, Wikimedia seizure screengrabs, the official Politie documentary breakdown, and 10 high-resolution forensic research infographics with lightbox zoom.
 
 **To run the interactive demo:** Open [`demo-site/index.html`](./demo-site/index.html) in any web browser.
 
