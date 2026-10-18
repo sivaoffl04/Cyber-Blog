@@ -12,6 +12,7 @@ Welcome to the **Cybersecurity Tool Masterclasses** repository section. Rather t
 | **John the Ripper** (JtR) | Password Cracking & Cryptanalysis | Password cracking modes, wordlist mutation rules, `*2john` format converters, potfile management, incremental attacks | CPU (Multi-core), SIMD, AVX-512, OpenCL | [John the Ripper Masterclass](./John%20the%20ripper/README.md) |
 | **Hashcat** | High-Performance Password Recovery | GPU-accelerated hashing, attack modes (0, 1, 3, 6, 7), rule-based cracking, mask attacks, Markov chains | GPU (CUDA, ROCm, OpenCL), PCIe, Tensor Cores | [Hashcat Masterclass](./Hashcat/README.md) |
 | **Aircrack-ng** | Wireless Security & 802.11 Auditing | Wi-Fi 802.11 frames, monitor mode, WPA/WPA2 4-way handshake capture, controlled deauth, WPA3 SAE / PMF analysis | 802.11 a/b/g/n/ac/ax, RF Channels, WPA2-PSK, WPA3-SAE | [Aircrack-ng Masterclass](./Aircrack-ng/README.md) |
+| **Kerberos** | Network Authentication & AD Security | RFC 4120 protocol, AS/TGS/AP exchanges, SPNs, Kerberoasting (T1558.003), AS-REP Roasting, Rubeus, Impacket, Event 4769 | Kerberos V5 (Port 88), RC4 / AES, LDAP, Active Directory | [Kerberos Masterclass](./Kerberos/README.md) |
 
 ---
 
@@ -32,3 +33,9 @@ Welcome to the **Cybersecurity Tool Masterclasses** repository section. Rather t
 ### 4. [Aircrack-ng & Wi-Fi Security — Complete Course](./Aircrack-ng/README.md)
 * **What You'll Learn:** 802.11 management, control, and data frames; RF monitor mode drivers; capturing the EAPOL 4-way handshake; targeted deauthentication mechanics; PMKID attacks without clients; and auditing modern WPA3-SAE networks with Protected Management Frames (PMF).
 * **Key Artifacts:** 4-way handshake cryptographic derivation diagram, deauth vs PMF attack matrix, and live aircrack session GIF.
+
+### 5. [Kerberos — Deep Explanation, Tools, Attack Research & Practical Lab Guide](./Kerberos/README.md)
+* **What You'll Learn:** RFC 4120 protocol mechanics; AS-REQ/REP, TGS-REQ/REP, and AP-REQ exchanges; Pre-Authentication; Service Principal Name (SPN) architecture; Kerberoasting (T1558.003) and AS-REP Roasting (T1558.004); Rubeus and Impacket GetUserSPNs tooling; offline GPU cracking with Hashcat Mode 13100; Windows Security Event Log analysis (4768, 4769, 4771); Splunk SPL detection engineering; and enterprise defense via gMSA and AES encryption.
+* **Key Artifacts:** Authentication sequence flowchart, Kerberoasting attack and defense architecture diagram, live auditing and SIEM alert GIF, and Splunk detection queries.
+
+

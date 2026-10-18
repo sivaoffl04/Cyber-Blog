@@ -54,6 +54,7 @@ flowchart TD
     Tools --> T2["John the Ripper Course"]
     Tools --> T3["Hashcat Complete Course"]
     Tools --> T4["Aircrack-ng Wi-Fi Course"]
+    Tools --> T5["Kerberos Deep Dive & Lab Guide"]
 
     Osint --> O1["OSINT Operational Framework & Playbook"]
     Osint --> O2["Infrastructure, Shodan & Censys"]
@@ -112,6 +113,7 @@ flowchart TD
 | 🧰 **Tools** | **John the Ripper Masterclass** | Hash Cracking, Rule Mutation, Incremental, `*2john` Converters | All Levels | [Explore](./tools/John%20the%20ripper/README.md) |
 | 🧰 **Tools** | **Hashcat Masterclass** | GPU Acceleration, Attack Modes (0,1,3,6,7), Cryptanalysis | All Levels | [Explore](./tools/Hashcat/README.md) |
 | 🧰 **Tools** | **Aircrack-ng Wi-Fi Security** | 802.11 Frames, EAPOL 4-Way Handshake, WPA2/WPA3, PMF | All Levels | [Explore](./tools/Aircrack-ng/README.md) |
+| 🧰 **Tools** | **Kerberos Identity Security** | RFC 4120, AS/TGS/AP Exchanges, SPNs, Kerberoasting (T1558.003), AS-REP Roasting, Rubeus, Event 4769 | All Levels | [Explore](./tools/Kerberos/README.md) |
 | 🎯 **Labs** | **Kibana: Event Logs I (CID 1182)** | Sysmon EID 1, Atomic Red Team, LOLBAS, `schtasks`, `sdelete` | Hands-on | [Explore](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) |
 | 🎯 **Labs** | **Kibana: Event Logs II (CID 1185)** | Sysmon EID 3, Active Directory, `Invoke-UserHunter`, LDAP/SMB | Hands-on | [Explore](./INE%20lab/Kibana%20Windows%20Event%20Logs%20II/README.md) |
 | 🎯 **Labs** | **Kibana: Event Logs III (CID 1186)** | Sysmon EID 1, IIS Webshell, In-Memory XOR Decryption, `appcmd` | Hands-on | [Explore](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
@@ -199,6 +201,13 @@ Each tool course is structured as an end-to-end masterclass featuring packet dia
 * **Handshake Auditing:** EAPOL 4-Way Handshake capture, targeted Layer 2 802.11 deauthentication attacks, and PMKID harvesting.
 * **Next-Gen Standards:** WPA3 Simultaneous Authentication of Equals (SAE) Dragonfly handshake and 802.11w Protected Management Frames (PMF) defense.
 
+### [5. Kerberos — Deep Explanation, Tools, Attack Research & Practical Lab Guide](./tools/Kerberos/README.md)
+* **RFC 4120 Protocol Mechanics:** Low-level AS-REQ/REP, TGS-REQ/REP, and AP-REQ handshakes, PAC structures, Pre-Authentication (`PA-ENC-TIMESTAMP`), and mutual authentication.
+* **Attack Tradecraft:** Service Principal Name (SPN) harvesting, Kerberoasting (`T1558.003`), AS-REP Roasting (`T1558.004`), Golden/Silver ticket forging, and tooling with Rubeus, Impacket `GetUserSPNs.py`, and Kerbrute.
+* **Detection & Hardening:** High-fidelity Windows Event ID 4768/4769/4771 SIEM detection, Splunk SPL queries, Group Managed Service Accounts (gMSA), and AES-256 Kerberos encryption enforcement.
+
+
+
 ---
 
 # 🎯 Hands-on Lab Walkthroughs (INE / AttackDefense)
@@ -271,8 +280,11 @@ Real-world SOC and threat hunting challenges documented with 100% verified flag 
 | **Defense Evasion** | **T1218.010** | Signed Binary Proxy Execution: Regsvr32 | [ELK Attack Emulation](./INE%20lab/Effectively%20Using%20the%20ELK%20Stack/README.md) |
 | **Credential Access** | **T1110** | Brute Force Password Guessing | [John the Ripper](./tools/John%20the%20ripper/README.md) & [Hashcat](./tools/Hashcat/README.md) & [Compromised Credentials](./INE%20lab/Compromised%20Credentials/README.md) |
 | **Credential Access** | **T1110.003** | Password Spraying (SMB `Administrator`) | [Compromised Credentials](./INE%20lab/Compromised%20Credentials/README.md) |
+| **Credential Access** | **T1558.003** | Steal or Forge Kerberos Tickets: Kerberoasting | [Kerberos Masterclass](./tools/Kerberos/README.md) & [Hashcat](./tools/Hashcat/README.md) |
+| **Credential Access** | **T1558.004** | Steal or Forge Kerberos Tickets: AS-REP Roasting | [Kerberos Masterclass](./tools/Kerberos/README.md) |
 | **Credential Access** | **T1552.001** | Credentials in Files / Git Trees | [GitHub Security Masterclass](./GitHub_Security/README.md) |
 | **Credential Access** | **T1003** | OS Credential Dumping (`appcmd`) | [Kibana Event Logs III](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
+
 | **Discovery** | **T1087** | Account Discovery (`UserHunter`) | [Kibana Event Logs II](./INE%20lab/Kibana%20Windows%20Event%20Logs%20II/README.md) |
 | **Discovery** | **T1018** | Remote System Discovery (Ping / Net) | [Kibana Event Logs I](./INE%20lab/Kibana%20Windows%20Event%20Logs%20I/README.md) & [II](./INE%20lab/Kibana%20Windows%20Event%20Logs%20II/README.md) |
 | **Discovery** | **T1518.001** | Security Software Discovery (Sysmon `fltmc`) | [ELK Attack Emulation](./INE%20lab/Effectively%20Using%20the%20ELK%20Stack/README.md) |
