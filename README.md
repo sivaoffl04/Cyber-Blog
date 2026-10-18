@@ -16,7 +16,7 @@
   <b>A comprehensive, production-grade cybersecurity knowledge base, hands-on lab walkthroughs, tool masterclasses, DevSecOps hardening guides, and detection engineering playbooks.</b>
 </p>
 
-[📚 Tool Masterclasses](#tool-masterclasses) • [🔎 OSINT Masterclass](#open-source-intelligence-osint--threat-reconnaissance) • [🔒 GitHub Security & DevSecOps](#github-security--devsecops-masterclass) • [🎯 Hands-on Lab Solutions](#hands-on-lab-walkthroughs-ine--attackdefense) • [👥 Security Teams](#security-team-operations) • [🛡️ SOC & Incident Response](#soc-detection-engineering--incident-response) • [📱 Mobile Pentesting](#android-application-penetration-testing) • [🤝 Contribute](./CONTRIBUTING.md)
+[📚 Tool Masterclasses](#tool-masterclasses) • [🔎 OSINT Masterclass](#open-source-intelligence-osint--threat-reconnaissance) • [🔒 GitHub Security & DevSecOps](#github-security--devsecops-masterclass) • [🎯 Hands-on Lab Solutions](#hands-on-lab-walkthroughs-ine--attackdefense) • [🍪 Case Studies](./Case%20Study/README.md) • [👥 Security Teams](#security-team-operations) • [🛡️ SOC & Incident Response](#soc-detection-engineering--incident-response) • [📱 Mobile Pentesting](#android-application-penetration-testing) • [🤝 Contribute](./CONTRIBUTING.md)
 
 </div>
 
@@ -42,10 +42,13 @@ flowchart TD
     Hub --> Tools["🧰 Tools Masterclasses\n(tools/)"]
     Hub --> Osint["🔎 OSINT & Recon\n(OSINT/)"]
     Hub --> GhSec["🔒 GitHub Security\n(GitHub_Security/)"]
+    Hub --> CaseStudies["🍪 Case Studies\n(Case Study/)"]
     Hub --> SecTeams["👥 Security Teams\n(Security_Team/)"]
     Hub --> SOC["🛡️ SOC & Blue Team\n(SOC/)"]
     Hub --> Mobile["📱 Mobile Security\n(Android_pentest/)"]
     Hub --> Labs["🎯 Hands-on Labs\n(INE lab/)"]
+
+    CaseStudies --> CS1["Genesis Market: Operation Cookie Monster"]
 
     Tools --> T1["Nmap Complete Course"]
     Tools --> T2["John the Ripper Course"]
@@ -101,6 +104,7 @@ flowchart TD
 
 | Category | Module / Topic | Core Technologies | Level | Direct Link |
 | :--- | :--- | :--- | :---: | :---: |
+| 🍪 **Case Study** | **Genesis Market: Operation Cookie Monster** | Identity-as-a-Service, Infostealers (RedLine/Vidar), Session Cookie Hijacking, EA Breach, Splunk, Python Triage | Advanced | [Explore](./Case%20Study/Genesis%20Market/README.md) |
 | 🔒 **Git & GitHub** | **How to Use Git & GitHub Securely** | Essential Commands, Git 4-Zones, Ed25519 SSH, `gh` CLI, Signed Commits | All Levels | [Explore](./GitHub_Security/How_to_Use_GitHub_Securely_Complete_Guide.md) |
 | 🔒 **DevSecOps** | **GitHub Security & Hardening Masterclass** | Breach Case Studies (Uber/Toyota), Secret Scanning, Gitleaks, OIDC, Actions | All Levels | [Explore](./GitHub_Security/GitHub_Security_and_Hardening_Masterclass.md) |
 | 🔎 **OSINT** | **Open Source Intelligence & Threat Reconnaissance** | Complete 20-Domain Framework: Shodan, Censys, Subfinder, Holehe, GEOINT, Dark Web, Crypto | Professional | [Explore](./OSINT/Over%20all%20OSINT/README.md) |
