@@ -15,9 +15,12 @@
 # 📡 Aircrack-ng & Wireless Security Masterclass 📡
 ### The Comprehensive Guide to 802.11 Protocol Cryptanalysis, Radio Frequency Auditing & Enterprise Defense
 
+[![Official Site](https://img.shields.io/badge/Official%20Site-aircrack--ng.org-0078D4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.aircrack-ng.org/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-aircrack--ng%2Faircrack--ng-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/aircrack-ng/aircrack-ng)
 [![Standard](https://img.shields.io/badge/Standard-IEEE%20802.11ax%2Fbe-blue?style=for-the-badge&logo=wi-fi)](https://www.ieee.org/)
 [![Tool](https://img.shields.io/badge/Suite-Aircrack--ng%20Suite-red?style=for-the-badge&logo=kali-linux)](https://www.aircrack-ng.org/)
 [![Focus](https://img.shields.io/badge/Focus-Wireless%20Audit%20%26%20Purple%20Defense-purple?style=for-the-badge&logo=securityscorecard)](https://github.com/sivaoffl04/Cyber-Blog)
+
 
 </div>
 

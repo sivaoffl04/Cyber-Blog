@@ -15,9 +15,12 @@
 # ⚔️ John the Ripper (JtR) Masterclass ⚔️
 ### The Definitive Guide to Password Cryptanalysis, Hash Auditing & Defensive Hardening
 
+[![Official Site](https://img.shields.io/badge/Official%20Site-openwall.com%2Fjohn-0078D4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.openwall.com/john/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-openwall%2Fjohn-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/openwall/john)
 [![Standard](https://img.shields.io/badge/Standard-NIST%20SP%20800--63B-blue?style=for-the-badge&logo=shield)](https://pages.nist.gov/800-63-3/sp800-63b.html)
 [![Tool](https://img.shields.io/badge/Engine-John%20the%20Ripper%20Jumbo-red?style=for-the-badge&logo=kali-linux)](https://www.openwall.com/john/)
 [![Focus](https://img.shields.io/badge/Focus-Offensive%20Audit%20%26%20Purple%20Defense-purple?style=for-the-badge&logo=securityscorecard)](https://github.com/sivaoffl04/Cyber-Blog)
+
 
 </div>
 
