@@ -1,0 +1,2565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUXNET: Cyber-Physical Sabotage Seminar (20 Slides)</title>
+    <style>
+        :root {
+            --bg-base: #070a11;
+            --bg-panel: #0d131f;
+            --bg-card: #131b2c;
+            --bg-card-hover: #1c273e;
+            --text-main: #f0f4fc;
+            --text-muted: #8b9bb4;
+            --text-dim: #54647c;
+            --accent-cyan: #00f0ff;
+            --accent-cyan-dim: rgba(0, 240, 255, 0.15);
+            --accent-crimson: #ff3366;
+            --accent-crimson-dim: rgba(255, 51, 102, 0.15);
+            --accent-amber: #ffb800;
+            --accent-amber-dim: rgba(255, 184, 0, 0.15);
+            --accent-emerald: #00ff9d;
+            --accent-emerald-dim: rgba(0, 255, 157, 0.15);
+            --border-glow: rgba(0, 240, 255, 0.25);
+            --border-card: #1f2c44;
+            --font-mono: 'Consolas', 'Fira Code', 'SF Mono', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Scanline and Cyber Ambient Effects */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 6px 100%;
+            z-index: 999;
+            opacity: 0.6;
+        }
+
+        .ambient-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(140px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.12;
+            transition: var(--transition-smooth);
+        }
+
+        .glow-top-right {
+            top: -200px;
+            right: -200px;
+            background: var(--accent-cyan);
+        }
+
+        .glow-bottom-left {
+            bottom: -200px;
+            left: -200px;
+            background: var(--accent-crimson);
+        }
+
+        /* Top Control Room HUD */
+        header.hud-header {
+            position: relative;
+            z-index: 10;
+            background: var(--bg-panel);
+            border-bottom: 1px solid var(--border-card);
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .hud-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .hud-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid var(--border-glow);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-emerald);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
+
+        .hud-title {
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hud-title span {
+            color: var(--accent-cyan);
+        }
+
+        .hud-center {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .timer-box {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--accent-amber);
+            background: rgba(255, 184, 0, 0.08);
+            border: 1px solid rgba(255, 184, 0, 0.25);
+            padding: 4px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .slide-counter {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            background: var(--bg-card);
+            padding: 5px 14px;
+            border-radius: 4px;
+            border: 1px solid var(--border-card);
+        }
+
+        .slide-counter .current-num {
+            color: var(--accent-cyan);
+            font-size: 16px;
+        }
+
+        .hud-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hud-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hud-btn:hover {
+            background: var(--bg-card-hover);
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
+
+        .hud-btn.active {
+            background: var(--accent-cyan-dim);
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+
+        /* Top Progress Bar */
+        .progress-bar-container {
+            width: 100%;
+            height: 3px;
+            background: rgba(255,255,255,0.05);
+            position: relative;
+            z-index: 11;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
+            width: 5%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        /* Main Viewport & Slide Deck */
+        main.presentation-deck {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.97) translateY(12px);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+            display: flex;
+            flex-direction: column;
+            padding: 28px 48px 20px 48px;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateY(0);
+            z-index: 2;
+        }
+
+        /* Slide Typography & Layout */
+        .slide-header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 12px;
+        }
+
+        .slide-tag {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--accent-cyan);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slide-tag::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 2px;
+            background: var(--accent-cyan);
+        }
+
+        .slide-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .slide-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .slide-meta-badge {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: var(--text-dim);
+        }
+
+        .slide-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            flex: 1;
+            min-height: 0;
+            align-items: stretch;
+        }
+
+        .slide-content-grid.single-col {
+            grid-template-columns: 1fr;
+        }
+
+        .slide-content-grid.tri-col {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .slide-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: var(--transition-smooth);
+        }
+
+        .slide-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 6px 20px rgba(0, 240, 255, 0.12);
+        }
+
+        .slide-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding-bottom: 8px;
+            margin-bottom: 4px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.06);
+            color: var(--text-muted);
+        }
+
+        .card-badge.cyan { background: var(--accent-cyan-dim); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+        .card-badge.crimson { background: var(--accent-crimson-dim); color: var(--accent-crimson); border: 1px solid var(--accent-crimson); }
+        .card-badge.amber { background: var(--accent-amber-dim); color: var(--accent-amber); border: 1px solid var(--accent-amber); }
+        .card-badge.emerald { background: var(--accent-emerald-dim); color: var(--accent-emerald); border: 1px solid var(--accent-emerald); }
+
+        ul.cyber-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        ul.cyber-bullets li {
+            position: relative;
+            padding-left: 18px;
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: #d1d9e6;
+        }
+
+        ul.cyber-bullets li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 8px;
+            color: var(--accent-cyan);
+        }
+
+        ul.cyber-bullets li strong {
+            color: #ffffff;
+        }
+
+        .highlight-text {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .danger-text {
+            color: var(--accent-crimson);
+            font-weight: 600;
+        }
+
+        .warning-text {
+            color: var(--accent-amber);
+            font-weight: 600;
+        }
+
+        .success-text {
+            color: var(--accent-emerald);
+            font-weight: 600;
+        }
+
+        /* Image Display & Diagrams */
+        .diagram-container {
+            width: 100%;
+            height: 100%;
+            background: #080d17;
+            border: 1px solid var(--border-card);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            max-height: 380px;
+            object-fit: contain;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .diagram-container:hover img {
+            transform: scale(1.02);
+        }
+
+        .diagram-caption {
+            font-size: 11px;
+            color: var(--text-dim);
+            font-family: var(--font-mono);
+            padding: 8px;
+            text-align: center;
+            width: 100%;
+            background: rgba(0,0,0,0.6);
+            border-top: 1px solid var(--border-card);
+        }
+
+        /* Stat Counters Box */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .stat-item {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 10px 14px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-family: var(--font-mono);
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--accent-cyan);
+        }
+
+        .stat-label {
+            font-size: 10.5px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* Interactive Rotor Canvas Simulator (Slide 12) */
+        .rotor-simulator-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: #060911;
+            border: 1px solid var(--border-glow);
+            border-radius: 8px;
+        }
+
+        #rotorCanvas {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #0e1726 0%, #04060a 100%);
+            box-shadow: 0 0 20px rgba(0,0,0,0.8), inset 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .rotor-controls {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .rotor-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .rotor-btn:hover {
+            color: #ffffff;
+            border-color: var(--accent-cyan);
+        }
+
+        .rotor-btn.active {
+            background: var(--accent-crimson-dim);
+            color: var(--accent-crimson);
+            border-color: var(--accent-crimson);
+            box-shadow: 0 0 10px var(--accent-crimson);
+        }
+
+        /* Bottom Controls Bar */
+        footer.hud-footer {
+            position: relative;
+            z-index: 10;
+            background: var(--bg-panel);
+            border-top: 1px solid var(--border-card);
+            padding: 8px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 52px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            color: var(--text-main);
+            padding: 8px 18px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-cyan);
+            color: #000000;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 12px var(--accent-cyan);
+        }
+
+        .key-hints {
+            display: flex;
+            gap: 12px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+
+        .key-hints kbd {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--text-muted);
+        }
+
+        /* Speaker Notes Modal */
+        .notes-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notes-modal-overlay.open {
+            display: flex;
+        }
+
+        .notes-modal {
+            width: 800px;
+            max-width: 90vw;
+            max-height: 85vh;
+            background: #0d1424;
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.3);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: modal-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modal-pop {
+            0% { transform: scale(0.92); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .notes-modal-header {
+            padding: 16px 20px;
+            background: #080d17;
+            border-bottom: 1px solid var(--border-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .notes-modal-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 20px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: var(--accent-crimson);
+        }
+
+        .notes-modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            color: #d1d9e6;
+            line-height: 1.7;
+            font-size: 14.5px;
+        }
+
+        .notes-modal-body h4 {
+            color: var(--accent-amber);
+            margin: 16px 0 8px 0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: var(--font-mono);
+        }
+
+        .notes-modal-body h4:first-child {
+            margin-top: 0;
+        }
+
+        .notes-modal-body p {
+            margin-bottom: 12px;
+        }
+
+        .notes-modal-body ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        /* Slide Overview Grid Modal */
+        .grid-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .grid-modal-overlay.open {
+            display: flex;
+        }
+
+        .grid-modal {
+            width: 1200px;
+            max-width: 95vw;
+            max-height: 90vh;
+            background: #090e1a;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .grid-modal-header {
+            padding: 16px 24px;
+            background: #050810;
+            border-bottom: 1px solid var(--border-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .grid-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .thumbnail-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .thumbnail-card:hover {
+            border-color: var(--accent-cyan);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .thumbnail-card.active {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            background: rgba(0, 240, 255, 0.08);
+        }
+
+        .thumb-num {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--accent-cyan);
+        }
+
+        .thumb-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+
+        /* Laser Pointer Canvas */
+        #laserCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 998;
+            display: none;
+        }
+
+        #laserCanvas.active {
+            display: block;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-card);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .slide-content-grid {
+                grid-template-columns: 1fr;
+            }
+            .slide {
+                padding: 20px 24px;
+            }
+        }
+
+        /* Print Media Styles for PDF Export */
+        @media print {
+            body {
+                overflow: visible;
+                height: auto;
+                background: #070a11 !important;
+                color: #ffffff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .scanlines, .ambient-glow, header.hud-header, footer.hud-footer, .notes-modal-overlay, .grid-modal-overlay, #laserCanvas {
+                display: none !important;
+            }
+            main.presentation-deck {
+                display: block;
+                height: auto;
+                overflow: visible;
+            }
+            .slide {
+                position: relative;
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+                page-break-after: always;
+                height: 100vh;
+                padding: 40px;
+                display: flex !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanlines"></div>
+    <div class="ambient-glow glow-top-right"></div>
+    <div class="ambient-glow glow-bottom-left"></div>
+    <canvas id="laserCanvas"></canvas>
+
+    <!-- Top SCADA Control Header -->
+    <header class="hud-header">
+        <div class="hud-left">
+            <div class="hud-badge">
+                <span class="pulse-dot"></span>
+                <span>OPERATION OLYMPIC GAMES</span>
+            </div>
+            <div class="hud-title">
+                <span>STUXNET</span> // MASTERCLASS SEMINAR
+            </div>
+        </div>
+
+        <div class="hud-center">
+            <div class="timer-box" title="Seminar Elapsed Time">
+                <span>⏱</span>
+                <span id="elapsedTimer">00:00:00</span>
+            </div>
+            <div class="slide-counter">
+                SLIDE <span class="current-num" id="currentSlideDisplay">01</span> / 20
+            </div>
+        </div>
+
+        <div class="hud-right">
+            <button class="hud-btn" id="soundToggleBtn" title="Toggle Cyber Audio Synthesizer (S)">
+                <span>🔊</span> SOUND: <span id="soundStatusText">ON</span>
+            </button>
+            <button class="hud-btn" id="laserToggleBtn" title="Toggle Laser Pointer (L)">
+                <span>🎯</span> LASER
+            </button>
+            <button class="hud-btn" id="notesToggleBtn" title="Open Speaker Notes (N)">
+                <span>📝</span> NOTES
+            </button>
+            <button class="hud-btn" id="gridToggleBtn" title="Slide Overview Grid (G)">
+                <span>👁️</span> OVERVIEW
+            </button>
+            <button class="hud-btn" id="autoplayToggleBtn" title="Auto Pacing (A)">
+                <span>⚡</span> AUTO
+            </button>
+            <button class="hud-btn" id="fullscreenToggleBtn" title="Fullscreen (F)">
+                <span>⛶</span> FULL
+            </button>
+        </div>
+    </header>
+
+    <!-- Top Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+    </div>
+
+    <!-- Main Slide Viewport -->
+    <main class="presentation-deck" id="deckContainer">
+
+        <!-- Slide 01 -->
+        <section class="slide active" id="slide-1" data-slide-index="1">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 01 // OVERVIEW</div>
+                    <h2 class="slide-title">STUXNET: The Cyber-Physical Rubicon</h2>
+                    <div class="slide-subtitle">Deconstructing the World's First Kinetic Industrial Weapon & The Sabotage of Natanz</div>
+                </div>
+                <div class="slide-meta-badge">MISSION DOSSIER // SLIDE 01</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">⚡ Strategic Executive Summary</span>
+                    <span class="card-badge crimson">CLASSIFIED TARGET</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>Target Facility:</strong> Natanz Fuel Enrichment Plant (FEP), Iran (~8,000 IR-1 gas centrifuges).</li>
+                    <li><strong>Strategic Mission:</strong> Clandestinely destroy nuclear enrichment hardware without kinetic warfare or overt geopolitical fallout.</li>
+                    <li><strong>Novel Weaponry:</strong> 4 simultaneous Windows zero-days, 2 stolen hardware code-signing certificates, and PLC microcode injection.</li>
+                    <li><strong>Kinetic Result:</strong> Physical destruction and premature decommissioning of an estimated <strong>~1,000 centrifuges</strong>.</li>
+                    <li><strong>Historical Milestone:</strong> Proved that digital ones and zeros can literally bend steel and shatter industrial machinery.</li>
+                </ul>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-value">4</span>
+                        <span class="stat-label">Zero-Day CVEs</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">2</span>
+                        <span class="stat-label">Stolen Certs</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">~1,000</span>
+                        <span class="stat-label">Centrifuges Broken</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">500 KB</span>
+                        <span class="stat-label">Binary Size</span>
+                    </div>
+                </div>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="diagram-container">
+                    <img src="../image/stuxnet_how_it_worked_infographic.jpg" alt="Stuxnet Architecture Overview">
+                    <div class="diagram-caption">FIGURE 1.1: Stuxnet's end-to-end cyber-physical kill chain: from USB infiltration to PLC manipulation.</div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 1: Introduction):</h4>
+                <p>"Welcome everyone to this masterclass seminar on Stuxnet. In June 2010, the global cybersecurity landscape fundamentally shifted. Up until that point, malware was designed to steal passwords, exfiltrate confidential emails, or hold financial data hostage. Stuxnet shattered that barrier by reaching out from cyberspace to physically destroy industrial hardware located 8 meters beneath the Iranian desert."</p>
+                <h4>Key Presentation Points:</h4>
+                <ul>
+                    <li>Emphasize that this was not conventional cybercrime or espionage; it was state-sponsored kinetic sabotage.</li>
+                    <li>Mention the sophistication: four zero-days, stolen cryptographic keys, and assembly injection into industrial controllers.</li>
+                    <li>Set the tone for the 20-slide seminar: we will walk step-by-step through the physics, the code, the evasion, and the lessons learned.</li>
+                </ul>
+                <h4>Audience Question to Pose:</h4>
+                <p><em>"Has anyone here ever encountered malware that can cause physical mechanical damage to hardware? Let's explore how software crossed that Rubicon."</em></p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 02 -->
+        <section class="slide " id="slide-2" data-slide-index="2">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 01 // GEOPOLITICS & GEOGRAPHY</div>
+                    <h2 class="slide-title">The Natanz Fuel Enrichment Facility</h2>
+                    <div class="slide-subtitle">A Subterranean Fortress Shielded by Reinforced Concrete and Air Gaps</div>
+                </div>
+                <div class="slide-meta-badge">TARGET ENVIRONMENT // SLIDE 02</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🏢 Facility Hardening & Defense</span>
+                    <span class="card-badge amber">SUBTERRANEAN BUNKER</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>Geographical Isolation:</strong> Located 300 km south of Tehran in the central desert of Isfahan Province.</li>
+                    <li><strong>Physical Hardening:</strong> Cascade halls buried <strong>8 meters underground</strong> beneath a 2.5-meter reinforced concrete roof, backfilled with dense earth.</li>
+                    <li><strong>Perimeter Security:</strong> Ringed by anti-aircraft missile batteries, radar installations, and elite security forces.</li>
+                    <li><strong>The Air Gap:</strong> Completely disconnected from the global public Internet; zero incoming fiber-optic cables from public telcos.</li>
+                    <li><strong>The Geopolitical Impasse:</strong> Airstrikes carried high risks of regional war; traditional diplomacy had stalled. A covert cyber weapon was the only plausible surgical option.</li>
+                </ul>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-value">8 m</span>
+                        <span class="stat-label">Bunker Depth</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">2.5 m</span>
+                        <span class="stat-label">Concrete Slab</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">0%</span>
+                        <span class="stat-label">Internet Connectivity</span>
+                    </div>
+                </div>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="diagram-container">
+                    <img src="../image/natanz_enrichment_facility_aerial.jpg" alt="Natanz Aerial Overview">
+                    <div class="diagram-caption">FIGURE 2.1: Satellite reconnaissance of the Natanz Fuel Enrichment Plant showing subterranean cascade halls.</div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 2: The Target):</h4>
+                <p>"To grasp the magnitude of Stuxnet's engineering, we must first examine the target. Natanz was designed to be impervious to conventional military strikes. The cascade halls were buried 8 meters underground, capped with reinforced concrete and earth. There was no internet connection—no email servers, no web browsers, no direct remote access."</p>
+                <h4>Discussion Prompts:</h4>
+                <ul>
+                    <li>Explain why the US and Israeli intelligence communities codenamed this 'Operation Olympic Games'.</li>
+                    <li>Emphasize the 'Air Gap' paradox: plant operators believed physical isolation guaranteed absolute security.</li>
+                </ul>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 03 -->
+        <section class="slide " id="slide-3" data-slide-index="3">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 01 // PARADIGM SHIFT</div>
+                    <h2 class="slide-title">The Cyber-Physical Paradigm Shift</h2>
+                    <div class="slide-subtitle">The Transition from Information Security to Physical Kinetic Consequences</div>
+                </div>
+                <div class="slide-meta-badge">CYBER VS PHYSICAL // SLIDE 03</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">⚖️ Conventional IT vs. Cyber-Physical</span>
+                    <span class="card-badge cyan">DOCTRINE COMPARISON</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>Conventional IT Threat:</strong> Focuses on the CIA Triad (Confidentiality, Integrity, Availability of data). Worst case: data breach, ransom, or downtime.</li>
+                    <li><strong>Cyber-Physical Threat (OT):</strong> Focuses on safety, environmental containment, and machine integrity. Worst case: explosion, mechanical disintegration, loss of human life.</li>
+                    <li><strong>The Mechanical Translation:</strong> Stuxnet translated digital CPU logic into physical torque:
+                        $$\Delta \text{Software Logic (MC7)} \longrightarrow \Delta \text{Rotational Torque} \longrightarrow \text{Harmonic Resonance} \longrightarrow \text{Structural Shear}$$
+                    </li>
+                    <li><strong>Invisible Weaponry:</strong> Unlike a cruise missile, Stuxnet left no radar signature, no bomb crater, and no initial evidence of foreign involvement.</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="slide-card">
+                    <div class="slide-card-header">
+                        <span class="card-title">🔍 The Sabotage Philosophy</span>
+                        <span class="card-badge emerald">STEALTH DOCTRINE</span>
+                    </div>
+                    <ul class="cyber-bullets">
+                        <li><strong>Slow Attrition vs Catastrophic Blast:</strong> The objective was NOT to blow up the entire plant in one day. Doing so would immediately alert Iran to an attack.</li>
+                        <li><strong>Manufacturing Defect Illusion:</strong> Stuxnet broke centrifuges gradually over months, making Iranian scientists believe their domestic aluminum was defective, their technicians were incompetent, or their manufacturing had failed.</li>
+                        <li><strong>Self-Doubt & Paranoia:</strong> Iran fired several senior plant engineers and replaced suppliers, wasting years hunting for non-existent mechanical flaws.</li>
+                    </ul>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 3: Paradigm Shift):</h4>
+                <p>"The core genius of Stuxnet was psychological and kinetic warfare combined. If you bomb a facility, the enemy rebuilds it with heightened resolve. But if their own machines silently tear themselves apart while computer monitors report normal operation, they blame their engineers, their metallurgists, and their domestic supply chain. It creates paranoia."</p>
+                <h4>Key Takeaway:</h4>
+                <p>Stuxnet proved that code can be as destructive as artillery, while retaining plausible deniability.</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 04 -->
+        <section class="slide " id="slide-4" data-slide-index="4">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 02 // ARCHITECTURE</div>
+                    <h2 class="slide-title">Industrial Topology & The Purdue Model</h2>
+                    <div class="slide-subtitle">How Modern Critical Infrastructure Separates Business IT from Physical Processes</div>
+                </div>
+                <div class="slide-meta-badge">PERA ARCHITECTURE // SLIDE 04</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🏗️ The 6 Levels of Purdue (PERA)</span>
+                    <span class="card-badge cyan">NETWORK HIERARCHY</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>Level 4/5 (Enterprise IT):</strong> Corporate network, email, ERP, Internet.</li>
+                    <li><strong>Level 3.5 (Industrial DMZ):</strong> Jump servers, patch mirrors, data historians.</li>
+                    <li><strong>Level 3 (Operations Management):</strong> SCADA central servers, maintenance tracking.</li>
+                    <li><strong>Level 2 (Supervisory Control):</strong> Human-Machine Interfaces (HMI) like Siemens WinCC, Engineering Workstations (EWS) running STEP 7.</li>
+                    <li><strong>Level 1 (Basic Control):</strong> Siemens S7-315 and S7-417 PLCs running cyclic ladder logic.</li>
+                    <li><strong>Level 0 (Physical Process):</strong> Variable Frequency Drives, vacuum pumps, valves, and rotating IR-1 centrifuges.</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="diagram-container">
+                    <img src="../image/stuxnet_purdue_model_deep_dive.jpg" alt="Purdue Model Deep Dive">
+                    <div class="diagram-caption">FIGURE 4.1: The Purdue Enterprise Reference Architecture (PERA) showing how Stuxnet traversed Level 4 to Level 0.</div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 4: Purdue Model):</h4>
+                <p>"In industrial engineering, the Purdue Model defines strict zones of trust. You never connect a Level 1 PLC directly to the internet. Firewalls and air gaps isolate Level 2 and Level 1. So how did Stuxnet reach Level 1? It didn't punch through the perimeter firewalls from the web; it arrived via the supply chain on physical media."</p>
+                <h4>Audience Check:</h4>
+                <p>Ask the room: 'How many of your organizations strictly enforce the Purdue Model? Does your IT security team have visibility into Level 1 and Level 0?'</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 05 -->
+        <section class="slide " id="slide-5" data-slide-index="5">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 02 // INITIAL ACCESS</div>
+                    <h2 class="slide-title">Crossing the Chasm: The Air-Gap Breach</h2>
+                    <div class="slide-subtitle">Supply-Chain Compromise & Zero-Click Removable Media Exploitation</div>
+                </div>
+                <div class="slide-meta-badge">SUPPLY CHAIN VECTOR // SLIDE 05</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🚗 The Infiltration Pathway</span>
+                    <span class="card-badge crimson">SUPPLY CHAIN INFECTION</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>Targeting the Contractors:</strong> Attackers identified 5 Iranian engineering contractor firms that serviced Natanz (Foolad, Behpajooh, Neda Rayaneh, Kala Electric, CG-IT).</li>
+                    <li><strong>The Trojan Horse:</strong> Contractor laptops and USB drives were infected outside the facility. When technicians entered Natanz to update PLC software, they brought Stuxnet across the security checkpoint.</li>
+                    <li><strong>Zero-Click USB Execution:</strong> No need for the technician to click an `.exe` file. The moment Windows Explorer opened the drive directory to render icons, Stuxnet took control.</li>
+                    <li><strong>Lateral Infection:</strong> Once inside a Level 2 workstation, Stuxnet spread across the local industrial subnet via network shares, RPC, and Siemens STEP 7 project files (`.s7p`).</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="slide-card">
+                    <div class="slide-card-header">
+                        <span class="card-title">💾 The Anatomy of a Zero-Click USB</span>
+                        <span class="card-badge amber">CVE-2010-2568</span>
+                    </div>
+                    <ul class="cyber-bullets">
+                        <li><strong>The Shortcut Trick:</strong> Stuxnet dropped weaponized `.lnk` shortcut files onto the flash drive along with hidden loader DLLs (`~WTR4141.tmp`).</li>
+                        <li><strong>Windows Shell Parser:</strong> `shell32.dll` parsed the shortcut to extract its icon. The icon path was crafted to point to an export inside Stuxnet's DLL.</li>
+                        <li><strong>Automatic Code Execution:</strong> Windows called `LoadLibraryW()` on the malicious file to render the icon, executing arbitrary Ring-3 code in `explorer.exe` instantly.</li>
+                        <li><strong>Air Gap Myth Shattered:</strong> Demonstrated that physical air gaps are routinely bridged by humans performing legitimate calibration tasks.</li>
+                    </ul>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 5: Air Gap Breach):</h4>
+                <p>"Here is the crucial lesson for security architects: An air gap is only as secure as the people who maintain it. Stuxnet did not need an internet cable. The attackers targeted third-party integration contractors. When a contractor plugged their calibration laptop into the Level 2 switch at Natanz, Stuxnet hopped the air gap in less than a second."</p>
+                <h4>Technical Detail:</h4>
+                <p>Point out that CVE-2010-2568 did not require AutoRun or AutoPlay! It exploited icon rendering.</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 06 -->
+        <section class="slide " id="slide-6" data-slide-index="6">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 03 // VULNERABILITY EXPLOITATION</div>
+                    <h2 class="slide-title">The Arsenal: Four Windows Zero-Days</h2>
+                    <div class="slide-subtitle">An Unprecedented R&D Investment in Remote Execution and Privilege Escalation</div>
+                </div>
+                <div class="slide-meta-badge">EXPLOIT WEAPONRY // SLIDE 06</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">💥 The 4 Zero-Day CVE Breakdown</span>
+                    <span class="card-badge crimson">RECORD-SETTING ARSENAL</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>1. CVE-2010-2568 (Windows Shell LNK):</strong> Zero-click execution via icon rendering in `shell32.dll`. Bypassed all user interaction requirements.</li>
+                    <li><strong>2. CVE-2010-2729 (Print Spooler RPC):</strong> Remote code execution via `spoolsv.exe`. Allowed lateral propagation across industrial subnets.</li>
+                    <li><strong>3. CVE-2010-3338 (Task Scheduler EoP):</strong> Local privilege escalation in `taskschd.dll` on Windows Vista/7 to obtain `NT AUTHORITY\SYSTEM`.</li>
+                    <li><strong>4. CVE-2010-2743 (Win32k.sys Graphics EoP):</strong> TrueType keyboard layout memory corruption in kernel driver, granting Ring-0 execution.</li>
+                </ul>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-value">$1M+</span>
+                        <span class="stat-label">Exploit Market Value</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">Ring 0</span>
+                        <span class="stat-label">Execution Level</span>
+                    </div>
+                </div>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="diagram-container">
+                    <img src="../image/stuxnet_windows_zero_days_internals.jpg" alt="Four Zero Days Internals">
+                    <div class="diagram-caption">FIGURE 6.1: Dissection of Stuxnet's 4 zero-days and dual code-signing certificate compromise.</div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 6: Zero Days):</h4>
+                <p>"Prior to 2010, the security industry had never seen a single piece of malware armed with four distinct zero-day vulnerabilities. In the commercial zero-day market, this represents millions of dollars in exploit research. It was definitive proof of a well-funded nation-state intelligence apparatus at work."</p>
+                <h4>Technical Deep Dive:</h4>
+                <p>Explain how Stuxnet chained CVE-2010-2568 for entry, CVE-2010-2729 for network spreading, and CVE-2010-2743 for ring-0 kernel control.</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 07 -->
+        <section class="slide " id="slide-7" data-slide-index="7">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 03 // CRYPTOGRAPHIC EVASION</div>
+                    <h2 class="slide-title">Subverting Cryptographic Trust</h2>
+                    <div class="slide-subtitle">Bypassing 64-bit Windows Driver Signature Enforcement (DSE)</div>
+                </div>
+                <div class="slide-meta-badge">DIGITAL CERTIFICATES // SLIDE 07</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🔐 The Driver Signature Enforcement Barrier</span>
+                    <span class="card-badge amber">WHQL SIGNING BYPASS</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>The Security Barrier:</strong> 64-bit Windows (x64) enforces strict Driver Signature Enforcement (DSE). Kernel-mode drivers (`.sys`) without a trusted VeriSign/Microsoft signature are blocked from loading.</li>
+                    <li><strong>The Intelligence Heist:</strong> Rather than attempting to break RSA-2048 cryptography, operators physically or digitally breached two major hardware vendors in Hsinchu Science Park, Taiwan:
+                        <br>• <strong>Realtek Semiconductor Corp.</strong>
+                        <br>• <strong>JMicron Technology Corp.</strong>
+                    </li>
+                    <li><strong>Private Key Theft:</strong> The attackers exfiltrated the private code-signing keys and signed their malicious rootkit drivers (`mrxnet.sys` and `mrxcls.sys`).</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="slide-card">
+                    <div class="slide-card-header">
+                        <span class="card-title">🛡️ Impact on Antivirus & Operating Systems</span>
+                        <span class="card-badge emerald">BLIND TRUST</span>
+                    </div>
+                    <ul class="cyber-bullets">
+                        <li><strong>Zero Warnings:</strong> When Windows installed Stuxnet's kernel driver, it displayed: <em>"Verified Publisher: Realtek Semiconductor Corp."</em></li>
+                        <li><strong>AV Whitelisting:</strong> Contemporary antivirus engines routinely whitelisted binaries signed by established global semiconductor manufacturers.</li>
+                        <li><strong>Failover Redundancy:</strong> When VeriSign revoked Realtek's certificate in July 2010, Stuxnet automatically switched its secondary dropper to use the stolen JMicron certificate!</li>
+                        <li><strong>Core Lesson:</strong> Trust in digital identity collapses when the private key storage of legitimate vendors is compromised.</li>
+                    </ul>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 7: Certificates):</h4>
+                <p>"Why didn't antivirus catch Stuxnet? Because Stuxnet carried legitimate, cryptographically valid signatures from Realtek and JMicron—two of the world's largest hardware component manufacturers. The attackers didn't hack the cryptography; they hacked the software supply chain to steal the signing keys."</p>
+                <h4>Discussion Question:</h4>
+                <p>'How do our organizations verify whether third-party signed drivers on critical workstations are authentic or compromised?'</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 08 -->
+        <section class="slide " id="slide-8" data-slide-index="8">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 03 // ROOTKIT & STEALTH</div>
+                    <h2 class="slide-title">Kernel Rootkit & Memory Anti-Forensics</h2>
+                    <div class="slide-subtitle">Hooking Native APIs and Hiding Malicious Artifacts in Plain Sight</div>
+                </div>
+                <div class="slide-meta-badge">RING-0 ROOTKIT // SLIDE 08</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">👻 The `mrxnet.sys` Rootkit Engine</span>
+                    <span class="card-badge crimson">SYSTEM CALL HOOKING</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>API Interception:</strong> Hooked `NtQueryDirectoryFile` and `ZwQueryDirectoryFile` in the Windows Native API.</li>
+                    <li><strong>Ghost Files:</strong> When any application (Windows Explorer, Command Prompt, or antivirus scanner) requested a directory listing of the USB drive:
+                        <br>• Files named `~WTR*.tmp`, `~DF*.tmp`, or malicious `.lnk` files were silently filtered out.
+                        <br>• The user saw an apparently blank or normal flash drive.
+                    </li>
+                    <li><strong>Encrypted In-Memory Virtual File System:</strong> Stuxnet decrypted its 54 DLL components entirely in RAM. The core payload never touched the hard drive as an unencrypted PE file.</li>
+                    <li><strong>Process Injection:</strong> Injected code into trusted system hosts (`services.exe`, `lsass.exe`, `explorer.exe`) to execute stealthily.</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="slide-card">
+                    <div class="slide-card-header">
+                        <span class="card-title">⏱️ Operational Hygiene & Kill Switches</span>
+                        <span class="card-badge cyan">STRICT HYGIENE</span>
+                    </div>
+                    <ul class="cyber-bullets">
+                        <li><strong>3-Hop Infection Limit:</strong> Stuxnet tracked an internal propagation counter. A USB drive could only infect up to 3 host machines before self-neutralizing.</li>
+                        <li><strong>Hardcoded Expiration Date:</strong> Stuxnet contained a built-in kill switch date: <strong>June 24, 2012</strong>. After this timestamp, the malware ceased all propagation.</li>
+                        <li><strong>Target Self-Restraint:</strong> If a machine was infected but lacked the specific Siemens software or cascade configuration, Stuxnet remained completely passive.</li>
+                    </ul>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 8: Rootkit & Evasion):</h4>
+                <p>"Stuxnet's authors exhibited extraordinary operational discipline. They implemented an in-memory virtual file system and hooked kernel directory calls so their exploit files were literally invisible. They even built in an infection hop counter: after infecting 3 machines, the USB stopped spreading. They did not want this weapon running wild across the globe."</p>
+                <h4>Key Takeaway:</h4>
+                <p>Highlight the contrast between noisy ransomware and precision-engineered cyber weapons.</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 09 -->
+        <section class="slide " id="slide-9" data-slide-index="9">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 04 // TARGET IDENTIFICATION</div>
+                    <h2 class="slide-title">Target Fingerprinting: The Narrow Funnel</h2>
+                    <div class="slide-subtitle">Exacting Hardware Filters Designed to Prevent Collateral Damage</div>
+                </div>
+                <div class="slide-meta-badge">TARGET QUALIFICATION // SLIDE 09</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🎯 The 6-Stage Qualification Funnel</span>
+                    <span class="card-badge emerald">LASER PRECISION</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>Filter 1 (Operating System):</strong> Windows 2000, XP, Server 2003, or Windows 7.</li>
+                    <li><strong>Filter 2 (Industrial Software):</strong> Siemens SIMATIC STEP 7 must be installed and running.</li>
+                    <li><strong>Filter 3 (Communications Card):</strong> Must detect a Siemens CP 342-5 communications processor connected to a Profibus DP network.</li>
+                    <li><strong>Filter 4 (Device Count):</strong> Exactly <strong>33 Variable Frequency Drives (VFDs)</strong> per subnet.</li>
+                    <li><strong>Filter 5 (Specific Manufacturers):</strong> VFDs must carry vendor IDs belonging to <strong>Fararo Paya (Iran)</strong> or <strong>Vacon (Finland)</strong>.</li>
+                    <li><strong>Filter 6 (Cascade Geometry):</strong> Exactly 164 centrifuges arranged in 18 sub-cascades.</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="diagram-container">
+                    <img src="../image/stuxnet_natanz_centrifuges_cascade.jpg" alt="Natanz Centrifuge Cascades">
+                    <div class="diagram-caption">FIGURE 9.1: The 164-centrifuge cascade hall at Natanz matching Stuxnet's exact hardware profile.</div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 9: Target Fingerprinting):</h4>
+                <p>"Imagine if someone released a biological weapon that could only infect someone who was exactly 6 feet tall, had blue eyes, wore a red tie, and worked at a specific desk. That is what Stuxnet did in software. If a computer did not match all six strict hardware criteria, Stuxnet did nothing. It was laser-guided."</p>
+                <h4>Discussion Prompt:</h4>
+                <p>'Why did the authors build such strict filters? Because collateral damage against European or American industrial plants would have exposed the operation immediately.'</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 10 -->
+        <section class="slide " id="slide-10" data-slide-index="10">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 04 // ENGINEERING MAN-IN-THE-MIDDLE</div>
+                    <h2 class="slide-title">The Man-in-the-Middle: `s7otbxdx.dll`</h2>
+                    <div class="slide-subtitle">Hijacking the Siemens Engineering Workstation and Intercepting PLC Code</div>
+                </div>
+                <div class="slide-meta-badge">DLL PROXY HOOK // SLIDE 10</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🔄 The DLL Replacement Technique</span>
+                    <span class="card-badge crimson">CODE PROXYING</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>The Siemens Core Library:</strong> `s7otbxdx.dll` is the primary communications library used by STEP 7 to talk to Siemens PLCs over ISO-on-TCP (Port 102).</li>
+                    <li><strong>The Substitution:</strong> Stuxnet renamed the authentic DLL to `s7otbxsx.dll` and placed its own weaponized `s7otbxdx.dll` in its original directory.</li>
+                    <li><strong>Export Forwarding:</strong> Stuxnet hooked 16 critical PLC functions, including `s7blk_read` and `s7blk_write`.</li>
+                    <li><strong>Blinding the Human Engineer:</strong> When an automation engineer clicked <em>"Compare Blocks"</em> or <em>"Upload Program from PLC"</em>:
+                        <br>• Stuxnet intercepted the request.
+                        <br>• Read the legitimate original program from `s7otbxsx.dll`.
+                        <br>• Returned clean, uninfected ladder logic to the engineer's screen!
+                    </li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="diagram-container">
+                    <img src="../image/stuxnet_step7_dll_proxy_architecture.jpg" alt="STEP 7 DLL Proxy Architecture">
+                    <div class="diagram-caption">FIGURE 10.1: Architecture of Stuxnet's DLL proxy hooking STEP 7 communication between EWS and PLC.</div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 10: DLL Proxy):</h4>
+                <p>"This was one of the most brilliant aspects of Stuxnet. Even if a suspicious engineer connected their laptop directly to the PLC and asked STEP 7: 'Show me what code is running on this controller', Stuxnet's hooked DLL intercepted the query, filtered out its own malicious blocks, and presented a clean, pristine copy of the original program. The engineer had no idea the controller was infected."</p>
+                <h4>Technical Takeaway:</h4>
+                <p>Explain the concept of 'Export Forwarding' and how DLL proxying works in Windows.</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 11 -->
+        <section class="slide " id="slide-11" data-slide-index="11">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 05 // PLC INTERNALS</div>
+                    <h2 class="slide-title">Inside the Controller: Siemens S7 PLCs</h2>
+                    <div class="slide-subtitle">Direct Microcode Injection into S7-315 and S7-417 Controllers</div>
+                </div>
+                <div class="slide-meta-badge">MC7 BYTECODE // SLIDE 11</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">⚙️ S7 Cyclic Execution Model</span>
+                    <span class="card-badge cyan">CYCLIC SCAN ARCHITECTURE</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>Organization Blocks:</strong>
+                        <br>• <strong>OB1:</strong> The main continuous execution loop.
+                        <br>• <strong>OB35:</strong> High-precision 100ms cyclic interrupt timer.
+                    </li>
+                    <li><strong>Function Blocks (FB/FC):</strong> Subroutines containing mathematical control logic. Stuxnet injected its own malicious blocks: <strong>FC1865 to FC1874</strong>.</li>
+                    <li><strong>Data Blocks (DB):</strong> Persistent process memory. Stuxnet allocated <strong>DB890</strong> and <strong>DB8062</strong> to store its state-machine timers and sensor buffers.</li>
+                    <li><strong>The Cyclic Hook:</strong> Stuxnet spliced its code into the entry point of OB1 and hooked `DP_SEND` / `DP_RECV` to hijack communications with the frequency drives.</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="diagram-container">
+                    <img src="../image/stuxnet_siemens_s7_mc7_bytecode_injection.jpg" alt="S7 MC7 Bytecode Injection">
+                    <div class="diagram-caption">FIGURE 11.1: Microcode injection layout inside S7 CPU memory hooking OB1/OB35 cyclic loops.</div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 11: PLC Microcode):</h4>
+                <p>"Now we enter the heart of the machine: the Siemens Programmable Logic Controller. A PLC doesn't run Python or C; it runs a compiled microcode called MC7. Stuxnet was the first malware in history to carry an MC7 compiler. It injected new Function Blocks directly into the PLC memory and hooked OB1—the cyclic heartbeat of the industrial controller."</p>
+                <h4>Key Takeaway:</h4>
+                <p>Emphasize that the malware operated at the lowest microcode level, below the operating system of the engineering laptop.</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 12 -->
+        <section class="slide " id="slide-12" data-slide-index="12">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 06 // KINETIC PHYSICS SABOTAGE</div>
+                    <h2 class="slide-title">The Physics of Sabotage: Centrifuge Destruction</h2>
+                    <div class="slide-subtitle">Exploiting Harmonic Resonance and Rotor Tensile Strength</div>
+                </div>
+                <div class="slide-meta-badge">PHYSICS SIMULATOR // SLIDE 12</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🌀 Rotational Sabotage Sequence</span>
+                    <span class="card-badge crimson">HARMONIC RESONANCE</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>Normal Operation:</strong> 1,064 Hz (63,840 RPM). The aluminum rotor spins at Mach 1.5 in a high vacuum to separate U-235 from U-238.</li>
+                    <li><strong>Phase 1 (Overspeed Attack):</strong> Stuxnet forced the frequency drives up to <strong>1,410 Hz (84,600 RPM)</strong> for 15 minutes. Centrifugal force increases quadratically:
+                        $$F_{\text{centrifugal}} = m \cdot \omega^2 \cdot r$$
+                        The aluminum expanded radially past its tensile yield strength.
+                    </li>
+                    <li><strong>Phase 2 (The Rest Period):</strong> Slowed rotors back to normal for 27 days to avoid suspicion.</li>
+                    <li><strong>Phase 3 (Resonance Crash):</strong> Dropped speed down to <strong>2 Hz (120 RPM)</strong> for 50 minutes, forcing the spinning rotor through critical harmonic resonance frequencies ($f_1, f_2$).</li>
+                    <li><strong>Catastrophic Impact:</strong> The rotor vibrated violently, wobbled off its magnetic bearing, and smashed into the outer casing at hypersonic speeds, triggering cascade explosions!</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="rotor-simulator-box">
+                    <canvas id="rotorCanvas" width="240" height="240"></canvas>
+                    <div class="stat-grid" style="width:100%;">
+                        <div class="stat-item">
+                            <span class="stat-value" id="rotorSpeedDisplay" style="color:var(--accent-emerald);">1,064 Hz</span>
+                            <span class="stat-label">Rotor Frequency</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="rotorRpmDisplay">63,840</span>
+                            <span class="stat-label">Calculated RPM</span>
+                        </div>
+                    </div>
+                    <div class="rotor-controls">
+                        <button class="rotor-btn active" id="btnNominalSpeed">NOMINAL (1,064 Hz)</button>
+                        <button class="rotor-btn" id="btnOverspeed">OVERSPEED (1,410 Hz)</button>
+                        <button class="rotor-btn" id="btnResonance">RESONANCE (2 Hz)</button>
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 12: Rotor Physics):</h4>
+                <p>"Here is the live simulation of the attack. Try clicking the buttons! At nominal speed, 1,064 Hz, the centrifuge spins safely. But during the overspeed phase, Stuxnet boosted the frequency to 1,410 Hz—pushing the aluminum rotor past its mechanical limit. Then, 27 days later, Stuxnet dropped the frequency to 2 Hz. In physics, when an object with high inertia slows down, it passes through its critical harmonic resonance frequencies. The rotor wobbled, struck the outer vacuum casing, and shattered into aluminum shrapnel."</p>
+                <h4>Interactive Demo Tip:</h4>
+                <p>Click the 'OVERSPEED' and 'RESONANCE' buttons on screen to demonstrate the rotor speed and vibration state to the audience!</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 13 -->
+        <section class="slide " id="slide-13" data-slide-index="13">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 07 // SENSOR DECEPTION</div>
+                    <h2 class="slide-title">The Deception Engine: The 21-Second Replay</h2>
+                    <div class="slide-subtitle">Blinding Control Rooms with Pre-Recorded Authentic Telemetry</div>
+                </div>
+                <div class="slide-meta-badge">OCEAN'S ELEVEN ATTACK // SLIDE 13</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">📹 The Virtual Reality for SCADA Operators</span>
+                    <span class="card-badge amber">TELEMETRY SPOOFING</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>The 'Ocean's Eleven' Playbook:</strong> In the heist film, thieves tap security cameras and broadcast a 21-second loop of an empty vault while robbing it in real time. Stuxnet executed the exact industrial equivalent.</li>
+                    <li><strong>Recording Phase (Pre-Attack):</strong> Stuxnet captured <strong>21 continuous seconds</strong> of authentic sensor data (vibration, bearing temperature, UF6 gas pressure, and rotor frequency) and stored it in Data Block DB89.</li>
+                    <li><strong>Replay Phase (During Attack):</strong> When the destructive 1,410 Hz overspeed command was sent, Stuxnet severed the live sensor feeds to WinCC and continuously replayed the 21-second nominal recording.</li>
+                    <li><strong>Alarm Suppression:</strong> Spliced logic suppressed emergency high-vibration trips. Plant operators saw serene green indicators while physical machinery was shattering under their feet.</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="diagram-container">
+                    <img src="../image/stuxnet_deception_engine_replay_timeline.jpg" alt="Deception Engine Timeline">
+                    <div class="diagram-caption">FIGURE 13.1: 65-minute comparative timeline: SCADA WinCC display vs. physical reality inside the cascade hall.</div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 13: The Deception Engine):</h4>
+                <p>"Why didn't anyone press the emergency stop button? Because on the WinCC operator monitors, everything looked perfect. The pressure was optimal, the vibration readings were flat, and all indicators were green. Stuxnet had recorded 21 seconds of normal telemetry before the attack, and fed that loop back to the SCADA system throughout the sabotage. It created a virtual reality for the operators."</p>
+                <h4>Key Takeaway:</h4>
+                <p>Explain that digital sensor data cannot be inherently trusted without independent, out-of-band physical verification.</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 14 -->
+        <section class="slide " id="slide-14" data-slide-index="14">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 07 // PRESSURE SABOTAGE</div>
+                    <h2 class="slide-title">The Overpressure Attack: Valve Sabotage</h2>
+                    <div class="slide-subtitle">Suffocating Rotors with Uranium Hexafluoride ($UF_6$) Overpressure</div>
+                </div>
+                <div class="slide-meta-badge">S7-400 ATTACK // SLIDE 14</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🧪 Stuxnet 0.5: The Gas Valve Sequence</span>
+                    <span class="card-badge crimson">PNEUMATIC SABOTAGE</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>The Siemens S7-417 Controller:</strong> While the S7-315 controlled motor speeds, the larger S7-417 managed the gas piping, isolation valves, and vacuum exhaust.</li>
+                    <li><strong>Closing the Valves:</strong> Stuxnet systematically closed the exhaust and isolation valves on individual centrifuge cascades.</li>
+                    <li><strong>Pressure Buildup:</strong> Uranium hexafluoride ($UF_6$) gas accumulated inside the centrifuge cylinder, causing internal gas pressure to spike.</li>
+                    <li><strong>Molecular Drag & Friction:</strong> Increased pressure caused massive aerodynamic drag on the rotor spinning at Mach 1.5, generating extreme friction heat.</li>
+                    <li><strong>Gas Solidification:</strong> Pressure spikes caused $UF_6$ gas to desublimate into solid uranium crystals, unbalancing the rotor and destroying the mechanical bearings.</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="diagram-container">
+                    <img src="../image/siemens_simatic_s7_400_hardware.jpg" alt="Siemens S7-400 Hardware">
+                    <div class="diagram-caption">FIGURE 14.1: Siemens SIMATIC S7-400 controller targeted by Stuxnet 0.5 for cascade gas valve manipulation.</div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 14: Overpressure Attack):</h4>
+                <p>"Most people only know about Stuxnet's motor speed attack. But historical reverse-engineering of Stuxnet version 0.5 revealed a complementary attack targeting the Siemens S7-400 PLCs governing the gas valves. By closing exhaust valves, Stuxnet caused UF6 gas pressure to surge. At supersonic speeds, gas drag generates enormous friction. The uranium gas crystallized into solid particles, unbalancing the rotors and seizing the bearings."</p>
+                <h4>Key Concept:</h4>
+                <p>Multi-domain cyber-physical attacks: attacking both kinetic motion and thermodynamic pressure simultaneously.</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 15 -->
+        <section class="slide " id="slide-15" data-slide-index="15">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 08 // THE ESCAPE</div>
+                    <h2 class="slide-title">The Outbreak: Escape into the Wild</h2>
+                    <div class="slide-subtitle">Aggressive Propagation Variants, Global Spread, and the Minsk Discovery</div>
+                </div>
+                <div class="slide-meta-badge">GLOBAL INCIDENT // SLIDE 15</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🌍 The Unintended Outbreak</span>
+                    <span class="card-badge amber">VIRAL ESCAPE</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>The Fatal Update:</strong> In early 2010, an aggressive variant incorporating the Print Spooler network exploit (MS10-061) was released.</li>
+                    <li><strong>Leaking the Air Gap:</strong> A contractor plugged their laptop into both Natanz and an internet-connected home office. Stuxnet broke free onto the global web.</li>
+                    <li><strong>Global Infection Distribution (July 2010):</strong>
+                        <br>• <strong>Iran: 58.8%</strong> of all global infections
+                        <br>• <strong>Indonesia: 18.2%</strong>
+                        <br>• <strong>India: 8.3%</strong>
+                        <br>• <strong>Azerbaijan: 2.6%</strong>
+                        <br>• <strong>United States: 1.6%</strong>
+                    </li>
+                    <li><strong>The Minsk Anomaly:</strong> In June 2010, an Iranian client PC in Minsk, Belarus began experiencing infinite blue-screen crash loops.</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="slide-card">
+                    <div class="slide-card-header">
+                        <span class="card-title">🔍 Discovery: Sergey Ulasen (VirusBlokAda)</span>
+                        <span class="card-badge emerald">JUNE 17, 2010</span>
+                    </div>
+                    <ul class="cyber-bullets">
+                        <li><strong>The Crash Dump:</strong> Sergey Ulasen and Oleg Kupreev at VirusBlokAda in Minsk analyzed the kernel crash dump.</li>
+                        <li><strong>Uncovering the LNK Zero-Day:</strong> They extracted `~WTR4141.tmp` and discovered that Windows Explorer was executing code merely by rendering icons!</li>
+                        <li><strong>The Realtek Signature:</strong> They observed a valid VeriSign signature from Realtek Semiconductor Corp. on a kernel driver that was crashing the OS.</li>
+                        <li><strong>Public Alarm:</strong> On July 12, 2010, the security community was officially alerted to the existence of an unprecedented weapon.</li>
+                    </ul>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 15: The Escape):</h4>
+                <p>"How did Stuxnet get caught? An aggressive propagation variant was loaded in 2010. A contractor carried an infected laptop home, connected to the internet, and the worm spread virally across the globe. Over 58% of all infections were centered in Iran, but computers in Indonesia, India, and the US were hit. In Minsk, Belarus, a small security firm named VirusBlokAda investigated a customer's computer stuck in a reboot loop, and pulled the thread that unraveled the entire operation."</p>
+                <h4>Discussion Question:</h4>
+                <p>'Can any cyber weapon ever be truly contained once released into the wild?'</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 16 -->
+        <section class="slide " id="slide-16" data-slide-index="16">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 09 // REVERSE ENGINEERING</div>
+                    <h2 class="slide-title">Reverse Engineering: Cracking the Code</h2>
+                    <div class="slide-subtitle">How Global Researchers Assembled the Pieces of the Stuxnet Puzzle</div>
+                </div>
+                <div class="slide-meta-badge">FORENSIC ANALYSIS // SLIDE 16</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🔬 The Forensic Investigation</span>
+                    <span class="card-badge cyan">CODE ANALYSIS</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>Symantec Core Team:</strong> Liam O'Murchu, Eric Chien, and Nicolas Falliere spent six months reverse-engineering the 500 KB binary, reconstructing its 54-layer architecture.</li>
+                    <li><strong>Ralph Langner's Epiphany:</strong> German industrial control systems security consultant Ralph Langner analyzed the injected bytecode and announced:
+                        <br><em>"This is not a corporate espionage tool. This code is looking for frequency converter drives to physically destroy centrifuges!"</em>
+                    </li>
+                    <li><strong>Operation Olympic Games Revealed:</strong> In 2012, investigative reporting by David Sanger confirmed that Stuxnet was part of a joint US-Israeli program initiated under President George W. Bush and accelerated under President Barack Obama.</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="diagram-container">
+                    <img src="../image/stuxnet_global_investigation_and_forensics.jpg" alt="Stuxnet Global Investigation">
+                    <div class="diagram-caption">FIGURE 16.1: Global forensic timeline: VirusBlokAda, Symantec, Ralph Langner, and Kaspersky reverse-engineering teams.</div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 16: Reverse Engineering):</h4>
+                <p>"When security analysts first looked at Stuxnet, they were baffled. Why did it have 500 kilobytes of code—twenty times larger than typical malware? Why did it hook Siemens DLLs? It wasn't until Ralph Langner recognized the Siemens MC7 assembly commands and frequency parameters that the world realized: someone had written a piece of software to physically attack a uranium enrichment plant."</p>
+                <h4>Key Takeaway:</h4>
+                <p>Highlight the interdisciplinary nature of the investigation: it required Windows kernel experts, industrial automation engineers, and nuclear physicists working together.</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 17 -->
+        <section class="slide " id="slide-17" data-slide-index="17">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 09 // THREAT FRAMEWORK</div>
+                    <h2 class="slide-title">MITRE ATT&CK for ICS: Stuxnet Matrix</h2>
+                    <div class="slide-subtitle">Tactics, Techniques & Procedures (TTPs) of an Advanced Cyber Weapon</div>
+                </div>
+                <div class="slide-meta-badge">ATT&CK FOR ICS // SLIDE 17</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">📊 Enterprise & ICS Tactics Breakdown</span>
+                    <span class="card-badge emerald">10 TACTICAL PHASES</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>Initial Access:</strong> T0847 (Replication Through Removable Media), T0865 (Supply Chain).</li>
+                    <li><strong>Execution:</strong> T0807 (Command-Line Interface), T0833 (Modify Controller Tasking).</li>
+                    <li><strong>Persistence:</strong> T0839 (Module Firmware/Logic Modification), T0859 (Valid Digital Accounts/Certificates).</li>
+                    <li><strong>Evasion:</strong> T0820 (Exploitation for Evasion), T0851 (Rootkit / DLL Proxy), T0856 (Spoof Reporting Message).</li>
+                    <li><strong>Impair Process Control:</strong> T0836 (Modify Parameter), T0855 (Unauthorized Command Message).</li>
+                    <li><strong>Inhibit Response:</strong> T0809 (Data Destruction), T0838 (Modify Alarm Settings).</li>
+                    <li><strong>Impact:</strong> T0832 (Manipulation of Control), T0879 (Damage to Property), T0880 (Loss of Safety).</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="slide-card">
+                    <div class="slide-card-header">
+                        <span class="card-title">🎯 Threat Modeling Significance</span>
+                        <span class="card-badge cyan">DEFENDER BLUEPRINT</span>
+                    </div>
+                    <ul class="cyber-bullets">
+                        <li><strong>Birth of ICS Threat Frameworks:</strong> Stuxnet's techniques served as the primary foundation for MITRE when creating the specialized ATT&CK for ICS matrix.</li>
+                        <li><strong>Multi-Tiered TTP Chaining:</strong> Demonstrated how IT exploitation (LNK, Print Spooler, Kerberos) directly enables OT manipulation (S7comm, Profibus DP, MC7 bytecode).</li>
+                        <li><strong>Dwell Time Optimization:</strong> Remained undetected inside the target environment for over 18 months by maintaining minimal telemetry footprint.</li>
+                    </ul>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 17: MITRE ATT&CK):</h4>
+                <p>"Today, every security operations center relies on the MITRE ATT&CK framework. But in 2010, the IT matrix didn't have categories for 'Modify Controller Tasking' or 'Spoof Reporting Message'. Stuxnet forced the cybersecurity industry to invent MITRE ATT&CK for ICS. Reviewing these TTPs shows how every step from USB insertion to rotor disintegration mapped into a repeatable offensive methodology."</p>
+                <h4>Practical Advice:</h4>
+                <p>Advise attendees to benchmark their OT security monitoring tools against these specific ATT&CK for ICS technique IDs.</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 18 -->
+        <section class="slide " id="slide-18" data-slide-index="18">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 10 // BLUE TEAM DEFENSE</div>
+                    <h2 class="slide-title">OT Detection Engineering & Playbooks</h2>
+                    <div class="slide-subtitle">Suricata Signatures, Workstation Baselines & Out-of-Band Telemetry</div>
+                </div>
+                <div class="slide-meta-badge">DEFENSIVE ARCHITECTURE // SLIDE 18</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🛡️ 4-Tier Defensive Hardening Architecture</span>
+                    <span class="card-badge emerald">BLUE TEAM CONTROLS</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>1. Network Deep Packet Inspection (DPI):</strong> Monitor S7comm over ISO-on-TCP (Port 102). Alert on Function 0x1A (Download Block) or 0x1B (Download Request) occurring outside scheduled maintenance windows.</li>
+                    <li><strong>2. Engineering Workstation File Integrity Monitoring (FIM):</strong> Cryptographically hash all DLLs in `%ProgramFiles%\Siemens\Step7\S7BIN\` to immediately detect `s7otbxdx.dll` proxy tampering.</li>
+                    <li><strong>3. PLC Firmware & Logic Baselines:</strong> Implement automated, periodic out-of-band memory hash verification comparing active PLC blocks (OB1, OB35, DB) against a golden Git repository.</li>
+                    <li><strong>4. Out-of-Band Physical Sensors:</strong> Mount independent vibration and acoustic sensors wired to an isolated recording circuit, completely bypassing the PLC!</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="slide-card">
+                    <div class="slide-card-header">
+                        <span class="card-title">🚨 Example Suricata S7comm Signature</span>
+                        <span class="card-badge amber">NETWORK RULE</span>
+                    </div>
+                    <pre style="background:#050810; padding:12px; border-radius:6px; font-family:var(--font-mono); font-size:11.5px; color:#00f0ff; overflow-x:auto; border:1px solid var(--border-card);">
+alert tcp any any -> $PLC_NET 102 (
+  msg:"ICS ALERT: S7comm Unauthorized Block Download";
+  content:"|03 00|"; depth:2;
+  content:"|32 01|"; distance:2;
+  content:"|1a|"; distance:10;
+  threshold: type limit, track by_src, count 1, seconds 300;
+  classtype:industrial-command-injection;
+  sid:1000891; rev:1;
+)</pre>
+                    <ul class="cyber-bullets" style="margin-top:10px;">
+                        <li>Detects raw block writing commands directly over the wire.</li>
+                        <li>Bypasses compromised engineering software.</li>
+                    </ul>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 18: Detection Engineering):</h4>
+                <p>"How do we stop the next Stuxnet? We cannot rely solely on the engineering workstation's screen, because that screen can be spoofed. We need defense in depth: Deep Packet Inspection of industrial protocols on Port 102, cryptographic hashing of STEP 7 libraries, and most importantly: out-of-band physical sensors. If an independent vibration sensor with no IP address sounds a mechanical siren, no malware in the world can silence it."</p>
+                <h4>Discussion Point:</h4>
+                <p>Discuss the concept of 'Physics-Based Verification' vs 'Digital Telemetry'.</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 19 -->
+        <section class="slide " id="slide-19" data-slide-index="19">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 10 // EVOLUTION & THREAT LANDSCAPE</div>
+                    <h2 class="slide-title">The Weaponized ICS Dynasty (2010-2026)</h2>
+                    <div class="slide-subtitle">From Stuxnet to PIPEDREAM: The Evolution of Industrial Cyber Warfare</div>
+                </div>
+                <div class="slide-meta-badge">HISTORICAL TIMELINE // SLIDE 19</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">⏳ The Lineage of Kinetic Malware</span>
+                    <span class="card-badge crimson">WEAPON EVOLUTION</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>2010 // STUXNET:</strong> First kinetic malware; targeted Siemens PLCs to destroy uranium centrifuges.</li>
+                    <li><strong>2011–2012 // DUQU & FLAME:</strong> Modular cyber-reconnaissance platforms sharing Stuxnet's Tilded platform framework.</li>
+                    <li><strong>2015 // BLACKENERGY 3:</strong> First cyberattack to cause an electrical blackout; shut down 30 substations in Western Ukraine (225,000 customers).</li>
+                    <li><strong>2016 // INDUSTROYER (CrashOverride):</strong> Automated malware directly speaking IEC 60870-5-104 and IEC 61850 substation protocols to trip breakers.</li>
+                    <li><strong>2017 // TRITON / TRISIS:</strong> First attack targeting Safety Instrumented Systems (SIS, Schneider Triconex) at a petrochemical plant.</li>
+                    <li><strong>2022 // PIPEDREAM (Incontroller):</strong> Modular, multi-vendor toolkit capable of targeting Omron, Schneider PLCs, and OPC UA worldwide.</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="slide-card">
+                    <div class="slide-card-header">
+                        <span class="card-title">📈 Strategic Trends in ICS Malware</span>
+                        <span class="card-badge amber">EVOLUTIONARY SHIFTS</span>
+                    </div>
+                    <ul class="cyber-bullets">
+                        <li><strong>From Bespoke to Modular:</strong> Stuxnet was hyper-customized for one specific plant. Modern malware like PIPEDREAM is a modular Swiss-Army knife capable of striking multiple industrial sectors.</li>
+                        <li><strong>Targeting Safety Systems:</strong> Triton crossed a darker line by disabling Safety Instrumented Systems (SIS) designed to prevent catastrophic chemical explosions.</li>
+                        <li><strong>Living-off-the-Land (LotL):</strong> Instead of zero-days, modern ICS attackers abuse legitimate built-in vendor protocols and administrative commands.</li>
+                    </ul>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 19: Malware Evolution):</h4>
+                <p>"Stuxnet was the Wright Brothers' plane of cyber-physical weapons. In the 16 years since, we have seen that primitive biplane evolve into supersonic fighter jets. In 2015, BlackEnergy cut the power to 225,000 Ukrainian citizens. In 2016, Industroyer automated the opening of transmission breakers. In 2017, Triton attacked the Safety Instrumented Systems in a petrochemical refinery—systems that prevent toxic gas releases and plant explosions. The threat has generalized from a single nuclear site to every power grid, water utility, and pipeline on Earth."</p>
+                <h4>Audience Question:</h4>
+                <p>'Is your organization prepared for an adversary who doesn't want your data, but wants to shut down your physical turbines or pumps?'</p>
+            
+            </template>
+        </section>
+        
+        <!-- Slide 20 -->
+        <section class="slide " id="slide-20" data-slide-index="20">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-tag">ACT 10 // CONCLUSION & SIMULATION</div>
+                    <h2 class="slide-title">Conclusion & Tabletop Simulation</h2>
+                    <div class="slide-subtitle">Key Seminar Takeaways & Launching 'Operation Centrifuge Shadow'</div>
+                </div>
+                <div class="slide-meta-badge">EXERCISE KICKOFF // SLIDE 20</div>
+            </div>
+
+            <div class="slide-content-grid">
+                <div class="slide-card">
+                    
+                <div class="slide-card-header">
+                    <span class="card-title">🎯 3 Enduring Seminar Lessons</span>
+                    <span class="card-badge emerald">STRATEGIC PRINCIPLES</span>
+                </div>
+                <ul class="cyber-bullets">
+                    <li><strong>1. The Air Gap is an Operational Delusion:</strong> Physical isolation is routinely breached by human routines, contractor laptops, and removable media. Security must assume breach.</li>
+                    <li><strong>2. Physics is the Ground Truth:</strong> When digital SCADA screens can be spoofed by man-in-the-middle replays, only out-of-band physical verification provides reality.</li>
+                    <li><strong>3. Code Can Bend Steel:</strong> In the cyber-physical era, cybersecurity is no longer merely an IT support function—it is a matter of physical safety, infrastructure reliability, and national defense.</li>
+                </ul>
+            
+                </div>
+                <div class="slide-card" style="padding: 12px;">
+                    
+                <div class="slide-card">
+                    <div class="slide-card-header">
+                        <span class="card-title">🎲 Tabletop Simulation Kickoff</span>
+                        <span class="card-badge crimson">OPERATION CENTRIFUGE SHADOW</span>
+                    </div>
+                    <ul class="cyber-bullets">
+                        <li><strong>Scenario:</strong> Veritas Chemical & Separation Facility (Centrifuge Cascade Unit 4).</li>
+                        <li><strong>Inject 1:</strong> The Contractor's Calibration Laptop & USB Anomaly.</li>
+                        <li><strong>Inject 2:</strong> The S7comm Network Alert (Port 102 Block Download).</li>
+                        <li><strong>Inject 3:</strong> The Vibration Telemetry Desynchronization.</li>
+                        <li><strong>Inject 4:</strong> The Emergency Trip Lockout & Incident Command Debrief.</li>
+                    </ul>
+                    <div style="margin-top:12px; background:rgba(0, 240, 255, 0.08); padding:10px; border-radius:6px; border:1px solid var(--border-glow); text-align:center;">
+                        <span style="font-family:var(--font-mono); font-size:12px; color:var(--accent-cyan); font-weight:700;">
+                            PROCEED TO CHAPTER 13 FOR FULL TABLETOP SIMULATION GUIDE
+                        </span>
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+
+            <template class="slide-notes-content">
+                
+                <h4>Speaker Script (Slide 20: Conclusion & TTX Kickoff):</h4>
+                <p>"To conclude our seminar: Stuxnet taught us that cybersecurity is not about firewalls and antivirus—it is about physical reality. Air gaps do not protect you if your contractors plug in USB drives. Screens cannot be trusted without out-of-band sensors. And software can bend steel. Now, we will transition into our interactive Tabletop Exercise: 'Operation Centrifuge Shadow'. You will take on the roles of Plant Operations Manager, Lead Automation Engineer, and Head of Cybersecurity to defend an industrial plant against an active cyber-physical attack. Thank you, and let's begin the exercise!"</p>
+                <h4>Wrap-Up Prompt:</h4>
+                <p>Open the floor for 10 minutes of Q&A before initiating Tabletop Exercise Inject 1.</p>
+            
+            </template>
+        </section>
+        
+    </main>
+
+    <!-- Bottom Controls Bar -->
+    <footer class="hud-footer">
+        <div class="nav-buttons">
+            <button class="nav-btn" id="prevSlideBtn">◀ PREVIOUS</button>
+            <button class="nav-btn" id="nextSlideBtn">NEXT ▶</button>
+        </div>
+
+        <div class="key-hints">
+            <span>NAVIGATE: <kbd>◀</kbd> <kbd>▶</kbd> <kbd>SPACE</kbd></span>
+            <span>OVERVIEW: <kbd>G</kbd></span>
+            <span>NOTES: <kbd>N</kbd></span>
+            <span>LASER: <kbd>L</kbd></span>
+            <span>FULL: <kbd>F</kbd></span>
+        </div>
+    </footer>
+
+    <!-- Speaker Notes Modal -->
+    <div class="notes-modal-overlay" id="notesModal">
+        <div class="notes-modal">
+            <div class="notes-modal-header">
+                <div class="notes-modal-title">
+                    <span>📝 SPEAKER NOTES & TALKING SCRIPT</span>
+                    <span id="notesSlideNumber" style="color:var(--accent-amber);">[SLIDE 01]</span>
+                </div>
+                <button class="close-btn" id="closeNotesBtn">&times;</button>
+            </div>
+            <div class="notes-modal-body" id="notesModalBody">
+                <!-- Injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide Overview Grid Modal -->
+    <div class="grid-modal-overlay" id="gridModal">
+        <div class="grid-modal">
+            <div class="grid-modal-header">
+                <div class="notes-modal-title">
+                    <span>👁️ SLIDE OVERVIEW GRID (20 SLIDES)</span>
+                </div>
+                <button class="close-btn" id="closeGridBtn">&times;</button>
+            </div>
+            <div class="grid-thumbnails" id="gridThumbnailsContainer">
+                <!-- Injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script Engine -->
+    <script>
+        (function() {
+            // State
+            let currentSlide = 1;
+            const totalSlides = 20;
+            let soundEnabled = true;
+            let laserActive = false;
+            let autoPlayActive = false;
+            let autoPlayTimer = null;
+            let timerSeconds = 0;
+
+            // DOM Elements
+            const deckContainer = document.getElementById('deckContainer');
+            const slides = document.querySelectorAll('.slide');
+            const currentSlideDisplay = document.getElementById('currentSlideDisplay');
+            const progressBarFill = document.getElementById('progressBarFill');
+            const prevSlideBtn = document.getElementById('prevSlideBtn');
+            const nextSlideBtn = document.getElementById('nextSlideBtn');
+            const soundToggleBtn = document.getElementById('soundToggleBtn');
+            const soundStatusText = document.getElementById('soundStatusText');
+            const laserToggleBtn = document.getElementById('laserToggleBtn');
+            const notesToggleBtn = document.getElementById('notesToggleBtn');
+            const gridToggleBtn = document.getElementById('gridToggleBtn');
+            const autoplayToggleBtn = document.getElementById('autoplayToggleBtn');
+            const fullscreenToggleBtn = document.getElementById('fullscreenToggleBtn');
+            const elapsedTimer = document.getElementById('elapsedTimer');
+
+            const notesModal = document.getElementById('notesModal');
+            const closeNotesBtn = document.getElementById('closeNotesBtn');
+            const notesModalBody = document.getElementById('notesModalBody');
+            const notesSlideNumber = document.getElementById('notesSlideNumber');
+
+            const gridModal = document.getElementById('gridModal');
+            const closeGridBtn = document.getElementById('closeGridBtn');
+            const gridThumbnailsContainer = document.getElementById('gridThumbnailsContainer');
+            const laserCanvas = document.getElementById('laserCanvas');
+            const laserCtx = laserCanvas.getContext('2d');
+
+            // Web Audio API Synthesizer (Zero External Dependencies)
+            let audioCtx = null;
+            function initAudio() {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            }
+
+            function playSound(type) {
+                if (!soundEnabled) return;
+                try {
+                    initAudio();
+                    const now = audioCtx.currentTime;
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    if (type === 'click') {
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(800, now);
+                        osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
+                        gain.gain.setValueAtTime(0.12, now);
+                        gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
+                        osc.start(now);
+                        osc.stop(now + 0.05);
+                    } else if (type === 'alert') {
+                        osc.type = 'sawtooth';
+                        osc.frequency.setValueAtTime(300, now);
+                        osc.frequency.linearRampToValueAtTime(600, now + 0.12);
+                        gain.gain.setValueAtTime(0.15, now);
+                        gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
+                        osc.start(now);
+                        osc.stop(now + 0.15);
+                    } else if (type === 'switch') {
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(1200, now);
+                        osc.frequency.linearRampToValueAtTime(2400, now + 0.08);
+                        gain.gain.setValueAtTime(0.1, now);
+                        gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
+                        osc.start(now);
+                        osc.stop(now + 0.08);
+                    }
+                } catch(e) {
+                    // Audio context blocked
+                }
+            }
+
+            // Elapsed Timer
+            setInterval(() => {
+                timerSeconds++;
+                const hrs = String(Math.floor(timerSeconds / 3600)).padStart(2, '0');
+                const mins = String(Math.floor((timerSeconds % 3600) / 60)).padStart(2, '0');
+                const secs = String(timerSeconds % 60).padStart(2, '0');
+                elapsedTimer.textContent = `${hrs}:${mins}:${secs}`;
+            }, 1000);
+
+            // Go to specific slide
+            function goToSlide(index) {
+                if (index < 1 || index > totalSlides) return;
+                currentSlide = index;
+
+                slides.forEach((slide, idx) => {
+                    if (idx + 1 === currentSlide) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                currentSlideDisplay.textContent = String(currentSlide).padStart(2, '0');
+                const progressPct = ((currentSlide) / totalSlides) * 100;
+                progressBarFill.style.width = `${progressPct}%`;
+
+                // Update notes if open
+                updateSpeakerNotes();
+
+                // Highlight in overview grid
+                const thumbs = gridThumbnailsContainer.querySelectorAll('.thumbnail-card');
+                thumbs.forEach((t, i) => {
+                    if (i + 1 === currentSlide) {
+                        t.classList.add('active');
+                    } else {
+                        t.classList.remove('active');
+                    }
+                });
+
+                playSound('click');
+                window.location.hash = `slide-${currentSlide}`;
+            }
+
+            function nextSlide() {
+                if (currentSlide < totalSlides) {
+                    goToSlide(currentSlide + 1);
+                } else {
+                    goToSlide(1); // loop
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 1) {
+                    goToSlide(currentSlide - 1);
+                }
+            }
+
+            // Speaker Notes
+            function updateSpeakerNotes() {
+                const activeSlideEl = document.querySelector(`.slide[data-slide-index="${currentSlide}"]`);
+                if (activeSlideEl) {
+                    const notesTemplate = activeSlideEl.querySelector('.slide-notes-content');
+                    if (notesTemplate) {
+                        notesModalBody.innerHTML = notesTemplate.innerHTML;
+                        notesSlideNumber.textContent = `[SLIDE ${String(currentSlide).padStart(2, '0')}]`;
+                    }
+                }
+            }
+
+            function toggleNotes() {
+                updateSpeakerNotes();
+                notesModal.classList.toggle('open');
+                notesToggleBtn.classList.toggle('active');
+                playSound('switch');
+            }
+
+            // Overview Grid Generator
+            function initGridOverview() {
+                gridThumbnailsContainer.innerHTML = '';
+                slides.forEach((slide, idx) => {
+                    const sNum = idx + 1;
+                    const titleEl = slide.querySelector('.slide-title');
+                    const title = titleEl ? titleEl.textContent : `Slide ${sNum}`;
+                    const tagEl = slide.querySelector('.slide-tag');
+                    const tag = tagEl ? tagEl.textContent : '';
+
+                    const card = document.createElement('div');
+                    card.className = `thumbnail-card ${sNum === currentSlide ? 'active' : ''}`;
+                    card.innerHTML = `
+                        <div class="thumb-num">${tag} // ${String(sNum).padStart(2, '0')}</div>
+                        <div class="thumb-title">${title}</div>
+                    `;
+                    card.addEventListener('click', () => {
+                        goToSlide(sNum);
+                        gridModal.classList.remove('open');
+                        gridToggleBtn.classList.remove('active');
+                    });
+                    gridThumbnailsContainer.appendChild(card);
+                });
+            }
+
+            function toggleGrid() {
+                initGridOverview();
+                gridModal.classList.toggle('open');
+                gridToggleBtn.classList.toggle('active');
+                playSound('switch');
+            }
+
+            // Laser Pointer Simulation
+            function resizeLaserCanvas() {
+                laserCanvas.width = window.innerWidth;
+                laserCanvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeLaserCanvas);
+            resizeLaserCanvas();
+
+            let mouseX = -100, mouseY = -100;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                if (laserActive) {
+                    drawLaser();
+                }
+            });
+
+            function drawLaser() {
+                laserCtx.clearRect(0, 0, laserCanvas.width, laserCanvas.height);
+                if (!laserActive) return;
+
+                // Glowing outer flare
+                const radGlow = laserCtx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 25);
+                radGlow.addColorStop(0, 'rgba(255, 51, 102, 0.9)');
+                radGlow.addColorStop(0.3, 'rgba(255, 51, 102, 0.4)');
+                radGlow.addColorStop(1, 'rgba(255, 51, 102, 0)');
+                laserCtx.fillStyle = radGlow;
+                laserCtx.beginPath();
+                laserCtx.arc(mouseX, mouseY, 25, 0, Math.PI * 2);
+                laserCtx.fill();
+
+                // Core red dot
+                laserCtx.fillStyle = '#ffffff';
+                laserCtx.beginPath();
+                laserCtx.arc(mouseX, mouseY, 3, 0, Math.PI * 2);
+                laserCtx.fill();
+            }
+
+            function toggleLaser() {
+                laserActive = !laserActive;
+                laserCanvas.classList.toggle('active', laserActive);
+                laserToggleBtn.classList.toggle('active', laserActive);
+                if (!laserActive) {
+                    laserCtx.clearRect(0, 0, laserCanvas.width, laserCanvas.height);
+                }
+                playSound('switch');
+            }
+
+            // Centrifuge Physics Simulation (Slide 12)
+            const rotorCanvas = document.getElementById('rotorCanvas');
+            let rotorAngle = 0;
+            let targetSpeed = 1064; // Hz
+            let currentSpeed = 1064;
+            let rotorMode = 'nominal'; // 'nominal', 'overspeed', 'resonance'
+            let vibrationOffset = 0;
+
+            if (rotorCanvas) {
+                const ctx = rotorCanvas.getContext('2d');
+                const btnNominal = document.getElementById('btnNominalSpeed');
+                const btnOverspeed = document.getElementById('btnOverspeed');
+                const btnResonance = document.getElementById('btnResonance');
+                const speedDisplay = document.getElementById('rotorSpeedDisplay');
+                const rpmDisplay = document.getElementById('rotorRpmDisplay');
+
+                btnNominal.addEventListener('click', () => setRotorMode('nominal'));
+                btnOverspeed.addEventListener('click', () => setRotorMode('overspeed'));
+                btnResonance.addEventListener('click', () => setRotorMode('resonance'));
+
+                function setRotorMode(mode) {
+                    rotorMode = mode;
+                    [btnNominal, btnOverspeed, btnResonance].forEach(b => b.classList.remove('active'));
+
+                    if (mode === 'nominal') {
+                        btnNominal.classList.add('active');
+                        targetSpeed = 1064;
+                        speedDisplay.textContent = '1,064 Hz';
+                        speedDisplay.style.color = 'var(--accent-emerald)';
+                        rpmDisplay.textContent = '63,840';
+                        playSound('click');
+                    } else if (mode === 'overspeed') {
+                        btnOverspeed.classList.add('active');
+                        targetSpeed = 1410;
+                        speedDisplay.textContent = '1,410 Hz';
+                        speedDisplay.style.color = 'var(--accent-crimson)';
+                        rpmDisplay.textContent = '84,600';
+                        playSound('alert');
+                    } else if (mode === 'resonance') {
+                        btnResonance.classList.add('active');
+                        targetSpeed = 2;
+                        speedDisplay.textContent = '2 Hz';
+                        speedDisplay.style.color = 'var(--accent-amber)';
+                        rpmDisplay.textContent = '120';
+                        playSound('alert');
+                    }
+                }
+
+                function animateRotor() {
+                    ctx.clearRect(0, 0, 240, 240);
+                    const cx = 120;
+                    const cy = 120;
+
+                    // Smooth speed transition
+                    currentSpeed += (targetSpeed - currentSpeed) * 0.05;
+
+                    // Compute rotation step
+                    let step = (currentSpeed / 1064) * 0.25;
+                    if (rotorMode === 'resonance') {
+                        step = 0.02; // slow wobble
+                        vibrationOffset = Math.sin(Date.now() * 0.02) * 8; // violent shudder
+                    } else if (rotorMode === 'overspeed') {
+                        step = 0.45;
+                        vibrationOffset = Math.sin(Date.now() * 0.08) * 3;
+                    } else {
+                        vibrationOffset = 0;
+                    }
+
+                    rotorAngle += step;
+
+                    // Draw outer stator casing
+                    ctx.save();
+                    ctx.translate(cx + (rotorMode === 'resonance' ? vibrationOffset * 0.4 : 0), cy);
+                    ctx.strokeStyle = '#1f2c44';
+                    ctx.lineWidth = 8;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 100, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    // Glowing status ring
+                    ctx.strokeStyle = rotorMode === 'nominal' ? '#00ff9d' : (rotorMode === 'overspeed' ? '#ff3366' : '#ffb800');
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 94, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    // Rotating aluminum rotor cylinder
+                    ctx.rotate(rotorAngle);
+
+                    // Rotor body
+                    const rotorColor = rotorMode === 'overspeed' ? '#ff3366' : (rotorMode === 'resonance' ? '#ff9900' : '#00f0ff');
+                    ctx.strokeStyle = rotorColor;
+                    ctx.lineWidth = 5;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 70, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    // Rotor vanes / internal gas scoops
+                    for (let i = 0; i < 4; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(0, 0);
+                        ctx.lineTo(65, 0);
+                        ctx.strokeStyle = rotorColor;
+                        ctx.lineWidth = 3;
+                        ctx.stroke();
+                        ctx.rotate(Math.PI / 2);
+                    }
+
+                    // Center magnetic bearing hub
+                    ctx.fillStyle = '#ffffff';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 12, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.restore();
+                    requestAnimationFrame(animateRotor);
+                }
+                animateRotor();
+            }
+
+            // Keyboard Navigation
+            window.addEventListener('keydown', (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+                switch(e.key) {
+                    case 'ArrowRight':
+                    case 'PageDown':
+                    case ' ':
+                        nextSlide();
+                        break;
+                    case 'ArrowLeft':
+                    case 'PageUp':
+                        prevSlide();
+                        break;
+                    case 'Home':
+                        goToSlide(1);
+                        break;
+                    case 'End':
+                        goToSlide(totalSlides);
+                        break;
+                    case 'n':
+                    case 'N':
+                        toggleNotes();
+                        break;
+                    case 'g':
+                    case 'G':
+                        toggleGrid();
+                        break;
+                    case 'l':
+                    case 'L':
+                        toggleLaser();
+                        break;
+                    case 's':
+                    case 'S':
+                        soundEnabled = !soundEnabled;
+                        soundStatusText.textContent = soundEnabled ? 'ON' : 'OFF';
+                        soundToggleBtn.classList.toggle('active', soundEnabled);
+                        playSound('switch');
+                        break;
+                    case 'f':
+                    case 'F':
+                        toggleFullscreen();
+                        break;
+                    case 'Escape':
+                        notesModal.classList.remove('open');
+                        notesToggleBtn.classList.remove('active');
+                        gridModal.classList.remove('open');
+                        gridToggleBtn.classList.remove('active');
+                        laserActive = false;
+                        laserCanvas.classList.remove('active');
+                        laserToggleBtn.classList.remove('active');
+                        break;
+                }
+            });
+
+            // Button Listeners
+            prevSlideBtn.addEventListener('click', prevSlide);
+            nextSlideBtn.addEventListener('click', nextSlide);
+
+            soundToggleBtn.addEventListener('click', () => {
+                soundEnabled = !soundEnabled;
+                soundStatusText.textContent = soundEnabled ? 'ON' : 'OFF';
+                soundToggleBtn.classList.toggle('active', soundEnabled);
+                playSound('switch');
+            });
+
+            laserToggleBtn.addEventListener('click', toggleLaser);
+            notesToggleBtn.addEventListener('click', toggleNotes);
+            closeNotesBtn.addEventListener('click', () => {
+                notesModal.classList.remove('open');
+                notesToggleBtn.classList.remove('active');
+            });
+
+            gridToggleBtn.addEventListener('click', toggleGrid);
+            closeGridBtn.addEventListener('click', () => {
+                gridModal.classList.remove('open');
+                gridToggleBtn.classList.remove('active');
+            });
+
+            autoplayToggleBtn.addEventListener('click', () => {
+                autoPlayActive = !autoPlayActive;
+                autoplayToggleBtn.classList.toggle('active', autoPlayActive);
+                if (autoPlayActive) {
+                    autoPlayTimer = setInterval(nextSlide, 8000);
+                } else {
+                    clearInterval(autoPlayTimer);
+                }
+                playSound('switch');
+            });
+
+            function toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(() => {});
+                } else {
+                    document.exitFullscreen().catch(() => {});
+                }
+            }
+            fullscreenToggleBtn.addEventListener('click', toggleFullscreen);
+
+            // Handle URL Hash on load
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#slide-')) {
+                const requestedSlide = parseInt(hash.replace('#slide-', ''), 10);
+                if (!isNaN(requestedSlide) && requestedSlide >= 1 && requestedSlide <= totalSlides) {
+                    goToSlide(requestedSlide);
+                }
+            } else {
+                goToSlide(1);
+            }
+        })();
+    </script>
+</body>
+</html>
