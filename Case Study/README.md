@@ -70,6 +70,51 @@ Every cybersecurity incident represents a collision between an innovative threat
 
 ---
 
+## 🛡️ Master Defense Blueprint: How to Solve the Vulnerabilities & Protect Against Each Incident
+
+The matrix below provides security leaders, enterprise architects, and incident responders with a unified cross-incident blueprint for **solving the underlying vulnerabilities** and **implementing resilient preventative protections**:
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                        MASTER BLUEPRINT: VULNERABILITY REMEDIATION & DEFENSE                           │
+├─────────────────────┬────────────────────────────────────────────┬─────────────────────────────────────┤
+│ INCIDENT            │ HOW TO SOLVE THE CORE VULNERABILITY        │ HOW TO PROTECT AGAINST THE INCIDENT │
+├─────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────┤
+│ 1. GENESIS MARKET   │ • App-Bound Encryption (Chrome 127+):      │ • Continuous Access Evaluation (CAE)│
+│    (Identity-as-    │   Encrypts DPAPI master key via SYSTEM     │   to revoke sessions within seconds │
+│    a-Service &      │   elevation service, blocking user-mode    │   of anomalous ASN or IP drift.     │
+│    Infostealers)    │   infostealers (RedLine/Vidar).            │ • Mandatory Session Revocation:     │
+│                     │ • RFC 9449 DPoP & W3C DBSC:                │   Invoke IdP APIs (Entra ID/Okta)   │
+│                     │   Binds session tokens to hardware TPM keys│   to invalidate all active cookies; │
+│                     │   so stolen cookies cannot be replayed.    │   never rely on password resets.    │
+│                     │ • Disable unmanaged binary execution in    │ • Phishing-Resistant FIDO2 keys     │
+│                     │   %TEMP% and %APPDATA% via WDAC.           │   and device compliance gateways.   │
+├─────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────┤
+│ 2. MGM RESORTS      │ • Abolish KBA (NIST SP 800-63B Rev 4):     │ • Phishing-Resistant FIDO2/WebAuthn │
+│    INTERNATIONAL    │   Ban static biographical questions at     │   hardware tokens (YubiKeys) for all│
+│    (Identity /      │   IT Help Desk; require live video checks  │   administrative personnel.         │
+│    Vishing & ESXi   │   with corporate badge photo matching.     │ • Just-in-Time (JIT) PAM: Zero      │
+│    Ransomware)      │ • IdP Federation Hardening:                │   standing Super Admin privileges.  │
+│                     │   Require break-glass dual-custodian       │ • Virtualization Isolation: Put     │
+│                     │   sign-off on Inbound SAML additions.      │   vCenter & ESXi on dedicated out-  │
+│                     │ • ESXi Strict Lockdown Mode:               │   of-band management subnets.       │
+│                     │   Disable SSH & DCUI; enforce UEFI Secure  │ • Immutable Backups & Extortion     │
+│                     │   Boot to reject unapproved ELF lockers.   │   Governance: $0 ransom policy.     │
+├─────────────────────┼────────────────────────────────────────────┼─────────────────────────────────────┤
+│ 3. STUXNET          │ • Apply MS10-046 & Revoke Certs:           │ • Hardware Optical Data Diodes:     │
+│    (Cyber-Physical  │   Neutralize CVE-2010-2568 (.LNK) and push │   Unidirectional physical fiber     │
+│    Sabotage &       │   Realtek/JMicron certs to untrusted store.│   prevents reverse OT infiltration. │
+│    Industrial ICS)  │ • PLC Hardware Keyswitch to "RUN":         │ • Out-of-Band Analog SIS: Indepen-  │
+│                     │   Physically disconnect programming bus    │   dent analog relays & vibration    │
+│                     │   write lines, blocking MC7 code injection.│   trips physically scram power.     │
+│                     │ • S7comm-Plus & Step 7 DLL Integrity:      │ • Air-Gap Transit Kiosks (Sheep-    │
+│                     │   Migrate to S7-1500; enforce Authenticode │   Dip) to scan all contractor USBs. │
+│                     │   signatures on communication libraries.   │ • S7comm Deep Packet Inspection.    │
+└─────────────────────┴────────────────────────────────────────────┴─────────────────────────────────────┘
+```
+
+---
+
 ## 📂 Case Study Deep-Dives
 
 ### 1. [Genesis Market: A Full Cybersecurity Case Study (Operation Cookie Monster)](./Genesis%20Market/README.md)
