@@ -32,6 +32,9 @@ In the commercial exploit broker market, assembling an arsenal of four zero-days
 └───────────────────┴───────────────────────────┴─────────────────────────────────┘
 ```
 
+![Stuxnet 4 Zero-Days and Digital Certificates](image/stuxnet_windows_zero_days_internals.jpg)
+*Figure 4.1: Technical dissection of Stuxnet's zero-day exploit architecture (CVE-2010-2568, CVE-2010-2729, CVE-2010-3338, CVE-2010-2743) and the dual Realtek/JMicron code-signing certificate compromise bypassing 64-bit Windows Driver Signature Enforcement (DSE).*
+
 ---
 
 ## 2. Technical Deconstruction of the Exploits

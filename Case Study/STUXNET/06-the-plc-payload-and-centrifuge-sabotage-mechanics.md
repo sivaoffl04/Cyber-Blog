@@ -33,6 +33,9 @@ To understand how Stuxnet executed its attack at the controller level, one must 
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+![Siemens S7 PLC Injection Architecture](image/stuxnet_siemens_s7_mc7_bytecode_injection.jpg)
+*Figure 6.1: Industrial Control Systems (ICS) microcode injection blueprint: Showing S7 CPU memory layout, hooking of OB1 and OB35, execution of malicious FC1865 state-machine logic, and interception of Profibus DP communication to Variable Frequency Drives.*
+
 ---
 
 ## 2. Infiltrating the Cyclic Execution Loop: The OB1 and OB35 Hook
@@ -121,6 +124,9 @@ Frequency (Hz)
    2 |                                     └─── 2 Hz (Slowdown: 50 mins)
      +------------------------------------------------------------------► Time
 ```
+
+![Centrifuge Rotor Destruction Blueprint](image/stuxnet_centrifuge_rotor_physics_breakdown.jpg)
+*Figure 6.2: Mechanical and vibrational dynamics of the IR-1 rotor destruction cycle: Illustrating the nominal cruise baseline, the plastic yield overspeed phase at 1,410 Hz, and the sub-synchronous resonance crash at 2 Hz.*
 
 ---
 

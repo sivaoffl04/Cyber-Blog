@@ -33,6 +33,9 @@ This aggressive propagation caused the worm to jump from contractor laptops onto
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+![Stuxnet Global Forensic Investigation Roadmap](image/stuxnet_global_investigation_and_forensics.jpg)
+*Figure 8.1: The Global Forensic Investigation Roadmap: Chronicling the four major investigation milestones from VirusBlokAda's initial BSOD triage in Belarus, through Symantec's PE reconstruction in California, Ralph Langner's PLC disassembly breakthrough in Germany, to IAEA ground-truth verification of centrifuge destruction.*
+
 The weapon that had operated silently in the dark for over two years suddenly became the center of a worldwide forensic investigation.
 
 ---

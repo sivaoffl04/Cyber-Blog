@@ -37,6 +37,9 @@ Stuxnet executed the digital, industrial equivalent of this exact strategy insid
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+![Stuxnet Sensor Replay Deception Timeline](image/stuxnet_deception_engine_replay_timeline.jpg)
+*Figure 7.1: The Sensor Replay Deception Engine: A 65-minute comparative timeline illustrating how Stuxnet's 21-second pre-recorded nominal telemetry loop in DB89 kept WinCC SCADA operators completely blinded to the physical overspeed and resonant destruction taking place inside the cascade halls.*
+
 ---
 
 ## 2. Low-Level Mechanics of the 21-Second Replay Buffer

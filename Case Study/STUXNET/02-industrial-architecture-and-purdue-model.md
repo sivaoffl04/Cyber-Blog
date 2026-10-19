@@ -43,14 +43,23 @@ The Purdue Model segments industrial manufacturing environments into hierarchica
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+![Purdue Model Breach Architecture](image/stuxnet_purdue_model_deep_dive.jpg)
+*Figure 2.1: Architectural mapping of Stuxnet's cross-boundary traversal through the Purdue Model (ISA-95), moving from infected engineering laptops across the physical air gap down to Level 1 PLCs and Level 0 frequency converter field drives.*
+
 ---
 
 ## 2. Hardware Architecture: Mapping the Natanz Plant Network
 
 Stuxnet's authors possessed an extraordinarily intimate, blueprint-level understanding of the physical and network topology inside the Natanz Fuel Enrichment Plant.
 
+```carousel
 ![Stuxnet SCADA PLC Network Architecture](image/stuxnet_scada_plc_network_architecture.jpg)
-*Figure 2.1: The multi-tiered industrial network architecture at Natanz: from SCADA WinCC operator terminals down to Siemens S7-300 and S7-400 PLCs and centrifuge cascades.*
+<!-- slide -->
+![Siemens S7-300 Hardware](image/siemens_simatic_s7_300_hardware.jpg)
+<!-- slide -->
+![Siemens S7-400 Hardware](image/siemens_simatic_s7_400_hardware.jpg)
+```
+*Figure 2.2: Industrial Automation Hardware at Natanz. Left: Network topology interconnecting WinCC SCADA terminals, CP 343/443 cards, and S7 PLCs; Center: Authentic Siemens SIMATIC S7-300 modular PLC rack (the platform governing VFD speed); Right: Authentic Siemens SIMATIC S7-400 rack (the platform governing cascade valve manifolds).*
 
 ```
                        NATANZ ENRICHMENT NETWORK TOPOLOGY
