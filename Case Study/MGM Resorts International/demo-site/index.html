@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGM Resorts Cyberattack: Seminar Lab & Identity Attack Path Explorer</title>
+    <style>
+        :root {
+            --bg-primary: #0b0f19;
+            --bg-secondary: #111827;
+            --bg-card: #1f2937;
+            --bg-card-hover: #374151;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --accent-crimson: #ef4444;
+            --accent-amber: #f59e0b;
+            --accent-emerald: #10b981;
+            --accent-purple: #8b5cf6;
+            --border-color: #374151;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-title h1 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .header-title h1 span {
+            color: var(--accent-cyan);
+        }
+
+        .header-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .header-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-threat {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--accent-crimson);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .badge-identity {
+            background-color: rgba(6, 182, 212, 0.2);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.4);
+        }
+
+        .badge-sandbox {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: #ffffff;
+            background: var(--bg-card);
+            border-color: var(--accent-cyan);
+        }
+
+        .tab-btn.active {
+            color: #ffffff;
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Tab Content Panes */
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* Vishing Simulator UI */
+        .chat-box {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            height: 380px;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .msg-caller {
+            background-color: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #fecaca;
+            align-self: flex-start;
+        }
+
+        .msg-agent {
+            background-color: rgba(6, 182, 212, 0.15);
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            color: #cffafe;
+            align-self: flex-end;
+        }
+
+        .msg-system {
+            background-color: rgba(107, 114, 128, 0.2);
+            border: 1px solid rgba(107, 114, 128, 0.4);
+            color: #d1d5db;
+            font-size: 0.8rem;
+            text-align: center;
+            align-self: center;
+            border-radius: 20px;
+            padding: 4px 16px;
+        }
+
+        .decision-panel {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .decision-panel h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: var(--accent-amber);
+        }
+
+        .decision-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .choice-btn {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 6px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .choice-btn:hover {
+            border-color: var(--accent-cyan);
+            background: #252f3f;
+        }
+
+        /* Attack Path Node Graph */
+        .timeline-step {
+            position: relative;
+            padding-left: 36px;
+            padding-bottom: 24px;
+            border-left: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .timeline-step:last-child {
+            border-left: 2px solid transparent;
+            padding-bottom: 0;
+        }
+
+        .step-dot {
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            border: 2px solid var(--bg-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .timeline-step:hover .step-dot,
+        .timeline-step.active .step-dot {
+            background-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        .step-header {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .node-inspector {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            height: 100%;
+        }
+
+        .node-inspector h3 {
+            color: var(--accent-cyan);
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+
+        /* Telemetry Console */
+        .terminal-window {
+            background-color: #030712;
+            border: 1px solid #1f2937;
+            border-radius: 8px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.85rem;
+            color: #e5e7eb;
+            overflow-x: auto;
+        }
+
+        .terminal-header {
+            background-color: #111827;
+            padding: 10px 16px;
+            border-bottom: 1px solid #1f2937;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .control-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background-color: #ef4444; }
+        .dot-yellow { background-color: #f59e0b; }
+        .dot-green { background-color: #10b981; }
+
+        .terminal-body {
+            padding: 16px;
+            max-height: 420px;
+            overflow-y: auto;
+            line-height: 1.7;
+        }
+
+        .log-row {
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+            border-left: 3px solid transparent;
+        }
+
+        .log-row:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .log-critical { border-left-color: var(--accent-crimson); background-color: rgba(239, 68, 68, 0.08); }
+        .log-high { border-left-color: var(--accent-amber); background-color: rgba(245, 158, 11, 0.08); }
+        .log-info { border-left-color: var(--accent-cyan); }
+
+        .log-time { color: var(--text-muted); margin-right: 8px; }
+        .log-level { font-weight: 700; margin-right: 8px; }
+        .level-crit { color: var(--accent-crimson); }
+        .level-warn { color: var(--accent-amber); }
+        .level-info { color: var(--accent-cyan); }
+
+        /* Policy Calculator UI */
+        .policy-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .policy-label h4 {
+            font-size: 0.95rem;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .policy-label p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #4b5563;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-emerald);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        .score-box {
+            text-align: center;
+            padding: 24px;
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .score-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 10px 0;
+            transition: color 0.3s ease;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-cyan);
+        }
+
+        .gallery-img-container {
+            width: 100%;
+            height: 200px;
+            background-color: #000000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-card:hover .gallery-img-container img {
+            transform: scale(1.04);
+        }
+
+        .gallery-info {
+            padding: 14px;
+        }
+
+        .gallery-info h4 {
+            font-size: 0.95rem;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .gallery-info p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .close-btn:hover {
+            color: var(--accent-crimson);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <div class="header-title">
+            <h1>MGM Resorts <span>Identity Compromise</span> Lab</h1>
+            <div class="header-subtitle">Seminar Demonstration & Interactive Identity Kill-Chain Simulator</div>
+        </div>
+        <div class="header-badges">
+            <span class="badge badge-threat">Threat: Scattered Spider / ALPHV</span>
+            <span class="badge badge-identity">Vector: Okta Vishing & ESXi Locker</span>
+            <span class="badge badge-sandbox">TLP:CLEAR Educational Lab</span>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('vishing')">1. Help Desk Vishing Simulator</button>
+        <button class="tab-btn" onclick="switchTab('killchain')">2. Identity Attack Path Explorer</button>
+        <button class="tab-btn" onclick="switchTab('siem')">3. SOC Live SIEM Log Console</button>
+        <button class="tab-btn" onclick="switchTab('policy')">4. Help Desk Policy Risk Auditor</button>
+        <button class="tab-btn" onclick="switchTab('gallery')">5. Forensic Evidence Gallery</button>
+    </div>
+
+    <!-- TAB 1: Vishing Simulator -->
+    <div id="tab-vishing" class="tab-pane active">
+        <div class="card">
+            <h2>📞 Interactive Help Desk Social Engineering Simulation</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                Experience the psychological conversational pressure utilized by Scattered Spider operators. 
+                As the Help Desk Analyst, evaluate the incoming caller's claims and select the defensive response.
+            </p>
+
+            <div class="grid-2">
+                <div>
+                    <div class="chat-box" id="vishingChat">
+                        <div class="message msg-system">--- INCOMING INTERNAL SUPPORT CALL CONNECTED ---</div>
+                        <div class="message msg-caller">
+                            <strong>Caller:</strong> "Hey Marcus, good morning! Listen, I'm having a massive headache here. 
+                            This is [David Vance] from Enterprise IAM. My phone dropped into the pool and is completely fried. 
+                            I'm trying to log into the Okta portal for an emergency ticket, but it's sending pushes to my dead phone."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="decision-panel">
+                    <h3>Decision Point: Choose Help Desk Action</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 14px;" id="decisionContext">
+                        The caller sounds urgent and professional. How do you verify their identity?
+                    </p>
+                    <div class="decision-buttons" id="decisionButtons">
+                        <button class="choice-btn" onclick="vishingDecision('kba')">
+                            <strong>Option A (Legacy KBA):</strong> "Can you verify your Employee ID, Date of Birth, and Home Zip Code?"
+                        </button>
+                        <button class="choice-btn" onclick="vishingDecision('oob_video')">
+                            <strong>Option B (Hardened OOB):</strong> "Per policy for privileged roles, please join a live Teams video call with your manager."
+                        </button>
+                        <button class="choice-btn" onclick="vishingDecision('direct_reset')">
+                            <strong>Option C (Direct Reset):</strong> "No problem, I can clear your factor and read you the activation code right now."
+                        </button>
+                    </div>
+                    <div id="vishingOutcome" style="margin-top: 16px; padding: 12px; border-radius: 6px; display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: Attack Path Explorer -->
+    <div id="tab-killchain" class="tab-pane">
+        <div class="card">
+            <h2>🗺️ The 6-Stage Identity Attack Path Explorer</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                Click through each phase of the attack to inspect the adversary tradecraft, technical telemetry, and defensive countermeasures.
+            </p>
+
+            <div class="grid-2">
+                <div>
+                    <div class="timeline-step active" onclick="selectStep(1)">
+                        <div class="step-dot"></div>
+                        <div class="step-header">Phase 1: OSINT & LinkedIn Profiling</div>
+                        <div class="step-desc">Targeting Identity Engineers and harvesting personal PII.</div>
+                    </div>
+                    <div class="timeline-step" onclick="selectStep(2)">
+                        <div class="step-dot"></div>
+                        <div class="step-header">Phase 2: Help Desk Vishing & MFA Reset</div>
+                        <div class="step-desc">Social engineering the support desk to clear Okta factors.</div>
+                    </div>
+                    <div class="timeline-step" onclick="selectStep(3)">
+                        <div class="step-dot"></div>
+                        <div class="step-header">Phase 3: Okta Super Admin & Inbound IdP</div>
+                        <div class="step-desc">Registering attacker device and establishing rogue SAML trust.</div>
+                    </div>
+                    <div class="timeline-step" onclick="selectStep(4)">
+                        <div class="step-dot"></div>
+                        <div class="step-header">Phase 4: Lateral Pivot to Azure AD & On-Prem</div>
+                        <div class="step-desc">Cross-tenant app registration and harvesting vCenter accounts.</div>
+                    </div>
+                    <div class="timeline-step" onclick="selectStep(5)">
+                        <div class="step-dot"></div>
+                        <div class="step-header">Phase 5: VMware ESXi Hypervisor Targeting</div>
+                        <div class="step-desc">Forcible VM termination via esxcli and Rust ransomware execution.</div>
+                    </div>
+                    <div class="timeline-step" onclick="selectStep(6)">
+                        <div class="step-dot"></div>
+                        <div class="step-header">Phase 6: Operational Disruption & $100M Outage</div>
+                        <div class="step-desc">Casino tilt shutdowns, locked hotel doors, and defensive severance.</div>
+                    </div>
+                </div>
+
+                <div class="node-inspector" id="nodeInspector">
+                    <h3 id="inspectorTitle">Phase 1: OSINT & LinkedIn Profiling</h3>
+                    <div id="inspectorContent" style="font-size: 0.9rem; line-height: 1.6; color: var(--text-secondary);">
+                        <p><strong>MITRE Tactic:</strong> Reconnaissance (T1593.001 / T1589.001)</p>
+                        <p style="margin-top: 8px;">
+                            Scattered Spider mined LinkedIn for employees matching <code>("MGM Resorts") AND ("Okta" OR "Identity")</code>. 
+                            By identifying the specific systems engineer who administered the identity environment, they enriched 
+                            biographical PII using people-search brokers, obtaining the employee's date of birth, mobile number, 
+                            and home address.
+                        </p>
+                        <div style="margin-top: 14px; padding: 10px; background: rgba(6, 182, 212, 0.1); border-left: 3px solid var(--accent-cyan); border-radius: 4px;">
+                            <strong>Blue Team Countermeasure:</strong> Executive and administrative digital footprint reduction; corporate policies restricting employee publication of sensitive internal IAM architectures on public resumes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: SOC Live SIEM Log Console -->
+    <div id="tab-siem" class="tab-pane">
+        <div class="card">
+            <h2>💻 SOC Live Telemetry & Log Investigation Console</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                Search and analyze simulated Okta SystemLog and VMware ESXi Syslog events reflecting the MGM attack timeline.
+            </p>
+
+            <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                <input type="text" id="logFilter" placeholder="Filter logs (e.g. 'mfa', 'esxcli', 'CRITICAL', 'idp')..." 
+                       style="flex-grow: 1; padding: 10px 14px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; color: #fff;"
+                       oninput="filterLogs()">
+                <button class="tab-btn" onclick="resetLogFilter()">Clear Filter</button>
+            </div>
+
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-controls">
+                        <div class="control-dot dot-red"></div>
+                        <div class="control-dot dot-yellow"></div>
+                        <div class="control-dot dot-green"></div>
+                    </div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Splunk / Wazuh ITDR Stream: index=okta OR index=esxi</div>
+                </div>
+                <div class="terminal-body" id="logConsole">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: Policy Risk Auditor -->
+    <div id="tab-policy" class="tab-pane">
+        <div class="card">
+            <h2>🛡️ Help Desk Verification Policy Risk Auditor</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                Toggle your organization's help desk verification controls to calculate your vulnerability rating against Scattered Spider vishing tradecraft.
+            </p>
+
+            <div class="grid-2">
+                <div>
+                    <div class="policy-item">
+                        <div class="policy-label">
+                            <h4>Ban Knowledge-Based Auth (KBA)</h4>
+                            <p>Prohibit Employee ID, DOB, and Zip Code as proof of identity</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="chkKba" onchange="calculateScore()">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="policy-item">
+                        <div class="policy-label">
+                            <h4>Strip Tier-0 Reset from Service Desk</h4>
+                            <p>Tier-1 agents cannot reset Super Admins or Domain Admins</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="chkTier0" onchange="calculateScore()">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="policy-item">
+                        <div class="policy-label">
+                            <h4>Mandatory Live Video Verification</h4>
+                            <p>Recorded video call matching corporate HR employee badge photo</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="chkVideo" onchange="calculateScore()">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="policy-item">
+                        <div class="policy-label">
+                            <h4>Dual-Custody Manager Digital Approval</h4>
+                            <p>Requires direct manager sign-off via ITSM ticket before reset</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="chkManager" onchange="calculateScore()">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="policy-item">
+                        <div class="policy-label">
+                            <h4>24-Hour Quarantine Restricted Window</h4>
+                            <p>Reset accounts temporarily restricted from cloud/vCenter portals</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="chkQuarantine" onchange="calculateScore()">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <h3 style="color: var(--text-secondary); font-size: 1rem;">Calculated Help Desk Vulnerability Score</h3>
+                    <div class="score-value" id="scoreDisplay">100%</div>
+                    <div id="scoreLabel" style="font-weight: 700; font-size: 1.1rem; color: var(--accent-crimson); margin-bottom: 12px;">
+                        CRITICAL RISK (MGM 2023 BASELINE)
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;" id="scoreSummary">
+                        Your help desk currently relies on static knowledge-based authentication and permits tier-1 agents 
+                        to modify privileged identities, making the organization highly susceptible to phone vishing.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 5: Forensic Gallery -->
+    <div id="tab-gallery" class="tab-pane">
+        <div class="card">
+            <h2>📸 Primary Source Forensic Evidence & Infographics</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                Click any evidence artifact to inspect high-resolution historical documents, network flow diagrams, and official notices.
+            </p>
+
+            <div class="gallery-grid">
+                <div class="gallery-card" onclick="openModal('../image/mgm_grand_las_vegas.jpg', 'Target Property: MGM Grand Las Vegas')">
+                    <div class="gallery-img-container">
+                        <img src="../image/mgm_grand_las_vegas.jpg" alt="MGM Grand">
+                    </div>
+                    <div class="gallery-info">
+                        <h4>MGM Grand Las Vegas</h4>
+                        <p>Flagship resort and casino property impacted by the September 2023 shutdown.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" onclick="openModal('../image/mgm_attack_flow_diagram.jpg', 'Complete 6-Stage Attack Flow Vector')">
+                    <div class="gallery-img-container">
+                        <img src="../image/mgm_attack_flow_diagram.jpg" alt="Attack Flow Diagram">
+                    </div>
+                    <div class="gallery-info">
+                        <h4>Attack Flow Vector Diagram</h4>
+                        <p>4K forensic vector diagram: LinkedIn ➔ Help Desk ➔ Okta ➔ Azure ➔ ESXi.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" onclick="openModal('../image/mgm_thrivedx_attack_timeline.jpg', 'ThriveDX Incident Progression Timeline')">
+                    <div class="gallery-img-container">
+                        <img src="../image/mgm_thrivedx_attack_timeline.jpg" alt="ThriveDX Timeline">
+                    </div>
+                    <div class="gallery-info">
+                        <h4>Incident Progression Timeline</h4>
+                        <p>Chronological 8-stage breakdown from reconnaissance to system isolation.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" onclick="openModal('../image/mgm_website_outage_notice.jpg', 'Public Outage Banner Notice')">
+                    <div class="gallery-img-container">
+                        <img src="../image/mgm_website_outage_notice.jpg" alt="Outage Notice">
+                    </div>
+                    <div class="gallery-info">
+                        <h4>Authentic Web Outage Notice</h4>
+                        <p>Static emergency banner deployed across all public MGM reservation portals.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" onclick="openModal('../image/mgm_twitter_official_statement.jpg', 'MGM Resorts Official Public Statement')">
+                    <div class="gallery-img-container">
+                        <img src="../image/mgm_twitter_official_statement.jpg" alt="Twitter Statement">
+                    </div>
+                    <div class="gallery-info">
+                        <h4>Official X/Twitter Disclosure</h4>
+                        <p>Primary public communication released by @MGMResortsIntl on September 11, 2023.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Image Preview -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <img id="modalImg" src="" alt="Artifact Preview">
+            <h4 id="modalCaption" style="margin-top: 14px; color: #ffffff;"></h4>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        MGM Resorts International Cyberattack Educational Seminar Suite &bull; Cyber-Blog Threat Intelligence &bull; Strictly for Educational & Defensive Use
+    </footer>
+</div>
+
+<script>
+    // Tab Switching
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+        
+        event.target.classList.add('active');
+        document.getElementById('tab-' + tabId).classList.add('active');
+    }
+
+    // Modal Control
+    function openModal(imgSrc, caption) {
+        document.getElementById('modalImg').src = imgSrc;
+        document.getElementById('modalCaption').innerText = caption;
+        document.getElementById('imageModal').classList.add('open');
+    }
+
+    function closeModal() {
+        document.getElementById('imageModal').classList.remove('open');
+    }
+
+    // Vishing Simulator Logic
+    function vishingDecision(choice) {
+        const chatBox = document.getElementById('vishingChat');
+        const outcomeBox = document.getElementById('vishingOutcome');
+        const buttons = document.getElementById('decisionButtons');
+
+        if (choice === 'kba') {
+            chatBox.innerHTML += `
+                <div class="message msg-agent"><strong>You:</strong> "Can you please verify your Employee ID, Date of Birth, and Home Zip Code?"</div>
+                <div class="message msg-caller"><strong>Caller:</strong> "Sure thing. Employee ID 482910, DOB September 14, 1982, zip code 89117 Las Vegas. That matches your screen right?"</div>
+                <div class="message msg-system">--- ADVERSARY PASSED STATIC KBA CHECK (DATA HARVESTED VIA OSINT) ---</div>
+            `;
+            outcomeBox.style.display = 'block';
+            outcomeBox.style.backgroundColor = 'rgba(239, 68, 68, 0.2)';
+            outcomeBox.style.border = '1px solid var(--accent-crimson)';
+            outcomeBox.innerHTML = `
+                <strong style="color: var(--accent-crimson);">CRITICAL FAILURE:</strong> The caller easily passed static KBA checks because employee birthday, zip code, and ID were harvested via LinkedIn and public data brokers. The adversary successfully registers their phone!
+            `;
+        } else if (choice === 'oob_video') {
+            chatBox.innerHTML += `
+                <div class="message msg-agent"><strong>You:</strong> "Per corporate security policy for Enterprise IAM administrators, I cannot clear MFA without an authenticated Teams video call with you and your direct manager."</div>
+                <div class="message msg-caller"><strong>Caller:</strong> "Come on, Marcus! The director's waiting! I told you my phone is fried, I can't get on Teams! Just read me the code!"</div>
+                <div class="message msg-system">--- CALL TERMINATED BY ADVERSARY (VISHING ATTEMPT THWARTED) ---</div>
+            `;
+            outcomeBox.style.display = 'block';
+            outcomeBox.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
+            outcomeBox.style.border = '1px solid var(--accent-emerald)';
+            outcomeBox.innerHTML = `
+                <strong style="color: var(--accent-emerald);">DEFENSIVE VICTORY:</strong> Enforcing mandatory Out-of-Band (OOB) video verification broke the social engineering script. The attacker hung up, protecting the Okta tenant!
+            `;
+        } else if (choice === 'direct_reset') {
+            chatBox.innerHTML += `
+                <div class="message msg-agent"><strong>You:</strong> "No problem David, I understand you're in a rush. I've cleared your Okta Verify factor. Your one-time bypass code is: 849-204."</div>
+                <div class="message msg-caller"><strong>Caller:</strong> "Awesome Marcus, you're a lifesaver! Have a great weekend!"</div>
+                <div class="message msg-system">--- ATTACKER REGISTERS NEW DEVICE AS OKTA SUPER ADMIN ---</div>
+            `;
+            outcomeBox.style.display = 'block';
+            outcomeBox.style.backgroundColor = 'rgba(239, 68, 68, 0.3)';
+            outcomeBox.style.border = '1px solid var(--accent-crimson)';
+            outcomeBox.innerHTML = `
+                <strong style="color: var(--accent-crimson);">CATASTROPHIC BREACH:</strong> Complete identity handover with zero verification. The attacker now controls the Okta Super Administrator console!
+            `;
+        }
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Step Explorer
+    const stepsData = {
+        1: {
+            title: "Phase 1: OSINT & LinkedIn Profiling",
+            tactic: "Reconnaissance (T1593.001 / T1589.001)",
+            desc: "Scattered Spider searched LinkedIn for MGM employees with 'Okta' and 'Identity Engineer' titles. By compiling corporate email schemas and querying commercial data brokers, the threat actors obtained employee birth dates, residential addresses, and mobile numbers.",
+            defense: "Proactive social media privacy training; monitoring data brokers; removing specific IAM technology names from public job profiles."
+        },
+        2: {
+            title: "Phase 2: Help Desk Vishing & MFA Reset",
+            tactic: "Initial Access (T1566.004 / T1556.006)",
+            desc: "The attacker placed a voice call to MGM's IT Service Desk, spoofing the employee's phone number. Presenting harvested biographical data, the caller claimed their phone was water-damaged and convinced the agent to deactivate their Okta Verify factor and issue a one-time enrollment token.",
+            defense: "Eliminate static Knowledge-Based Authentication (KBA). Mandate out-of-band video verification and direct manager digital approval."
+        },
+        3: {
+            title: "Phase 3: Okta Super Admin & Inbound IdP",
+            tactic: "Persistence & Privilege Escalation (T1078.004 / T1484.002)",
+            desc: "Using the bypass token, the attacker registered their personal iPhone as the new Okta Verify device. Routing via residential proxies to evade geofencing, they logged in with Super Admin rights and configured a rogue Inbound SAML Identity Provider for permanent backdoor persistence.",
+            defense: "Enforce FIDO2 phishing-resistant hardware keys (YubiKeys); alert immediately on Inbound IdP creations; restrict admin console access to corporate MDM devices."
+        },
+        4: {
+            title: "Phase 4: Lateral Pivot to Azure AD & On-Premises",
+            tactic: "Lateral Movement & Discovery (T1087.004 / T1098.001)",
+            desc: "Leveraging federated single sign-on from Okta, the attacker accessed Microsoft Entra ID (Azure AD) as Global Administrator. They registered malicious enterprise applications to grant persistent Graph API permissions, then pivoted to on-premises Domain Controllers to harvest vCenter credentials.",
+            defense: "Implement Zero Trust blast-radius isolation between SaaS identity and infrastructure management. Disable persistent Global Administrator standing privileges."
+        },
+        5: {
+            title: "Phase 5: VMware ESXi Hypervisor Targeting",
+            tactic: "Impact & Service Stop (T1486 / T1489 / T1021.004)",
+            desc: "The attackers connected via SSH directly to VMware ESXi hypervisor hosts. Executing `esxcli vm process kill`, they forcibly terminated hundreds of running virtual machines, then executed the ALPHV/BlackCat Rust locker to encrypt `.vmdk` virtual disk files across 100+ hypervisors.",
+            defense: "Enforce VMware Strict Lockdown Mode; isolate ESXi management on an air-gapped VLAN; maintain immutable hardware storage snapshots on SAN arrays."
+        },
+        6: {
+            title: "Phase 6: Operational Disruption & $100M Outage",
+            tactic: "Impact & Financial Loss ($100M EBITDAR)",
+            desc: "With core database VMs encrypted, casino slot machines entered security tilt locks, digital mobile hotel room keys failed, and front desks resorted to manual paper vouchers. MGM proactively disconnected networks, leading to a ~$100M negative EBITDAR financial impact.",
+            defense: "Comprehensive business continuity planning; manual offline operational playbooks; cyber insurance policy review."
+        }
+    };
+
+    function selectStep(stepNum) {
+        document.querySelectorAll('.timeline-step').forEach((s, idx) => {
+            if (idx + 1 === stepNum) s.classList.add('active');
+            else s.classList.remove('active');
+        });
+
+        const data = stepsData[stepNum];
+        document.getElementById('inspectorTitle').innerText = data.title;
+        document.getElementById('inspectorContent').innerHTML = `
+            <p><strong>MITRE Tactic:</strong> ${data.tactic}</p>
+            <p style="margin-top: 8px;">${data.desc}</p>
+            <div style="margin-top: 14px; padding: 10px; background: rgba(6, 182, 212, 0.1); border-left: 3px solid var(--accent-cyan); border-radius: 4px;">
+                <strong>Defensive Architecture:</strong> ${data.defense}
+            </div>
+        `;
+    }
+
+    // SIEM Telemetry Logs
+    const rawLogs = [
+        { time: "2023-09-10T02:14:10Z", level: "INFO", src: "okta", text: "eventType=user.session.start user=systems.engineer@mgmresorts.com ip=199.167.211.5 outcome=SUCCESS" },
+        { time: "2023-09-10T04:22:18Z", level: "HIGH", src: "okta", text: "eventType=user.mfa.factor.deactivate actor=helpdesk.agent@mgmresorts.com target=systems.engineer@mgmresorts.com factor=OktaVerify" },
+        { time: "2023-09-10T04:30:45Z", level: "CRITICAL", src: "okta", text: "eventType=user.mfa.factor.activate target=systems.engineer@mgmresorts.com ip=70.168.14.92 (Residential/Henderson_NV) factor=OktaVerifyPush" },
+        { time: "2023-09-10T04:32:01Z", level: "HIGH", src: "okta", text: "eventType=user.session.start actor=systems.engineer@mgmresorts.com ip=70.168.14.92 app=OktaAdminConsole" },
+        { time: "2023-09-10T05:14:22Z", level: "CRITICAL", src: "okta", text: "eventType=system.idp.lifecycle.create actor=systems.engineer@mgmresorts.com idp_name=External-Partner-SAML-Trust" },
+        { time: "2023-09-10T09:40:11Z", level: "HIGH", src: "azure", text: "operationName='Add service principal credentials' targetApp='Azure-Mgmt-App' permissions='Directory.ReadWrite.All'" },
+        { time: "2023-09-10T14:12:05Z", level: "INFO", src: "network", text: "action=ALLOW proto=TCP src=10.240.10.15 dst=10.100.20.5 dport=443 (vCenter-SSO-Management)" },
+        { time: "2023-09-10T22:05:40Z", level: "HIGH", src: "esxi", text: "host=esxi-cluster-04.mgm.local Accepted keyboard-interactive/pam for root from 10.240.10.15 port 42812 ssh2" },
+        { time: "2023-09-11T01:35:10Z", level: "CRITICAL", src: "esxi", text: "host=esxi-cluster-04 command='esxcli vm process kill --type=force --world-id=49102' (Terminating VM: CMS-SQL-PROD-01)" },
+        { time: "2023-09-11T01:36:22Z", level: "CRITICAL", src: "esxi", text: "host=esxi-cluster-04 command='./alphv_esxi --access-token 4b18... --paths /vmfs/volumes/datastore1'" },
+        { time: "2023-09-11T02:00:15Z", level: "CRITICAL", src: "storage", text: "volume=/vmfs/volumes/SAN-LUN-04 Mass write IOPS burst detected (>65000 IOPS). File renaming to *.alphv" }
+    ];
+
+    function renderLogs(filterText = '') {
+        const consoleEl = document.getElementById('logConsole');
+        consoleEl.innerHTML = '';
+        const lower = filterText.toLowerCase();
+
+        rawLogs.forEach(l => {
+            const rowStr = `${l.time} [${l.level}] ${l.src.toUpperCase()}: ${l.text}`;
+            if (!lower || rowStr.toLowerCase().includes(lower)) {
+                let cssClass = 'log-info';
+                let lvlClass = 'level-info';
+                if (l.level === 'CRITICAL') { cssClass = 'log-critical'; lvlClass = 'level-crit'; }
+                else if (l.level === 'HIGH') { cssClass = 'log-high'; lvlClass = 'level-warn'; }
+
+                consoleEl.innerHTML += `
+                    <div class="log-row ${cssClass}">
+                        <span class="log-time">${l.time.substring(11, 19)}</span>
+                        <span class="log-level ${lvlClass}">[${l.level}]</span>
+                        <span>${l.text}</span>
+                    </div>
+                `;
+            }
+        });
+    }
+
+    function filterLogs() {
+        const val = document.getElementById('logFilter').value;
+        renderLogs(val);
+    }
+
+    function resetLogFilter() {
+        document.getElementById('logFilter').value = '';
+        renderLogs('');
+    }
+
+    // Policy Calculator
+    function calculateScore() {
+        const kbaBanned = document.getElementById('chkKba').checked;
+        const tier0Stripped = document.getElementById('chkTier0').checked;
+        const videoRequired = document.getElementById('chkVideo').checked;
+        const managerApproved = document.getElementById('chkManager').checked;
+        const quarantineEnforced = document.getElementById('chkQuarantine').checked;
+
+        let risk = 100;
+        if (kbaBanned) risk -= 30;
+        if (tier0Stripped) risk -= 25;
+        if (videoRequired) risk -= 20;
+        if (managerApproved) risk -= 15;
+        if (quarantineEnforced) risk -= 10;
+
+        const scoreEl = document.getElementById('scoreDisplay');
+        const labelEl = document.getElementById('scoreLabel');
+        const summaryEl = document.getElementById('scoreSummary');
+
+        scoreEl.innerText = risk + '%';
+
+        if (risk >= 70) {
+            scoreEl.style.color = 'var(--accent-crimson)';
+            labelEl.style.color = 'var(--accent-crimson)';
+            labelEl.innerText = 'CRITICAL VULNERABILITY (MGM 2023 BASELINE)';
+            summaryEl.innerText = 'High exposure to voice phishing and social engineering. Tier-1 help desk agents can be manipulated into transferring privileged identities.';
+        } else if (risk >= 35) {
+            scoreEl.style.color = 'var(--accent-amber)';
+            labelEl.style.color = 'var(--accent-amber)';
+            labelEl.innerText = 'MODERATE RESILIENCE';
+            summaryEl.innerText = 'Several foundational controls are present, but remaining gaps (e.g. lack of manager approval or video checks) leave pathways for persistent access.';
+        } else {
+            scoreEl.style.color = 'var(--accent-emerald)';
+            labelEl.style.color = 'var(--accent-emerald)';
+            labelEl.innerText = 'HARDENED ZERO TRUST POSTURE';
+            summaryEl.innerText = 'Outstanding identity defense. The help desk enforces cryptographic/video verification and cannot clear Tier-0 admin factors, stopping Scattered Spider.';
+        }
+    }
+
+    // Initial Render
+    renderLogs();
+</script>
+
+</body>
+</html>
