@@ -17,6 +17,7 @@ Each case study breaks down:
 | :--- | :---: | :--- | :---: | :--- | :---: |
 | **Genesis Market: From Stolen Credentials to "Identity-as-a-Service"** | **Cybercrime / IAB / Credential Theft** | Genesis "Bots", RedLine/Vidar/Raccoon Infostealers, Session Cookie Hijacking, EA Breach | **Operation Cookie Monster** (4 April 2023)<br>17 Nations, 119 Arrests | **Password Reset ≠ Attack Stopped**<br>Mandatory Session Revocation, FIDO2 MFA, DPoP Token Binding | [Read Case Study](./Genesis%20Market/README.md) |
 | **Inside the MGM Resorts Cyberattack: How Social Engineering Became an Enterprise Incident** | **Identity Compromise / Vishing / Ransomware** | Scattered Spider (UNC3944), ALPHV/BlackCat, Okta Super Admin, Azure AD, VMware ESXi Locker | **The 2023 Las Vegas Campaign** (Sept 2023)<br>~$100M EBITDAR Loss | **Identity is the Perimeter**<br>Ban KBA at Help Desk, Strict ESXi Lockdown, OOB Video Verification | [Read Case Study](./MGM%20Resorts%20International/README.md) |
+| **STUXNET: When Cybersecurity Crossed Into the Physical World** | **Cyber-Physical Sabotage / ICS / SCADA** | Operation Olympic Games, Siemens S7-315/417 PLCs, VFD Overclocking, Natanz IR-1 Centrifuges | **Natanz Sabotage Campaign** (2007–2010)<br>~1,000 Centrifuges Destroyed | **Displayed State ≠ Physical Reality**<br>Hardware Keyswitch to RUN, Analog Out-of-Band Safety, S7comm DPI | [Read Case Study](./Stuxnet/README.md) |
 
 ---
 
@@ -67,4 +68,28 @@ Each case study breaks down:
   * [13: Seminar Handbook, Tabletop Exercises & Curriculum](./MGM%20Resorts%20International/13-seminar-handbook-tabletop-exercises-and-curriculum.md)
 * **Interactive Web Lab:** [**Interactive MGM Resorts Identity Attack Path & Seminar Lab**](./MGM%20Resorts%20International/demo-site/index.html) (Live help desk vishing simulator, 6-stage interactive attack path explorer, SOC SIEM telemetry console, and verification risk calculator).
 * **Custom Tooling:** [`identity_helpdesk_audit.py`](./MGM%20Resorts%20International/scripts/identity_helpdesk_audit.py) (Okta SystemLog anomaly hunt, help desk verification policy scoring, and ESXi hardening audit tool).
+
+---
+
+### 3. [STUXNET: When Cybersecurity Crossed Into the Physical World](./Stuxnet/README.md)
+* **Status:** 🟢 **100% Complete — 13 Technical Chapters + Master Landing Portal + Interactive Telemetry Lab + Python Audit Script**
+* **Featured Incident:** The 2007–2010 Natanz Nuclear Enrichment Sabotage Operation (~1,000 IR-1 centrifuges decommissioned, 18-month nuclear delay).
+* **Key Mechanics:** How Stuxnet bridged an air-gapped facility via weaponized USB media (CVE-2010-2568), subverted 64-bit Windows kernel driver signing with stolen Realtek/JMicron certificates, executed a man-in-the-middle DLL proxy attack on Siemens STEP 7 (`s7otbxdx.dll`), manipulated S7-315/S7-417 PLC microcode (OB1/OB35), and drove centrifuges into 1,410 Hz overspeed and 2 Hz resonant crash while replaying a 21-second loop of pristine sensor data to operators.
+* **Chapters Included:**
+  * [01: Executive Summary & The Cyber-Physical Paradigm Shift](./Stuxnet/01-executive-summary-and-cyber-physical-paradigm.md)
+  * [02: Industrial Architecture & The Purdue Model](./Stuxnet/02-industrial-architecture-and-purdue-model.md)
+  * [03: Air-Gap Traversal & Weaponized Propagation](./Stuxnet/03-air-gap-traversal-and-weaponized-propagation.md)
+  * [04: The Four Zero-Days & Windows Internals](./Stuxnet/04-the-four-zero-days-and-windows-internals.md)
+  * [05: Target Validation & Siemens STEP 7 Hooking](./Stuxnet/05-target-validation-and-siemens-step7-hooking.md)
+  * [06: The PLC Payload & Centrifuge Sabotage Mechanics](./Stuxnet/06-the-plc-payload-and-centrifuge-sabotage-mechanics.md)
+  * [07: The Deception Engine & Sensor Replay Attacks](./Stuxnet/07-the-deception-engine-and-sensor-replay-attacks.md)
+  * [08: Discovery, Investigation & Forensic Reverse Engineering](./Stuxnet/08-discovery-investigation-and-forensic-reverse-engineering.md)
+  * [09: Comprehensive MITRE ATT&CK for ICS Matrix](./Stuxnet/09-mitre-attack-for-ics-comprehensive-matrix.md)
+  * [10: Blue Team SOC Playbooks & OT Detection Engineering](./Stuxnet/10-blue-team-soc-playbooks-and-ot-detection-engineering.md)
+  * [11: OT Incident Response & Cyber-Physical Resilience](./Stuxnet/11-ot-incident-response-and-cyber-physical-resilience.md)
+  * [12: Comparative Analysis — ICS Malware Evolution](./Stuxnet/12-comparative-analysis-ics-malware-evolution.md)
+  * [13: Seminar Handbook, Tabletop Exercise & Curriculum](./Stuxnet/13-seminar-handbook-tabletop-exercise-and-curriculum.md)
+* **Interactive Web Lab:** [**Interactive Cyber-Physical Attack Simulator & Centrifuge Telemetry Lab**](./Stuxnet/demo-site/index.html) (Live rotor frequency wave canvas, SCADA operator deception split-view, Siemens S7 MC7 bytecode inspector, and MITRE ICS explorer).
+* **Custom Tooling:** [`stuxnet_s7comm_audit.py`](./Stuxnet/scripts/stuxnet_s7comm_audit.py) (S7comm protocol packet inspector, STEP 7 DLL proxy integrity auditor, and centrifuge rotor resonance stress calculator).
+
 

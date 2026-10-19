@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUXNET: Cyber-Physical Attack Simulator & Centrifuge Telemetry Lab</title>
+    <style>
+        :root {
+            --bg-primary: #0b0f19;
+            --bg-secondary: #111827;
+            --bg-card: #1f2937;
+            --bg-card-hover: #374151;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-cyan: #06b6d4;
+            --accent-amber: #f59e0b;
+            --accent-crimson: #ef4444;
+            --accent-emerald: #10b981;
+            --accent-purple: #8b5cf6;
+            --border-color: #374151;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #111827 0%, #311010 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-title h1 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .header-title h1 span {
+            color: var(--accent-amber);
+        }
+
+        .header-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .header-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-nuclear {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: var(--accent-amber);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+
+        .badge-ics {
+            background-color: rgba(6, 182, 212, 0.2);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.4);
+        }
+
+        .badge-sabotage {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--accent-crimson);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        /* Nav Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: #ffffff;
+            background: var(--bg-card);
+            border-color: var(--accent-cyan);
+        }
+
+        .tab-btn.active {
+            color: #ffffff;
+            background: #b45309;
+            border-color: var(--accent-amber);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 20px;
+        }
+
+        /* Telemetry Graph Canvas */
+        .chart-container {
+            background-color: #030712;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            position: relative;
+        }
+
+        canvas {
+            width: 100%;
+            height: 260px;
+            background-color: #030712;
+            border-radius: 6px;
+        }
+
+        .controls-panel {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sim-btn {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 6px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .sim-btn:hover {
+            border-color: var(--accent-amber);
+            background: #252f3f;
+        }
+
+        .sim-btn.btn-active {
+            border-color: var(--accent-amber);
+            background: rgba(245, 158, 11, 0.2);
+        }
+
+        /* Split Screen Deception UI */
+        .split-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .view-panel {
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .panel-real {
+            background-color: rgba(239, 68, 68, 0.06);
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        .panel-fake {
+            background-color: rgba(16, 185, 129, 0.06);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .view-header {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-pill {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .pill-danger { background: rgba(239, 68, 68, 0.2); color: var(--accent-crimson); }
+        .pill-success { background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            font-size: 0.9rem;
+        }
+
+        /* S7 Inspector UI */
+        .code-box {
+            background-color: #030712;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.85rem;
+            color: #d1d5db;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-amber);
+        }
+
+        .gallery-img-container {
+            width: 100%;
+            height: 200px;
+            background-color: #000000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-card:hover .gallery-img-container img {
+            transform: scale(1.04);
+        }
+
+        .gallery-info {
+            padding: 14px;
+        }
+
+        .gallery-info h4 {
+            font-size: 0.95rem;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .gallery-info p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .close-btn:hover {
+            color: var(--accent-crimson);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <div class="header-title">
+            <h1>STUXNET: <span>Cyber-Physical Attack</span> Lab</h1>
+            <div class="header-subtitle">Seminar Demonstration & Centrifuge Rotational Telemetry Simulator</div>
+        </div>
+        <div class="header-badges">
+            <span class="badge badge-nuclear">Target: Natanz IR-1 Centrifuges</span>
+            <span class="badge badge-ics">PLC: Siemens S7-315 / S7-417</span>
+            <span class="badge badge-sabotage">Sabotage: 1,410 Hz & 2 Hz Resonance</span>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('telemetry')">1. Centrifuge Rotational Telemetry Lab</button>
+        <button class="tab-btn" onclick="switchTab('deception')">2. SCADA Operator Deception Split-View</button>
+        <button class="tab-btn" onclick="switchTab('s7hook')">3. Siemens S7 DLL Proxy & PLC Inspector</button>
+        <button class="tab-btn" onclick="switchTab('matrix')">4. MITRE ATT&CK for ICS Explorer</button>
+        <button class="tab-btn" onclick="switchTab('gallery')">5. Forensic Evidence Gallery</button>
+    </div>
+
+    <!-- TAB 1: Centrifuge Telemetry Lab -->
+    <div id="tab-telemetry" class="tab-pane active">
+        <div class="card">
+            <h2>☢️ Centrifuge Rotational Speed & Harmonic Stress Simulator</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                Select a Stuxnet operational phase to simulate the Variable Frequency Drive (VFD) output frequency 
+                and observe real-time centrifugal stress on the aluminum rotor cylinder.
+            </p>
+
+            <div class="grid-2">
+                <div class="chart-container">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="font-size: 0.85rem; font-weight: 700; color: #fff;">LIVE ROTOR FREQUENCY (Hz)</span>
+                        <span id="currentSpeedVal" style="font-weight: 800; color: var(--accent-emerald);">1,064 Hz (63,840 RPM)</span>
+                    </div>
+                    <canvas id="freqCanvas"></canvas>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px;">
+                        Critical Resonance Bands: [300-450 Hz] & [750-900 Hz] &bull; Burst Limit: >1,350 Hz
+                    </div>
+                </div>
+
+                <div class="controls-panel">
+                    <h3>Select Stuxnet Operational Phase</h3>
+                    <button class="sim-btn btn-active" onclick="setSpeedPhase('normal')">
+                        <strong>Phase 1: Normal Cruise (1,064 Hz / 63,840 RPM)</strong><br>
+                        <span style="font-size: 0.8rem; color: var(--text-secondary);">Optimal supercritical enrichment operating baseline. Tensile stress: 1.0x.</span>
+                    </button>
+                    <button class="sim-btn" onclick="setSpeedPhase('overspeed')">
+                        <strong>Phase 2: Destructive Overspeed (1,410 Hz / 84,600 RPM)</strong><br>
+                        <span style="font-size: 0.8rem; color: var(--text-secondary);">15-minute overspeed cycle. Radial stress increases by +75.6%! Exceeds aluminum yield.</span>
+                    </button>
+                    <button class="sim-btn" onclick="setSpeedPhase('resonance')">
+                        <strong>Phase 3: Resonant Slowdown Crash (2 Hz / 120 RPM)</strong><br>
+                        <span style="font-size: 0.8rem; color: var(--text-secondary);">50-minute deceleration. Rotor lingers in resonance zones; wobbles and shatters.</span>
+                    </button>
+
+                    <div id="stressIndicator" style="margin-top: 8px; padding: 12px; background: rgba(16, 185, 129, 0.15); border-left: 3px solid var(--accent-emerald); border-radius: 4px; font-size: 0.85rem;">
+                        <strong>Mechanical Status:</strong> Rotor running smoothly in stable supercritical condition. Hydrodynamic vacuum integrity maintained.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: SCADA Deception Split-View -->
+    <div id="tab-deception" class="tab-pane">
+        <div class="card">
+            <h2>🎭 The 21-Second Telemetry Replay Attack: Display vs. Reality</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                Compare the falsified HMI screen shown to Iranian operators against the true physical catastrophe 
+                unfolding inside the cascade hall during a Stuxnet overspeed attack.
+            </p>
+
+            <div class="split-view">
+                <div class="view-panel panel-fake">
+                    <div class="view-header">
+                        <span style="color: var(--accent-emerald);">WINCC OPERATOR CONSOLE (SCADA)</span>
+                        <span class="status-pill pill-success">21s REPLAY TAPE LOOP</span>
+                    </div>
+                    <div class="metric-row">
+                        <span>Cascade 01 Status:</span>
+                        <strong style="color: var(--accent-emerald);">OPTIMAL / RUNNING</strong>
+                    </div>
+                    <div class="metric-row">
+                        <span>Rotational Speed:</span>
+                        <span>1,064 Hz (63,840 RPM)</span>
+                    </div>
+                    <div class="metric-row">
+                        <span>UF6 Gas Pressure:</span>
+                        <span>0.051 Torr (Normal)</span>
+                    </div>
+                    <div class="metric-row">
+                        <span>Bearing Temperature:</span>
+                        <span>21.4 °C</span>
+                    </div>
+                    <div class="metric-row">
+                        <span>Vibration Transducers:</span>
+                        <span>0.02 mm/s (Smooth)</span>
+                    </div>
+                    <div class="metric-row">
+                        <span>Active Alarms:</span>
+                        <strong style="color: var(--accent-emerald);">0 ALARMS ACTIVE</strong>
+                    </div>
+                    <p style="margin-top: 14px; font-size: 0.8rem; color: var(--text-secondary);">
+                        <em>Stuxnet intercepts read packets and loops 21 seconds of pre-recorded baseline telemetry. The operator sees zero anomalies.</em>
+                    </p>
+                </div>
+
+                <div class="view-panel panel-real">
+                    <div class="view-header">
+                        <span style="color: var(--accent-crimson);">PHYSICAL CASCADE HALL REALITY</span>
+                        <span class="status-pill pill-danger">ACTIVE KINETIC SABOTAGE</span>
+                    </div>
+                    <div class="metric-row">
+                        <span>True Physical State:</span>
+                        <strong style="color: var(--accent-crimson);">CATASTROPHIC FAILURE</strong>
+                    </div>
+                    <div class="metric-row">
+                        <span>Rotational Speed:</span>
+                        <strong style="color: var(--accent-crimson);">1,410 Hz (84,600 RPM)</strong>
+                    </div>
+                    <div class="metric-row">
+                        <span>Radial Rotor Strain:</span>
+                        <strong style="color: var(--accent-crimson);">+75.6% OVERLOAD</strong>
+                    </div>
+                    <div class="metric-row">
+                        <span>Mechanical Vibration:</span>
+                        <strong style="color: var(--accent-crimson);">14.8 mm/s (SEVERE)</strong>
+                    </div>
+                    <div class="metric-row">
+                        <span>Rotor Status:</span>
+                        <strong style="color: var(--accent-crimson);">STRIKING OUTER CASING</strong>
+                    </div>
+                    <div class="metric-row">
+                        <span>Safety Interlocks:</span>
+                        <strong style="color: var(--accent-crimson);">DISCONNECTED IN CODE</strong>
+                    </div>
+                    <p style="margin-top: 14px; font-size: 0.8rem; color: #fecaca;">
+                        <em>Aluminum rotors stretching past tensile failure limit. Supersonic shrapnel puncturing adjacent centrifuges in the cascade.</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: S7 Hook & PLC Inspector -->
+    <div id="tab-s7hook" class="tab-pane">
+        <div class="card">
+            <h2>⚙️ Siemens S7 MitM DLL Proxy & Microcode Hook Inspector</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                Inspect how Stuxnet intercepted communication between SIMATIC STEP 7 and the S7-315 controller 
+                using dynamic link library proxying and injected Organization Blocks.
+            </p>
+
+            <div class="grid-2">
+                <div>
+                    <h3 style="color: var(--accent-cyan); font-size: 1.05rem; margin-bottom: 10px;">Hooked s7otbxdx.dll Execution Flow</h3>
+                    <div class="code-box">
+// Siemens S7comm Interception Architecture
+1. Legitimate DLL renamed:
+   s7otbxdx.dll  ==>  s7otbxsx.dll
+
+2. Malicious Proxy dropped:
+   s7otbxdx.dll (Stuxnet Wrapper)
+
+3. Intercepted Export Functions:
+   • s7blk_write()  [Injects MC7 Bytecode]
+   • s7blk_read()   [Cloaks Injected Code]
+   • s7blk_delete() [Blocks Code Removal]
+
+4. Injected Organization Blocks:
+   • OB1   -> Main Cyclic Hook
+   • OB35  -> 100ms Precision Interrupt
+   • DB89  -> 21-Second Sensor Buffer
+   • FC1865-> VFD Sabotage Routine
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--accent-amber); font-size: 1.05rem; margin-bottom: 10px;">Injected MC7 Bytecode Logic (Disassembly)</h3>
+                    <div class="code-box">
+// Injected OB1 Hook Header
+L   DB89.DBW 0        // Load State Machine Flag
+L   W#16#DEAD         // Sabotage Trigger Constant
+==I
+JC  _EXEC_SABOTAGE    // Jump to Speed Override
+
+// Normal Fallthrough (Passthrough to Legitimate Logic)
+CALL  FC  1           // Original Legitimate Cycle
+BEU                   // Block End Unconditional
+
+_EXEC_SABOTAGE:
+L   1410              // Frequency in Hz (Overspeed)
+T   PQW 256           // Direct Write to Profibus VFD
+CALL  FC 1865         // Replay Recorded DB89 Telemetry
+BEU
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: MITRE ATT&CK for ICS Matrix -->
+    <div id="tab-matrix" class="tab-pane">
+        <div class="card">
+            <h2>🗺️ MITRE ATT&CK for Industrial Control Systems (ICS) Explorer</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                Click any tactic card to view Stuxnet's specific industrial adversary technique.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+                <div class="card" style="margin-bottom: 0; background: var(--bg-card); border-left: 3px solid var(--accent-cyan);">
+                    <h4 style="color: #fff; font-size: 0.95rem;">T0847: Replication Media</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;">
+                        Weaponized USB flash drives using zero-click .LNK icon rendering (CVE-2010-2568) to cross physical air gaps.
+                    </p>
+                </div>
+                <div class="card" style="margin-bottom: 0; background: var(--bg-card); border-left: 3px solid var(--accent-cyan);">
+                    <h4 style="color: #fff; font-size: 0.95rem;">T0843: Program Download</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;">
+                        Writing modified MC7 bytecode blocks (OB1, OB35, DB89) into Siemens S7-315 and S7-417 PLCs via S7comm.
+                    </p>
+                </div>
+                <div class="card" style="margin-bottom: 0; background: var(--bg-card); border-left: 3px solid var(--accent-amber);">
+                    <h4 style="color: #fff; font-size: 0.95rem;">T0856: Spoof Reporting</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;">
+                        Replaying 21-second recorded normal telemetry loop from DB89 to deceive operators staring at WinCC screens.
+                    </p>
+                </div>
+                <div class="card" style="margin-bottom: 0; background: var(--bg-card); border-left: 3px solid var(--accent-crimson);">
+                    <h4 style="color: #fff; font-size: 0.95rem;">T0836: Modify Parameter</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;">
+                        Altering Variable Frequency Drive output parameters to 1,410 Hz (overspeed) and 2 Hz (resonant slowdown).
+                    </p>
+                </div>
+                <div class="card" style="margin-bottom: 0; background: var(--bg-card); border-left: 3px solid var(--accent-crimson);">
+                    <h4 style="color: #fff; font-size: 0.95rem;">T0879: Damage to Property</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;">
+                        Harmonic resonance induced rotor collision, destroying an estimated ~1,000 IR-1 centrifuges at Natanz.
+                    </p>
+                </div>
+                <div class="card" style="margin-bottom: 0; background: var(--bg-card); border-left: 3px solid var(--accent-purple);">
+                    <h4 style="color: #fff; font-size: 0.95rem;">T0851: Rootkit Filter</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;">
+                        Signed kernel drivers (mrxnet.sys / mrxcls.sys) hiding malicious files on removable USB flash drives.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 5: Forensic Gallery -->
+    <div id="tab-gallery" class="tab-pane">
+        <div class="card">
+            <h2>📸 Primary Source Forensic Blueprints & Visual Evidence</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
+                Click any evidence artifact to inspect high-resolution architecture diagrams and historical photographs.
+            </p>
+
+            <div class="gallery-grid">
+                <div class="gallery-card" onclick="openModal('../image/stuxnet_how_it_worked_infographic.jpg', 'How Stuxnet Worked: Architectural Flowchart')">
+                    <div class="gallery-img-container">
+                        <img src="../image/stuxnet_how_it_worked_infographic.jpg" alt="How Stuxnet Worked">
+                    </div>
+                    <div class="gallery-info">
+                        <h4>How Stuxnet Worked</h4>
+                        <p>High-resolution infographic: USB delivery to PLC sabotage and sensor deception.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" onclick="openModal('../image/stuxnet_natanz_centrifuges_cascade.jpg', 'Target Equipment: IR-1 Centrifuges at Natanz')">
+                    <div class="gallery-img-container">
+                        <img src="../image/stuxnet_natanz_centrifuges_cascade.jpg" alt="Centrifuges at Natanz">
+                    </div>
+                    <div class="gallery-info">
+                        <h4>IR-1 Centrifuge Cascades</h4>
+                        <p>Cylindrical aluminum gas centrifuges at the Natanz Fuel Enrichment Plant.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" onclick="openModal('../image/stuxnet_scada_plc_network_architecture.jpg', 'Industrial Network & SCADA Topology')">
+                    <div class="gallery-img-container">
+                        <img src="../image/stuxnet_scada_plc_network_architecture.jpg" alt="Network Topology">
+                    </div>
+                    <div class="gallery-info">
+                        <h4>SCADA & PLC Network Topology</h4>
+                        <p>Industrial routing: WinCC terminals ➔ Industrial Ethernet ➔ S7-300/S7-400 PLCs.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" onclick="openModal('../image/stuxnet_step7_dll_proxy_architecture.jpg', 'Siemens STEP 7 DLL Proxy Architecture')">
+                    <div class="gallery-img-container">
+                        <img src="../image/stuxnet_step7_dll_proxy_architecture.jpg" alt="DLL Proxy Architecture">
+                    </div>
+                    <div class="gallery-info">
+                        <h4>STEP 7 DLL Proxy Architecture</h4>
+                        <p>Replacing s7otbxdx.dll with s7otbxsx.dll to hook s7blk_read and s7blk_write.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Image Preview -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <img id="modalImg" src="" alt="Artifact Preview">
+            <h4 id="modalCaption" style="margin-top: 14px; color: #ffffff;"></h4>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        STUXNET: When Cybersecurity Crossed Into the Physical World &bull; Cyber-Blog Threat Intelligence &bull; Strictly for Educational & Defensive Use
+    </footer>
+</div>
+
+<script>
+    // Tab Switching
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+        
+        event.target.classList.add('active');
+        document.getElementById('tab-' + tabId).classList.add('active');
+    }
+
+    // Modal Control
+    function openModal(imgSrc, caption) {
+        document.getElementById('modalImg').src = imgSrc;
+        document.getElementById('modalCaption').innerText = caption;
+        document.getElementById('imageModal').classList.add('open');
+    }
+
+    function closeModal() {
+        document.getElementById('imageModal').classList.remove('open');
+    }
+
+    // Telemetry Wave Animation
+    let currentPhase = 'normal';
+    let targetFreq = 1064;
+    let currentFreq = 1064;
+    let waveOffset = 0;
+
+    function setSpeedPhase(phase) {
+        currentPhase = phase;
+        document.querySelectorAll('.sim-btn').forEach(b => b.classList.remove('btn-active'));
+        event.currentTarget.classList.add('btn-active');
+
+        const indicator = document.getElementById('stressIndicator');
+        const speedVal = document.getElementById('currentSpeedVal');
+
+        if (phase === 'normal') {
+            targetFreq = 1064;
+            speedVal.innerText = '1,064 Hz (63,840 RPM)';
+            speedVal.style.color = 'var(--accent-emerald)';
+            indicator.style.borderLeftColor = 'var(--accent-emerald)';
+            indicator.style.background = 'rgba(16, 185, 129, 0.15)';
+            indicator.innerHTML = '<strong>Mechanical Status:</strong> Rotor running smoothly in stable supercritical condition. Hydrodynamic vacuum integrity maintained.';
+        } else if (phase === 'overspeed') {
+            targetFreq = 1410;
+            speedVal.innerText = '1,410 Hz (84,600 RPM)';
+            speedVal.style.color = 'var(--accent-crimson)';
+            indicator.style.borderLeftColor = 'var(--accent-crimson)';
+            indicator.style.background = 'rgba(239, 68, 68, 0.2)';
+            indicator.innerHTML = '<strong>CRITICAL OVERLOAD:</strong> Radial centrifugal strain exceeds yield strength of Aluminum 7075-T6 (+75.6% stress). Micro-cracks propagating!';
+        } else if (phase === 'resonance') {
+            targetFreq = 2;
+            speedVal.innerText = '2 Hz (120 RPM)';
+            speedVal.style.color = 'var(--accent-amber)';
+            indicator.style.borderLeftColor = 'var(--accent-amber)';
+            indicator.style.background = 'rgba(245, 158, 11, 0.2)';
+            indicator.innerHTML = '<strong>HARMONIC RESONANCE CRASH:</strong> Deceleration lingers in critical nodes (~800 Hz / ~350 Hz). Violent lateral wobble! Rotor striking casing!';
+        }
+    }
+
+    function drawTelemetryWave() {
+        const canvas = document.getElementById('freqCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width = canvas.offsetWidth;
+        const height = canvas.height = canvas.offsetHeight;
+
+        // Smooth frequency interpolation
+        currentFreq += (targetFreq - currentFreq) * 0.05;
+
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw Grid Lines
+        ctx.strokeStyle = '#1f2937';
+        ctx.lineWidth = 1;
+        for (let y = 30; y < height; y += 40) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(width, y);
+            ctx.stroke();
+        }
+
+        // Draw Critical Resonance Threshold Zones
+        ctx.fillStyle = 'rgba(239, 68, 68, 0.08)';
+        ctx.fillRect(0, 30, width, 50); // Burst Zone (>1350)
+        ctx.fillStyle = 'rgba(245, 158, 11, 0.08)';
+        ctx.fillRect(0, 110, width, 40); // 750-900 Resonance Zone
+        ctx.fillRect(0, 170, width, 40); // 300-450 Resonance Zone
+
+        // Draw Telemetry Line
+        ctx.beginPath();
+        let strokeColor = '#10b981';
+        if (currentFreq > 1200) strokeColor = '#ef4444';
+        else if (currentFreq < 500) strokeColor = '#f59e0b';
+
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = 2.5;
+
+        const waveSpeed = currentFreq > 500 ? (currentFreq / 200) : 0.5;
+        waveOffset += waveSpeed * 0.05;
+
+        // Map frequency to canvas height
+        const normalizedY = height - ((currentFreq / 1500) * (height - 40)) - 20;
+
+        for (let x = 0; x < width; x++) {
+            const angle = (x * 0.05) + waveOffset;
+            const amplitude = currentFreq < 500 ? 15 : (currentFreq > 1300 ? 8 : 4);
+            const y = normalizedY + Math.sin(angle) * amplitude;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        requestAnimationFrame(drawTelemetryWave);
+    }
+
+    window.addEventListener('load', () => {
+        drawTelemetryWave();
+    });
+</script>
+
+</body>
+</html>
