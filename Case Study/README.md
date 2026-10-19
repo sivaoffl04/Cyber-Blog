@@ -11,7 +11,11 @@ Each case study breaks down:
 
 ---
 
-## 🏆 Featured Case Studies
+> [!TIP]
+> **Detailed Technical Investigation & Problem-Resolution Reports:**  
+> For step-by-step DFIR investigations, verified root-cause deconstructions, exact remediation commands, and empirical verification test plans, explore the companion suite: [**`Case Study Solutions/`**](../Case%20Study%20Solutions/README.md).
+
+---
 
 | Case Study Title | Category | Primary Focus & Threat Actor | Operation / Takedown | Key Takeaway / Defense | Link |
 | :--- | :---: | :--- | :---: | :--- | :---: |
