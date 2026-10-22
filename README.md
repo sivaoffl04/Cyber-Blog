@@ -16,7 +16,7 @@
   <b>A comprehensive, production-grade cybersecurity knowledge base, hands-on lab walkthroughs, tool masterclasses, DevSecOps hardening guides, and detection engineering playbooks.</b>
 </p>
 
-[📚 Tool Masterclasses](#tool-masterclasses) • [🔎 OSINT Masterclass](#open-source-intelligence-osint--threat-reconnaissance) • [🔒 GitHub Security & DevSecOps](#github-security--devsecops-masterclass) • [🎯 Hands-on Lab Solutions](#hands-on-lab-walkthroughs-ine--attackdefense) • [🍪 Case Studies](./Case%20Study/README.md) • [👥 Security Teams](#security-team-operations) • [🛡️ SOC & Incident Response](#soc-detection-engineering--incident-response) • [📱 Mobile Pentesting](#android-application-penetration-testing) • [🤝 Contribute](./CONTRIBUTING.md)
+[📚 Tool Masterclasses](#tool-masterclasses) • [🎓 CEH v13 Masterclass](./CEHv13/README.md) • [🔎 OSINT Masterclass](#open-source-intelligence-osint--threat-reconnaissance) • [🔒 GitHub Security & DevSecOps](#github-security--devsecops-masterclass) • [🎯 Hands-on Lab Solutions](#hands-on-lab-walkthroughs-ine--attackdefense) • [🍪 Case Studies](./Case%20Study/README.md) • [👥 Security Teams](#security-team-operations) • [🛡️ SOC & Incident Response](#soc-detection-engineering--incident-response) • [📱 Mobile Pentesting](#android-application-penetration-testing) • [🤝 Contribute](./CONTRIBUTING.md)
 
 </div>
 
@@ -28,7 +28,7 @@ Welcome to **Cyber-Blog**! 👋
 
 This repository is my central cybersecurity research blog and operational knowledge base. Rather than high-level summaries or basic command cheat sheets, every guide in this repository is built as an **in-depth, production-ready masterclass**—grounded in low-level protocol mechanics, source code analysis, realistic attack tradecraft, detection engineering (Sigma rules), CI/CD pipeline hardening, and enterprise defense playbooks.
 
-Whether you are preparing for certifications (**eJPT, eCPPT, OSCP, BAP, CRTP, eCDFP, CySA+**), conducting authorized penetration testing engagements, or defending an enterprise SOC and cloud infrastructure, this repository provides deep, actionable knowledge.
+Whether you are preparing for certifications (**CEH v13, eJPT, eCPPT, OSCP, BAP, CRTP, eCDFP, CySA+**), conducting authorized penetration testing engagements, or defending an enterprise SOC and cloud infrastructure, this repository provides deep, actionable knowledge.
 
 ---
 
@@ -47,8 +47,10 @@ flowchart TD
     Hub --> SOC["🛡️ SOC & Blue Team\n(SOC/)"]
     Hub --> Mobile["📱 Mobile Security\n(Android_pentest/)"]
     Hub --> Labs["🎯 Hands-on Labs\n(INE lab/)"]
+    Hub --> CEH["🎓 CEH v13 Master Track\n(CEHv13/)"]
 
     CaseStudies --> CS1["Genesis Market: Operation Cookie Monster"]
+    CEH --> CEH1["Module 01: Intro to Ethical Hacking"]
 
     Tools --> T1["Nmap Complete Course"]
     Tools --> T2["John the Ripper Course"]
@@ -99,6 +101,7 @@ flowchart TD
     style SOC fill:#1e293b,stroke:#0ea5e9,color:#fff
     style Mobile fill:#1e293b,stroke:#f59e0b,color:#fff
     style Labs fill:#1e293b,stroke:#ef4444,color:#fff
+    style CEH fill:#1e293b,stroke:#0078D4,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -107,6 +110,7 @@ flowchart TD
 
 | Category | Module / Topic | Core Technologies | Level | Direct Link |
 | :--- | :--- | :--- | :---: | :---: |
+| 🎓 **CEH v13** | **Module 01: Introduction to Ethical Hacking** | InfoSec, CIA Triad, AAA, Attack Models, Kill Chains, Diamond Model, CTI, AI in Pentesting | All Levels | [Explore](./CEHv13/Module%2001/README.md) |
 | 🍪 **Case Study** | **Genesis Market: Operation Cookie Monster** | Identity-as-a-Service, Infostealers (RedLine/Vidar), Session Cookie Hijacking, EA Breach, Splunk, Python Triage | Advanced | [Explore](./Case%20Study/Genesis%20Market/README.md) |
 | 🔒 **Git & GitHub** | **How to Use Git & GitHub Securely** | Essential Commands, Git 4-Zones, Ed25519 SSH, `gh` CLI, Signed Commits | All Levels | [Explore](./GitHub_Security/How_to_Use_GitHub_Securely_Complete_Guide.md) |
 | 🔒 **DevSecOps** | **GitHub Security & Hardening Masterclass** | Breach Case Studies (Uber/Toyota), Secret Scanning, Gitleaks, OIDC, Actions | All Levels | [Explore](./GitHub_Security/GitHub_Security_and_Hardening_Masterclass.md) |
