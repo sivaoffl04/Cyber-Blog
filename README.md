@@ -51,6 +51,8 @@ flowchart TD
 
     CaseStudies --> CS1["Genesis Market: Operation Cookie Monster"]
     CEH --> CEH1["Module 01: Intro to Ethical Hacking"]
+    CEH --> CEH2["Module 02: Footprinting & Recon"]
+    CEH --> CEH3["Module 03: Scanning Networks"]
 
     Tools --> T1["Nmap Complete Course"]
     Tools --> T2["John the Ripper Course"]
@@ -111,6 +113,8 @@ flowchart TD
 | Category | Module / Topic | Core Technologies | Level | Direct Link |
 | :--- | :--- | :--- | :---: | :---: |
 | 🎓 **CEH v13** | **Module 01: Introduction to Ethical Hacking** | InfoSec, CIA Triad, AAA, Attack Models, Kill Chains, Diamond Model, CTI, AI in Pentesting | All Levels | [Explore](./CEHv13/Module%2001/README.md) |
+| 🎓 **CEH v13** | **Module 02: Footprinting and Reconnaissance** | Passive/Active OSINT, Whois, DNS Recon, Google Dorking, Subdomain Harvesting, Email Tracking | All Levels | [Explore](./CEHv13/Module%2002/README.md) |
+| 🎓 **CEH v13** | **Module 03: Scanning Networks** | TCP Flags, 3-Way Handshake, SYN/Connect/Inverse Scans, Nmap, Hping3, Idle Scan, Checksums | All Levels | [Explore](./CEHv13/Module%2003/README.md) |
 | 🍪 **Case Study** | **Genesis Market: Operation Cookie Monster** | Identity-as-a-Service, Infostealers (RedLine/Vidar), Session Cookie Hijacking, EA Breach, Splunk, Python Triage | Advanced | [Explore](./Case%20Study/Genesis%20Market/README.md) |
 | 🔒 **Git & GitHub** | **How to Use Git & GitHub Securely** | Essential Commands, Git 4-Zones, Ed25519 SSH, `gh` CLI, Signed Commits | All Levels | [Explore](./GitHub_Security/How_to_Use_GitHub_Securely_Complete_Guide.md) |
 | 🔒 **DevSecOps** | **GitHub Security & Hardening Masterclass** | Breach Case Studies (Uber/Toyota), Secret Scanning, Gitleaks, OIDC, Actions | All Levels | [Explore](./GitHub_Security/GitHub_Security_and_Hardening_Masterclass.md) |

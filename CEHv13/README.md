@@ -12,7 +12,7 @@
   <b>Comprehensive, exam-oriented study guide, deep-dive technical architectures, attack methodologies, and defensive engineering playbooks for the EC-Council Certified Ethical Hacker (CEH v13) certification track.</b>
 </p>
 
-[🏠 Cyber-Blog Hub](../README.md) • [🚀 Module 01 Direct Link](./Module%2001/README.md) • [🤝 Contributing](../CONTRIBUTING.md)
+[🏠 Cyber-Blog Hub](../README.md) • [🚀 Module 01](./Module%2001/README.md) • [🚀 Module 02](./Module%2002/README.md) • [🚀 Module 03](./Module%2003/README.md) • [🤝 Contributing](../CONTRIBUTING.md)
 
 </div>
 
@@ -59,6 +59,8 @@ flowchart TD
     style P3 fill:#1e293b,stroke:#f59e0b,color:#fff
     style P4 fill:#1e293b,stroke:#10b981,color:#fff
     style M1 fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
+    style M2 fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
+    style M3 fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -68,8 +70,8 @@ flowchart TD
 | Module | Module Title | Primary Exam Focus & Key Concepts | Status | Study Notes |
 |:---:|:---|:---|:---:|:---:|
 | **01** | **Introduction to Ethical Hacking** | InfoSec, CIA Triad, AAA, Attack Models, Kill Chains, Diamond Model, CTI, AI in Pentesting | Complete | [View Notes](./Module%2001/README.md) |
-| **02** | **Footprinting and Reconnaissance** | Passive/Active OSINT, Whois, DNS Recon, Google Dorking, Subdomain Harvesting, Email Tracking | Upcoming | Planned |
-| **03** | **Scanning Networks** | Ping Sweeps, TCP 3-Way Handshake, SYN/FIN/XMAS Scans, Nmap Timing, OS Fingerprinting | Upcoming | Planned |
+| **02** | **Footprinting and Reconnaissance** | Passive/Active OSINT, Whois, DNS Recon, Google Dorking, Subdomain Harvesting, Email Tracking | Complete | [View Notes](./Module%2002/README.md) |
+| **03** | **Scanning Networks** | Ping Sweeps, TCP 3-Way Handshake, SYN/FIN/XMAS Scans, Nmap Timing, OS Fingerprinting | Complete | [View Notes](./Module%2003/README.md) |
 | **04** | **Enumeration** | NetBIOS, SMB, SNMP, LDAP, NTP, SMTP, DNS Zone Transfers, RPC Interrogation | Upcoming | Planned |
 | **05** | **Vulnerability Analysis** | Vulnerability Assessment Lifecycle, CVE, CVSS v3/v4 Metrics, Nessus, OpenVAS, Qualys | Upcoming | Planned |
 | **06** | **System Hacking** | Password Cracking, Buffer Overflows, Privilege Escalation, Clearing Logs, Pivoting, Rootkits | Upcoming | Planned |
@@ -103,6 +105,6 @@ EC-Council CEH v13 represents a fundamental paradigm shift from legacy manual pe
 
 <div align="center">
 
-<b>Begin Learning: [Explore Module 01 Study Notes](./Module%2001/README.md)</b>
+<b>Explore Modules: [Module 01: Introduction](./Module%2001/README.md) • [Module 02: Footprinting](./Module%2002/README.md) • [Module 03: Scanning Networks](./Module%2003/README.md)</b>
 
 </div>
