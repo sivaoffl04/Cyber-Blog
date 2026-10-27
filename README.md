@@ -96,6 +96,7 @@ flowchart TD
     Labs --> L12["Attack Emulation on ELK (HELK & Atomic Red Team)"]
     Labs --> L13["Kibana DNS Log Analysis (SecRepo CID 1191)"]
     Labs --> L14["ELK SSH Log Analysis (Multi-Server CID 1138)"]
+    Labs --> L15["Threat Detection with Wazuh & Sysmon"]
 
     style Hub fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#fff
     style Tools fill:#1e293b,stroke:#06b6d4,color:#fff
@@ -147,6 +148,7 @@ flowchart TD
 | 🎯 **Labs** | **Detecting Mimikatz Threat with Wazuh** | Wazuh Manager, Sysmon EID 1/8/10, LSASS Memory Dumping, Level 12 Rules | Hands-on | [Explore](./INE%20lab/Detecting%20Mimikatz%20Threat%20Using%20Sysmon%20and%20Wazuh/README.md) |
 | 🎯 **Labs** | **Detecting PsExec with Wazuh** | Wazuh SIEM, Sysmon Registry EID 12/13, Named Pipes EID 17/18, Lateral Movement | Hands-on | [Explore](./INE%20lab/Detecting%20PsExec%20with%20Wazuh/README.md) |
 | 🎯 **Labs** | **Malware Fundamentals (LockBit 2.0)** | Static PE Triage, HxD, BinText, PE-Tree, VirusTotal, GPO Abuse, Libsodium | Hands-on | [Explore](./INE%20lab/Malware%20Fundamentals/README.md) |
+| 🎯 **Labs** | **Threat Detection with Wazuh & Sysmon** | Wazuh Manager, Sysmon EID 1/8/10, Pass-The-Hash PsExec, Injection, Backdoor | Hands-on | [Explore](./INE%20lab/Threat%20Detection%20with%20Wazuh%20Sysmon/README.md) |
 | 👥 **Teams** | **🔴 Red Team Operations** | C2 Infrastructure, Evasion, Lateral Movement, AD Exploitation | Intermediate | [Explore](./Security_Team/Red_Team/README.md) |
 | 👥 **Teams** | **🔵 Blue Team Operations** | Threat Hunting, EDR Telemetry, SIEM Correlation, Hardening | Intermediate | [Explore](./Security_Team/Blue_Team/README.md) |
 | 👥 **Teams** | **🟣 Purple Team Methodology** | Adversary Emulation, Telemetry Validation, Sigma Rules | Intermediate | [Explore](./Security_Team/Purple_Team/README.md) |
@@ -269,6 +271,7 @@ Real-world SOC and threat hunting challenges documented with 100% verified flag 
 | **Kibana: Squid Log Analysis**<br>*(CID 1190)* | Open Squid proxy exploitation and pivoting (`squid-logs*`). Tracking Nmap `http-open-proxy`, internal subnet port scanning (11 ports), 3 live hosts, Nikto web scanning, FTP exfiltration (`billy`), and proxy credential cracking (`admin`). | 🟢 **10 of 10 Flags**<br>`192.161.225.4`, `11 ports`, `3 live hosts`, `billy`, `admin`, `28s` | [Read Walkthrough](./INE%20lab/Kibana%20Squid%20Log%20Analysis/README.md) |
 | **MongoDB: Basics**<br>*(CID 230)* | NoSQL database cluster reconnaissance on MongoDB 4.x (`localhost:27017`). Enumerating databases, extracting CTF flags, querying user emails, filtering US Census zip records with `$gt`, `$and`, `$or`, regex, and aggregation pipelines. | 🟢 **12 of 12 Questions**<br>`7 dbs`, `fl4g_f0r_m0ng0_db`, `Heather email`, `5785 pop>15k`, `ADDY`, `8462.79` | [Read Walkthrough](./INE%20lab/MongoDB%20Basics/README.md) |
 | **Threat Detection with Elasticsearch & Kibana**<br>*(Red-to-Blue Lab)* | End-to-end detection engineering on HELK (Kafka `10.0.21.29:9092`), Windows Server 2019, Sysmon, and Winlogbeat. Emulating Rejetto HFS 2.3 RCE, Meterpreter VBS persistence, and Mimikatz LSASS dumps, with full Kibana correlation. | 🟢 **8 of 8 Tasks**<br>`Kafka Ingestion`, `Rejetto HFS RCE`, `Meterpreter VBS`, `Mimikatz Dump`, `Sysmon Dashboard` | [Read Walkthrough](./INE%20lab/Threat%20Detection%20With%20Elasticsearch%20And%20Kibana/README.md) |
+| **Threat Detection with Wazuh & Sysmon**<br>*(Red-to-Blue SIEM)* | Enterprise Wazuh SIEM v4.x (`10.0.26.67`) & Sysmon on Windows Server 2019 (`10.0.18.168`). Custom Mimikatz rules (100000-100002), Sysmon group rule 220000, Kali Metasploit PsExec PTH, process migration to `explorer.exe`, and backdoor account creation (`wazuh-hacker`). | 🟢 **7 of 7 Tasks**<br>`Wazuh Agent MSI`, `Sysmon Export XML`, `EventChannel ossec.conf`, `Rules 100000-100002/220000`, `PsExec PTH`, `explorer.exe Injection`, `wazuh-hacker` | [Read Walkthrough](./INE%20lab/Threat%20Detection%20with%20Wazuh%20Sysmon/README.md) |
 
 ---
 

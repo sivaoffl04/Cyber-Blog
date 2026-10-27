@@ -35,6 +35,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **Kibana: Squid Log Analysis** | **CID 1190** | Network Telemetry / Proxy Forensics | Squid Access Logs (`squid-logs*`) | **T1090.002** (Open Proxy)<br>**T1046** (Network Service Scanning)<br>**T1572** (Protocol Tunneling)<br>**T1110.001** (Password Guessing) | 🟢 **100% Solved**<br>(10/10 Flags) | [View Solution](./Kibana%20Squid%20Log%20Analysis/README.md) |
 | **MongoDB: Basics** | **CID 230** | Infrastructure Attacks / NoSQL Injection | MongoDB 4.x (`admin`, `city`, `flag`, `users`) | **T1190** (Exploit Public App)<br>**T1087** (Account Discovery)<br>**T1083** (File & Directory Discovery)<br>**T1005** (Data from Local System) | 🟢 **100% Solved**<br>(12/12 Questions) | [View Solution](./MongoDB%20Basics/README.md) |
 | **Threat Detection with Elasticsearch & Kibana** | **SOC Lab** | Red-to-Blue Telemetry / Threat Hunting | Sysmon + Winlogbeat → HELK Kafka (`10.0.21.29:9092`) | **T1190** (Rejetto HFS Exploit)<br>**T1059.005** (VBScript)<br>**T1547.001** (Persistence Run Key)<br>**T1003.001** (LSASS Memory Dump) | 🟢 **100% Solved**<br>(8/8 Tasks) | [View Solution](./Threat%20Detection%20With%20Elasticsearch%20And%20Kibana/README.md) |
+| **Threat Detection with Wazuh and Sysmon** | **SOC Lab** | Red-to-Blue Telemetry / SIEM Detection | Sysmon (EIDs 1, 8, 10, 13) + Wazuh Manager (`10.0.26.67`) | **T1021.002** (SMB PsExec)<br>**T1078.003** (Pass-The-Hash)<br>**T1055.001** (Remote Injection)<br>**T1136.001** (Local Account) | 🟢 **100% Solved**<br>(7/7 Tasks) | [View Solution](./Threat%20Detection%20with%20Wazuh%20Sysmon/README.md) |
 
 ---
 
@@ -193,6 +194,13 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Platform & Stack:** Hunting ELK (HELK) on Ubuntu 20.04 (`10.0.21.29:9092` Kafka), Windows Server 2019 (`demo2.ine.local`), Kali Linux, Metasploit, Sysmon, Winlogbeat.
 * **Scenario:** End-to-end detection engineering and red-to-blue emulation. Configuring Windows detailed process auditing, deploying SwiftOnSecurity Sysmon, establishing an enterprise Kafka-to-Elasticsearch telemetry pipeline, executing Rejetto HFS 2.3 RCE, planting Meterpreter VBS persistence, dumping LSASS credentials via Mimikatz, and triaging all attacks in Kibana.
 * **Key Tasks:** Starting containerized HELK stack (`./helk_install.sh`); enabling Group Policy Detailed Tracking, Process Creation with command line, and Task Scheduler operational logs; deploying Sysmon service (`Sysmon.exe -i sysmonconfig-export.xml`); configuring Winlogbeat to point to Kafka broker `10.0.21.29:9092`; exploiting Rejetto HFS 2.3 via Metasploit (`rejetto_hfs_exec`) and elevating to `SYSTEM`; deploying persistence backdoor (`douwxodqwof.vbs`); dumping NTLM hashes with Mimikatz (`sekurlsa::logonPasswords`); and correlating the entire breach footprint across Kibana Sysmon Dashboards and Discover queries.
+
+---
+
+### 26. [Threat Detection with Wazuh and Sysmon](./Threat%20Detection%20with%20Wazuh%20Sysmon/README.md)
+* **Platform & Stack:** Wazuh Manager & Agent v4.x on Ubuntu 20.04 (`10.0.26.67`), Windows Server 2019 (`10.0.18.168`), Microsoft Sysmon v14.x (SwiftOnSecurity), Kali Linux, Metasploit Framework.
+* **Scenario:** Enterprise host telemetry forwarding, custom SIEM XML rule authoring, adversary attack emulation via Pass-The-Hash lateral movement, in-memory thread injection, and rogue account provisioning with full Wazuh Security Events UI validation.
+* **Key Tasks:** Installing Wazuh Agent MSI silently with manager registration flags; installing SwiftOnSecurity Sysmon configuration; binding `Microsoft-Windows-Sysmon/Operational` eventchannel with client buffering in `ossec.conf`; crafting custom Level 12 XML detection rules (`100000`, `100001`, `100002`) targeting Mimikatz execution, remote thread injection, and LSASS handle access; creating high-level group rule `220000` to promote all Sysmon alerts to the Wazuh Security Events UI; emulating lateral movement via Metasploit `windows/smb/psexec` using captured NTLM hashes (`00000000000000000000000000000000:5c4d59391f656d5958dab124ffeabc20`); executing thread injection and migrating Meterpreter into `explorer.exe`; provisioning backdoor administrator `wazuh-hacker`; and triaging 26+ correlated alerts across the Wazuh Manager dashboard.
 
 ---
 
