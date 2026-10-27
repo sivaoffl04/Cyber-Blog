@@ -24,7 +24,7 @@ font_body = ImageFont.truetype("C:/Windows/Fonts/segoeui.ttf", 14)
 font_small = ImageFont.truetype("C:/Windows/Fonts/segoeui.ttf", 12)
 font_mono = ImageFont.truetype("C:/Windows/Fonts/consola.ttf", 14)
 font_mono_bold = ImageFont.truetype("C:/Windows/Fonts/consolab.ttf", 15)
-font_mono_small = ImageFont.truetype("C:/Windows/Fonts/consola.ttf", 12)
+font_mono_small = ImageFont.truetype("C:/Windows/Fonts/consola.ttf", 11)
 font_badge = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", 12)
 
 def draw_grid_background(draw, width, height, grid_size=40, line_color=(20, 30, 55)):
@@ -196,7 +196,7 @@ def generate_workflow_map():
         draw.text((cx + 20, cy + 18), s["stage"], fill=s["accent"], font=font_badge)
 
         # Title
-        draw.text((cx + 14, cy + 46), s["title"], fill=(248, 250, 252), font=font_title)
+        draw.text((cx + 14, cy + 46), s["title"], fill=(248, 250, 252), font=font_subtitle)
 
         # Filter box
         draw.rounded_rectangle([(cx + 12, cy + 82), (cx + card_w - 12, cy + 122)], radius=6, fill=(11, 17, 32), outline=(30, 41, 59), width=1)

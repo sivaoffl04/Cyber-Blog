@@ -34,6 +34,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **ELK: SSH Logs** | **CID 1138** | Linux Host Telemetry / SSH Brute-Force | OpenSSH Daemon Logs (`ssh-log*`) | **T1110.001** (Password Guessing)<br>**T1110.003** (Password Spraying)<br>**T1078.003** (Local Accounts)<br>**T1021.004** (SSH)<br>**T1571** (Non-Standard Port) | 🟢 **100% Solved**<br>(10/10 Flags) | [View Solution](./ELK%20SSH%20Logs/README.md) |
 | **Kibana: Squid Log Analysis** | **CID 1190** | Network Telemetry / Proxy Forensics | Squid Access Logs (`squid-logs*`) | **T1090.002** (Open Proxy)<br>**T1046** (Network Service Scanning)<br>**T1572** (Protocol Tunneling)<br>**T1110.001** (Password Guessing) | 🟢 **100% Solved**<br>(10/10 Flags) | [View Solution](./Kibana%20Squid%20Log%20Analysis/README.md) |
 | **MongoDB: Basics** | **CID 230** | Infrastructure Attacks / NoSQL Injection | MongoDB 4.x (`admin`, `city`, `flag`, `users`) | **T1190** (Exploit Public App)<br>**T1087** (Account Discovery)<br>**T1083** (File & Directory Discovery)<br>**T1005** (Data from Local System) | 🟢 **100% Solved**<br>(12/12 Questions) | [View Solution](./MongoDB%20Basics/README.md) |
+| **Threat Detection with Elasticsearch & Kibana** | **SOC Lab** | Red-to-Blue Telemetry / Threat Hunting | Sysmon + Winlogbeat → HELK Kafka (`10.0.21.29:9092`) | **T1190** (Rejetto HFS Exploit)<br>**T1059.005** (VBScript)<br>**T1547.001** (Persistence Run Key)<br>**T1003.001** (LSASS Memory Dump) | 🟢 **100% Solved**<br>(8/8 Tasks) | [View Solution](./Threat%20Detection%20With%20Elasticsearch%20And%20Kibana/README.md) |
 
 ---
 
@@ -185,6 +186,13 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Platform & Stack:** MongoDB 4.x Database Shell (`localhost:27017`), US Census Bureau `zips.json` dataset (29,353 records).
 * **Scenario:** Database cluster reconnaissance, NoSQL document filtering, relational comparison operations, logical query conjunction/disjunction, regular expression indexing, cursor pagination, and server-side aggregation pipelines.
 * **Key Tasks:** Enumerating 7 cluster databases (`show dbs`); auditing collection namespaces to identify 3 collections in database `users`; extracting hidden CTF flag (`fl4g_f0r_m0ng0_db`) from isolated `flag` collection; querying user profile documents to extract email address for user `Heather` (`mauris.sapien@eueratsemper.ca`); calculating collection cardinality for archived users (`179`); filtering US Census records for Massachusetts (`MA` - 474 cities); applying relational comparison operator `$gt` for population > 15,000 (5,785 cities); executing compound logical `$and` queries (Indiana pop > 15,000 = 130 cities) and `$or` queries (pop < 100 or Indiana = 1,376 cities); regex prefix matching (`^AN.*` = 154 cities); offset pagination via `.sort({"city":1}).skip(100).limit(1)` to extract 101st city (`ADDY`); and constructing an aggregation pipeline with `$group` and `$avg` to calculate average population (`8462.79`).
+
+---
+
+### 25. [Threat Detection with Elasticsearch and Kibana](./Threat%20Detection%20With%20Elasticsearch%20And%20Kibana/README.md)
+* **Platform & Stack:** Hunting ELK (HELK) on Ubuntu 20.04 (`10.0.21.29:9092` Kafka), Windows Server 2019 (`demo2.ine.local`), Kali Linux, Metasploit, Sysmon, Winlogbeat.
+* **Scenario:** End-to-end detection engineering and red-to-blue emulation. Configuring Windows detailed process auditing, deploying SwiftOnSecurity Sysmon, establishing an enterprise Kafka-to-Elasticsearch telemetry pipeline, executing Rejetto HFS 2.3 RCE, planting Meterpreter VBS persistence, dumping LSASS credentials via Mimikatz, and triaging all attacks in Kibana.
+* **Key Tasks:** Starting containerized HELK stack (`./helk_install.sh`); enabling Group Policy Detailed Tracking, Process Creation with command line, and Task Scheduler operational logs; deploying Sysmon service (`Sysmon.exe -i sysmonconfig-export.xml`); configuring Winlogbeat to point to Kafka broker `10.0.21.29:9092`; exploiting Rejetto HFS 2.3 via Metasploit (`rejetto_hfs_exec`) and elevating to `SYSTEM`; deploying persistence backdoor (`douwxodqwof.vbs`); dumping NTLM hashes with Mimikatz (`sekurlsa::logonPasswords`); and correlating the entire breach footprint across Kibana Sysmon Dashboards and Discover queries.
 
 ---
 
