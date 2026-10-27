@@ -32,6 +32,8 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **SOC-1: Detecting Malware** | **Incident Response** | Wazuh FIM & Sysmon / WannaCry | Wazuh syscheck & Sysmon EID 1 (Process Creation) | **T1204.002** (Malicious File)<br>**T1059.003** (Command Shell)<br>**T1547.001** (Registry Run)<br>**T1490** (Inhibit Recovery)<br>**T1486** (Data Encrypted) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./SOC-1%20Detecting%20Malware/README.md) |
 | **Malware Analysis: Trojan** | **Malware Analysis** | Disguised PDF Dropper / REMnux | `base64dump.py`, `scite`, `iconv`, VirusTotal | **T1036.008** (Masquerade File Type)<br>**T1027** (Obfuscated Command)<br>**T1059.001** (PowerShell)<br>**T1564.003** (Hidden Window)<br>**T1105** (Ingress Tool Transfer) | 🟢 **100% Solved**<br>(Payload Deobfuscated) | [View Solution](./Malware%20Analysis%20Trojan/README.md) |
 | **ELK: SSH Logs** | **CID 1138** | Linux Host Telemetry / SSH Brute-Force | OpenSSH Daemon Logs (`ssh-log*`) | **T1110.001** (Password Guessing)<br>**T1110.003** (Password Spraying)<br>**T1078.003** (Local Accounts)<br>**T1021.004** (SSH)<br>**T1571** (Non-Standard Port) | 🟢 **100% Solved**<br>(10/10 Flags) | [View Solution](./ELK%20SSH%20Logs/README.md) |
+| **Kibana: Squid Log Analysis** | **CID 1190** | Network Telemetry / Proxy Forensics | Squid Access Logs (`squid-logs*`) | **T1090.002** (Open Proxy)<br>**T1046** (Network Service Scanning)<br>**T1572** (Protocol Tunneling)<br>**T1110.001** (Password Guessing) | 🟢 **100% Solved**<br>(10/10 Flags) | [View Solution](./Kibana%20Squid%20Log%20Analysis/README.md) |
+| **MongoDB: Basics** | **CID 230** | Infrastructure Attacks / NoSQL Injection | MongoDB 4.x (`admin`, `city`, `flag`, `users`) | **T1190** (Exploit Public App)<br>**T1087** (Account Discovery)<br>**T1083** (File & Directory Discovery)<br>**T1005** (Data from Local System) | 🟢 **100% Solved**<br>(12/12 Questions) | [View Solution](./MongoDB%20Basics/README.md) |
 
 ---
 
@@ -169,6 +171,20 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Platform & Stack:** Elasticsearch & Kibana (`http://localhost:5601`), OpenSSH Server Telemetry (`ssh-log*`).
 * **Scenario:** Multi-server SSH brute-force campaign forensics, authentication mechanism profiling, credential compromise verification, and breach timeline reconstruction.
 * **Key Tasks:** Identifying 3 distinct attacking machines (`192.148.107.6`, `192.148.107.7`, `192.148.107.8`); constructing vertical bar charts to isolate primary attacker `192.148.107.6` (~1,300 attempts); verifying attack exposure across all 3 SSH servers (`192.148.107.3`, `192.148.107.4`, `192.148.107.5`); building two-level nested concentric pie charts to correlate most targeted host (`192.148.107.4`) with top attacker (`192.148.107.6`); profiling 2 active authentication mechanisms (`password` & `publickey`); attributing unauthorized public key break-in to adversary `192.148.107.8`; verifying non-standard SSH daemon port (`3603`); confirming compromised user account (`administrator`); isolating peak log push timestamp (`16:17:58`) via Timelion time-series analysis; and identifying Patient Zero server (`192.148.107.3` / `ssh-server-3`).
+
+---
+
+### 23. [Kibana: Squid Log Analysis](./Kibana%20Squid%20Log%20Analysis/README.md)
+* **Platform & Stack:** Elasticsearch & Kibana (`http://localhost:5601`), Squid Access Logs (`squid-logs*`), Nmap, Nikto, Hydra.
+* **Scenario:** Open proxy exploitation, internal subnet discovery sweep, FTP directory-busting and credential brute-force, web vulnerability scanning, and authenticated SSH tunneling.
+* **Key Tasks:** Identifying initial open proxy verification probe from `192.161.225.4` using Nmap `http-open-proxy`; tracking internal host enumeration across `192.170.46.0/24` generating 328 HTTP 503 errors; constructing Terms aggregations to identify 11 scanned ports; identifying 3 live internal hosts (`192.170.46.1`, `192.170.46.4`, `192.170.46.5`); detecting Nikto web vulnerability scanner from `192.161.225.5` on web server port 80; extracting retrieved `/flag` file and FTP username `billy`; isolating unauthenticated open proxy SSH tunnel to `192.170.46.3:22`; attributing Hydra FTP dictionary attack to `192.161.225.6` (1,030 hits); tracking 45,017 failed proxy authentication attempts (HTTP 407) until user `admin` is compromised by `192.161.225.7`; and measuring authenticated SSH session duration (`28` seconds / 28,202 ms).
+
+---
+
+### 24. [MongoDB: Basics](./MongoDB%20Basics/README.md)
+* **Platform & Stack:** MongoDB 4.x Database Shell (`localhost:27017`), US Census Bureau `zips.json` dataset (29,353 records).
+* **Scenario:** Database cluster reconnaissance, NoSQL document filtering, relational comparison operations, logical query conjunction/disjunction, regular expression indexing, cursor pagination, and server-side aggregation pipelines.
+* **Key Tasks:** Enumerating 7 cluster databases (`show dbs`); auditing collection namespaces to identify 3 collections in database `users`; extracting hidden CTF flag (`fl4g_f0r_m0ng0_db`) from isolated `flag` collection; querying user profile documents to extract email address for user `Heather` (`mauris.sapien@eueratsemper.ca`); calculating collection cardinality for archived users (`179`); filtering US Census records for Massachusetts (`MA` - 474 cities); applying relational comparison operator `$gt` for population > 15,000 (5,785 cities); executing compound logical `$and` queries (Indiana pop > 15,000 = 130 cities) and `$or` queries (pop < 100 or Indiana = 1,376 cities); regex prefix matching (`^AN.*` = 154 cities); offset pagination via `.sort({"city":1}).skip(100).limit(1)` to extract 101st city (`ADDY`); and constructing an aggregation pipeline with `$group` and `$avg` to calculate average population (`8462.79`).
 
 ---
 
