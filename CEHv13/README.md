@@ -3,15 +3,15 @@
 ![CEH v13 Master AI-Powered Ethical Hacking Hero](./images/ceh_v13_master_hero_art.jpg)
 
 # 🛡️ Certified Ethical Hacker (CEH v13) Master Curriculum
-### Complete 20-Module Exam Study Notes • Technical Architectures • Adversary Tradecraft • AI-Driven Operations
+### Complete 13-Module Exam Study Notes • Technical Architectures • Official Courseware Slide Decks • AI-Driven Operations
 
 [![Certification](https://img.shields.io/badge/Certification-CEH%20v13%20(ANSI%2017024)-0078D4?style=for-the-badge&logo=shield)](https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/)
 [![EC-Council](https://img.shields.io/badge/Exam%20Code-312--50-red?style=for-the-badge&logo=target)](https://www.eccouncil.org/)
-[![Curriculum](https://img.shields.io/badge/Modules-20%20Modules-success?style=for-the-badge&logo=git)](./README.md)
+[![Curriculum](https://img.shields.io/badge/Modules-13%20Modules%20(With%20PDFs)-success?style=for-the-badge&logo=git)](./README.md)
 [![Status](https://img.shields.io/badge/Status-Actively%20Maintained-blueviolet?style=for-the-badge)](./README.md)
 
 <p align="center">
-  <b>Comprehensive, exam-oriented study guide, deep-dive technical architectures, attack methodologies, and defensive engineering playbooks for the EC-Council Certified Ethical Hacker (CEH v13) certification track.</b>
+  <b>Comprehensive, exam-oriented study guide, deep-dive technical architectures, attack methodologies, official PDF slide decks, and defensive engineering playbooks for the EC-Council Certified Ethical Hacker (CEH v13) certification track.</b>
 </p>
 
 [🏠 Cyber-Blog Hub](../README.md) • [🚀 Module 01](./Module%2001/README.md) • [🚀 Module 02](./Module%2002/README.md) • [🚀 Module 03](./Module%2003/README.md) • [🤝 Contributing](../CONTRIBUTING.md)
@@ -20,68 +20,62 @@
 
 ---
 
-### 💻 20-Module Interactive Curriculum Showcase
+### 💻 13-Module Interactive Curriculum Showcase
 
-The animated showcase below highlights each of the 20 official CEH v13 modules across all 4 operational phases—from foundational reconnaissance and host exploitation to web, wireless, IoT/OT, and cloud architectures:
+The animated showcase below highlights each of the 13 official CEH v13 modules across all 3 operational phases—from foundational reconnaissance and network scanning to host exploitation, malware, sniffing, DoS, evasion, and web server architectures:
 
-![CEH v13 All Modules Animated Overview](./images/cehv13_modules_overview.gif)
+![CEH v13 13-Module Animated Overview](./images/cehv13_modules_overview.gif)
 
 ---
 
-## 🗺️ CEH v13 Master 20-Module Architecture & Attack Lifecycle Roadmap
+## 🗺️ CEH v13 Master 13-Module Architecture & Attack Lifecycle Roadmap
 
-The master architectural infographic below provides an end-to-end visual breakdown of all 20 modules structured across the 4 core phases of the ethical hacking lifecycle—complete with primary attack vectors, industry toolchains, and exam focus objectives:
+The master architectural infographic below provides an end-to-end visual breakdown of all 13 official modules structured across the 3 core phases of the ethical hacking lifecycle—complete with primary attack vectors, industry toolchains, exam focus objectives, and AI-powered ethical hacking:
 
-![CEH v13 Complete 20-Module Architecture Roadmap](./images/ceh_v13_all_modules_roadmap.png)
+![CEH v13 Complete 13-Module Architecture Roadmap](./images/ceh_v13_all_modules_roadmap.png)
 
 ```mermaid
 flowchart TD
     CEH["🛡️ CEH v13 Master Track\n(EC-Council 312-50)"]
 
-    CEH --> P1["Phase 1: Foundations & Recon\n(Modules 01 - 05)"]
-    CEH --> P2["Phase 2: Network & Host Hacking\n(Modules 06 - 12)"]
-    CEH --> P3["Phase 3: Web, Wireless & Modern Tech\n(Modules 13 - 18)"]
-    CEH --> P4["Phase 4: Cloud & Cryptography\n(Modules 19 - 20)"]
+    CEH --> P1["Phase 1: Information Gathering & Recon\n(Modules 01 - 05)"]
+    CEH --> P2["Phase 2: Network & Host Exploitation\n(Modules 06 - 12)"]
+    CEH --> P3["Phase 3: Web Server & AI Security\n(Module 13 + AI Framework)"]
 
-    P1 --> M1["Module 01: Intro to Ethical Hacking & InfoSec\n(CIA, AAA, Kill Chains, CTI, AI)"]
-    P1 --> M2["Module 02: Footprinting & Reconnaissance"]
-    P1 --> M3["Module 03: Scanning Networks"]
-    P1 --> M4["Module 04: Enumeration"]
-    P1 --> M5["Module 05: Vulnerability Analysis"]
+    P1 --> M1["Module 01: Intro to Ethical Hacking\n(CIA, AAA, Kill Chains, CTI, AI)"]
+    P1 --> M2["Module 02: Footprinting & Reconnaissance\n(OSINT, Whois, DNS, Google Dorking)"]
+    P1 --> M3["Module 03: Scanning Networks\n(TCP Flags, SYN/Xmas Scans, Nmap)"]
+    P1 --> M4["Module 04: Enumeration\n(NetBIOS, SMB, SNMP, LDAP, NTP, SMTP)"]
+    P1 --> M5["Module 05: Vulnerability Analysis\n(CVSS v3/v4, CVE/NVD, Nessus, OpenVAS)"]
 
-    P2 --> M6["Module 06: System Hacking"]
-    P2 --> M7["Module 07: Malware Threats"]
-    P2 --> M8["Module 08: Sniffing"]
-    P2 --> M9["Module 09: Social Engineering"]
-    P2 --> M10["Module 10: Denial-of-Service"]
-    P2 --> M11["Module 11: Session Hijacking"]
-    P2 --> M12["Module 12: Evading IDS, Firewalls & Honeypots"]
+    P2 --> M6["Module 06: System Hacking\n(Pass-The-Hash, Buffer Overflows, PrivEsc)"]
+    P2 --> M7["Module 07: Malware Threats\n(Trojans, Ransomware, Crypters, Droppers)"]
+    P2 --> M8["Module 08: Sniffing\n(MAC Flooding, ARP Poisoning, Wireshark)"]
+    P2 --> M9["Module 09: Social Engineering\n(Phishing, Vishing, SET, Human Vectors)"]
+    P2 --> M10["Module 10: Denial-of-Service\n(SYN Floods, UDP Amplification, Slowloris)"]
+    P2 --> M11["Module 11: Session Hijacking\n(TCP Hijacking, XSS, Session Replay)"]
+    P2 --> M12["Module 12: Evading IDS, Firewalls & Honeypots\n(Fragmentation, Tunneling, Decoys)"]
 
-    P3 --> M13["Module 13: Hacking Web Servers"]
-    P3 --> M14["Module 14: Hacking Web Applications"]
-    P3 --> M15["Module 15: SQL Injection"]
-    P3 --> M16["Module 16: Hacking Wireless Networks"]
-    P3 --> M17["Module 17: Hacking Mobile Platforms"]
-    P3 --> M18["Module 18: IoT & OT Hacking"]
-
-    P4 --> M19["Module 19: Cloud Computing"]
-    P4 --> M20["Module 20: Cryptography"]
+    P3 --> M13["Module 13: Hacking Web Servers\n(Apache, Nginx, IIS, WebDAV, Smuggling)"]
+    P3 --> AI["⚡ AI-Powered Ethical Hacking\n(GenAI Recon, Exploit Synthesis, LLM Security)"]
 
     style CEH fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#fff
-    style P1 fill:#1e293b,stroke:#06b6d4,color:#fff
-    style P2 fill:#1e293b,stroke:#ef4444,color:#fff
-    style P3 fill:#1e293b,stroke:#f59e0b,color:#fff
-    style P4 fill:#1e293b,stroke:#10b981,color:#fff
+    style P1 fill:#1e293b,stroke:#00d4ff,color:#fff
+    style P2 fill:#1e293b,stroke:#ff385c,color:#fff
+    style P3 fill:#1e293b,stroke:#ffb300,color:#fff
     style M1 fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
     style M2 fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
     style M3 fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
+    style M4 fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
+    style M5 fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
+    style AI fill:#181238,stroke:#a855f7,stroke-width:2px,color:#fff
 ```
 
 ---
 
-## 🔬 Four Operational Phases Deep-Dive Infographics
+## 🔬 Three Operational Phases Deep-Dive Infographics
 
-Each of the four operational phases has been diagrammed in high resolution, articulating the specific attack vectors, protocol mechanics, tools, and exam focus areas for each module:
+Each of the three operational phases has been diagrammed in high resolution, articulating the specific attack vectors, protocol mechanics, tools, and exam focus areas for each module:
 
 ### 🔍 Phase 1: Information Gathering & Vulnerability Assessment (Modules 01 - 05)
 ![CEH v13 Phase 1 Overview](./images/phases/ceh_v13_phase_1_overview.png)
@@ -89,38 +83,30 @@ Each of the four operational phases has been diagrammed in high resolution, arti
 ### ⚔️ Phase 2: Network, Endpoint & System Exploitation (Modules 06 - 12)
 ![CEH v13 Phase 2 Overview](./images/phases/ceh_v13_phase_2_overview.png)
 
-### 🌐 Phase 3: Web, Wireless, Mobile & Modern Tech Exploitation (Modules 13 - 18)
+### 🌐 Phase 3: Web Server Exploitation & AI-Powered Security (Module 13 + AI Framework)
 ![CEH v13 Phase 3 Overview](./images/phases/ceh_v13_phase_3_overview.png)
-
-### ☁️ Phase 4: Cloud Computing, Modern Infrastructure & Cryptography (Modules 19 - 20)
-![CEH v13 Phase 4 Overview](./images/phases/ceh_v13_phase_4_overview.png)
 
 ---
 
-## 📑 20-Module Study Notes & Visual Explanations Index
+## 📑 13-Module Study Notes & Courseware Directory
 
-| Module | Module Title | Primary Exam Focus & Key Concepts | Visual Card | Study Notes |
-|:---:|:---|:---|:---:|:---:|
-| **01** | **Introduction to Ethical Hacking** | InfoSec, CIA Triad, AAA, Attack Models, Kill Chains, Diamond Model, CTI, AI in Pentesting | [🖼️ View Card](./images/modules/Module_01.png) | [View Notes](./Module%2001/README.md) |
-| **02** | **Footprinting and Reconnaissance** | Passive/Active OSINT, Whois, DNS Recon, Google Dorking, Subdomain Harvesting, Email Tracking | [🖼️ View Card](./images/modules/Module_02.png) | [View Notes](./Module%2002/README.md) |
-| **03** | **Scanning Networks** | Ping Sweeps, TCP 3-Way Handshake, SYN/FIN/XMAS Scans, Nmap Timing, OS Fingerprinting | [🖼️ View Card](./images/modules/Module_03.png) | [View Notes](./Module%2003/README.md) |
-| **04** | **Enumeration** | NetBIOS, SMB, SNMP, LDAP, NTP, SMTP, DNS Zone Transfers, RPC Interrogation | [🖼️ View Card](./images/modules/Module_04.png) | [View Notes](./Module%2004/README.md) |
-| **05** | **Vulnerability Analysis** | Vulnerability Assessment Lifecycle, CVE, CVSS v3/v4 Metrics, Nessus, OpenVAS, Qualys | [🖼️ View Card](./images/modules/Module_05.png) | [View Notes](./Module%2005/README.md) |
-| **06** | **System Hacking** | Password Cracking, Buffer Overflows, Privilege Escalation, Clearing Logs, Pivoting, Rootkits | [🖼️ View Card](./images/modules/Module_06.png) | [View Notes](./Module%2006/README.md) |
-| **07** | **Malware Threats** | Trojans, Viruses, Worms, Ransomware, Crypters, Code Obfuscation, Dynamic Sandboxing | [🖼️ View Card](./images/modules/Module_07.png) | [View Notes](./Module%2007/README.md) |
-| **08** | **Sniffing** | MAC Flooding, ARP Poisoning, DHCP Starvation, DNS Spoofing, Promiscuous Mode, Wireshark | [🖼️ View Card](./images/modules/Module_08.png) | [View Notes](./Module%2008/README.md) |
-| **09** | **Social Engineering** | Phishing, Spearphishing, Vishing, Smishing, Pretexting, Tailgating, Insider Threats | [🖼️ View Card](./images/modules/Module_09.png) | [View Notes](./Module%2009/README.md) |
-| **10** | **Denial-of-Service** | SYN Floods, UDP Amplification, Slowloris, Smurf, Botnets, Cloudflare Mitigation | [🖼️ View Card](./images/modules/Module_10.png) | [View Notes](./Module%2010/README.md) |
-| **11** | **Session Hijacking** | TCP Session Hijacking, Man-in-the-Browser, Cross-Site Scripting (XSS), Cookie Replay | [🖼️ View Card](./images/modules/Module_11.png) | [View Notes](./Module%2011/README.md) |
-| **12** | **Evading IDS, Firewalls, and Honeypots** | Packet Fragmentation, Decoys, IP Spoofing, Tunneling, Honeypot Detection | [🖼️ View Card](./images/modules/Module_12.png) | [View Notes](./Module%2012/README.md) |
-| **13** | **Hacking Web Servers** | Apache/Nginx Misconfigurations, Directory Traversal, WebDAV, HTTP Request Smuggling | [🖼️ View Card](./images/modules/Module_13.png) | [View Notes](./Module%2013/README.md) |
-| **14** | **Hacking Web Applications** | OWASP Top 10, Injection, Broken Access Control, CSRF, SSRF, IDOR, Web API Attacks | [🖼️ View Card](./images/modules/Module_14.png) | [View Notes](./Module%2014/README.md) |
-| **15** | **SQL Injection** | Classic In-Band (UNION), Blind (Boolean/Time-Based), Out-of-Band SQLi, SQLMap, Prepared Statements | [🖼️ View Card](./images/modules/Module_15.png) | [View Notes](./Module%2015/README.md) |
-| **16** | **Hacking Wireless Networks** | 802.11 Protocols, WPA/WPA2 4-Way Handshake, WPA3 SAE, Rogue APs, Evil Twin, Aircrack-ng | [🖼️ View Card](./images/modules/Module_16.png) | [View Notes](./Module%2016/README.md) |
-| **17** | **Hacking Mobile Platforms** | Android APK Reverse Engineering, JADX, MobSF, iOS Sandboxing, Mobile Device Management (MDM) | [🖼️ View Card](./images/modules/Module_17.png) | [View Notes](./Module%2017/README.md) |
-| **18** | **IoT and OT Hacking** | MQTT, Zigbee, Modbus, SCADA/ICS Protocols, Hardware JTAG/UART Interfacing | [🖼️ View Card](./images/modules/Module_18.png) | [View Notes](./Module%2018/README.md) |
-| **19** | **Cloud Computing** | AWS/Azure/GCP IAM Misconfigurations, S3 Bucket Leakage, Container Escapes, Serverless Security | [🖼️ View Card](./images/modules/Module_19.png) | [View Notes](./Module%2019/README.md) |
-| **20** | **Cryptography** | Symmetric (AES), Asymmetric (RSA/ECC), Hashing (SHA-2/3), PKI, Digital Signatures, Cryptanalysis | [🖼️ View Card](./images/modules/Module_20.png) | [View Notes](./Module%2020/README.md) |
+Every module includes official courseware PDF slide decks, exam-oriented study notes, and an explanatory visual card:
+
+| Module | Module Title | Primary Exam Focus & Key Concepts | Official Courseware PDF | Visual Card | Study Notes |
+|:---:|:---|:---|:---:|:---:|:---:|
+| **01** | **Introduction to Ethical Hacking** | InfoSec, CIA Triad, AAA, Attack Models, Kill Chains, Diamond Model, CTI, AI in Pentesting | [📄 View PDF](./Module%2001/CEHv13%20-%20Module%2001%20-%20Introduction%20to%20Ethical%20Hacking.pdf) | [🖼️ View Card](./images/modules/Module_01.png) | [View Notes](./Module%2001/README.md) |
+| **02** | **Footprinting and Reconnaissance** | Passive/Active OSINT, Whois, DNS Recon, Google Dorking, Subdomain Harvesting, Email Tracking | [📄 View PDF](./Module%2002/CEHv13%20-%20Module%2002%20-%20Footprinting%20and%20Reconnaissance.pdf) | [🖼️ View Card](./images/modules/Module_02.png) | [View Notes](./Module%2002/README.md) |
+| **03** | **Scanning Networks** | Ping Sweeps, TCP 3-Way Handshake, SYN/FIN/XMAS Scans, Nmap Timing, OS Fingerprinting | [📄 View PDF](./Module%2003/CEHv13%20-%20Module%2003%20-%20Scanning%20Networks.pdf) | [🖼️ View Card](./images/modules/Module_03.png) | [View Notes](./Module%2003/README.md) |
+| **04** | **Enumeration** | NetBIOS, SMB, SNMP, LDAP, NTP, SMTP, DNS Zone Transfers, RPC Interrogation | [📄 View PDF](./Module%2004/CEHv13%20-%20Module%2004%20-%20Enumeration.pdf) | [🖼️ View Card](./images/modules/Module_04.png) | [View Notes](./Module%2004/README.md) |
+| **05** | **Vulnerability Analysis** | Vulnerability Assessment Lifecycle, CVE, CVSS v3/v4 Metrics, Nessus, OpenVAS, Qualys | [📄 View PDF](./Module%2005/CEHv13%20-%20Module%2005%20-%20Vulnerability%20Analysis.pdf) | [🖼️ View Card](./images/modules/Module_05.png) | [View Notes](./Module%2005/README.md) |
+| **06** | **System Hacking** | Password Cracking, Buffer Overflows, Privilege Escalation, Clearing Logs, Pivoting, Rootkits | [📄 Part 1](./Module%2006/CEHv13%20-%20Module%2006%20-%20System%20Hacking%20Part%201.pdf)<br>[📄 Part 2](./Module%2006/CEHv13%20-%20Module%2006%20-%20System%20Hacking%20Part%202.pdf)<br>[📄 Part 3](./Module%2006/CEHv13%20-%20Module%2006%20-%20System%20Hacking%20Part%203.pdf) | [🖼️ View Card](./images/modules/Module_06.png) | [View Notes](./Module%2006/README.md) |
+| **07** | **Malware Threats** | Trojans, Viruses, Worms, Ransomware, Crypters, Code Obfuscation, Dynamic Sandboxing | [📄 Part 1](./Module%2007/CEHv13%20-%20Module%2007%20-%20Malware%20Threats%20Part%201.pdf)<br>[📄 Part 2](./Module%2007/CEHv13%20-%20Module%2007%20-%20Malware%20Threats%20Part%202.pdf) | [🖼️ View Card](./images/modules/Module_07.png) | [View Notes](./Module%2007/README.md) |
+| **08** | **Sniffing** | MAC Flooding, ARP Poisoning, DHCP Starvation, DNS Spoofing, Promiscuous Mode, Wireshark | [📄 View PDF](./Module%2008/CEHv13%20-%20Module%2008%20-%20Sniffing.pdf) | [🖼️ View Card](./images/modules/Module_08.png) | [View Notes](./Module%2008/README.md) |
+| **09** | **Social Engineering** | Phishing, Spearphishing, Vishing, Smishing, Pretexting, Tailgating, Insider Threats | [📄 View PDF](./Module%2009/CEHv13%20-%20Module%2009%20-%20Social%20Engineering.pdf) | [🖼️ View Card](./images/modules/Module_09.png) | [View Notes](./Module%2009/README.md) |
+| **10** | **Denial-of-Service** | SYN Floods, UDP Amplification, Slowloris, Smurf, Botnets, Cloudflare Mitigation | [📄 View PDF](./Module%2010/CEHv13%20-%20Module%2010%20-%20Denial-of-Service.pdf) | [🖼️ View Card](./images/modules/Module_10.png) | [View Notes](./Module%2010/README.md) |
+| **11** | **Session Hijacking** | TCP Session Hijacking, Man-in-the-Browser, Cross-Site Scripting (XSS), Cookie Replay | [📄 View PDF](./Module%2011/CEHv13%20-%20Module%2011%20-%20Session%20Hijacking.pdf) | [🖼️ View Card](./images/modules/Module_11.png) | [View Notes](./Module%2011/README.md) |
+| **12** | **Evading IDS, Firewalls, and Honeypots** | Packet Fragmentation, Decoys, IP Spoofing, Tunneling, Honeypot Detection | [📄 View PDF](./Module%2012/CEHv13%20-%20Module%2012%20-%20Evading%20IDS,%20Firewalls,%20and%20Honeypots.pdf) | [🖼️ View Card](./images/modules/Module_12.png) | [View Notes](./Module%2012/README.md) |
+| **13** | **Hacking Web Servers** | Apache/Nginx Misconfigurations, Directory Traversal, WebDAV, HTTP Request Smuggling | [📄 View PDF](./Module%2013/CEHv13%20-%20Module%2013%20-%20Hacking%20Web%20Servers.pdf) | [🖼️ View Card](./images/modules/Module_13.png) | [View Notes](./Module%2013/README.md) |
 
 ---
 
@@ -139,6 +125,6 @@ EC-Council CEH v13 represents a fundamental paradigm shift from legacy manual pe
 
 <div align="center">
 
-<b>Explore Modules: [Module 01: Introduction](./Module%2001/README.md) • [Module 02: Footprinting](./Module%2002/README.md) • [Module 03: Scanning Networks](./Module%2003/README.md)</b>
+<b>Explore Modules: [Module 01: Introduction](./Module%2001/README.md) • [Module 02: Footprinting](./Module%2002/README.md) • [Module 03: Scanning Networks](./Module%2003/README.md) • [Module 13: Web Servers](./Module%2013/README.md)</b>
 
 </div>

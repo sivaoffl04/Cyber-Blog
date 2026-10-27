@@ -115,7 +115,7 @@ flowchart TD
 
 | Category | Module / Topic | Core Technologies | Level | Direct Link |
 | :--- | :--- | :--- | :---: | :---: |
-| 🎓 **CEH v13** | **Master Curriculum (All 20 Modules)** | ANSI 17024 Accredited, 4-Phase Architecture, AI-Powered Ethical Hacking, Exam 312-50 | All Levels | [Explore Hub](./CEHv13/README.md) |
+| 🎓 **CEH v13** | **Core Curriculum (Modules 01 - 13)** | ANSI 17024 Accredited, 3-Phase Architecture, AI-Powered Ethical Hacking, Exam 312-50 | All Levels | [Explore Hub](./CEHv13/README.md) |
 | 🎓 **CEH v13** | **Module 01: Introduction to Ethical Hacking** | InfoSec, CIA Triad, AAA, Attack Models, Kill Chains, Diamond Model, CTI, AI in Pentesting | All Levels | [Explore](./CEHv13/Module%2001/README.md) |
 | 🎓 **CEH v13** | **Module 02: Footprinting and Reconnaissance** | Passive/Active OSINT, Whois, DNS Recon, Google Dorking, Subdomain Harvesting, Email Tracking | All Levels | [Explore](./CEHv13/Module%2002/README.md) |
 | 🎓 **CEH v13** | **Module 03: Scanning Networks** | TCP Flags, 3-Way Handshake, SYN/Connect/Inverse Scans, Nmap, Hping3, Idle Scan, Checksums | All Levels | [Explore](./CEHv13/Module%2003/README.md) |
