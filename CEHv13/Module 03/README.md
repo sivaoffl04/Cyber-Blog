@@ -1,5 +1,7 @@
 <div align="center">
 
+![CEH v13 Module 03 Banner](./images/banner.jpg)
+
 # 🛡️ CEH v13 — Module 03: Scanning Networks
 ### Certified Ethical Hacker (CEH) Exam Notes • TCP/IP Mechanics • Nmap & Hping3 • Stealth & Idle Scanning • Packet Crafting
 

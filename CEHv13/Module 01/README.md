@@ -1,5 +1,7 @@
 <div align="center">
 
+![CEH v13 Module 01 Banner](./images/banner.jpg)
+
 # 🛡️ CEH v13 — Module 01: Introduction to Ethical Hacking
 ### Certified Ethical Hacker (CEH) Exam Notes • Information Security Fundamentals • Attack Methodologies • Cyber Kill Chains • CTI & AI
 

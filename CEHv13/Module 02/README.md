@@ -1,5 +1,7 @@
 <div align="center">
 
+![CEH v13 Module 02 Banner](./images/banner.jpg)
+
 # 🛡️ CEH v13 — Module 02: Footprinting and Reconnaissance
 ### Certified Ethical Hacker (CEH) Exam Notes • OSINT Frameworks • Google Dorking • DNS & Whois Interrogation • Network Range Discovery • Email Tracking • AI-Driven Recon
 
