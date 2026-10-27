@@ -95,6 +95,7 @@ flowchart TD
     Labs --> L11["PCAP Analysis With Zeek (Malware Forensics)"]
     Labs --> L12["Attack Emulation on ELK (HELK & Atomic Red Team)"]
     Labs --> L13["Kibana DNS Log Analysis (SecRepo CID 1191)"]
+    Labs --> L14["ELK SSH Log Analysis (Multi-Server CID 1138)"]
 
     style Hub fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#fff
     style Tools fill:#1e293b,stroke:#06b6d4,color:#fff
@@ -131,6 +132,7 @@ flowchart TD
 | 🎯 **Labs** | **Kibana: Event Logs II (CID 1185)** | Sysmon EID 3, Active Directory, `Invoke-UserHunter`, LDAP/SMB | Hands-on | [Explore](./INE%20lab/Kibana%20Windows%20Event%20Logs%20II/README.md) |
 | 🎯 **Labs** | **Kibana: Event Logs III (CID 1186)** | Sysmon EID 1, IIS Webshell, In-Memory XOR Decryption, `appcmd` | Hands-on | [Explore](./INE%20lab/Kibana%20Windows%20Event%20Logs%20III/README.md) |
 | 🎯 **Labs** | **Kibana: DNS Log Analysis (CID 1191)** | SecRepo MACCDC 2012, Zeek DNS, AXFR Zone Transfer, Covert TXT, NXDOMAIN Storm | Hands-on | [Explore](./INE%20lab/Kibana%20DNS%20log%20analysis/README.md) |
+| 🎯 **Labs** | **ELK: SSH Logs (CID 1138)** | OpenSSH Telemetry, Brute-Force Spray, Auth Failure, Timelion Spike, Pubkey Auth | Hands-on | [Explore](./INE%20lab/ELK%20SSH%20Logs/README.md) |
 | 🎯 **Labs** | **Log Anomaly Detection (CID 141)** | Web Server Access Logs, Cardinality Profiling, RFC Violations, Outliers | Hands-on | [Explore](./INE%20lab/Log%20Anomaly%20Detection%20Basics/README.md) |
 | 🎯 **Labs** | **Compromised Credentials** | Windows Security EID 4625/4624, Sysmon EID 3, SMB Password Spray | Hands-on | [Explore](./INE%20lab/Compromised%20Credentials/README.md) |
 | 🎯 **Labs** | **Malicious User Behaviour** | Linux Credential Audit, ClamAV Malware Scan, Rogue Netcat Sockets | Hands-on | [Explore](./INE%20lab/Malicious%20User%20Behaviour%20Analysis/README.md) |

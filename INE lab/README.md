@@ -31,8 +31,7 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 | **SOC-1: Scanning for IOCs** | **Incident Response** | Host Forensics / IOC Triage | LOKI IOC Scanner, TheHive 5, VirusTotal | **T1059.001** (PowerShell)<br>**T1547.001** (Startup Folder)<br>**T1562.001** (Disable Tools)<br>**T1003.002** (SAM Dump)<br>**T1003** (Mimikatz) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./SOC-1%20Scanning%20for%20IOCs/README.md) |
 | **SOC-1: Detecting Malware** | **Incident Response** | Wazuh FIM & Sysmon / WannaCry | Wazuh syscheck & Sysmon EID 1 (Process Creation) | **T1204.002** (Malicious File)<br>**T1059.003** (Command Shell)<br>**T1547.001** (Registry Run)<br>**T1490** (Inhibit Recovery)<br>**T1486** (Data Encrypted) | 🟢 **100% Solved**<br>(Escalated to L2) | [View Solution](./SOC-1%20Detecting%20Malware/README.md) |
 | **Malware Analysis: Trojan** | **Malware Analysis** | Disguised PDF Dropper / REMnux | `base64dump.py`, `scite`, `iconv`, VirusTotal | **T1036.008** (Masquerade File Type)<br>**T1027** (Obfuscated Command)<br>**T1059.001** (PowerShell)<br>**T1564.003** (Hidden Window)<br>**T1105** (Ingress Tool Transfer) | 🟢 **100% Solved**<br>(Payload Deobfuscated) | [View Solution](./Malware%20Analysis%20Trojan/README.md) |
-
-
+| **ELK: SSH Logs** | **CID 1138** | Linux Host Telemetry / SSH Brute-Force | OpenSSH Daemon Logs (`ssh-log*`) | **T1110.001** (Password Guessing)<br>**T1110.003** (Password Spraying)<br>**T1078.003** (Local Accounts)<br>**T1021.004** (SSH)<br>**T1571** (Non-Standard Port) | 🟢 **100% Solved**<br>(10/10 Flags) | [View Solution](./ELK%20SSH%20Logs/README.md) |
 
 ---
 
@@ -163,6 +162,13 @@ Each walkthrough includes real-world MITRE ATT&CK technique mappings, raw teleme
 * **Platform & Stack:** Elasticsearch & Kibana (`http://localhost:5601`), Zeek DNS Telemetry (`logstash-*`), SecRepo MACCDC 2012 Dataset.
 * **Scenario:** Comprehensive SOC threat hunting and network forensics across 280,000+ DNS events to uncover covert channels, protocol abuse, and reconnaissance activities.
 * **Key Tasks:** Identifying the top queried domain (`teredo.ipv6.microsoft.com` - 17,219 requests); profiling scanner anomalies with empty DNS questions to isolate host `192.168.202.78` (13,016 requests); diagnosing root cause of DNS server failure returning 99.2% NXDOMAIN responses (`192.168.207.4`) and isolating max NXDOMAIN client `192.168.202.103`; building vertical bar charts to identify top sender `10.10.117.210` (212,277 requests); tracking internal network topology sweeps via reverse DNS PTR lookups (`192.168.202.83` with 11,540 `*in-addr.arpa` queries); auditing 440 unauthorized AXFR DNS zone transfers; and extracting a covert DNS C2 payload (`You’ve been pwned`) in an Apple subdomain TXT record alongside its Zeek connection identifier (`CmjiklOm3bnHgctw`).
+
+---
+
+### 22. [ELK: SSH Log Analysis](./ELK%20SSH%20Logs/README.md)
+* **Platform & Stack:** Elasticsearch & Kibana (`http://localhost:5601`), OpenSSH Server Telemetry (`ssh-log*`).
+* **Scenario:** Multi-server SSH brute-force campaign forensics, authentication mechanism profiling, credential compromise verification, and breach timeline reconstruction.
+* **Key Tasks:** Identifying 3 distinct attacking machines (`192.148.107.6`, `192.148.107.7`, `192.148.107.8`); constructing vertical bar charts to isolate primary attacker `192.148.107.6` (~1,300 attempts); verifying attack exposure across all 3 SSH servers (`192.148.107.3`, `192.148.107.4`, `192.148.107.5`); building two-level nested concentric pie charts to correlate most targeted host (`192.148.107.4`) with top attacker (`192.148.107.6`); profiling 2 active authentication mechanisms (`password` & `publickey`); attributing unauthorized public key break-in to adversary `192.148.107.8`; verifying non-standard SSH daemon port (`3603`); confirming compromised user account (`administrator`); isolating peak log push timestamp (`16:17:58`) via Timelion time-series analysis; and identifying Patient Zero server (`192.148.107.3` / `ssh-server-3`).
 
 ---
 
