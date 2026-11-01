@@ -1,0 +1,18 @@
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# CEH Courseware PDFs in Modules 14-20 (local reference, exceeds GitHub 100MB file limit)
+CEHv13/Module 14/*.pdf
+CEHv13/Module 15/*.pdf
+CEHv13/Module 16/*.pdf
+CEHv13/Module 17/*.pdf
+CEHv13/Module 18/*.pdf
+CEHv13/Module 19/*.pdf
+CEHv13/Module 20/*.pdf
