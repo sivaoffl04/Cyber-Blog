@@ -15,7 +15,7 @@
   <b>Authoritative, exam-oriented study guide and reference architecture for CEH v13 Module 16: Hacking Wireless Networks. Covers IEEE 802.11 physical standards, channel architectures (1, 6, 11), wireless frame categories (Management, Control, Data), WEP IV reuse vulnerabilities, WPA/WPA2 CCMP mechanics and 4-Way Handshake offline cracking, WPA3 SAE (Dragonfly) forward secrecy, WPS PIN flaws (Reaver/Pixie Dust), Rogue APs and Evil Twin captive portals, the Aircrack-ng offensive suite, Bluetooth attacks (Bluejacking vs. Bluesnarfing vs. Bluebugging), and WIPS defensive hardening.</b>
 </p>
 
-[📖 Module Hub](../README.md) • [🧰 Network Analysis Tools](../../tools/README.md) • [🗺️ Knowledge Base Index](../../README.md)
+[📖 Module Hub](../README.md) • [📋 PDF Reference](./CEHv13%20-%20Module%2016%20-%20Hacking%20Wireless%20Networks.pdf) • [🧰 Network Analysis Tools](../../tools/README.md) • [🗺️ Knowledge Base Index](../../README.md)
 
 </div>
 

@@ -15,7 +15,7 @@
   <b>Authoritative, exam-oriented study guide and reference architecture for CEH v13 Module 17: Hacking Mobile Platforms. Covers Android OS architecture (Linux Kernel, ART, DEX bytecode) and iOS system defenses (Darwin kernel, FairPlay DRM, sandboxing), APK decompilation and Smali tampering (apktool, jadx, apksigner), iOS jailbreak mechanics (Checkm8 BootROM exploit), IPC interrogation with Drozer, runtime hooking and SSL pinning bypass via Frida and Objection, automated mobile auditing with MobSF, and enterprise MDM controls.</b>
 </p>
 
-[📖 Module Hub](../README.md) • [🧰 Mobile Pentesting Tools](../../tools/README.md) • [🗺️ Knowledge Base Index](../../README.md)
+[📖 Module Hub](../README.md) • [📋 PDF Reference](./CEHv13%20-%20Module%2017%20-%20Hacking%20Mobile%20Platforms.pdf) • [🧰 Mobile Pentesting Tools](../../tools/README.md) • [🗺️ Knowledge Base Index](../../README.md)
 
 </div>
 
