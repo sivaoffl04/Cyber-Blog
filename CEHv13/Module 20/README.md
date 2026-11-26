@@ -15,7 +15,7 @@
   <b>Authoritative, exam-oriented study guide and reference architecture for CEH v13 Module 20: Cryptography. Covers fundamental mathematical foundations (Kerckhoffs's Principle, Shannon's Secrecy), symmetric block/stream ciphers (AES rounds, DES Feistel networks, cipher modes ECB vs. CBC vs. GCM), asymmetric public key cryptography (RSA prime factorization, Diffie-Hellman key exchange, Elliptic Curve Cryptography), cryptographic hashing and collision resistance (MD5, SHA-2, SHA-3, HMAC), Public Key Infrastructure (X.509 certificate chains, CRL, OCSP Stapling), and cryptanalytic attack vectors (Birthday Attack, Meet-in-the-Middle, Padding Oracle, Side-Channel analysis).</b>
 </p>
 
-[📖 Module Hub](../README.md) • [📋 PDF Reference](./CEHv13%20-%20Module%2020%20-%20Cryptography.pdf) • [🧰 Cryptographic Tools](../../tools/README.md) • [🗺️ Knowledge Base Index](../../README.md)
+[📖 Module Hub](../README.md) • [📋 PDF Reference Part 1](./CEHv13%20-%20Module%2020%20-%20Cryptography%20Part%201.pdf) • [📋 Part 2](./CEHv13%20-%20Module%2020%20-%20Cryptography%20Part%202.pdf) • [📋 Part 3](./CEHv13%20-%20Module%2020%20-%20Cryptography%20Part%203.pdf) • [🗺️ Knowledge Base Index](../../README.md)
 
 </div>
 
