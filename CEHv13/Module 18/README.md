@@ -12,7 +12,7 @@
   <b>Authoritative, exam-oriented study guide and reference architecture for CEH v13 Module 18: IoT and OT Hacking. Covers IoT architecture models, telemetry protocols (MQTT topic interception, CoAP, Zigbee), physical hardware hacking (UART pin discovery, JTAG flash dumping, I2C/SPI), firmware extraction and SquashFS reverse engineering using binwalk, Operational Technology (OT) and SCADA systems, the Purdue Enterprise Reference Model (Levels 0–5), industrial protocols (Modbus TCP Port 502), cyber-physical attacks (Stuxnet, Industroyer, Triton), and industrial defense with Data Diodes.</b>
 </p>
 
-[📖 Module Hub](../README.md) • [🧰 Hardware & IoT Pentest Tools](../../tools/README.md) • [🗺️ Knowledge Base Index](../../README.md)
+[📖 Module Hub](../README.md) • [📋 PDF Reference Part 1](./CEHv13%20-%20Module%2018%20-%20IoT%20and%20OT%20Hacking%20Part%201.pdf) • [📋 Part 2](./CEHv13%20-%20Module%2018%20-%20IoT%20and%20OT%20Hacking%20Part%202.pdf) • [🗺️ Knowledge Base Index](../../README.md)
 
 </div>
 

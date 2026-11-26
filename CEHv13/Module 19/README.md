@@ -15,7 +15,7 @@
   <b>Authoritative, exam-oriented study guide and reference architecture for CEH v13 Module 19: Cloud Computing. Covers NIST cloud service models (IaaS, PaaS, SaaS, FaaS), deployment models, the Shared Responsibility Model, CSA Top Threats, public cloud storage enumeration (AWS S3, Azure Blobs, GCP Buckets), IAM privilege escalation vectors, Instance Metadata Service interrogation (IMDSv1 vs. IMDSv2 token defense), container breakout techniques (Docker daemon 2375, privileged containers), Kubernetes attack surfaces, and cloud governance tooling (CSPM, CWPP, CASB, CIEM).</b>
 </p>
 
-[📖 Module Hub](../README.md) • [📋 PDF Reference](./CEHv13%20-%20Module%2019%20-%20Cloud%20Computing.pdf) • [🧰 Cloud Security Tools](../../tools/README.md) • [🗺️ Knowledge Base Index](../../README.md)
+[📖 Module Hub](../README.md) • [📋 PDF Reference Part 1](./CEHv13%20-%20Module%2019%20-%20Cloud%20Computing%20Part%201.pdf) • [📋 Part 2](./CEHv13%20-%20Module%2019%20-%20Cloud%20Computing%20Part%202.pdf) • [📋 Part 3](./CEHv13%20-%20Module%2019%20-%20Cloud%20Computing%20Part%203.pdf) • [🗺️ Knowledge Base Index](../../README.md)
 
 </div>
 
