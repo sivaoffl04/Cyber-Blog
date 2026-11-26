@@ -15,7 +15,7 @@
   <b>Authoritative, exam-oriented study guide and reference architecture for CEH v13 Module 15: SQL Injection. Covers the complete spectrum of SQL injection techniques: In-Band exploitation (UNION-based column alignment, Error-based casting), Inferential Blind injection (Boolean differential analysis, Time-based delayed responses), Out-of-Band (OOB) DNS exfiltration, cross-database fingerprinting (MySQL, MSSQL, Oracle, PostgreSQL), system takeover via xp_cmdshell and INTO OUTFILE, enterprise automated exploitation with sqlmap, and parameterized query defenses.</b>
 </p>
 
-[📖 Module Hub](../README.md) • [🧰 Web Pentesting Tools](../../tools/README.md) • [🗺️ Knowledge Base Index](../../README.md)
+[📖 Module Hub](../README.md) • [📋 PDF Reference](./CEHv13%20-%20Module%2015%20-%20SQL%20Injection.pdf) • [🧰 Web Pentesting Tools](../../tools/README.md) • [🗺️ Knowledge Base Index](../../README.md)
 
 </div>
 

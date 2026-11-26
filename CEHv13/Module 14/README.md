@@ -15,7 +15,7 @@
   <b>Authoritative, exam-oriented study guide and reference architecture for CEH v13 Module 14: Hacking Web Applications. Covers modern multi-tier web application architectures, the OWASP Top 10 vulnerabilities, Cross-Site Scripting (Stored, Reflected, DOM), Cross-Site Request Forgery (CSRF), Server-Side Request Forgery (SSRF) and Cloud Metadata exploitation, Insecure Direct Object References (IDOR), Local and Remote File Inclusion (LFI/RFI) with PHP wrappers, Burp Suite Intruder attack modes, and WAF defense.</b>
 </p>
 
-[📖 Module Hub](../README.md) • [🧰 Burp Suite & Web Pentest Tools](../../tools/README.md) • [🗺️ Knowledge Base Index](../../README.md)
+[📖 Module Hub](../README.md) • [📋 PDF Reference Part 1](./CEHv13%20-%20Module%2014%20-%20Hacking%20Web%20Applications%20Part%201.pdf) • [📋 Part 2](./CEHv13%20-%20Module%2014%20-%20Hacking%20Web%20Applications%20Part%202.pdf) • [📋 Part 3](./CEHv13%20-%20Module%2014%20-%20Hacking%20Web%20Applications%20Part%203.pdf) • [🗺️ Knowledge Base Index](../../README.md)
 
 </div>
 
