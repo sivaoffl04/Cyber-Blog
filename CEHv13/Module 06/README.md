@@ -55,6 +55,14 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 06 Is Really About:**  
+> **System Hacking** is where an attacker actually breaks onto a computer and takes full control — step by step in **4 simple phases**:  
+> 1. **Gain Access:** Guess/crack a user's password (using `Hashcat`/`John`), trick a PC into coughing up its login hash (`Responder`), or overflow a program's memory (*Buffer Overflow*) so the CPU executes your code instead of the app's!  
+> 2. **Escalate Privileges:** Upgrade from a normal guest badge to the master admin key (`SYSTEM` or `root`) via unquoted Windows paths, Potato token tricks, or Linux `SUID`/sudo misconfigurations.  
+> 3. **Maintain Access:** Leave secret spare keys behind so you can return later — hiding files inside Windows streams (*NTFS ADS*), Startup Registry keys, or hiding inside the OS kernel itself (*Rootkits*).  
+> 4. **Clear Tracks:** Wipe bash history, timestomp modified dates, or clear Windows logs (note: wiping Windows Security logs creates **Event ID 1102**, like taping over a security camera — it alerts defenders you were there!).
+
 ## 1. System Hacking Architecture & The 4 Phases
 
 ### The CEH System Hacking Methodology
@@ -255,7 +263,7 @@ flowchart TD
 
 ---
 
-### Modern Exploit Mitigations
+### Modern Exploit Mitigations: DEP/NX, ASLR, and Canaries
 
 | Mitigation | Mechanism | Bypass Technique |
 | :--- | :--- | :--- |
@@ -353,6 +361,12 @@ PrintSpoofer.exe -i -c cmd.exe
 
 ## 5. Phase 3: Maintaining Access (Persistence & Concealment)
 
+### Trojans, RATs, and Hardware/Software Keyloggers
+Once initial access is gained, attackers plant covert persistence mechanisms to preserve remote control:
+* **Remote Access Trojans (RATs):** Full interactive command, file transfer, screen/webcam capture over outbound encrypted channels (`njRAT`, Meterpreter, Sliver).
+* **Software Keyloggers:** User-space (`SetWindowsHookEx` API hooking) or kernel-driver utilities capturing every keystroke and clipboard secret.
+* **Hardware Keyloggers:** Physical USB/PS2 inline dongles or acoustic/EM eavesdropping devices attached directly between keyboard and workstation.
+
 ### Rootkits: Ring 3 User-Mode vs. Ring 0 Kernel-Mode & DKOM
 
 Rootkits provide stealth and persistence by intercepting and modifying operating system APIs and kernel structures:
@@ -381,7 +395,7 @@ Rootkits provide stealth and persistence by intercepting and modifying operating
 
 ---
 
-### Windows Persistence Hooks
+### Windows Persistence Hooks (Registry Run, Services, WMI, Sticky Keys)
 
 1. **Registry Run Keys**: Automatically executes binaries upon user logon or system start:
    * `HKLM\Software\Microsoft\Windows\CurrentVersion\Run`
@@ -418,9 +432,23 @@ wmic process call create "C:\notes\readme.txt:hidden_nc.exe"
 
 ---
 
+### Steganography & LSB Encoding
+**Steganography** hides secret messages, scripts, or payloads directly inside innocent media files (`.png`, `.bmp`, `.wav`) without altering visible quality.
+* **Least Significant Bit (LSB) Substitution:** Replaces the lowest-value bit (`1s` place) of every pixel's Red/Green/Blue byte with secret message bits — changing a pixel color value from `11010100` to `11010101` is completely invisible to the human eye!
+* **Tools:** `steghide`, `OpenStego`, `Snow` (whitespace steganography), `zsteg`.
+
+---
+
 ## 6. Phase 4: Clearing Tracks & Anti-Forensics
 
-### Clearing Windows Event Logs
+### Disabling Auditing & Bypassing Security Logging
+Before erasing historical logs, attackers disable active security telemetry so new actions stop being recorded:
+```cmd
+:: Temporarily disable Windows audit policy logging for logon/object access
+auditpol /set /category:"Logon/Logoff" /success:disable /failure:disable
+```
+
+### Clearing Windows Event Logs (`wevtutil`, `clearev`, Event ID 1102)
 
 * **Event Viewer Logs**: Stored as binary `.evtx` files under `%SystemRoot%\System32\Winevt\Logs\`.
 * **The High-Yield Exam Trap**: Clearing the Windows Security log immediately logs **Event ID 1102 ("The audit log was cleared")**, leaving an obvious investigative red flag!

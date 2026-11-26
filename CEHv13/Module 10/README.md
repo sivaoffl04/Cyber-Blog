@@ -1,5 +1,8 @@
 <div align="center">
 
+![CEH v13 Module 10 Banner](./images/banner.jpg)
+![CEH v13 Module 10 Card](./images/module_card.png)
+
 # 🛡️ CEH v13 — Module 10: Denial-of-Service
 ### Certified Ethical Hacker (CEH) Exam Notes • DoS vs. DDoS • SYN Flooding & TCB Exhaustion • Smurf & Fraggle • Amplification (DNS/NTP/Memcached) • Slowloris • SYN Cookies & Scrubbing
 
@@ -48,11 +51,20 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 10 Is Really About:**  
+> Think of a **Denial-of-Service (DoS)** attack like overwhelming a busy pizza shop so real hungry customers cannot get through:  
+> 1. **Volumetric Attack (Traffic Jam):** Sending 10,000 fake delivery trucks to jam the highway leading to the shop (*UDP/DNS/NTP/Memcached Amplification* — sending a tiny request that triggers a 50,000x bigger response!).  
+> 2. **Protocol Attack (*SYN Flood*):** Calling to order a pizza, listening to the cashier write down your ticket (*allocating TCB RAM*), and hanging up before confirming — until the cashier runs out of order pads (**defeated by SYN Cookies**, which write nothing in RAM until you reply!).  
+> 3. **Application Attack (*Slowloris / RUDY*):** Walking inside, speaking *one word per 10 seconds* so the cashier is forced to stand waiting for you forever instead of serving anyone else!
+
 # 1. DoS / DDoS Fundamentals & Attack Classifications
 
 ## Definition & The Availability Pillar
 
 A **Denial-of-Service (DoS)** attack is an explicit attempt by an adversary to render a computer, network service, or infrastructure component unavailable to its intended legitimate users, directly degrading the **Availability** pillar of the CIA Triad.
+
+## DoS vs. DDoS: Architectural Distinctions
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
@@ -80,13 +92,17 @@ A **Denial-of-Service (DoS)** attack is an explicit attempt by an adversary to r
 
 ---
 
-## The 3 DoS Attack Categories
+## The 3 DoS Attack Categories: Volumetric, Protocol, and Application-Layer
 
 | Category | Primary Metric | Target of Exhaustion | Representative Attacks |
 |---|:---:|---|---|
 | **1. Volumetric Attacks** | **Bits per Second (bps)** | Network pipe bandwidth; saturates ingress transit link. | UDP Flood, ICMP Flood, DNS Amplification, NTP Reflection. |
 | **2. Protocol Attacks** | **Packets per Second (pps)** | State tables of intermediate appliances (Firewalls, Load Balancers, OS TCP queues). | TCP SYN Flood, Ping of Death, Smurf, Teardrop. |
 | **3. Application-Layer Attacks** | **Requests per Second (rps)** | Web server threads, CPU processing, database connection pools. | Slowloris, RUDY, HTTP GET Floods, ReDoS. |
+
+## Botnet Architectures: Centralized C2 vs. Peer-to-Peer (P2P)
+* **Centralized Command & Control (C2):** Bots poll one central IRC/HTTP server for attack orders. Fast coordination, but taking down the single C2 server disables the entire botnet.
+* **Peer-to-Peer (P2P) Mesh:** Every infected bot acts as both client and relay server, propagating commands across decentralized peers with zero single point of failure.
 
 ---
 
@@ -149,7 +165,8 @@ A **Smurf attack** amplifies traffic by exploiting misconfigured routers that pe
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-* **Fraggle Attack:** Conceptually identical to Smurf, but utilizes **UDP packets** instead of ICMP. The attacker sends spoofed UDP packets to **port 7 (Echo)** or **port 19 (Chargen)** on an intermediary broadcast network.
+## Fraggle Attack (UDP Echo / Chargen Amplification)
+Conceptually identical to Smurf, but utilizes **UDP packets** instead of ICMP. The attacker sends spoofed UDP packets to **port 7 (Echo)** or **port 19 (Chargen)** on an intermediary broadcast network, triggering an amplified UDP response torrent toward the victim.
 
 ---
 
@@ -171,9 +188,21 @@ $$\mathbf{Amplification\ Factor} = \frac{\text{Response Payload Size}}{\text{Req
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+### DNS Amplification Attacks (EDNS0 & Recursive Resolvers)
+Spoofs the victim's IP inside small `ANY` DNS queries with `EDNS0` large-packet extensions sent to misconfigured open recursive resolvers, reflecting huge 4,000+ byte DNS responses onto the target.
+
+### NTP Monlist Amplification Attacks
+Abuses the legacy Network Time Protocol `monlist` administrative query (UDP Port 123), where an 8-byte request triggers a multi-packet reply listing the last 600 client IPs (~500x amplification).
+
+### Memcached Amplification (50,000x Factor)
+Exploits Internet-exposed Memcached servers listening unauthenticated on **UDP Port 11211** — a 15-byte key-fetch request can trigger up to **750 KB+** of cached payload data reflected toward the spoofed victim!
+
 ---
 
 # 4. Application-Layer (Layer 7) Low-and-Slow Attacks
+
+## HTTP GET / POST Flooding
+Thousands of botnet nodes send valid-looking `GET /search?q=...` or heavy `POST` database queries simultaneously, overwhelming backend PHP/Java workers and SQL connection pools while appearing normal at Layer 4.
 
 ## Slowloris: Thread Starvation via Incomplete Headers
 
@@ -201,7 +230,8 @@ $$\mathbf{Amplification\ Factor} = \frac{\text{Response Payload Size}}{\text{Req
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-* **R-U-Dead-Yet (RUDY):** Attacks web form submissions by setting a massive `Content-Length` header (e.g., 1,000,000 bytes) and transmitting the POST data body **one single byte every 10 seconds**, completely starving server sockets.
+## R-U-Dead-Yet (RUDY): Slow POST Data Starvation
+Attacks web form submissions by setting a massive `Content-Length` header (e.g., 1,000,000 bytes) and transmitting the POST data body **one single byte every 10 seconds**, completely starving server sockets without hitting bandwidth alarms.
 
 ---
 
@@ -222,6 +252,13 @@ $$\mathbf{Amplification\ Factor} = \frac{\text{Response Payload Size}}{\text{Req
 **Best Current Practice 38 (BCP 38)** mandates that Internet Service Providers (ISPs) implement **egress filtering** on customer routers:
 * If a customer transmits a packet whose source IP address does not belong to that customer's allocated CIDR block, the router drops the packet immediately.
 * **Impact:** Completely eliminates IP address spoofing, dismantling Smurf, Fraggle, and UDP amplification attacks.
+
+## Architectural Resilience: BGP Anycast & Scrubbing Centers
+Cloud DDoS protection providers (Cloudflare, Akamai Prolexic) advertise the victim's IP range across global **BGP Anycast** points of presence. Massive terabit floods hit the nearest regional scrubbing center instead of a single datacenter, dropping bad packets and forwarding only clean traffic over GRE tunnels.
+
+## Remediation: Blackholing & Sinkholing
+* **Remotely Triggered Black Hole (RTBH / Null Routing):** Routes flooded target IP traffic straight to `Null0` (`/dev/null`) at ISP border routers to protect neighboring infrastructure (sacrifice one IP to save the network).
+* **Sinkholing:** Diverts malicious DDoS or botnet traffic into an isolated, monitored analysis server rather than simply dropping it, allowing defenders to capture forensic telemetry.
 
 ---
 

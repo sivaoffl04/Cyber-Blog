@@ -53,6 +53,13 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 16 Is Really About:**  
+> Unlike wired cables locked inside a building, **Wi-Fi blasts signals right out into the parking lot** where anyone with a cheap USB antenna can listen in!  
+> - **2.4 GHz Channels 1, 6, 11:** The only three Wi-Fi lanes in the 2.4 GHz band that do not crash/overlap into each other.  
+> - **WEP vs. WPA2 vs. WPA3:** **WEP** reused short 24-bit keys (*crackable in 5 minutes*). **WPA2** locks traffic securely, *except* attackers can knock a user offline (**Deauth** `aireplay-ng -0`) to record the **4-Way Handshake** as they reconnect, then test passwords offline! **WPA3 (Dragonfly/SAE)** makes offline guessing mathematically impossible AND signs management frames (**802.11w**) so fake disconnects don't work!  
+> - **Bluetooth Attacks:** **Bluejacking** = sending annoying spam texts (harmless prank); **Bluesnarfing** = quietly *stealing* contacts/messages; **Bluebugging** = taking *full remote control* of the phone!
+
 ## 1. Wireless Fundamentals & IEEE 802.11 Standards
 
 ### 802.11 Physical Layer Standards Matrix
@@ -68,9 +75,9 @@
 
 ---
 
-### 2.4 GHz Spectrum & Non-Overlapping Channels
-
-The 2.4 GHz ISM band is divided into 11 channels (in North America) or 13/14 channels (internationally), each spaced 5 MHz apart with a 20 MHz or 22 MHz channel width:
+### 2.4 GHz vs. 5 GHz Spectrum & Non-Overlapping Channels
+* **2.4 GHz Band:** Longer range and better wall penetration, but crowded and slow. In North America (FCC), **Channels 1, 6, and 11** are the only three primary non-overlapping channels (each 20/22 MHz wide).
+* **5 GHz Band:** Shorter range, significantly higher throughput (up to 6.9+ Gbps on 802.11ac/ax), and 20+ non-overlapping channels.
 
 ```
 Channel 1 (2412 MHz)        Channel 6 (2437 MHz)        Channel 11 (2462 MHz)
@@ -86,7 +93,7 @@ Channel 1 (2412 MHz)        Channel 6 (2437 MHz)        Channel 11 (2462 MHz)
 
 ---
 
-### SSID, BSSID, and ESSID Terminology
+### SSID, BSSID, and ESSID Architectural Terminology
 
 * **SSID (Service Set Identifier)**: The human-readable broadcast name of the wireless network (up to 32 alphanumeric characters).
 * **BSSID (Basic Service Set Identifier)**: The unique 48-bit physical MAC address of the Access Point's wireless radio chip.
@@ -94,7 +101,7 @@ Channel 1 (2412 MHz)        Channel 6 (2437 MHz)        Channel 11 (2462 MHz)
 
 ---
 
-### The 3 Wireless Frame Types
+### The 3 Wireless Frame Types: Management, Control, and Data
 
 ```
 +--------------------------------------------------------------------------+
@@ -142,6 +149,11 @@ $$\text{Key Stream} = \text{RC4}(\text{IV } [24\text{ bits}] + \text{Pre-Shared 
 
 ---
 
+### WPA: Temporal Key Integrity Protocol (TKIP)
+Introduced as a temporary bridge fix over legacy WEP hardware (keeping RC4, while doubling IVs to 48 bits and rotating keys per packet via **TKIP** and adding a MIC integrity check called **Michael**). Deprecated due to Beck-Tews and Ohigashi-Morii cryptanalytic attacks.
+
+---
+
 ### WPA2: AES-CCMP & The 4-Way Handshake
 
 WPA2 replaces RC4 and TKIP with **CCMP** (Counter Mode Cipher Block Chaining Message Authentication Code Protocol) based on **AES-128**.
@@ -168,7 +180,7 @@ sequenceDiagram
 
 ---
 
-### WPA3: Simultaneous Authentication of Equals (SAE)
+### WPA3: Simultaneous Authentication of Equals (SAE) & Protected Management Frames
 
 WPA3 replaces the vulnerable 4-way PSK derivation with **SAE (Dragonfly Handshake)** based on Zero-Knowledge Proofs:
 * **Resistant to Offline Dictionary Attacks**: Eavesdropping on a WPA3 connection handshake reveals zero data that can be brute-forced offline.
@@ -179,7 +191,7 @@ WPA3 replaces the vulnerable 4-way PSK derivation with **SAE (Dragonfly Handshak
 
 ## 3. Wireless Attack Vectors & Methodologies
 
-### Deauthentication Denial-of-Service
+### Deauthentication & Disassociation Denial-of-Service
 
 Because 802.11 Management frames are transmitted unencrypted in WPA and WPA2, an attacker can spoof the MAC address of the Access Point and transmit malicious **Deauthentication frames** (`Type 0x00, Subtype 0x1100`) to any connected client, instantly severing its connection:
 
@@ -224,9 +236,20 @@ Wi-Fi Protected Setup (WPS) uses an **8-digit numeric PIN**:
 * The Access Point validates the **first 4 digits** ($10^4 = 10,000$ possibilities) and the **last 3 digits** ($10^3 = 1,000$ possibilities) **separately**!
 * Reduces the entire search space to just **11,000 total attempts**, cracked in hours via `reaver` or within seconds offline via the **Pixie Dust attack** (`pixiewps`).
 
+### KRACK (Key Reinstallation Attack)
+Discovered in 2017 against WPA2's 4-Way Handshake: a MitM attacker intercepts and blocks Message 4, forcing the Access Point to retransmit Message 3 — tricking the victim client into **reinstalling the same encryption nonce (`IV`) and resetting the packet replay counter**, enabling attackers to decrypt traffic and inject forged packets!
+
 ---
 
 ## 4. The Aircrack-ng Offensive Toolchain
+
+### Workflow: Monitor Mode to Handshake Cracking
+1. Kill conflicting network managers (`airmon-ng check kill`) and switch Wi-Fi NIC to **Monitor Mode** (`wlan0mon`).
+2. Scan nearby channels (`airodump-ng wlan0mon`) to locate target BSSID, channel, and connected clients.
+3. Capture EAPOL traffic on the exact target channel (`airodump-ng -c ...`) while firing a brief Deauth burst (`aireplay-ng -0 5`).
+4. Crack the captured `.cap` 4-way handshake offline with `aircrack-ng` or Hashcat mode `22000`.
+
+### Toolchain Syntax: airmon-ng, airodump-ng, aireplay-ng, aircrack-ng
 
 ```bash
 # 1. Kill interfering background network processes
@@ -253,6 +276,7 @@ aircrack-ng -w /usr/share/wordlists/rockyou.txt -b AA:BB:CC:DD:EE:FF target_wpa2
 
 ## 5. Bluetooth Security & Attack Taxonomy
 
+### Bluejacking vs. Bluesnarfing vs. Bluebugging vs. Bluesmacking
 Bluetooth operates in the 2.4 GHz ISM band utilizing Frequency-Hopping Spread Spectrum (FHSS):
 
 ```
@@ -288,10 +312,13 @@ Bluetooth operates in the 2.4 GHz ISM band utilizing Frequency-Hopping Spread Sp
 * **Enterprise Mode (802.1X)**: Individual user credentials validated against a centralized **RADIUS** server.
   * **EAP-TLS**: The most secure implementation; requires mutual certificate authentication (both client and server possess valid X.509 digital certificates). Immune to credential phishing!
 
-### Defensive Recommendations
+### Wireless Intrusion Prevention Systems (WIPS)
+Automated RF sensors deployed throughout an enterprise campus that continuously monitor the 2.4/5/6 GHz airspace, detect rogue Access Points, Evil Twins, or Deauth floods in real time, and actively suppress rogue connections via over-the-air containment frames.
+
+### RF Shielding & Defensive Configurations
 
 1. **Mandate WPA3 with Protected Management Frames (802.11w)** to eliminate deauthentication attacks.
-2. **Deploy WIPS (Wireless Intrusion Prevention Systems)** to detect and suppress rogue APs and deauth floods.
+2. **Apply RF Shielding & Transmit Power Tuning:** Lower AP antenna output power so Wi-Fi signals stay inside building walls rather than leaking out to parking lots, and use RF-shielding wall paint in high-security facilities.
 3. **Disable WPS (Wi-Fi Protected Setup)** across all corporate and guest routers.
 4. **Isolate Guest Wi-Fi** using private VLANs with client-to-client isolation enabled.
 

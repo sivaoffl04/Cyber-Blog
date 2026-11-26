@@ -1,5 +1,8 @@
 <div align="center">
 
+![CEH v13 Module 11 Banner](./images/banner.jpg)
+![CEH v13 Module 11 Card](./images/module_card.png)
+
 # 🛡️ CEH v13 — Module 11: Session Hijacking
 ### Certified Ethical Hacker (CEH) Exam Notes • Network vs. Application Hijacking • TCP Sequence Prediction • ACK Storms • Session Fixation • MitB • Cookie Security Flags
 
@@ -47,6 +50,13 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 11 Is Really About:**  
+> Think of **Session Hijacking** vs. **Spoofing** like sneaking into a VIP concert:  
+> - **Spoofing (Before login):** Forging a fake ID at the front gate to sneak in yourself.  
+> - **Session Hijacking (After login):** Waiting patiently until Alice shows her real ID, gets her purple VIP wristband (*Session Cookie / TCP stream*), and then **stealing or copying Alice's wristband** so the bartender treats *you* as Alice without ever knowing her password!  
+> - **Best Defenses:** Put **`HttpOnly`** on cookies (JavaScript cannot steal them), **`Secure`** (HTTPS only), **`SameSite=Strict`** (blocks CSRF), and always **regenerate a brand-new Session ID** right after login!
+
 # 1. Session Hijacking Fundamentals
 
 ## Definition & The Spoofing vs. Hijacking Distinction
@@ -85,9 +95,16 @@ flowchart LR
     style P3 fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
 ```
 
+## Application-Level vs. Network-Level Hijacking
+* **Application-Level Hijacking:** Stealing HTTP session cookies, tokens, or forcing fixed session IDs (`PHPSESSID`, `JSESSIONID`, JWTs) over web applications.
+* **Network-Level Hijacking:** Intercepting active transport-layer TCP/UDP packets directly on the wire and predicting 32-bit sequence numbers to inject malicious commands mid-connection.
+
 ---
 
 # 2. Application-Level Session Hijacking
+
+## Session Token Hijacking & The Session State Model
+Because HTTP is stateless, servers issue a random token stored in the user's browser cookie (`Cookie: session_id=...`). Anyone possessing that string inherits the victim's active login state until logout or timeout expiration.
 
 ## Session Fixation Attacks & Mechanics
 
@@ -132,6 +149,9 @@ If a web application reflects unvalidated user input, an attacker injects malici
 
 When the victim loads the page, their browser transmits their sensitive session cookie directly to the attacker's listener server.
 
+## Cross-Site Request Forgery (CSRF)
+Unlike XSS cookie theft, **CSRF** exploits the fact that browsers automatically attach session cookies on cross-origin form requests — tricking a logged-in victim visiting `evil.com` into firing hidden bank transfers or password changes on `bank.com`.
+
 ---
 
 ## Man-in-the-Browser (MitB) Trojan Exploitation
@@ -149,9 +169,13 @@ A **Man-in-the-Browser (MitB)** attack utilizes a malicious browser extension, h
 TCP is a stateful, connection-oriented protocol that relies on 32-bit **Sequence Numbers (SEQ)** and **Acknowledgment Numbers (ACK)** to ensure reliable, in-order packet delivery:
 $$\text{Next Expected ACK} = \text{Received SEQ} + \text{Length of Incoming Payload}$$
 
----
+## TCP Sequence Number Prediction & Blind Hijacking
+When a legacy system generates weak, predictable Initial Sequence Numbers (ISNs), an attacker outside the direct network path can sniff one handshake packet or guess the increment, inject spoofed commands using the predicted `SEQ/ACK`, and perform **blind injection** without seeing return output.
 
-## Connection Desynchronization & The ACK Storm Phenomenon
+## Connection Desynchronization & RST Injection
+To seize control cleanly, an attacker injects a spoofed **TCP RST** packet to forcibly terminate the legitimate victim's connection state (or alters sequence numbers via injected payloads), knocking the real user out of synchronization with the server.
+
+## The ACK Storm Phenomenon & Packet Infinite Loops
 
 When an attacker attempts to inject data into an active TCP stream without having a full in-line Man-in-the-Middle position:
 1. The attacker injects a spoofed packet with a predicted sequence number: $\text{SEQ} = X$.
@@ -160,9 +184,26 @@ When an attacker attempts to inject data into an active TCP stream without havin
 4. The client receives this unexpected `ACK`, sees a sequence number mismatch, and generates an `ACK` back to the server.
 5. **The ACK Storm:** The client and server enter an infinite ping-pong loop, rapidly transmitting thousands of `ACK` packets back and forth trying to resynchronize, consuming massive bandwidth and freezing the connection.
 
+## UDP Session Hijacking
+Because UDP is connectionless and lacks sequence/acknowledgment numbers, an attacker simply sniffs the wire to intercept the victim's request and races to transmit a forged UDP response back to the client (or server) *before* the real peer replies!
+
 ---
 
-# 4. Session Hijacking Countermeasures & Defensive Engineering
+# 4. Session Hijacking Toolchains
+
+## Hunt, Bettercap, and Scapy Packet Crafting
+* **Hunt:** Classic Linux TCP hijacking tool capable of watching active Telnet/FTP TCP streams, desynchronizing connections, triggering ACK storms resolution, and injecting live commands.
+* **Bettercap / Mitmproxy:** Modern interactive HTTP/HTTPS proxy interceptors extracting session cookies (`Cookie` / `Authorization` headers) during active MitM sniffing.
+* **Scapy:** Python packet manipulation toolkit allowing attackers to construct arbitrary custom TCP frames with exact predicted `seq` and `ack` numbers:
+  ```python
+  from scapy.all import IP, TCP, send
+  pkt = IP(src="192.168.1.100", dst="192.168.1.50") / TCP(sport=54321, dport=23, flags="PA", seq=1048576, ack=2097152) / "id\n"
+  send(pkt)
+  ```
+
+---
+
+# 5. Session Hijacking Countermeasures & Defensive Engineering
 
 ## Hardening HTTP Cookies: HttpOnly, Secure, and SameSite Flags
 
@@ -177,6 +218,13 @@ Set-Cookie: session_id=abc123xyz789; Secure; HttpOnly; SameSite=Strict; Path=/; 
 | **`HttpOnly`** | **Completely blocks client-side JavaScript from accessing the cookie (`document.cookie`).** Renders Cross-Site Scripting (XSS) cookie theft completely impossible! |
 | **`Secure`** | Instructs the browser to transmit the cookie **strictly over encrypted HTTPS connections**. Prevents cleartext sniffing over unencrypted HTTP. |
 | **`SameSite=Strict`** | Prohibits the browser from sending the cookie in cross-site requests. Completely neutralizes Cross-Site Request Forgery (CSRF). |
+
+## Session Regeneration on Authentication
+Web applications **must immediately invalidate the pre-login session ID and generate a fresh, high-entropy random token** upon successful authentication (defeating Session Fixation completely), as well as enforcing short idle timeouts.
+
+## Network Layer Protections: IPsec & TLS Everywhere
+* **TLS 1.3 (HTTPS):** Encrypts HTTP headers, cookies, and form payloads end-to-end, blocking passive cookie sniffing on Wi-Fi or switched LANs.
+* **IPsec (ESP Encryption & AH Integrity):** Protects Layer-3/4 network sessions with cryptographic packet authentication, making blind TCP sequence number spoofing and RST injection impossible.
 
 ---
 

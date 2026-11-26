@@ -1,5 +1,8 @@
 <div align="center">
 
+![CEH v13 Module 12 Banner](./images/banner.jpg)
+![CEH v13 Module 12 Card](./images/module_card.png)
+
 # 🛡️ CEH v13 — Module 12: Evading IDS, Firewalls, and Honeypots
 ### Certified Ethical Hacker (CEH) Exam Notes • Intrusion Detection & Prevention • Firewall Architectures • Evasion Tradecraft (Fragmentation, Decoys, Tunneling) • Honeypots & Detection
 
@@ -50,6 +53,12 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 12 Is Really About:**  
+> Think of perimeter defenses like airport security:  
+> - **IDS vs. IPS:** An **IDS** is a security guard watching CCTV monitors who calls police *after* seeing a weapon (**Out-of-Band / Alerts only**). An **IPS** stands *in the doorway* and tackles the attacker before they enter (**In-Line / Drops packets**).  
+> - **How Attackers Sneak Past:** Splitting an exploit into tiny 8-byte puzzle pieces (*Packet Fragmentation* `nmap -f`), hiding in a crowd of 20 fake shoppers (*Decoy Scanning* `nmap -D`), disguising secret messages inside permitted DNS lookups (*DNS Tunneling*), or spotting fake decoy rooms (*Honeypots* like `Honeyd`) by checking if a host claims to run 50 impossible services simultaneously!
+
 # 1. IDS, IPS, and Firewall Architectures
 
 ## IDS vs. IPS: In-Line vs. Out-of-Band Operations
@@ -76,11 +85,11 @@
 
 ---
 
-## Detection Models
+## Detection Models: Signature-Based vs. Anomaly-Based vs. Heuristics
 
 1. **Signature-Based Detection:** Compares incoming packet byte sequences against a static database of known attack signatures (e.g., Snort rules). Extremely fast and accurate for known exploits; completely blind to zero-days.
 2. **Anomaly-Based Detection:** Establishes a statistical baseline of "normal" network traffic (bandwidth, protocols, connections). Any activity that deviates significantly from the baseline triggers an alert. Capable of discovering novel zero-day attacks, but prone to **high false-positive rates**.
-3. **Heuristic / Behavioral Detection:** Evaluates the behavioral intent and characteristics of code or traffic using expert algorithms.
+3. **Heuristic / Behavioral Detection:** Evaluates the behavioral intent and characteristics of code or traffic using expert algorithms and ML models.
 
 ---
 
@@ -94,9 +103,23 @@
 | **Application-Level Proxy** | Layer 7 | Terminates connection, inspects payload (HTTP, FTP), acts as intermediary. | Highest security; deep inspection; high processing overhead / latency. |
 | **Next-Generation (NGFW)** | Layers 2–7 | Integrates deep packet inspection, in-line IPS, user identity, and application awareness. | Identifies evasive applications running over non-standard ports (e.g., Tor over 443). |
 
+## Next-Generation Firewalls (NGFW) & Deep Packet Inspection (DPI)
+Traditional firewalls trust port numbers (`Port 443 = HTTPS`). An **NGFW with DPI** inspects inside encrypted/application headers up to Layer 7, blocking attackers trying to smuggle SSH or C2 traffic over port 80/443 while correlating alerts with threat intelligence feeds.
+
 ---
 
-# 2. Advanced IDS & Firewall Evasion Techniques
+# 2. Enterprise Perimeter Defenses & Deployment Topology
+
+## Screened Subnet (DMZ) Architecture
+Separates Internet-facing web/mail servers from the protected internal LAN using dual firewalls: Internet traffic can enter the **DMZ**, while DMZ hosts are strictly blocked from initiating outbound sessions directly into core corporate databases.
+
+## Snort, Suricata, and iptables Rules Engine
+* **Snort / Suricata Rule Syntax:** `<Action> <Protocol> <SrcIP> <SrcPort> -> <DstIP> <DstPort> (msg:"Alert"; content:"/etc/passwd"; sid:100001;)`
+* **Linux `iptables` State Rule:** `iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT`
+
+---
+
+# 3. Advanced IDS & Firewall Evasion Techniques
 
 ```
                                   EVASION TAXONOMY
@@ -114,7 +137,7 @@
 
 ---
 
-## Packet Fragmentation & Overlapping Fragments
+## Packet Fragmentation & Overlapping Fragments (`nmap -f`, `-mtu`)
 
 Attackers break attack payloads into small IP fragments (e.g., 8 or 16 bytes) using `nmap -f` or `nmap --mtu 16`.
 * **IDS Failure:** If the IDS does not reassemble fragments before inspection, individual 8-byte fragments bypass string signatures.
@@ -132,6 +155,14 @@ nmap -D RND:10,198.51.100.25,ME 192.168.1.50
 
 The target's firewall and IDS log 12 distinct machines scanning the port simultaneously, making it impossible for the SOC analyst to determine which IP was the true adversary.
 
+## Source Routing: Loose (LSR) vs. Strict (SSR)
+IPv4 source routing headers let the sender pre-specify which routers a packet traverses to bypass perimeter security sensors (`nmap --ip-options L` / `S`):
+* **Loose Source Routing (LSR):** Lists required intermediate router hops while allowing other hops in between.
+* **Strict Source Routing (SSR):** Forces every single exact router hop in order; packet is dropped if the exact path is unavailable.
+
+## Session Splicing & Time-Delay Evasion
+Sending an attack payload separated across tiny 1-byte TCP segments spaced several seconds or minutes apart (e.g., `nmap --scan-delay 5s`) causes stateful IDS timeout buffers to flush before all pieces are assembled.
+
 ---
 
 ## Tunneling Protocols: DNS Tunneling (`iodine`) & SSH Pivoting
@@ -144,7 +175,7 @@ The target's firewall and IDS log 12 distinct machines scanning the port simulta
 
 ---
 
-## Obfuscation & Unicode Encoding
+## Obfuscation, Polymorphism & Unicode Encoding
 
 Web Application Firewalls (WAFs) looking for explicit strings like `/etc/passwd` or `<script>` can be bypassed using alternative encodings:
 * **URL Double-Encoding:** `%252e%252e%252f` (Decodes to `%2e%2e%2f`, which decodes to `../`).
@@ -152,10 +183,22 @@ Web Application Firewalls (WAFs) looking for explicit strings like `/etc/passwd`
 
 ---
 
-# 3. Honeypot Architectures & Adversary Detection
+# 4. Bypassing Network Access Control (NAC) & Endpoint Security
 
-A **honeypot** is an isolated, monitored decoy resource deployed within an enterprise network designed to entice, detect, and analyze unauthorized activity:
+## 802.1X Port Authentication Bypass
+Corporate switch ports running 802.1X block unknown laptops. Attackers bypass NAC by **MAC spoofing** an authorized printer/VoIP phone MAC address (`macchanger -m`) or inserting an inline hardware bridge/hub between an already authenticated VoIP phone and the wall jack.
 
+## EDR Evasion: Direct Syscalls & API Unhooking
+Endpoint Detection & Response (EDR) agents monitor Windows API calls by placing hooks inside `ntdll.dll`. Advanced offensive payloads invoke **Direct Syscalls** directly into the kernel or remap a fresh clean copy of `ntdll.dll` from disk to unhook EDR monitoring.
+
+---
+
+# 5. Honeypot Architectures & Adversary Detection
+
+## What is a Honeypot? Roles & Classifications
+A **honeypot** is an isolated, instrumented decoy server placed inside or on the edge of a corporate network with **zero legitimate business traffic** — meaning *any* connection hitting it is immediately confirmed as malicious scanning or lateral movement.
+
+## Low-Interaction (Honeyd) vs. High-Interaction (Honeynets)
 | Honeypot Classification | Interaction Level | Implementation Details | Pros & Cons |
 |---|---|---|---|
 | **Low-Interaction** | Simulates only specific daemon banners & ports (e.g., **Honeyd**). | Emulates rudimentary OS responses; no real operating system. | Low maintenance, zero risk of compromise; easily fingerprinted by attackers. |
@@ -163,7 +206,7 @@ A **honeypot** is an isolated, monitored decoy resource deployed within an enter
 
 ---
 
-## Detecting Honeypots
+## Detecting Honeypots: Latency Probing & Service Fingerprinting
 
 Adversaries probe systems before launching exploits to determine if they are interacting with a honeypot:
 1. **Unrealistic Port Combinations:** A system presenting open ports for Microsoft IIS, Apache, Sendmail, and Oracle DB simultaneously on a single IP address.
@@ -172,11 +215,14 @@ Adversaries probe systems before launching exploits to determine if they are int
 
 ---
 
-# 4. Evasion Countermeasures & Defensive Normalization
+# 6. Evasion Countermeasures & Defensive Normalization
 
-1. **Traffic Normalization:** The perimeter gateway (Firewall/IPS) reassembles and standardizes all incoming fragmented packets and ambiguous encodings before forwarding them to internal servers.
-2. **Deep Packet Inspection (DPI):** Next-Gen firewalls reassemble full TCP streams across Layer 7 to inspect payload content regardless of port.
-3. **Egress DNS Filtering:** Restrict internal DNS resolution to authorized corporate DNS servers, dropping unauthorized outbound UDP port 53 traffic to prevent DNS tunneling.
+## Traffic Normalization & Full Stream Reassembly
+The perimeter gateway (Firewall/IPS) reassembles and standardizes all incoming fragmented packets and ambiguous URL/Unicode encodings into canonical bytes before pattern matching and before forwarding to internal servers.
+
+## Egress DNS Filtering & Protocol Strict Enforcement
+* Enforce **Deep Packet Inspection (DPI)** so applications cannot tunnel C2 channels inside HTTP/DNS ports.
+* Restrict internal DNS resolution strictly to authorized corporate DNS resolvers, dropping unauthorized outbound UDP port 53 traffic to eliminate DNS tunneling.
 
 ---
 

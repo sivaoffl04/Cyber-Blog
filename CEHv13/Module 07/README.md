@@ -55,6 +55,14 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 07 Is Really About:**  
+> Think of **Malware** as digital sabotage tools, each with a distinct personality tested heavily on the CEH exam:  
+> - **Virus vs. Worm:** A **Virus** is like a parasite — it attaches itself to an existing file and needs *a human to click/open it* to spread. A **Worm** is a self-driving robot — it requires **zero human clicks** and spreads automatically across network vulnerabilities (like WannaCry).  
+> - **Trojan:** Looks like a helpful gift (calculator, cracked game, invoice PDF), but secretly opens a backdoor once opened.  
+> - **Polymorphic vs. Metamorphic:** **Polymorphic** puts the exact same letter inside a different colored envelope (new encryption key each time). **Metamorphic** actually rewrites the entire letter using synonyms so no signature matches!  
+> - **Static vs. Dynamic Analysis:** **Static** inspects a sealed bomb with X-rays without turning it on (`strings`, `PE headers`, `SSDEEP`). **Dynamic** detonates it safely inside a reinforced glass blast chamber (*Sandbox* + `ProcMon` + `RegShot` + `INetSim`).
+
 ## 1. Malware Concepts & Operational Taxonomy
 
 ### The CEH Malware Taxonomy
@@ -80,6 +88,11 @@ Malicious software (Malware) is classified by its **propagation mechanism**, **h
 +--------------------------------------------------------------------------+
 ```
 
+### Infection Vectors & Modern Delivery Mechanisms
+* **Spear-Phishing & Weaponized Attachments:** Malicious `.docm`/`.xlsm` macros, HTML smuggling, and shortcut (`.lnk`) payloads.
+* **Drive-by Downloads & Malvertising:** Compromised websites/ad networks delivering browser exploit kits silently.
+* **Removable Media & Supply Chain Compromise:** Autorun USB drops and trojanized vendor software updates (e.g., SolarWinds).
+
 ---
 
 ## 2. Trojan Concepts & Construction Anatomy
@@ -103,7 +116,7 @@ sequenceDiagram
 
 ---
 
-### Malware Engineering Tools
+### Malware Engineering Tools: Wrappers, Crypters, Droppers, Downloaders
 
 ```
 +--------------------------------------------------------------------------+
@@ -147,6 +160,13 @@ sequenceDiagram
 ---
 
 ## 3. Virus Concepts & Architectural Classifications
+
+### The Virus Lifecycle: Infection, Execution, Replication
+Every classic computer virus cycles through four distinct operational stages:
+1. **Dormant Phase:** Virus enters system via host file and waits silently for a trigger (specific date, reboot, file open).
+2. **Propagation Phase:** Copies itself onto additional uninfected host programs, boot sectors, or shared drives.
+3. **Triggering Phase:** Activated by a logic bomb condition or elapsed counter.
+4. **Execution Phase:** Delivers its malicious payload (corrupts files, displays message, drops backdoor).
 
 ### Comprehensive Virus Taxonomy (High-Yield Exam Section)
 
@@ -236,6 +256,9 @@ EC-Council tests deeply on specific virus infection strategies:
 * **Morris Worm (1988)**: First recognized Internet worm; exploited `sendmail` (DEBUG command), `fingerd` buffer overflow, and trusted `rsh`/`rexec`.
 * **WannaCry (2017)**: Exploited the SMBv1 vulnerability **MS17-010 (EternalBlue)** to self-propagate across global internal subnets and encrypt endpoints within seconds.
 
+### Autonomous Network Worm Replication
+Unlike viruses that infect user files, network worms execute a rapid 4-step automated loop in memory: **Scan target IP ranges** $\rightarrow$ **Exploit open network service (e.g., SMB 445)** $\rightarrow$ **Replicate & Transfer worm binary** $\rightarrow$ **Repeat from newly compromised host**, causing massive network congestion.
+
 ---
 
 ## 5. Fileless Malware & Living-off-the-Land (LOLBins)
@@ -295,6 +318,11 @@ flowchart TD
     class Start,GenKey,EncryptFiles,EncryptAESKey,WipeRAM,DropNote default;
 ```
 
+### Double & Triple Extortion Operations
+Modern ransomware groups no longer rely solely on encryption (since backups defeat single extortion):
+* **Double Extortion:** Attackers exfiltrate sensitive databases *before* encrypting them, threatening public leak if ransom is unpaid.
+* **Triple Extortion:** Adds DDoS attacks against company websites or directly threatens the organization's customers/partners using stolen PII.
+
 ---
 
 ## 7. Malware Analysis: Static & Dynamic Methodologies
@@ -322,7 +350,7 @@ upx -d suspect_sample.exe -o unpacked.exe
 
 ---
 
-### Dynamic Analysis: Sandboxing & System Telemetry
+### Dynamic Analysis: Sandboxing, ProcMon, RegShot, and INetSim
 
 Dynamic analysis executes the malware in an isolated, monitored environment to observe live behavior:
 
@@ -362,6 +390,13 @@ Dynamic analysis executes the malware in an isolated, monitored environment to o
 ---
 
 ## 8. Malware Detection & YARA Rule Authoring
+
+### Detection Paradigms: Signature vs. Heuristic vs. Behavioral
+| Detection Engine | How It Works | Strength & Blind Spot |
+|---|---|---|
+| **Signature-Based** | Compares file MD5/SHA-256 hashes or static byte sequences against a known database. | Zero false positives; **100% blind to zero-days, crypters, and metamorphic malware**. |
+| **Heuristic Analysis** | Scans binaries for suspicious structural patterns (e.g., high section entropy, weird API imports). | Catches unknown variants; prone to moderate false positives. |
+| **Behavioral / EDR** | Monitors live runtime process actions (process hollowing, LSASS memory reads, mass file encryption). | Catches **fileless malware & zero-days** regardless of disk obfuscation. |
 
 ### Authoring Production YARA Rules
 

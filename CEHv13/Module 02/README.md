@@ -1,6 +1,7 @@
 <div align="center">
 
 ![CEH v13 Module 02 Banner](./images/banner.jpg)
+![CEH v13 Module 02 Card](./images/module_card.png)
 
 # 🛡️ CEH v13 — Module 02: Footprinting and Reconnaissance
 ### Certified Ethical Hacker (CEH) Exam Notes • OSINT Frameworks • Google Dorking • DNS & Whois Interrogation • Network Range Discovery • Email Tracking • AI-Driven Recon
@@ -73,9 +74,9 @@
   - [Dumpster Diving & Physical Trash Inspection](#dumpster-diving--physical-trash-inspection)
   - [Pretexting & Impersonation Scenarios](#pretexting--impersonation-scenarios)
 - [9. Automated Footprinting Tools & AI Integration](#9-automated-footprinting-tools--ai-integration)
-  - [Reconnaissance Frameworks (Maltego, Recon-ng, theHarvester, SpiderFoot)](#reconnaissance-frameworks-maltego-recon-ng-theharvester-spiderfoot)
+  - [Reconnaissance Frameworks (Maltego, Recon-ng, theHarvester, SpiderFoot)](#reconnaissance-frameworks)
   - [Subdomain Enumeration Engines (`subfinder`, `amass`)](#subdomain-enumeration-engines-subfinder-amass)
-  - [AI-Driven OSINT Platforms (Taranis AI, Cylect.io, TiDB Cloud)](#ai-driven-osint-platforms-taranis-ai-cylectio-tidb-cloud)
+  - [AI-Driven OSINT Platforms (Taranis AI, Cylect.io, TiDB Cloud)](#ai-driven-osint-platforms)
   - [Automating Reconnaissance via Shell AI (`sgpt`) & Python](#automating-reconnaissance-via-shell-ai-sgpt--python)
 - [10. Footprinting Countermeasures & Defensive Engineering](#10-footprinting-countermeasures--defensive-engineering)
   - [Search Engine & Leak Mitigation](#search-engine--leak-mitigation)
@@ -86,6 +87,12 @@
 - [🎯 High-Value CEH Exam Distinctions to Memorize](#-high-value-ceh-exam-distinctions-to-memorize)
 
 ---
+
+> [!TIP]
+> **💡 In Simple Words — What Module 02 Is Really About:**  
+> Before a burglar ever touches a building's doors, a smart investigator studies the target from public records — **Footprinting (Reconnaissance)** is the cybersecurity version of doing homework before knocking.  
+> - **Passive Recon (Zero Contact):** Looking at Google search tricks (*Google Dorks*), LinkedIn employee job posts, domain registration records (*Whois*), and Shodan search results — the target receives **zero packets** from your computer, so they cannot detect you!  
+> - **Active Recon:** Directly asking the target's mail or DNS server questions (`dig` Zone Transfers, `traceroute`, or calling the helpdesk). Faster and deeper, but leaves footprints in logs.
 
 # 1. Footprinting Fundamentals & Reconnaissance Concepts
 

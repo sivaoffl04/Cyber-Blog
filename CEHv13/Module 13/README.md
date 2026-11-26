@@ -1,5 +1,8 @@
 <div align="center">
 
+![CEH v13 Module 13 Banner](./images/banner.jpg)
+![CEH v13 Module 13 Card](./images/module_card.png)
+
 # 🛡️ CEH v13 — Module 13: Hacking Web Servers
 ### Certified Ethical Hacker (CEH) Exam Notes • Apache, Nginx & IIS • Misconfiguration Attacks • WebDAV Exploitation • HTTP Request Smuggling • Hardening & DMZ Architecture
 
@@ -45,6 +48,13 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 13 Is Really About:**  
+> Notice the difference between **Module 13 (Web Servers)** and **Module 14 (Web Applications)**: **Module 13 attacks the building itself** (Apache, Nginx, IIS configuration), whereas Module 14 attacks the software inside!  
+> - **Default Settings & Directory Traversal:** Servers left with folder browsing ON, default `admin:admin` consoles (`/manager/html`), or `../../../../etc/passwd` flaws letting attackers climb out of `/var/www/html`.  
+> - **WebDAV (`PUT` / `MOVE`):** Leaving file-collaboration verbs enabled lets attackers `PUT` a harmless `.txt` file, rename it to `shell.php` with `MOVE`, and execute server commands!  
+> - **HTTP Request Smuggling (`CL.TE` / `TE.CL`):** When the front-end security guard counts parcel length by *weight* (`Content-Length`) while the back-end warehouse counts by *boxes* (`Transfer-Encoding`), attackers hide a secret second request inside the leftover bytes!
+
 # 1. Web Server Architecture & Threat Surface
 
 ## Web Server Components: Daemons, Document Roots & Connectors
@@ -79,6 +89,13 @@ A web server is a combination of physical hardware, operating system, and softwa
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+## Open Source vs. Proprietary Architectures (Apache, Nginx, IIS)
+| Web Server | Platform & Licensing | Process Model | Key CEH Security Notes |
+|---|---|---|---|
+| **Apache HTTPD** | Cross-platform (Open Source) | Multi-Process / Worker (`httpd`, `www-data`) | Uses `.htaccess` per-directory overrides; hide banner with `ServerTokens Prod` & `ServerSignature Off`. |
+| **Nginx** | Cross-platform (Open Source) | Asynchronous Event-Driven | High concurrency reverse proxy; suppress version via `server_tokens off;`. |
+| **Microsoft IIS** | Windows Server (Proprietary) | Worker Processes (`w3wp.exe`, `IIS_IUSRS`) | Deep ASP.NET & Active Directory integration; legacy metabase, short-filename (`~1`), and WebDAV risks. |
+
 ---
 
 ## Root Causes of Web Server Breaches
@@ -90,6 +107,9 @@ A web server is a combination of physical hardware, operating system, and softwa
 ---
 
 # 2. Web Server Attack Vectors & Exploitation
+
+## Web Server Misconfigurations (Directory Listing, Default Creds)
+Leaving `Options +Indexes` enabled exposes backup `.zip`/`.sql` dumps directly to crawlers, while exposed diagnostic consoles (`/server-status`, Apache Tomcat `/manager/html` with `tomcat:s3cret`) allow instant malicious `.war` webshell deployment.
 
 ## Directory Traversal Attacks (Dot-Dot-Slash `../`)
 
@@ -105,7 +125,7 @@ http://target.com/view.php?page=..\..\..\..\boot.ini
 
 ---
 
-## WebDAV Exploitation & Dangerous HTTP Methods
+## WebDAV Exploitation & Dangerous HTTP Methods (`PUT`, `DELETE`)
 
 **Web Distributed Authoring and Versioning (WebDAV)** is an extension to HTTP that permits clients to edit and manage files collaboratively on a remote server.
 * **Dangerous HTTP Methods:**
@@ -138,7 +158,7 @@ http://target.com/view.php?page=..\..\..\..\boot.ini
 
 ---
 
-## HTTP Request Smuggling (CL.TE & TE.CL Desync)
+## HTTP Request Smuggling (CL.TE & TE.CL Desynchronization)
 
 HTTP Request Smuggling occurs when a front-end reverse proxy (e.g., Cloudflare, Nginx) and a back-end web server interpret request boundaries differently when handling ambiguous HTTP headers:
 * **`Content-Length` (CL):** Specifies request body size in exact bytes.
@@ -161,6 +181,10 @@ HTTP Request Smuggling occurs when a front-end reverse proxy (e.g., Cloudflare, 
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+## Web Cache Poisoning & DNS Server Hijacking
+* **Web Cache Poisoning:** Attackers inject malicious unkeyed HTTP headers (e.g., `X-Forwarded-Host: evil.com`) into a cached page response so the CDN/reverse proxy saves the poisoned malicious script and serves it to thousands of victims!
+* **DNS Server Hijacking:** Modifying authoritative DNS records (`A` / `CNAME`) at the registrar or via cache poisoning to redirect legitimate visitors to an attacker's rogue mirror web server.
+
 ---
 
 # 3. The 5-Phase Web Server Attack Methodology
@@ -179,6 +203,21 @@ flowchart TD
     style P5 fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
 ```
 
+## Phase 1: Information Gathering & Fingerprinting (WhatWeb, Netcraft)
+Identify web server vendor, patch version, SSL certs, and backend frameworks (`whatweb http://target.com`, Netcraft site reports, `curl -I`).
+
+## Phase 2: Web Server Enumeration & Directory Busting (Gobuster)
+Discover hidden admin panels, `/backup/` folders, and `.git` directories (`gobuster dir -u http://target.com -w common.txt`).
+
+## Phase 3: Vulnerability Scanning (Nikto)
+Run automated CGI, default-file, and dangerous-header scans (`nikto -h http://target.com -Tuning 123bde`).
+
+## Phase 4: Exploitation & Webshell Deployment
+Leverage WebDAV `PUT`/`MOVE`, Tomcat default logins, or known Apache/IIS CVEs to upload an interactive web shell or trigger a reverse shell.
+
+## Phase 5: Post-Exploitation & Privilege Escalation
+Pivot from the unprivileged web daemon account (`www-data` / `IIS_IUSRS`) via local kernel exploits, config password theft (`wp-config.php`), or sudo abuse to gain `root` / `SYSTEM`.
+
 ### Essential Tool Commands for the Exam
 ```bash
 # 1. Fingerprint web server technologies
@@ -195,29 +234,32 @@ nikto -h http://target.com -Tuning 123bde -o nikto_report.html
 
 # 4. Web Server Hardening & Defensive Engineering
 
-1. **Disable Dangerous HTTP Methods:** Configure web server to reject `PUT`, `DELETE`, `TRACE`, and `MOVE`:
-   ```apache
-   # Apache httpd.conf
-   <Location "/">
-       <LimitExcept GET POST HEAD>
-           Require all denied
-       </LimitExcept>
-   </Location>
-   ```
-2. **Suppress Server Banners:**
-   * **Apache:**
-     ```apache
-     ServerTokens Prod
-     ServerSignature Off
-     ```
-   * **Nginx:**
-     ```nginx
-     server_tokens off;
-     ```
-   * **Microsoft IIS:** Disable directory browsing and install URLScan / Request Filtering to strip the `Server` header.
-3. **DMZ Architecture & Principle of Least Privilege:**
-   * Isolate web servers in an external Demilitarized Zone (DMZ) separated by dual firewalls from internal corporate LANs and backend databases.
-   * Run the web server process under an unprivileged user account (`www-data` or `IIS_IUSRS`) with zero write access to system directories.
+## Disabling Dangerous HTTP Methods & Directory Indexes
+Configure web servers to reject unnecessary verbs (`PUT`, `DELETE`, `TRACE`, `MOVE`) and disable directory browsing (`Options -Indexes`):
+```apache
+# Apache httpd.conf
+<Location "/">
+    <LimitExcept GET POST HEAD>
+        Require all denied
+    </LimitExcept>
+</Location>
+```
+
+## Suppressing Server Banners: Apache, Nginx, and IIS
+* **Apache:**
+  ```apache
+  ServerTokens Prod
+  ServerSignature Off
+  ```
+* **Nginx:**
+  ```nginx
+  server_tokens off;
+  ```
+* **Microsoft IIS:** Disable directory browsing and install URLScan / Request Filtering to strip the `Server` and `X-Powered-By` headers.
+
+## Demilitarized Zone (DMZ) Architecture & Least Privilege Isolation
+* Isolate web servers in an external **Demilitarized Zone (DMZ)** separated by dual firewalls from internal corporate LANs and backend databases.
+* Run the web server process strictly under an unprivileged account (`www-data` or `IIS_IUSRS`) with zero write access to system directories.
 
 ---
 
@@ -265,6 +307,6 @@ flowchart TD
 
 <div align="center">
 
-<b>Next Module: [Module 14 — Hacking Web Applications](../README.md)</b> • <b>Previous Module: [Module 12 — Evading IDS, Firewalls, and Honeypots](../Module%2012/README.md)</b>
+<b>Next Module: [Module 14 — Hacking Web Applications](../Module%2014/README.md)</b> • <b>Previous Module: [Module 12 — Evading IDS, Firewalls, and Honeypots](../Module%2012/README.md)</b>
 
 </div>

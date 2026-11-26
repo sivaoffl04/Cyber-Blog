@@ -14,9 +14,20 @@
   <b>Comprehensive, exam-oriented study guide, deep-dive technical architectures, attack methodologies, and defensive engineering playbooks for the EC-Council Certified Ethical Hacker (CEH v13) certification track.</b>
 </p>
 
-[🏠 Cyber-Blog Hub](../README.md) • [🚀 Module 01](./Module%2001/README.md) • [🚀 Module 02](./Module%2002/README.md) • [🚀 Module 03](./Module%2003/README.md) • [🤝 Contributing](../CONTRIBUTING.md)
+[🏠 Cyber-Blog Hub](../README.md) • [🚀 Start: Module 01](./Module%2001/README.md) • [📑 All 20 Modules Index](#-20-module-study-notes--visual-explanations-index) • [🤖 AI in CEH v13](#-whats-new-in-ceh-v13-ai-powered-ethical-hacking) • [🤝 Contributing](../CONTRIBUTING.md)
 
 </div>
+
+---
+
+> [!TIP]
+> **🧭 Plain-English Learning Roadmap (Start Here):**  
+> New to ethical hacking? Think of these **20 CEH v13 modules** as **4 simple stages** of a legal security break-in test:
+> 1. **Phase 1 (Modules 01–05 — Find & Map):** Learn the legal rules, look up public clues (Footprinting), knock on network doors (Scanning), ask services for lists (Enumeration), and check a catalog of known flaws (Vulnerability Analysis).
+> 2. **Phase 2 (Modules 06–12 — Break & Sneak In):** Crack passwords & climb permissions (System Hacking), study viruses/Trojans (Malware), listen on wires (Sniffing), trick humans (Social Engineering), overload servers (DoS), steal active logins (Session Hijacking), and bypass alarms (Evading IDS/Firewalls).
+> 3. **Phase 3 (Modules 13–18 — Attack Modern Tech):** Break web servers, web apps (XSS/CSRF), databases (SQL Injection), Wi-Fi, phones (Android/iOS), and smart gadgets/factories (IoT & OT).
+> 4. **Phase 4 (Modules 19–20 — Cloud & Codes):** Secure cloud accounts/containers (AWS/Docker/K8s) and understand secret codes, certificates, and encryption (Cryptography).
+> Every module below starts with a **💡 In Simple Words** intuition guide, followed by **visual diagrams, exact exam commands, official PDF decks, and high-yield exam traps**.
 
 ---
 
@@ -139,6 +150,6 @@ EC-Council CEH v13 represents a fundamental paradigm shift from legacy manual pe
 
 <div align="center">
 
-<b>Explore Modules: [Module 01: Introduction](./Module%2001/README.md) • [Module 02: Footprinting](./Module%2002/README.md) • [Module 03: Scanning Networks](./Module%2003/README.md)</b>
+<b>Quick Navigation: [🏁 Module 01: Introduction](./Module%2001/README.md) • [🗺️ Full 20-Module Index](#-20-module-study-notes--visual-explanations-index) • [🔐 Module 20: Cryptography](./Module%2020/README.md)</b>
 
 </div>

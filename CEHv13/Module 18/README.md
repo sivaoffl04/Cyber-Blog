@@ -1,5 +1,8 @@
 <div align="center">
 
+![CEH v13 Module 18 Banner](./images/banner.jpg)
+![CEH v13 Module 18 Card](./images/module_card.png)
+
 # 🛡️ CEH v13 — Module 18: IoT and OT Hacking
 ### Certified Ethical Hacker (CEH) Exam Notes • IoT Architecture & MQTT • Hardware Debugging (UART/JTAG) • Firmware Reversing (Binwalk) • Purdue Model & SCADA • Modbus • Defense
 
@@ -52,6 +55,14 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 18 Is Really About:**  
+> Standard computers store spreadsheets; **IoT (smart cameras/thermostats)** and **OT (power plants, factories, water valves)** control the **physical world**!  
+> - **IT vs. OT Priority Flip (Exam #1 Fact!):** Office IT puts **Confidentiality** first (*CIA*). Factory OT puts **Availability & Human Safety** first (*AIC* — if a hospital respirator or centrifuge stops, people get hurt, and you *never* run aggressive `nmap` scans against delicate 20-year-old factory controllers!).  
+> - **MQTT `#` Wildcard:** Connecting to an open smart-home/factory message broker on port `1883` and subscribing to `#` prints *every message* in the building!  
+> - **Purdue Level 3.5 & Data Diodes:** Separating corporate office email (IT Level 4–5) from industrial controllers (OT Level 0–3) with an **Industrial DMZ** and **one-way optical Data Diodes**!  
+> - **Hardware Ports:** Popping open a smart gadget's circuit board to plug into 4 tiny **UART** pins at `115200` baud often drops you straight into an unauthenticated `root` Linux shell!
+
 ## 1. IoT Concepts & Architectural Frameworks
 
 ### The Multi-Layer IoT Architecture
@@ -74,11 +85,14 @@ Internet of Things (IoT) systems bridge the physical and digital worlds across f
 +--------------------------------------------------------------------------+
 ```
 
+### IoT Attack Surfaces & OWASP IoT Top 10
+Commonly exploited IoT weaknesses include weak/hardcoded factory passwords (e.g., Mirai botnet), insecure network services, plaintext firmware updates, unencrypted telemetry, and exposed physical PCB debug ports.
+
 ---
 
 ## 2. IoT Communication Protocols & Exploitation
 
-### MQTT Protocol Deep-Dive (Port 1883 / 8883)
+### MQTT Protocol Deep-Dive (Broker, Topics, Port 1883/8883)
 
 MQTT (Message Queuing Telemetry Transport) is a lightweight, publish-subscribe messaging protocol designed for constrained networks:
 * **The Broker**: The central server that distributes messages between publishers and subscribers.
@@ -101,6 +115,11 @@ mosquitto_pub -h 192.168.1.50 -p 1883 -t "factory/relays/valve1" -m "OPEN"
 
 * Operates over **UDP (Port 5683 / 5684 with DTLS)**.
 * Translates HTTP REST semantics (`GET`, `POST`, `PUT`, `DELETE`) into lightweight binary datagrams suitable for low-power microcontroller nodes.
+
+### Zigbee, Z-Wave, and Bluetooth Low Energy (BLE)
+* **Zigbee (IEEE 802.15.4):** Low-power wireless mesh networking (2.4 GHz / 915 MHz); tools like **KillerBee** intercept over-the-air frames when network keys transmit during pairing.
+* **Z-Wave:** Sub-1 GHz (~908 MHz US) smart-home protocol vulnerable to downgrade/key-extraction if legacy S0 pairing is used.
+* **BLE:** Sniffed using Ubertooth One / nRF52840 dongles; lacks pairing encryption when `Just Works` mode is enabled (`gatttool` reads/writes GATT characteristics directly).
 
 ---
 
@@ -137,6 +156,9 @@ screen /dev/ttyUSB0 115200
 * **Core Pins**: **TDI** (Test Data In), **TDO** (Test Data Out), **TCK** (Test Clock), **TMS** (Test Mode Select), **TRST** (Test Reset).
 * **Offensive Value**: Allows testers to halt the microcontroller CPU, step through execution, read/write internal CPU registers, and **dump the entire flash memory chip directly to disk** using OpenOCD.
 
+### I2C and SPI EEPROM Flash Memory Snooping
+Devices store firmware and Wi-Fi secrets inside external **SPI** (8-pin flash chip) or **I2C** EEPROM memory chips on the PCB. Attackers clip an SOIC-8 test clip onto the chip using a hardware programmer (CH341A / Bus Pirate) and read the entire binary flash image directly offline via `flashrom`!
+
 ---
 
 ## 4. Firmware Analysis & Reverse Engineering
@@ -155,7 +177,7 @@ binwalk -e -M firmware.bin
 
 ---
 
-### Modifying SquashFS & Repackaging
+### Modifying SquashFS & Repackaging with Firmware Mod Kit
 
 Using the **Firmware Mod Kit (FMK)**:
 
@@ -173,11 +195,14 @@ echo "root:password123" | chpasswd
 ./build_firmware.sh
 ```
 
+### Hunting Hardcoded Secrets, Passwords, and Private Keys
+Once SquashFS is unpacked, auditors run `firmwalker` or `grep` across `/etc/shadow`, web scripts, and `.conf` files to uncover default root hashes, SSL private keys (`.pem`/`.key`), and vendor backdoor accounts.
+
 ---
 
 ## 5. Operational Technology (OT) & ICS/SCADA Systems
 
-### IT vs. OT: The Inverted Security Triad
+### IT vs. OT: The Inverted Security Triad (AIC vs. CIA)
 
 ```
 +--------------------------------------------------------------------------+
@@ -201,7 +226,7 @@ echo "root:password123" | chpasswd
 
 ---
 
-### The Purdue Enterprise Reference Architecture (Purdue Model)
+### The Purdue Enterprise Reference Architecture (Purdue Model Levels 0–5)
 
 The Purdue Model establishes mandatory zoning boundaries for industrial automation:
 
@@ -234,11 +259,17 @@ flowchart TD
     class L5,L4,IDMZ,L3,L2,L1,L0 default;
 ```
 
+### Industrial Components: PLCs, RTUs, HMIs, and Historians
+* **PLC (Programmable Logic Controller):** Ruggedized industrial computer reading sensor signals and controlling motors/valves via ladder logic.
+* **RTU (Remote Terminal Unit):** Field controller connecting geographically remote sensors (e.g., oil pipelines) back to SCADA over radio/cellular telemetry.
+* **HMI (Human Machine Interface):** Graphical touchscreen console used by plant operators to monitor pressures and issue manual overrides.
+* **Historian:** Time-series database logging plant process metrics; typically replicated safely across the Level 3.5 IDMZ.
+
 ---
 
 ## 6. Industrial Protocols & Exploitation
 
-### Modbus Protocol (TCP Port 502)
+### Modbus Protocol (TCP Port 502) & Coil Manipulation
 
 Modbus is the most common industrial protocol. Originally designed in 1979 for serial lines, Modbus TCP operates over **TCP Port 502** with **zero encryption and zero authentication**:
 
@@ -268,9 +299,15 @@ client.close()
 "
 ```
 
+### DNP3, Profinet, EtherNet/IP, and BACnet
+* **DNP3 (TCP/UDP 20000):** Distributed Network Protocol widely used by North American electric and water utilities (supports Secure Authentication v5).
+* **Profinet / Profibus:** High-speed real-time industrial Ethernet protocols heavily deployed by Siemens factory automation.
+* **EtherNet/IP (TCP 44818):** Common Industrial Protocol (CIP) encapsulated in standard Ethernet for Allen-Bradley/Rockwell PLCs.
+* **BACnet (UDP 47808):** Building Automation and Control Networks protocol managing smart HVAC, elevators, and badge doors.
+
 ---
 
-### Historic Cyber-Physical Attacks
+### Historic Cyber-Physical Attacks: Stuxnet, Industroyer, Triton
 
 * **Stuxnet (2010)**: Sophisticated nation-state malware targeting Siemens S7-300 PLCs controlling Iranian uranium enrichment centrifuges. Altered centrifuge rotational speeds while replaying normal telemetry to operators.
 * **Industroyer / CrashOverride (2016)**: Attacked Ukrainian electric substations; natively spoke industrial protocols (IEC 60870-5-104, IEC 61850) to directly open circuit breakers and cut power.
@@ -280,11 +317,14 @@ client.close()
 
 ## 7. IoT and OT Defensive Hardening
 
-### Defensive Principles
+### Strict Purdue Network Segmentation & The Industrial DMZ (IDMZ)
+No direct IP communication must ever occur between Enterprise IT (Level 4) and Industrial Operations (Level 3). All patch servers, Historian mirrors, and remote jump hosts terminate strictly inside the **Level 3.5 IDMZ**.
 
-1. **Strict Purdue Segmentation via IDMZ (Level 3.5)**: No direct IP communication must ever occur between Enterprise IT (Level 4) and Industrial Operations (Level 3).
-2. **Unidirectional Security Gateways (Data Diodes)**: Hardware-enforced physical data diodes (using fiber-optic LEDs and photodiodes) that physically permit data transmission in **one direction only** (e.g., from OT Historian outward to Enterprise IT), making remote inbound hacking physically impossible!
-3. **Passive Network Monitoring**: Active port scanners (like aggressive Nmap scans) can **crash delicate legacy PLCs** and cause physical damage. OT networks must be monitored exclusively via **passive TAP/SPAN ports** using industrial IDS platforms (Dragos, Claroty, Nozomi Networks).
+### Unidirectional Security Gateways (Data Diodes)
+Hardware-enforced physical data diodes use a **laser LED transmitter on one side and a photo-receiver on the other (zero return fiber!)** to physically allow telemetry in **one direction only** (OT $\rightarrow$ IT), making remote inbound cyberattacks over the wire physically impossible!
+
+### Passive Monitoring vs. Active Scanning Risks
+Active port scanners (like aggressive `nmap` scans) can **crash delicate legacy PLCs** and halt physical factory operations. OT networks must be monitored via **passive TAP/SPAN ports** using industrial anomaly engines (Dragos, Claroty, Nozomi Networks).
 
 ---
 

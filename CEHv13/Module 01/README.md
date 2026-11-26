@@ -1,6 +1,7 @@
 <div align="center">
 
 ![CEH v13 Module 01 Banner](./images/banner.jpg)
+![CEH v13 Module 01 Card](./images/module_card.png)
 
 # 🛡️ CEH v13 — Module 01: Introduction to Ethical Hacking
 ### Certified Ethical Hacker (CEH) Exam Notes • Information Security Fundamentals • Attack Methodologies • Cyber Kill Chains • CTI & AI
@@ -62,6 +63,13 @@
 - [🎯 High-Value CEH Exam Distinctions to Memorize](#-high-value-ceh-exam-distinctions-to-memorize)
 
 ---
+
+> [!TIP]
+> **💡 In Simple Words — What Module 01 Is Really About:**  
+> Think of an **Ethical Hacker** as a **licensed security locksmith** whom a bank *hires and signs a legal contract with* to test their vaults before real burglars try.  
+> - **CIA Triad:** **Confidentiality** = keeping secrets private (locked box); **Integrity** = ensuring nobody secretly alters data (tamper-proof seal); **Availability** = making sure authorized people can open the door 24/7.  
+> - **AAA Model:** **Authentication** = showing your ID card; **Authorization** = checking which rooms your badge lets you enter; **Accounting** = the security camera logging every room you visited. **Non-Repudiation** = a signed receipt you cannot falsely deny signing later.  
+> - **Vulnerability vs. Threat vs. Risk:** A unlocked window is a **Vulnerability**; a burglar outside is a **Threat**; **Risk** is how likely that burglar climbs in and what you lose if they do.
 
 # 1. Introduction to Ethical Hacking
 
@@ -816,7 +824,7 @@ flowchart TD
 
 <div align="center">
 
-<b>Next Module: [Module 02 — Footprinting and Reconnaissance](../README.md)</b>  
+<b>Next Module: [Module 02 — Footprinting and Reconnaissance](../Module%2002/README.md)</b>  
 *Cyber-Blog • Production-Grade Security Knowledge Base*
 
 </div>

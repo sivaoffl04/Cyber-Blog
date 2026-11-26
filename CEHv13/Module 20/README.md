@@ -57,6 +57,13 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 20 Is Really About:**  
+> **Cryptography** solves three everyday trust problems on the Internet:  
+> 1. **Secret Key (Symmetric — AES/ChaCha20):** Fast! Like locking a suitcase with one physical key — both Alice and Bob must safely hold the same key. Never use **ECB** mode (it preserves visual patterns like the Tux penguin!). Use **AES-GCM**.  
+> 2. **Public Padlock (Asymmetric — RSA/ECC/DH):** Alice hands out *open padlocks* (**Public Key**) to everyone, while keeping the single metal **Private Key** in her pocket! Anyone can lock a box with her Public Key, and only she can open it! (Note: **Diffie-Hellman** only swaps keys; it cannot encrypt files!)  
+> 3. **Digital Fingerprint (Hashing — SHA-2/SHA-3) & ID Cards (PKI):** A **Hash** turns any huge file into a fixed-length one-way fingerprint (`MD5`/`SHA-1` are broken!). **PKI / X.509 Certificates** are digital passports signed by trusted Certificate Authorities (**CAs**) proving you're really talking to `bank.com`.
+
 ## 1. Cryptography Foundations & Information Theory
 
 ### The Cryptographic Vocabulary
@@ -107,7 +114,12 @@
 
 ## 2. Symmetric Cryptography (Block & Stream Ciphers)
 
-### Block Ciphers: DES, 3DES, AES, Blowfish, Twofish
+### Stream Ciphers (RC4, ChaCha20)
+Encrypt plaintext **one bit or byte at a time** by XORing data with a continuous pseudorandom keystream — super fast for streaming media and wireless links:
+* **RC4:** Legacy cipher (broken in WEP/TLS due to biased keystream output; deprecated completely).
+* **ChaCha20:** Modern, ultra-fast ARX stream cipher paired with Poly1305 AEAD in **TLS 1.3** and WireGuard VPNs.
+
+### Block Ciphers (DES, 3DES, AES, Blowfish, Twofish)
 
 ```
 +--------------------------------------------------------------------------+
@@ -124,13 +136,7 @@
 |     - Key Size: 112 bits (2-key) or 168 bits (3-key). Deprecated.        |
 +--------------------------------------------------------------------------+
 |  3. AES (Advanced Encryption Standard - Rijndael):                       |
-|     - Block Size: STRICTLY 128 bits across all variants!                 |
-|     - Key Sizes & Rounds:                                                |
-|       * AES-128: 128-bit key -> 10 rounds of transformation.             |
-|       * AES-192: 192-bit key -> 12 rounds of transformation.             |
-|       * AES-256: 256-bit key -> 14 rounds of transformation.             |
-|     - Architecture: Substitution-Permutation Network (SPN).              |
-|       (SubBytes, ShiftRows, MixColumns, AddRoundKey). Global standard.   |
+|     - Architecture: Substitution-Permutation Network (SPN). Global std.  |
 +--------------------------------------------------------------------------+
 |  4. BLOWFISH & TWOFISH:                                                  |
 |     - Blowfish: 64-bit block size; variable key size (32 to 448 bits).   |
@@ -138,7 +144,10 @@
 +--------------------------------------------------------------------------+
 ```
 
----
+### AES (Advanced Encryption Standard) Internal Architecture
+* **Block Size:** **Strictly 128 bits** ($4 \times 4$ byte state matrix) across ALL variants!
+* **Rounds by Key Size:** **AES-128 = 10 rounds** | **AES-192 = 12 rounds** | **AES-256 = 14 rounds**.
+* **4 Transformation Operations:** `SubBytes` (non-linear S-box substitution) $\rightarrow$ `ShiftRows` $\rightarrow$ `MixColumns` $\rightarrow$ `AddRoundKey` (XOR with round key).
 
 ### Block Cipher Modes: ECB vs. CBC vs. CTR vs. GCM
 
@@ -189,7 +198,7 @@ $$e \cdot d \equiv 1 \pmod{\phi(n)}$$
 
 ---
 
-### Diffie-Hellman Key Exchange (DH)
+### Diffie-Hellman Key Exchange (DH & ECDH)
 
 Allows two parties (Alice and Bob) to establish a shared secret key across an insecure, sniffed communications channel without sending the secret itself:
 * Based on the mathematical difficulty of the **Discrete Logarithm Problem**:
@@ -234,12 +243,15 @@ $$y^2 = x^3 + ax + b$$
 
 ---
 
-### Hash Algorithm Profiles
+### MD5, SHA-1, SHA-2, and SHA-3 Keccak Sponge
 
 * **MD5**: Produces a **128-bit** digest. Completely broken; collisions can be generated in seconds.
 * **SHA-1**: Produces a **160-bit** digest. Broken (Google SHAttered collision in 2017).
 * **SHA-2**: Family consisting of SHA-224, **SHA-256**, SHA-384, and SHA-512. Secure and widely deployed.
 * **SHA-3**: Based on the **Keccak sponge construction**; structurally distinct from the Merkle-Damgård architecture of SHA-1 and SHA-2.
+
+### HMAC (Hash-Based Message Authentication Code)
+Standard hashes prove a file wasn't corrupted, *not* who sent it (anyone can recompute SHA-256). **HMAC** mixes a shared **secret key** with the message (`HMAC(K, m) = H((K ⊕ opad) || H((K ⊕ ipad) || m))`) to provide simultaneous **Data Integrity + Sender Authenticity**.
 
 ---
 
@@ -263,6 +275,9 @@ Digital certificates bind a public key to an organization's identity:
 |  Extensions: Subject Alternative Name (SAN), Key Usage, CRL Distribution |
 +--------------------------------------------------------------------------+
 ```
+
+### Certificate Authorities & Trust Chains
+Browsers ship with a pre-installed root store containing trusted **Root Certificate Authorities (CAs)** (e.g., DigiCert, Let's Encrypt ISRG Root). Root CAs sign offline **Intermediate CAs**, which in turn sign leaf domain TLS certificates — forming a verifiable **Chain of Trust** down to the Root CA's signature.
 
 ---
 
@@ -312,9 +327,26 @@ $$\text{Intermediate State} = E_{K1}(P) = D_{K2}(C)$$
 
 When an application decrypts ciphertext in CBC mode and leaks distinct error messages depending on whether the **PKCS#7 padding** is valid or invalid (e.g., HTTP 500 internal error vs. HTTP 200), an attacker can iteratively decrypt ciphertext byte-by-byte without knowing the decryption key!
 
+### Side-Channel Analysis (Timing, Power, Acoustic)
+Rather than attacking mathematical equations directly, side-channel attacks measure physical hardware leaks during cryptographic computation: microsecond **timing differences** in signature verification, CPU **power consumption spikes (DPA)** on smartcards, electromagnetic radiation, or capacitor acoustic noise.
+
 ---
 
-## 7. Master Decision Tree & Flowchart
+## 7. Disk Encryption & Transport Layer Security
+
+### BitLocker, VeraCrypt, and LUKS
+Full-disk encryption (FDE) defends Data-at-Rest against lost/stolen laptops and physical hard-drive seizure:
+* **Microsoft BitLocker:** Windows Enterprise FDE using **AES-XTS (128/256-bit)** bound to the motherboard **Trusted Platform Module (TPM)** chip.
+* **VeraCrypt:** Open-source cross-platform container & volume encryption (TrueCrypt successor) supporting cascading ciphers (`AES-Twofish-Serpent`) and **plausible deniability hidden volumes**.
+* **Linux LUKS (`dm-crypt`):** Standard kernel block-device encryption on Linux distributions via `cryptsetup`.
+
+### TLS 1.2 vs. TLS 1.3 Architectural Enhancements
+* **TLS 1.2:** Uses a 2-RTT handshake, permits deprecated ciphers (`RSA` key transport lacking Forward Secrecy, `RC4`, `CBC` modes), and sends certificates partially in cleartext.
+* **TLS 1.3 (RFC 8446):** Faster **1-RTT (and 0-RTT)** handshake, drops ALL insecure ciphers (`RSA` key exchange, `CBC`, `RC4`, `MD5`, `SHA-1`), and **mandates Ephemeral Diffie-Hellman (ECDHE/DHE) for Perfect Forward Secrecy** paired with AEAD ciphers (`AES-GCM`, `ChaCha20-Poly1305`).
+
+---
+
+## 8. Master Decision Tree & Flowchart
 
 ```
                           [ CRYPTOGRAPHIC SELECTION ]
@@ -333,7 +365,7 @@ When an application decrypts ciphertext in CBC mode and leaks distinct error mes
 
 ---
 
-## 8. CEH v13 Exam Essentials & Distinction Matrix
+## 9. CEH v13 Exam Essentials & Distinction Matrix
 
 | Concept / Technique | Essential CEH Exam Distinction |
 | :--- | :--- |

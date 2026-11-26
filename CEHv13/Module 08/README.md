@@ -1,5 +1,8 @@
 <div align="center">
 
+![CEH v13 Module 08 Banner](./images/banner.jpg)
+![CEH v13 Module 08 Card](./images/module_card.png)
+
 # 🛡️ CEH v13 — Module 08: Sniffing
 ### Certified Ethical Hacker (CEH) Exam Notes • Passive vs. Active Sniffing • CAM Flooding • ARP Poisoning • DHCP Starvation • Wireshark Tradecraft • DAI & Port Security
 
@@ -45,6 +48,14 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 08 Is Really About:**  
+> **Packet Sniffing** is wiretapping network cables to read passwords and messages flying across the LAN!  
+> - **Hub (Passive Sniffing) vs. Switch (Active Sniffing):** A legacy **Hub** shouts every message to everyone in the room (anyone can listen passively). A modern **Switch** whispers privately port-to-port — so an attacker must actively *trick* the network to hear traffic!  
+> - **MAC Flooding (`macof`):** Sending 100,000 fake MAC addresses until the switch's memory (*CAM Table*) fills up, causing it to **fail open** into dumb Hub mode and broadcast everyone's traffic!  
+> - **ARP Poisoning (MitM):** Telling the victim *"I'm your router"* and telling the router *"I'm your victim"*, forcing all packets to detour through your laptop while keeping Internet working (`ip_forward=1`).  
+> - **Defenses:** Limit MACs per port (**Port Security**), block fake DHCP offers (**DHCP Snooping**), and verify ARP replies (**Dynamic ARP Inspection / DAI**).
+
 # 1. Sniffing Fundamentals & Layer-2 Mechanics
 
 ## Definition & The Promiscuous Mode Mechanism
@@ -73,6 +84,13 @@ A **packet sniffer** is a software program or hardware appliance that intercepts
 │                                                                                  │
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
+
+## Collision Domains vs. Broadcast Domains
+| Networking Device | Collision Domains | Broadcast Domains | Sniffing Impact |
+|---|---|---|---|
+| **Hub / Repeater (Layer 1)** | **Single** shared collision domain | **Single** broadcast domain | **Passive sniffing**: every port hears all frames. |
+| **Switch (Layer 2)** | **One per port** (isolated) | **Single** broadcast domain (per VLAN) | **Active sniffing** required (MAC flood or ARP poisoning). |
+| **Router (Layer 3)** | **One per interface** | **One per interface** (blocks Layer-2 broadcasts) | Isolates broadcast attacks between subnets. |
 
 ---
 
@@ -104,7 +122,7 @@ flowchart TD
 
 ---
 
-## DHCP Starvation & Rogue DHCP Server Injection
+## DHCP Starvation & Rogue DHCP Server Injection (`yersinia`)
 
 * **DHCP Starvation:** The attacker floods the local broadcast domain with thousands of `DHCPDISCOVER` packets, each bearing a randomly forged MAC address. The DHCP server allocates its entire pool of available IP leases, leaving zero valid addresses for legitimate clients (Denial of Service).
   * *Tools:* **Yersinia**, `dhcpstarv`.
@@ -149,11 +167,14 @@ arpspoof -i eth0 -t 192.168.1.100 192.168.1.1
 arpspoof -i eth0 -t 192.168.1.1 192.168.1.100
 ```
 
+## DNS Spoofing & Cache Poisoning
+Once positioned in a Man-in-the-Middle (MitM) path via ARP poisoning, the attacker intercepts outbound UDP Port 53 DNS queries (e.g., `bank.com`) and replies faster than the real DNS server with the **attacker's fake IP**, seamlessly redirecting victims to spoofed phishing pages.
+
 ---
 
 # 3. Sniffing Toolchains & Protocol Analysis
 
-## Wireshark: Advanced Display Filters
+## Wireshark: Advanced Display Filters & TCP Stream Reassembly
 
 | Filter Objective | Wireshark Display Filter Syntax |
 |---|---|
@@ -176,18 +197,24 @@ tcpdump -i eth0 -nn -s 0 -w http_traffic.pcap port 80
 tcpdump -X -r http_traffic.pcap
 ```
 
+## Automated MitM Toolchains: Bettercap & Ettercap
+* **Ettercap:** Classic GUI/CLI unified MitM suite (`ettercap -Tq -i eth0 -M arp:remote /192.168.1.1// /192.168.1.100//`). Automatically poisons ARP caches and extracts cleartext passwords (HTTP, FTP, Telnet).
+* **Bettercap:** Modern modular Golang MitM engine supporting ARP/NDP spoofing, SSL stripping, DNS spoofing, and real-time packet credential sniffing (`net.sniff on`, `arp.spoof on`).
+
 ---
 
 # 4. Sniffer Detection Techniques
 
 An ethical hacker or security engineer can actively detect whether a rogue host on the subnet is running in promiscuous mode:
 
-1. **The Ping (ICMP) Latency / Bogus MAC Method:**
-   * The auditor transmits an **ICMP Echo Request** containing the **correct IP address** of the suspect machine, but with a **bogus, non-existent destination MAC address**.
-   * *Normal Host:* The hardware NIC inspects the destination MAC, sees it does not match its own, and drops the packet. No ping response is returned.
-   * *Sniffer in Promiscuous Mode:* The hardware filter is off! The packet is passed to the OS kernel. The kernel inspects the IP header, sees its own IP, and transmits an **ICMP Echo Reply**! Answering a ping sent to a wrong MAC address exposes the sniffer immediately.
-2. **The DNS Reverse Lookup Method:**
-   * Many sniffer tools (like Wireshark) automatically perform reverse DNS lookups on every IP seen on the wire. The auditor transmits packets to fake IP addresses and monitors the local DNS server; if the suspect host suddenly sends DNS requests for those fake IPs, it is running a sniffer.
+## Detecting Promiscuous NICs: The Ping Method
+* The auditor transmits an **ICMP Echo Request** containing the **correct IP address** of the suspect machine, but with a **bogus, non-existent destination MAC address**.
+* *Normal Host:* The hardware NIC inspects the destination MAC, sees it does not match its own, and drops the packet. No ping response is returned.
+* *Sniffer in Promiscuous Mode:* The hardware filter is off! The packet is passed to the OS kernel. The kernel inspects the IP header, sees its own IP, and transmits an **ICMP Echo Reply**! Answering a ping sent to a wrong MAC address exposes the sniffer immediately.
+
+## The ARP & DNS Reverse Lookup Test
+* **ARP Cache Anomaly Test:** Send an ARP request addressed to an invalid hardware MAC (`FF:FF:FF:FF:FF:FE` instead of true broadcast `FF:FF:FF:FF:FF:FF`). Only hosts in promiscuous mode accept and reply to it.
+* **DNS Reverse Lookup Test:** Many sniffer tools (like Wireshark) automatically perform reverse DNS lookups on every IP seen on the wire. The auditor transmits packets to fake IP addresses and monitors the local DNS server; if the suspect host suddenly sends DNS queries for those fake IPs, it is running a sniffer.
 
 ---
 
@@ -207,17 +234,20 @@ An ethical hacker or security engineer can actively detect whether a rogue host 
 └──────────────────┘               └──────────────────┘               └──────────────────┘
 ```
 
-1. **Cisco Switch Port Security:**
-   ```text
-   interface GigabitEthernet0/1
-    switchport mode access
-    switchport port-security
-    switchport port-security maximum 2
-    switchport port-security violation shutdown
-   ```
-2. **DHCP Snooping & Dynamic ARP Inspection (DAI):**
-   * **DHCP Snooping:** Designates specific ports as "trusted" (connected to legitimate DHCP servers). All untrusted access ports dropping unauthorized DHCP server responses (`DHCPOFFER`, `DHCPACK`).
-   * **Dynamic ARP Inspection (DAI):** Cross-references every intercepted ARP packet with the DHCP Snooping Binding Database. If the sender MAC and IP do not match the valid lease, the ARP frame is dropped.
+## Switch Port Security Configuration
+```text
+interface GigabitEthernet0/1
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation shutdown
+```
+
+## DHCP Snooping Architecture
+Designates specific uplink ports as **"trusted"** (connected to legitimate DHCP servers). All untrusted access ports automatically drop unauthorized DHCP server responses (`DHCPOFFER`, `DHCPACK`), stopping rogue DHCP MitM attacks.
+
+## Dynamic ARP Inspection (DAI)
+Cross-references every intercepted ARP packet against the **DHCP Snooping Binding Database**. If the sender MAC and IP do not match a valid authorized lease, the switch immediately drops the forged ARP frame, neutralizing ARP poisoning completely.
 
 ---
 

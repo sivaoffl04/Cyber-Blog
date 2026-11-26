@@ -1,5 +1,8 @@
 <div align="center">
 
+![CEH v13 Module 09 Banner](./images/banner.jpg)
+![CEH v13 Module 09 Card](./images/module_card.png)
+
 # 🛡️ CEH v13 — Module 09: Social Engineering
 ### Certified Ethical Hacker (CEH) Exam Notes • Human Vector Exploitation • Phishing & Whaling • BEC & Quishing • Deepfake Vishing • Enterprise Defense
 
@@ -49,6 +52,12 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 09 Is Really About:**  
+> You can buy a \$500,000 titanium vault door, and an attacker can still walk right in simply by calling the receptionist and convincing them to hold the door open! **Social Engineering** hacks **human psychology** (fear, urgency, politeness, authority) instead of software code.  
+> - **Tailgating vs. Piggybacking (Exam Favorite!):** **Tailgating** = sneaking through the door behind someone *without* them knowing. **Piggybacking** = carrying heavy boxes so someone *politely opens* the door for you (with consent!).  
+> - **Phishing Types:** **Bulk Phishing** = spam sent to millions; **Spear Phishing** = customized email to one employee; **Whaling** = targeting the CEO/CFO ("Big Fish"); **Quishing** = fake QR codes; **Vishing** = voice/deepfake phone calls.
+
 # 1. Social Engineering Fundamentals & Cognitive Triggers
 
 ## Definition & The Human Vulnerability Factor
@@ -90,7 +99,18 @@ flowchart LR
 
 ---
 
+## Insider Threat Profiling: Malicious vs. Negligent Insiders
+Not all human threats come from outside the building:
+* **Malicious Insider (Intentional):** Disgruntled employee, bribed administrator, or planted corporate spy purposefully stealing IP or sabotaging systems.
+* **Negligent Insider (Accidental):** Well-meaning worker who accidentally emails sensitive spreadsheets to the wrong address, clicks a phishing link, or leaves an unlocked laptop at a coffee shop.
+* **Compromised Insider:** Legitimate employee whose valid credentials/device have been secretly hijacked by an external attacker.
+
+---
+
 # 2. Human-Based Social Engineering Techniques
+
+## Pretexting & Impersonation Scenarios
+**Pretexting** is inventing a believable false identity or urgent story (e.g., calling as IT Helpdesk, an external auditor, or FedEx courier) so targets gladly hand over passwords, badge details, or system access.
 
 ## Tailgating vs. Piggybacking: The Critical CEH Distinction
 
@@ -116,6 +136,12 @@ The distinction between tailgating and piggybacking is one of the most heavily t
 
 ---
 
+## Eavesdropping & Shoulder Surfing
+* **Eavesdropping:** Secretly listening to spoken conversations in cafés, elevators, airport lounges, or conference rooms near corporate offices.
+* **Shoulder Surfing:** Looking over someone's shoulder (or using telephoto smartphone zoom / hidden reflections) to watch PIN codes, Wi-Fi passwords, or corporate login credentials being typed.
+
+---
+
 ## Dumpster Diving & Physical Trash Forensics
 
 **Dumpster diving** is the retrieval of sensitive records, discarded storage media, and corporate memoranda from exterior trash bins, recycling compactors, or recycling containers.
@@ -124,6 +150,8 @@ The distinction between tailgating and piggybacking is one of the most heavily t
 ---
 
 # 3. Computer-Based Social Engineering Techniques
+
+## Phishing Taxonomy: Bulk, Spear Phishing, and Whaling
 
 ```
                                 COMPUTER PHISHING TAXONOMY
@@ -141,17 +169,28 @@ The distinction between tailgating and piggybacking is one of the most heavily t
                                                                               └─────────────┘
 ```
 
-* **Whaling:** Highly tailored spear phishing directed specifically at C-level executives (CEO, CFO, CISO) or high-net-worth board members to authorize major wire transfers or approve sensitive corporate acquisitions.
-* **Watering Hole Attack:** The adversary discovers which legitimate websites a target group frequently visits (e.g., industry forums, regional catering portals), compromises that website, and embeds a drive-by zero-day exploit to infect target employees visiting the site.
-* **Business Email Compromise (BEC):** The attacker compromises or spoofs a CEO or executive's email account and instructs the finance department to execute an emergency wire transfer to an attacker-controlled bank account.
+## Business Email Compromise (BEC): CEO Fraud & Invoice Diversion
+The attacker compromises or spoofs a CEO, CFO, or trusted supplier email account and instructs the finance department to execute an urgent wire transfer or redirect vendor invoice payments to an attacker-controlled bank account.
+
+## Watering Hole Attacks
+The adversary identifies legitimate websites that employees of the target organization frequently visit (e.g., an industry engineering forum or local union portal), compromises that site, and injects a drive-by exploit to infect target employees when they browse there.
+
+## Clone Phishing & Rogue Pop-ups
+* **Clone Phishing:** Attacker copies a real legitimate email previously received by the victim (same branding, layout, and signature), replaces its safe attachment or link with a malicious lookalike, and resends it claiming *"Here is an updated copy."*
+* **Rogue Pop-ups & Scareware:** Fake browser overlays alerting *"CRITICAL VIRUS DETECTED — Call Microsoft Support Now"* tricking users into installing remote access software.
 
 ---
 
 # 4. Mobile-Based & Emerging AI Social Engineering
 
-* **SMiShing (SMS Phishing):** Phishing conducted via SMS text messaging (e.g., spoofed banking alerts, package delivery notifications with bit.ly links).
-* **Vishing (Voice Phishing) & AI Deepfakes:** Phone fraud. In CEH v13, adversaries use **generative neural voice cloning** to synthesize the voice of a CEO, calling a branch manager to bypass secondary security authorizations.
-* **Quishing (QR Code Phishing):** Attackers paste physical stickers containing malicious QR codes over legitimate parking meter or restaurant menu QR codes. When scanned, the smartphone browser redirects to credential harvesting portals.
+## SMiShing (SMS Phishing) Attack Workflows
+Phishing conducted over SMS/text messaging (e.g., fake bank fraud alerts, toll unpaid notices, or parcel delivery links pointing to credential harvesters or malicious Android `.apk` downloads).
+
+## Vishing (Voice Phishing) & AI Deepfake Voice Cloning
+Voice fraud over phone or VoIP calls. Modern attackers leverage Caller ID spoofing combined with **CEH v13 AI generative voice cloning** trained on a few seconds of a CEO's earnings-call audio to authorize emergency transfers.
+
+## Quishing: QR Code Manipulation & Evasion
+Attackers print malicious QR code stickers and paste them over real parking meters or send QR codes embedded inside PDFs/images — bypassing traditional email URL scanners because security gateways cannot inspect links encoded inside pixels!
 
 ---
 
@@ -173,8 +212,20 @@ flowchart TD
     style Training fill:#064e3b,stroke:#22c55e,stroke-width:2px,color:#fff
 ```
 
-* **Mantraps (Access Portals):** A specialized physical security vestibule with two interlocking doors. Door 2 cannot open until Door 1 is completely closed and authenticated, making tailgating physically impossible.
-* **FIDO2 / WebAuthn Hardware Tokens:** Cryptographic public-key authentication bound to the browser's origin domain. Even if a user enters their credentials into a phishing landing page, the hardware token will refuse to authenticate against the spoofed domain.
+## Physical Security Engineering: Mantraps & Turnstiles
+* **Mantraps (Access Portals):** Two interlocking doors inside a physical vestibule where Door 2 cannot unlock until Door 1 closes and verifies a single badge — physically neutralizing tailgating and piggybacking.
+* **Optical Turnstiles & Guard Escorts:** Enforce one-badge-per-person entry across lobbies.
+
+## Administrative Security Policies (Clean Desk, Shredding)
+* **Clean Desk Policy & Cross-Cut Shredding:** Ensures sticky-note passwords aren't visible and discarded paper documents cannot be reassembled during dumpster diving.
+* **Mandatory Out-of-Band Callback:** Requires finance teams to verify wire changes by dialing a previously known phone number rather than replying to the email thread.
+
+## Technical Controls: FIDO2 / WebAuthn & DMARC
+* **FIDO2 / WebAuthn Hardware Tokens:** Cryptographic public-key MFA bound strictly to the genuine origin domain — making MFA completely **phishing-resistant** even against Evilginx proxy sites.
+* **Strict DMARC (`p=reject`) + SPF + DKIM:** Instructs receiving mail servers to drop spoofed executive lookalike emails automatically.
+
+## Security Awareness & Phishing Simulation Frameworks
+Using platforms like **GoPhish** and KnowBe4 to run regular realistic phishing/vishing drills paired with blame-free one-click *"Report Phish"* buttons.
 
 ---
 

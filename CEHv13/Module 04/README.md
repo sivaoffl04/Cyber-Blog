@@ -70,6 +70,13 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 04 Is Really About:**  
+> In Module 03 (Scanning), you walked down the hallway and found which doors were open (e.g., Port 445 or Port 161). In **Module 04 (Enumeration)**, you actually **walk up to those open doors and talk directly to the service** to pull out a list of employee usernames, shared folders, network settings, and email addresses!  
+> - **SMB / NetBIOS (`139`, `445`):** Connecting anonymously (*Null Session* to `IPC$`) and asking Windows: *"Who are your users?"* and using **RID Cycling** (`500` = Admin, `501` = Guest, `1000+` = Regular users).  
+> - **SNMP (`161`, `162`):** Asking routers/printers for their hardware & IP map using weak default passwords like `"public"` or `"private"` (SNMPv1/v2c sends everything in plaintext; always upgrade to **SNMPv3 `authPriv`**).  
+> - **SMTP (`25`):** Asking the mail server directly `VRFY bob` or `EXPN admins` to confirm real employee emails before phishing.
+
 # 1. Enumeration Fundamentals
 
 ## Definition & The Scanning-to-Enumeration Pivot
@@ -432,10 +439,13 @@ The **Network Time Protocol (NTP)** synchronizes computer system clocks over **U
   1. **Internal IP Enumeration:** Reveals private corporate internal workstation and server IP addresses.
   2. **NTP Amplification DDoS:** An attacker spoofs the victim's source IP and sends a tiny 8-byte `monlist` request; the NTP server returns up to 100 large packets, achieving an amplification factor of **over 500x**.
 
+### NTP Interrogation: `ntpq`, `ntpdate`
+
 ```bash
-# Querying NTP server using ntpq
+# Querying NTP server using ntpq and ntpdc
 ntpq -c readlist 192.168.1.50
 ntpq -c "rv" 192.168.1.50
+ntpdate -q 192.168.1.50
 ntpdc -c monlist 192.168.1.50
 ```
 
@@ -447,12 +457,14 @@ ntpdc -c monlist 192.168.1.50
 * **Port 2049 (TCP/UDP):** NFS file service.
 * **Port 111 (TCP/UDP):** RPCbind / Portmapper — directs clients to dynamic RPC ports.
 
+### NFS Export Discovery: `showmount -e` & Remote Mounting
+
 ```bash
 # 1. Query remote NFS server for exported shares
 showmount -e 192.168.1.50
 
 # 2. Mount vulnerable share locally with root privileges
-mkdir /mnt/nfs_target
+mkdir -p /mnt/nfs_target
 mount -t nfs 192.168.1.50:/var/share /mnt/nfs_target -o nolock
 ```
 
@@ -494,9 +506,12 @@ The **Simple Mail Transfer Protocol (SMTP)** routes electronic mail. In the enum
 * **`EXPN <list>`:** Requests the server to expand a mailing list and display its individual member email addresses.
 * **`RCPT TO:<email>`:** Evaluates delivery acceptance for a recipient address during mail composition.
 
+### Automating SMTP Reconnaissance: `smtp-user-enum`
+
 ```bash
-# Automating SMTP username harvesting
+# Automating SMTP username harvesting against VRFY, EXPN, and RCPT TO
 smtp-user-enum -M VRFY -U usernames.txt -t 192.168.1.25
+smtp-user-enum -M RCPT -U usernames.txt -t 192.168.1.25
 ```
 
 ---
@@ -560,20 +575,24 @@ svmap 192.168.1.0/24
 └─────────────┘        └─────────────┘                 └─────────────┘        └─────────────┘
 ```
 
-1. **Windows SMB & Null Session Defense:**
-   * Set registry key `HKLM\SYSTEM\CurrentControlSet\Control\Lsa\RestrictAnonymous = 2` (prohibits anonymous enumeration of SAM accounts and shares).
-   * Require SMB Signing (`RequireSecuritySignature = True`) to prevent man-in-the-middle RID manipulation.
-   * Completely disable SMBv1 across the enterprise.
-2. **SNMP Hardening:**
-   * Remove default community strings (`public`, `private`).
-   * Upgrade legacy SNMPv1/v2c systems to **SNMPv3** configured with `authPriv` (SHA authentication + AES-256 payload encryption).
-   * Block UDP port 161/162 at enterprise perimeter firewalls.
-3. **LDAP Hardening:**
-   * Require **LDAP Signing and Channel Binding** to eliminate unauthenticated NTLM relay and anonymous binds.
-   * Restrict LDAPS queries to authenticated domain users.
-4. **NTP & Mail Infrastructure:**
-   * Add `disable monitor` in `ntp.conf` to disable `monlist` response.
-   * Disable `VRFY` and `EXPN` commands in SMTP server configurations (Postfix, Microsoft Exchange, Sendmail).
+## Windows & SMB Defenses: RestrictAnonymous & SMB Signing
+* Set registry key `HKLM\SYSTEM\CurrentControlSet\Control\Lsa\RestrictAnonymous = 2` (prohibits anonymous enumeration of SAM accounts and shares).
+* Require SMB Signing (`RequireSecuritySignature = True`) to prevent man-in-the-middle RID manipulation.
+* Completely disable SMBv1 across the enterprise.
+
+## SNMPv3 Migration & Community String Hardening
+* Remove default community strings (`public`, `private`).
+* Upgrade legacy SNMPv1/v2c systems to **SNMPv3** configured with `authPriv` (SHA authentication + AES-256 payload encryption).
+* Block UDP port 161/162 at enterprise perimeter firewalls.
+
+## LDAP Signing & Channel Binding
+* Require **LDAP Signing and Channel Binding** to eliminate unauthenticated NTLM relay and anonymous binds.
+* Restrict LDAPS queries to authenticated domain users.
+
+## NTP, SMTP, and NFS Hardening Rules
+* Add `disable monitor` in `ntp.conf` to disable `monlist` response.
+* Disable `VRFY` and `EXPN` commands in SMTP server configurations (Postfix, Microsoft Exchange, Sendmail).
+* Restrict NFS exports in `/etc/exports` to explicit trusted client IPs and enforce `root_squash` (prevents remote root from acting as local root).
 
 ---
 

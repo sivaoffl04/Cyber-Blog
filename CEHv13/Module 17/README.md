@@ -53,9 +53,16 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 17 Is Really About:**  
+> Think of an **Android `.apk`** app just like a normal `.zip` archive containing source code (`classes.dex`), a list of permissions (`AndroidManifest.xml`), and signing certificates (`META-INF`).  
+> - **Static Analysis (`jadx` / `apktool` / `MobSF`):** Unzipping the app to look for hardcoded API passwords, exported screens (`android:exported="true"`), and risky permissions. `apktool` extracts editable *Smali assembly*; `jadx` decompiles readable *Java source*.  
+> - **Dynamic Analysis (`Frida` / `Objection`):** Hooking directly into a *running app's memory* to make functions lie (e.g., forcing `isDeviceRooted()` to always return `false`, or disabling **SSL Certificate Pinning** so Burp Suite can read its HTTPS traffic!).  
+> - **iOS Security:** Locks apps tightly with a hardware **BootROM** trust chain and **Secure Enclave**, *except* older A5–A11 Apple chips suffer from the **unpatchable Checkm8** silicon BootROM flaw!
+
 ## 1. Mobile Platform Architecture & Threat Landscape
 
-### Mobile Attack Vectors
+### Mobile Attack Vectors (Smishing, Malicious Apps, Rogue Profiles)
 
 Mobile devices introduce unique hardware and radio vulnerabilities absent in traditional desktop environments:
 * **Smishing (SMS Phishing)**: Fraudulent text messages containing deceptive URLs or fake 2FA verification prompts.
@@ -65,7 +72,7 @@ Mobile devices introduce unique hardware and radio vulnerabilities absent in tra
 
 ---
 
-### Android Architecture Stack
+### Android Architecture Stack (Linux Kernel to Applications)
 
 Android is an open-source operating system built on top of a modified **Linux Kernel**:
 
@@ -91,7 +98,7 @@ Android is an open-source operating system built on top of a modified **Linux Ke
 
 ---
 
-### iOS Security Architecture
+### iOS Security Architecture (Secure Enclave, Sandbox, FairPlay DRM)
 
 Apple iOS is built upon the **Darwin (Mach-based)** kernel and enforces strict security controls:
 * **Hardware Root of Trust**: Boot code burned directly into read-only memory (BootROM) during silicon manufacturing.
@@ -103,7 +110,7 @@ Apple iOS is built upon the **Darwin (Mach-based)** kernel and enforces strict s
 
 ## 2. Android Platform Hacking & Reverse Engineering
 
-### Anatomy of an APK (Android Package)
+### Anatomy of an APK (DEX, AndroidManifest, Resources, META-INF)
 
 An APK is simply a compressed `.zip` archive containing application assets:
 
@@ -122,7 +129,7 @@ app.apk (ZIP Archive)
 
 ---
 
-### Reverse Engineering Workflow: Decompiling & Modifying
+### Reverse Engineering Workflow: Decompiling with `apktool` and `jadx`
 
 ```mermaid
 flowchart TD
@@ -136,6 +143,7 @@ flowchart TD
     class APK,Decompile,Modify,Rebuild,Align,Sign default;
 ```
 
+### Modifying Smali Bytecode, Repackaging, and Aligning
 ```bash
 # 1. Decompile human-readable Java source using jadx
 jadx-gui target.apk
@@ -143,7 +151,7 @@ jadx-gui target.apk
 # 2. Decompile to Smali assembly and decode resources with apktool
 apktool d target.apk -o decompiled_app
 
-# 3. Rebuild modified APK
+# 3. Rebuild modified APK after editing Smali logic
 apktool b decompiled_app -o app_rebuilt.apk
 
 # 4. Align memory boundaries
@@ -154,11 +162,14 @@ keytool -genkey -v -keystore evil.keystore -alias evil -keyalg RSA -keysize 2048
 apksigner sign --ks evil.keystore --ks-key-alias evil app_aligned.apk
 ```
 
+### Android Rooting Mechanisms: Systemless Root & Magisk
+Traditional rooting modified `/system` directly, breaking SafetyNet/Play Integrity checks. Modern **Systemless Root (Magisk)** leaves `/system` untouched by patching only the `boot.img` ramdisk, using **Zygisk** and DenyLists to hide root privileges from banking and enterprise MDM apps.
+
 ---
 
 ## 3. Android IPC Component Interrogation with Drozer
 
-### Exported Activities, Services, and Content Providers
+### Exported Activities, Broadcast Receivers, and Content Providers
 
 In `AndroidManifest.xml`, if a component defines `android:exported="true"`, any third-party app installed on the device can invoke that component without requiring permissions:
 
@@ -172,7 +183,7 @@ In `AndroidManifest.xml`, if a component defines `android:exported="true"`, any 
           android:exported="true" />
 ```
 
-### Exploiting Content Providers with Drozer
+### Exploiting Insecure Content Providers (SQLi & Directory Traversal)
 
 **Drozer** is the premier framework for assessing Android IPC surfaces:
 
@@ -198,7 +209,7 @@ dz> run app.provider.read content://com.target.provider/../../../../etc/hosts
 
 ## 4. iOS Platform Hacking & Jailbreaking
 
-### Jailbreaking Taxonomy
+### Jailbreaking Taxonomy: Untethered, Semi-Untethered, Tethered
 
 Jailbreaking removes Apple's mandatory kernel sandbox and code-signing restrictions, granting `root` access to the filesystem:
 
@@ -229,11 +240,14 @@ Jailbreaking removes Apple's mandatory kernel sandbox and code-signing restricti
 * **Checkm8**: An unpatchable, permanent vulnerability residing in the **read-only BootROM memory** of Apple devices running chips from **A5 to A11** (iPhone 4S through iPhone X).
 * **High-Yield Exam Point**: Because BootROM code is physically burned into the silicon during fabrication, **Apple cannot patch Checkm8 via software updates**!
 
+### IPA Structure & Decrypting Binaries (`frida-ios-dump`)
+iOS applications are distributed as `.ipa` ZIP archives containing `Payload/<App>.app/`, `Info.plist`, and the compiled **Mach-O** binary. App Store `.ipa` binaries are encrypted with Apple FairPlay DRM until loaded into RAM, where auditors dump unencrypted binaries with `frida-ios-dump` on a jailbroken device.
+
 ---
 
 ## 5. Dynamic Instrumentation & Hooking: Frida & Objection
 
-### Frida JavaScript Injection
+### Frida JavaScript Injection & Function Hooking
 
 **Frida** injects Google's V8 JavaScript engine into a running process's memory space, allowing penetration testers to hook native functions, rewrite return values, and inspect variables at runtime:
 
@@ -255,6 +269,9 @@ Java.perform(function() {
 frida -U -f com.target.app -l bypass_root.js --no-pause
 ```
 
+### Bypassing SSL Certificate Pinning & Root/Jailbreak Checks
+Apps implement **Certificate Pinning** by embedding their server's trusted public-key hash directly in code to reject Burp Suite proxies. Attackers neutralize pinning dynamically via **Objection** (`android sslpinning disable` / `ios sslpinning disable`) or Frida universal SSL bypass scripts!
+
 ### Objection: Runtime Mobile Assessment
 
 ```bash
@@ -275,14 +292,18 @@ sqlite sync
 ## 6. Automated Auditing: Mobile Security Framework (MobSF)
 
 **MobSF** is an all-in-one automated framework supporting Android, iOS, and Windows mobile apps:
-* **Static Analysis**: Decompiles APK/IPA, flags dangerous permissions (e.g., `READ_SMS`, `ACCESS_FINE_LOCATION`), detects hardcoded API keys and AWS tokens, identifies insecure encryption modes (`AES/ECB`).
-* **Dynamic Analysis**: Automatically deploys the app to an emulator, monitors network traffic via MITM proxy, executes runtime API hooks, and generates compliance reports (OWASP Mobile Top 10).
+
+### MobSF Static Analysis (Manifest permissions, hardcoded secrets)
+Decompiles uploaded APKs/IPAs automatically, flags over-privileged permissions (`READ_SMS`, `ACCESS_FINE_LOCATION`), detects hardcoded API keys/AWS tokens, and catches weak cryptography (`AES/ECB`, `MD5`).
+
+### MobSF Dynamic Sandboxing
+Launches the app inside an instrumented Android emulator, captures decrypted HTTPS API traffic through a built-in proxy, runs Frida runtime hooks, and outputs compliance audit reports.
 
 ---
 
 ## 7. Enterprise Mobile Security & Mobile Device Management (MDM)
 
-### MDM Controls & Containerization
+### MDM Policies, Containerization, and Remote Wiping
 
 * **Mobile Device Management (MDM)**: Centralized enterprise platforms (Microsoft Intune, VMware Workspace ONE) enforcing security policies on employee devices:
   * Enforcing complex lock-screen PINs / biometrics.
@@ -290,6 +311,9 @@ sqlite sync
   * Disabling USB debugging (`adb`) and developer options.
   * **Remote Wipe**: Erasing corporate data or performing a complete factory reset if a phone is lost or stolen.
 * **Containerization**: Isolating corporate email, documents, and business apps within an encrypted, sandboxed partition completely segregated from personal apps.
+
+### BYOD Risks & OWASP Mobile Top 10 Mapping
+Bring-Your-Own-Device (BYOD) blurs corporate and personal security boundaries (malware on personal side leaking enterprise VPN sessions). CEH v13 aligns mobile defenses directly to **OWASP Mobile Top 10** (M1: Improper Credential Usage, M3: Insecure Authentication, M5: Insecure Communication, M9: Insecure Data Storage).
 
 ---
 

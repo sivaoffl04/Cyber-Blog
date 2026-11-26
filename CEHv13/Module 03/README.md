@@ -1,6 +1,7 @@
 <div align="center">
 
 ![CEH v13 Module 03 Banner](./images/banner.jpg)
+![CEH v13 Module 03 Card](./images/module_card.png)
 
 # 🛡️ CEH v13 — Module 03: Scanning Networks
 ### Certified Ethical Hacker (CEH) Exam Notes • TCP/IP Mechanics • Nmap & Hping3 • Stealth & Idle Scanning • Packet Crafting
@@ -73,6 +74,14 @@
 - [🎯 High-Value CEH Exam Distinctions to Memorize](#-high-value-ceh-exam-distinctions-to-memorize)
 
 ---
+
+> [!TIP]
+> **💡 In Simple Words — What Module 03 Is Really About:**  
+> Imagine an IP address is a massive hotel with **65,535 doors (ports)**. **Network Scanning** is walking down the hallway checking which computers are awake (*Host Discovery*), which doors are open (*Port Scanning*), and what software is running inside (*Banner Grabbing & OS Detection*).  
+> - **TCP Connect Scan (`-sT`):** Polite full greeting (*"Hi!" → "Hi back!" → "Nice to meet you!"*). Accurate, works without admin rights, but always gets written down in the guestbook (logs).  
+> - **SYN Stealth Scan (`-sS`):** Knocking on the door, hearing the host say *"Hello?"* (`SYN/ACK`), and immediately slipping away (`RST`) without shaking hands — quieter and much faster!  
+> - **Xmas / FIN / Null Scans:** Sending weird, rule-breaking packets (`FIN+PSH+URG` flags all lit up like a Christmas tree). Open Linux ports silently ignore nonsense, while closed ports snap back with `RST` (*"Go away!"*). *(Note: Windows always replies `RST` to everything!)*  
+> - **Idle / Zombie Scan (`-sI`):** Sending an innocent third computer (*Zombie*) to knock on the target door while you check how the Zombie's packet counter (`IP ID`) changes — so the target only ever logs the Zombie's IP, never yours!
 
 # 1. What is Network Scanning?
 
@@ -998,7 +1007,7 @@ flowchart TD
 
 <div align="center">
 
-<b>Previous Module: [Module 01 — Introduction to Ethical Hacking](../Module%2001/README.md)</b> • <b>Next Module: [Module 04 — Enumeration](../README.md)</b>  
+<b>Previous Module: [Module 02 — Footprinting and Reconnaissance](../Module%2002/README.md)</b> • <b>Next Module: [Module 04 — Enumeration](../Module%2004/README.md)</b>  
 *Cyber-Blog • Production-Grade Security Knowledge Base*
 
 </div>
